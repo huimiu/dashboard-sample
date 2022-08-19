@@ -1,15 +1,15 @@
 import React from "react";
 
-import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
+import { FluentBlocksProvider} from '@fluent-blocks/react';
 import { HashRouter as Router, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 
 export default function App() {
   return (
-    <FluentProvider theme={teamsLightTheme}>
+    <FluentBlocksProvider>
       <Router> 
         <Route path="/dashbaord" element={Dashboard} />
       </Router>
-    </FluentProvider>
+    </FluentBlocksProvider>
   );
 }
