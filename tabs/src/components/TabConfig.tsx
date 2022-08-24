@@ -1,6 +1,8 @@
-import React from "react";
-import "./App.css";
-import * as microsoftTeams from "@microsoft/teams-js";
+import './App.css';
+
+import React from 'react';
+
+import * as microsoftTeams from '@microsoft/teams-js';
 
 /**
  * The 'Config' component is used to display your group tabs
