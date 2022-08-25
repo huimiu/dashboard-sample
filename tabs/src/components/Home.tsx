@@ -3,6 +3,7 @@ import { Card, CardHeader, CardPreview } from '@fluentui/react-components/unstab
 import { Comment16Regular } from '@fluentui/react-icons';
 
 import Task from '../widget/Task';
+import Files from '../widget/Files';
 import { useStyles } from './Styles';
 
 export default function Home() {
@@ -50,6 +51,7 @@ export default function Home() {
         />
       </Card>
       <Task />
+      <Files />
     </div>
   );
 }

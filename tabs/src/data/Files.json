@@ -1,0 +1,16 @@
+[
+  {
+      "id": "t1",
+      "name": "file1",
+      "description": "description 1",
+      "url": "",
+      "icon": ""
+  },
+  {
+      "id": "t2",
+      "name": "file2",
+      "description": "description 2",
+      "url": "",
+      "icon": ""
+  }
+]

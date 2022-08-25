@@ -20,21 +20,7 @@ export default function Dashboard() {
         blocks: [
           {
             dashboard: {
-              items: [
-                {
-                  item: {
-                    widget: {
-                      title: "Task",
-                      label: "task widget",
-                      tabs: [
-                        {
-                          tab: { label: "task" },
-                          panel: [],
-                        },
-                      ],
-                    },
-                  },
-                },
+              items: [                
                 {
                   item: {
                     widget: {

@@ -1,10 +1,12 @@
 import { makeStyles, shorthands, tokens } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({
-  cardSize: {
+  cardContainer: {
     height: "340px",
     width: "280px",
-  },
+    display: "flex",
+    flexDirection: "column"
+  },  
   spacedPreview: { ...shorthands.padding("25px") },
   grayBackground: {
     backgroundColor: tokens.colorNeutralBackground3,
@@ -30,5 +32,7 @@ export const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "left",
+    verticalAlign: "bottom",
+    marginTop: "auto"
   },
 });

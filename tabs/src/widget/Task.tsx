@@ -1,4 +1,4 @@
-import { Body1, Button, Text } from "@fluentui/react-components";
+import { Body1, Button, mergeClasses, Text } from "@fluentui/react-components";
 import {
   Card,
   CardFooter,
@@ -14,10 +14,11 @@ import { getTask } from "../service/Requests";
 import { useStyles } from "./Styles";
 
 export default function Task() {
+
   const tasks = getTask();
   const styles = useStyles();
   return (
-    <Card className={styles.cardSize} appearance="filled-alternative">
+    <Card className={styles.cardContainer} appearance="filled-alternative">
       <CardHeader
         header={
           <Text weight="semibold" size={400}>
@@ -28,7 +29,14 @@ export default function Task() {
       {tasks.map((task: TaskModel, i) => {
         return (
           <CardHeader
-            image={{ as: "img", src: "20x20.jpg", alt: "" }}
+            key={task.id}
+            image={{
+              as: "img",
+              src: "20x20.jpg",
+              alt: "",
+              height: 30,
+              width: 30,
+            }}
             header={<Body1>{task.name}</Body1>}
             action={
               <Button
