@@ -1,16 +1,11 @@
-import { Escape, View } from '@fluent-blocks/react';
-import {
-    Avatar, Body1, Button, Caption1, Image, mergeClasses, Text
-} from '@fluentui/react-components';
-import { Card, CardHeader, CardPreview } from '@fluentui/react-components/unstable';
-import {
-    AccessTimeFilled, MoreHorizontal16Filled, MoreHorizontal48Regular
-} from '@fluentui/react-icons';
+import '@fluent-blocks/basic-icons';
 
-import { useStyles } from './Styles';
+import { View } from '@fluent-blocks/react';
+
+import FilesWidget from '../widget/Files';
+import TaskWidget from '../widget/Task';
 
 export default function Dashboard() {
-  const styles = useStyles();
   return (
     <View
       accentScheme="teams"
@@ -20,21 +15,19 @@ export default function Dashboard() {
         blocks: [
           {
             dashboard: {
-              items: [                
+              items: [
                 {
-                  item: {
-                    widget: {
-                      title: "Task",
-                      label: "task widget",
-                      tabs: [
-                        {
-                          tab: { label: "task" },
-                          panel: [],
-                        },
-                      ],
-                    },
-                  },
+                  item: TaskWidget(),
                 },
+                {
+                  item: FilesWidget(),
+                },
+                {
+                  item: FilesWidget(),
+                },
+                {
+                  item: FilesWidget(),
+                }
               ],
             },
           },

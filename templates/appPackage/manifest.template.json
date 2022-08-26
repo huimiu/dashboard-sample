@@ -44,6 +44,15 @@
             "scopes": [
                 "personal"
             ]
+        },
+        {
+            "entityId": "index2",
+            "name": "Dashboard2",
+            "contentUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/dashboard",
+            "websiteUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/dashboard",
+            "scopes": [
+                "personal"
+            ]
         }
     ],
     "permissions": [

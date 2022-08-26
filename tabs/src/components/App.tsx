@@ -13,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </FluentBlocksProvider>

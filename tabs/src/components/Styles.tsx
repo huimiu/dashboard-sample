@@ -1,9 +1,15 @@
 import { makeStyles, shorthands, tokens } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({
-  root: {
+  banner: {
     display: "flex",
     flexDirection: "column",
+    ...shorthands.gap("8px"),
+  },
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "8px",
     ...shorthands.gap("8px"),
   },
   card: {
@@ -28,7 +34,13 @@ export const useStyles = makeStyles({
   flexContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
     ...shorthands.gap("4px"),
   },
+  cardListContainer: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "10px",
+    marginBottom: "10px",
+    ...shorthands.gap("8px"),
+  }
 });
