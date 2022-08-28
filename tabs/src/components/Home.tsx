@@ -39,7 +39,7 @@ export default function Home() {
             header={<Body1 weight="semibold">Classroom Collaboration</Body1>}
             description={
               <Caption1
-                className={mergeClasses(styles.flexContainer, styles.caption)}
+                className={mergeClasses(styles.caption)}
               >
                 <Comment16Regular color="#D83B01" />
                 <span>Colin replied to a comment</span>

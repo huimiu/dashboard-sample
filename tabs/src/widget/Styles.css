@@ -1,0 +1,69 @@
+.bannerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.footer {
+  margin-bottom: auto;
+}
+
+.connect {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.connectItem {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 160px;
+  gap: 3px;  
+}
+
+.eventsDate {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.today {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+}
+
+.todayColor {
+  color: gray;
+}
+
+.eventsDetail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.eventsDetailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.divider {
+  width: 10px;
+}

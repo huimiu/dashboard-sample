@@ -31,11 +31,6 @@ export const useStyles = makeStyles({
   caption: {
     color: tokens.colorNeutralForeground3,
   },
-  flexContainer: {
-    display: "flex",
-    flexDirection: "row",
-    ...shorthands.gap("4px"),
-  },
   cardListContainer: {
     display: "flex",
     flexDirection: "column",
