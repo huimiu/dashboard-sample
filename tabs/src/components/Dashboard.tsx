@@ -1,25 +1,10 @@
-import {
-  Avatar,
-  Body1,
-  Caption1,
-  Image,
-  mergeClasses,
-} from "@fluentui/react-components";
-import { Escape, View } from "@fluent-blocks/react";
-import {
-  Card,
-  CardHeader,
-  CardPreview,
-} from "@fluentui/react-components/unstable";
-import { Comment16Regular } from "@fluentui/react-icons";
+import { Escape, View } from '@fluent-blocks/react';
 
-import { title } from "process";
-import { Layout } from "@fluent-blocks/react/types/blocks/Layout/Layout";
-import Banner from "../widget/Banner";
-import FilesWidget from "../widget/Files";
-import TaskWidget from "../widget/Task";
-import Collaboration from "../widget/Collaboration";
-import EventsWidget from "../widget/Events"
+import Banner from '../widget/Banner';
+import Collaboration from '../widget/Collaboration';
+import EventsWidget from '../widget/Events';
+import FilesWidget from '../widget/Files';
+import TaskWidget from '../widget/Task';
 
 export default function Dashboard() {
   return (

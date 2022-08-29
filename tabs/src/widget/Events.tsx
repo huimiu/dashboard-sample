@@ -3,12 +3,11 @@ import "./Styles.css";
 
 import { Escape } from "@fluent-blocks/react";
 import {
-  Avatar,
   Divider,
-  getNativeElementProps,
   Label,
+  Button,
 } from "@fluentui/react-components";
-import { CalendarToday24Regular } from "@fluentui/react-icons";
+import { CalendarToday24Regular, ArrowRight24Regular } from "@fluentui/react-icons";
 
 import { getEvents } from "../service/Requests";
 import EventsModel from "../model/EventsModel";
@@ -20,34 +19,44 @@ export default function EventsWidget() {
       title: [{ text: "Your upcoming events" }],
       body: [
         <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div>
-            <div className="eventsDate">
-              <div className="today">
-                <CalendarToday24Regular />
-                <Label className="todayColor">Today</Label>
+          <div className="cardContainer">
+            <div className="eventsContainer">
+              <div className="eventsDate">
+                <div className="today">
+                  <CalendarToday24Regular />
+                  <Label className="todayColor">Today</Label>
+                </div>
+                <div>
+                  <Label weight="semibold">Fri, May 13 2022</Label>
+                </div>
               </div>
-              <div>
-                <Label weight="semibold">Fri, May 13 2022</Label>
+              <div className="eventList">
+                {events?.map((event: EventsModel, i) => {
+                  return (
+                    <div className="eventsDetail">
+                      <div className="eventsItem">
+                        <Label>{event.startTime}</Label>
+                        <Label size="small">{event.duration}</Label>
+                      </div>
+                      <div className="dividerContainer">
+                        <Divider className="divider" vertical />
+                      </div>
+                      <div className="eventsItem">
+                        <Label>{event.title}</Label>
+                        <Label size="small">{event.subTitle}</Label>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            {events?.map((event: EventsModel, i) => {
-              return (
-                <div className="eventsDetail">
-                  <div className="eventsDetailItem">
-                    <Label>{event.startTime}</Label>
-                    <Label size="small">{event.duration}</Label>
-                  </div>
-                  <Divider vertical className="divider" />
-                  <div className="eventsDetailItem">
-                    <Label>{event.title}</Label>
-                    <Label size="small">{event.subTitle}</Label>
-                  </div>
-                </div>
-              );
-            })}
+            <div className="actions">
+              <Button appearance="primary">Join the meeting</Button>
+              <Button icon={<ArrowRight24Regular/>} iconPosition='after' appearance="transparent" size='small'>View More</Button> 
+            </div>
           </div>
         </Escape>,
-      ],
+      ] 
     },
   };
 }
