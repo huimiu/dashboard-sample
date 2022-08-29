@@ -53,6 +53,15 @@
             "scopes": [
                 "personal"
             ]
+        },
+        {
+            "entityId": "index3",
+            "name": "Login",
+            "contentUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/login",
+            "websiteUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/login",
+            "scopes": [
+                "personal"
+            ]
         }
     ],
     "permissions": [
