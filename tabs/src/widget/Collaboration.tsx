@@ -1,9 +1,7 @@
 import './Styles.css';
 
 import { Escape } from '@fluent-blocks/react';
-import { Avatar, Body1, Caption1, Image, Label } from '@fluentui/react-components';
-import { Card, CardHeader, CardPreview } from '@fluentui/react-components/unstable';
-import { Comment16Regular } from '@fluentui/react-icons';
+import { Image, Label } from '@fluentui/react-components';
 
 export default function Collaboration() {
   return {
@@ -11,33 +9,27 @@ export default function Collaboration() {
       title: [{ text: "Team collaborations" }],
       body: [
         <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="connect">
-            <div className="connectItem">
+          <div className="collaboration">
+            <div className="collaborationItem">
               <Image height="110px" width="180px" src="content1.jpg" />
-              <Label weight='semibold'>
-                Code Repository
-              </Label>
-              <Label size="small">
-                Uploaded 1h ago
-              </Label>
+              <div className="collaborationDes">
+                <Label weight="semibold">Code Repository</Label>
+                <Label size="small">Uploaded 1h ago</Label>
+              </div>
             </div>
-            <div className="connectItem">
+            <div className="collaborationItem">
               <Image bordered height="110px" width="180px" src="content2.png" />
-              <Label weight='semibold'>
-                Azure DevOps
-              </Label>
-              <Label size="small">
-                Uploaded 1h ago
-              </Label>
+              <div className="collaborationDes">
+                <Label weight="semibold">Azure DevOps</Label>
+                <Label size="small">Uploaded 1h ago</Label>
+              </div>
             </div>
-            <div className="connectItem">
+            <div className="collaborationItem">
               <Image height="110px" width="180px" src="content3.jpg" />
-              <Label weight='semibold'>
-                Data Analytics
-              </Label>
-              <Label size="small">
-                Uploaded 1h ago
-              </Label>
+              <div className="collaborationDes">
+                <Label weight="semibold">Data Analytics</Label>
+                <Label size="small">Uploaded 1h ago</Label>
+              </div>
             </div>
           </div>
         </Escape>,

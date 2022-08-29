@@ -9,35 +9,53 @@
   flex-direction: column;
 }
 
+.smallCardContent {
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+  flex: 1;
+  flex-basis: 160px;
+}
+
 .tab {
-  display: inline-block;
+  display:flex;
   white-space: nowrap;
+  flex-direction: row;  
+  justify-content: space-between;
+  gap: 2px;
 }
 
 .footer {
   margin-bottom: auto;
 }
 
-.connect {
+.collaboration {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
-.connectItem {
+.collaborationItem {
   display: flex;
   flex-direction: column;
-  width: 180px;
-  height: 160px;
-  gap: 3px;  
+  gap: 10px;
+  flex-grow: 1;
 }
 
-.eventsContainer {
+.collaborationDes {
+  display: flex;
+  flex-direction: column;
+}
+
+.mediumContainer {
   display: flex;
   flex-direction: column; 
   gap: 15px;
   flex: 1;
-  flex-basis: 260px;
+  flex-basis: 420px;
 }
 
 .eventsDate {
@@ -63,7 +81,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 10px;
+  gap: 18px;
 }
 .eventsDetail {
   display: flex;
@@ -85,13 +103,18 @@
   overflow: hidden;
 }
 
-.divider {
-}
-
 .actions {
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.filesAction {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;  
+  margin-bottom: 10px;
 }

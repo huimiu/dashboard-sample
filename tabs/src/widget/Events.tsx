@@ -1,16 +1,12 @@
-import "@fluent-blocks/basic-icons";
-import "./Styles.css";
+import '@fluent-blocks/basic-icons';
+import './Styles.css';
 
-import { Escape } from "@fluent-blocks/react";
-import {
-  Divider,
-  Label,
-  Button,
-} from "@fluentui/react-components";
-import { CalendarToday24Regular, ArrowRight24Regular } from "@fluentui/react-icons";
+import { Escape } from '@fluent-blocks/react';
+import { Button, Divider, Label } from '@fluentui/react-components';
+import { ArrowRight24Regular, CalendarToday24Regular } from '@fluentui/react-icons';
 
-import { getEvents } from "../service/Requests";
-import EventsModel from "../model/EventsModel";
+import EventsModel from '../model/EventsModel';
+import { getEvents } from '../service/Requests';
 
 export default function EventsWidget() {
   const events = getEvents();
@@ -20,7 +16,7 @@ export default function EventsWidget() {
       body: [
         <Escape contentMeetsAccessibilityAndDesignStandards>
           <div className="cardContainer">
-            <div className="eventsContainer">
+            <div className="mediumContainer">
               <div className="eventsDate">
                 <div className="today">
                   <CalendarToday24Regular />
@@ -35,14 +31,14 @@ export default function EventsWidget() {
                   return (
                     <div className="eventsDetail">
                       <div className="eventsItem">
-                        <Label>{event.startTime}</Label>
+                        <Label size='large' weight='semibold'>{event.startTime}</Label>
                         <Label size="small">{event.duration}</Label>
                       </div>
                       <div className="dividerContainer">
                         <Divider className="divider" vertical />
                       </div>
                       <div className="eventsItem">
-                        <Label>{event.title}</Label>
+                        <Label size='large' weight='semibold'>{event.title}</Label>
                         <Label size="small">{event.subTitle}</Label>
                       </div>
                     </div>
