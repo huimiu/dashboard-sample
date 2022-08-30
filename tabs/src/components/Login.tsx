@@ -4,7 +4,8 @@ import { Escape, View } from '@fluent-blocks/react';
 import { createMicrosoftGraphClient, TeamsFx, UserInfo } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "./Context";
 import { Client } from "@microsoft/microsoft-graph-client";
-import UserprofileModel from '../model/UserprofileModel';
+import { UserprofileModel } from '../model/UserprofileModel';
+import { UserSettingTypes } from '@microsoft/teams-js';
 
 const scope = ["User.Read"];
 
@@ -21,7 +22,7 @@ async function loginAction() {
 }
 
 var profile: any;
-async function getUserprofile() {
+export async function getUserprofile() {
   const teamsfx = new TeamsFx();
   try {
     const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(scope);
@@ -34,7 +35,14 @@ async function getUserprofile() {
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
     profile = await graphClient.api("/me").get();
-    console.log(profile);
+    const ans : UserprofileModel = {
+      id: profile["id"], 
+      mail: profile["mail"], 
+      userPrincipalName: profile["userPrincipalName"]
+    };
+    
+    //console.log(ans);
+    return ans;
   } catch(e) {}
 
   //return profile;

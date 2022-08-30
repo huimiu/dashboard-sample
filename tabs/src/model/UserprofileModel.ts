@@ -1,4 +1,4 @@
-export default interface UserprofileModel {
+export interface UserprofileModel {
     '@onformdata.context'?: string;
     id: string;
     businessPhone?: string[];
