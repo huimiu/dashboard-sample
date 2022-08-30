@@ -1,14 +1,11 @@
 import './Styles.css';
 
 import { Escape, View } from '@fluent-blocks/react';
-import { createMicrosoftGraphClient, TeamsFx, UserInfo } from '@microsoft/teamsfx';
+import { TeamsFx } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "./Context";
-import { Client } from "@microsoft/microsoft-graph-client";
-import { UserprofileModel } from '../model/UserprofileModel';
-import { UserSettingTypes } from '@microsoft/teams-js';
+import { getUserprofile } from '../service/GetUserprofile';
 
-const scope = ["User.Read"];
-
+const scope = ["User.Read", "Files.Read"];
 async function loginAction() {
   const teamsfx = new TeamsFx();
   try {
@@ -19,33 +16,6 @@ async function loginAction() {
     console.log(e);
     throw "Login Error: can not login!";
   }
-}
-
-var profile: any;
-export async function getUserprofile() {
-  const teamsfx = new TeamsFx();
-  try {
-    const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(scope);
-    let tokenstr;
-    if (!token) tokenstr = ""; 
-    else tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
-  } catch(e) {}
-
-  try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
-    profile = await graphClient.api("/me").get();
-    const ans : UserprofileModel = {
-      id: profile["id"], 
-      mail: profile["mail"], 
-      userPrincipalName: profile["userPrincipalName"]
-    };
-    
-    //console.log(ans);
-    return ans;
-  } catch(e) {}
-
-  //return profile;
 }
 
 export default function Login() {
@@ -66,8 +36,6 @@ export default function Login() {
                   onAction: () => {
                     loginAction();
                     getUserprofile();
-                    // const profilestr = profile.toString();
-                    // const getProfile = (): UserprofileModel => JSON.parse(profilestr);
                   },
                 },
               },
