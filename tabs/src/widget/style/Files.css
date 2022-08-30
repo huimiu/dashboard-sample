@@ -1,0 +1,59 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;
+  height: 160px;
+}
+
+.files-tab {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: auto;
+  align-content: space-around;
+}
+
+.files-tab::-webkit-scrollbar {
+  display: none;
+}
+
+.files-content {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+
+.files-item {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+}
+
+.files-item-icon {
+  flex-basis: 35px;
+  align-self: center;
+}
+
+.files-item-desc {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  flex: 1
+}
+
+.files-item-more {
+  align-self: center;
+}
+
+.files-action {
+  display: flex;
+  flex-direction: row-reverse;
+}
+

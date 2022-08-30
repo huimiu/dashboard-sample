@@ -1,12 +1,15 @@
-import '@fluent-blocks/basic-icons';
-import './Styles.css';
+import "@fluent-blocks/basic-icons";
+import "./Styles.css";
 
-import { Escape } from '@fluent-blocks/react';
-import { Button, Divider, Label } from '@fluentui/react-components';
-import { ArrowRight24Regular, CalendarToday24Regular } from '@fluentui/react-icons';
+import { Escape } from "@fluent-blocks/react";
+import { Button, Divider, Label } from "@fluentui/react-components";
+import {
+  ArrowRight16Regular,
+  CalendarToday24Regular,
+} from "@fluentui/react-icons";
 
-import EventsModel from '../model/EventsModel';
-import { getEvents } from '../service/Requests';
+import EventsModel from "../model/EventsModel";
+import { getEvents } from "../service/Requests";
 
 export default function EventsWidget() {
   const events = getEvents();
@@ -31,14 +34,18 @@ export default function EventsWidget() {
                   return (
                     <div className="eventsDetail">
                       <div className="eventsItem">
-                        <Label size='large' weight='semibold'>{event.startTime}</Label>
+                        <Label size="large" weight="semibold">
+                          {event.startTime}
+                        </Label>
                         <Label size="small">{event.duration}</Label>
                       </div>
                       <div className="dividerContainer">
                         <Divider className="divider" vertical />
                       </div>
                       <div className="eventsItem">
-                        <Label size='large' weight='semibold'>{event.title}</Label>
+                        <Label size="large" weight="semibold">
+                          {event.title}
+                        </Label>
                         <Label size="small">{event.subTitle}</Label>
                       </div>
                     </div>
@@ -48,11 +55,18 @@ export default function EventsWidget() {
             </div>
             <div className="actions">
               <Button appearance="primary">Join the meeting</Button>
-              <Button icon={<ArrowRight24Regular/>} iconPosition='after' appearance="transparent" size='small'>View More</Button> 
+              <Button
+                icon={<ArrowRight16Regular />}
+                iconPosition="after"
+                appearance="transparent"
+                size="small"
+              >
+                View More
+              </Button>
             </div>
           </div>
         </Escape>,
-      ] 
+      ],
     },
   };
 }

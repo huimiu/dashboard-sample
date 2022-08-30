@@ -1,16 +1,67 @@
-import '@fluent-blocks/basic-icons';
-import './Styles.css';
+import "@fluent-blocks/basic-icons";
+import "./style/Files.css";
 
-import { Escape } from '@fluent-blocks/react';
-import { Body1, Button, ToggleButton } from '@fluentui/react-components';
-import { CardHeader } from '@fluentui/react-components/unstable';
+import { Escape } from "@fluent-blocks/react";
 import {
-    ArrowRight24Regular, Box16Regular, Clock16Regular,
-    MoreHorizontal16Filled, People16Regular, Star16Regular
-} from '@fluentui/react-icons';
+  Body1,
+  Button,
+  ToggleButton,
+  Image,
+  Text,
+  Avatar,
+} from "@fluentui/react-components";
+import { CardHeader } from "@fluentui/react-components/unstable";
+import {
+  ArrowRight16Regular,
+  Box16Regular,
+  Clock16Regular,
+  MoreHorizontal16Filled,
+  People16Regular,
+  Star16Regular,
+} from "@fluentui/react-icons";
+import {
+  ExcelColorIcon,
+  FilesTextColoredIcon,
+  OneNoteColorIcon,
+  PowerPointColorIcon,
+  VisioColorIcon,
+  WordColorIcon,
+} from "@fluentui/react-icons-northstar";
 
-import FilesModel from '../model/FilesModel';
-import { getFiles } from '../service/Requests';
+import FilesModel from "../model/FilesModel";
+import { getFiles } from "../service/Requests";
+import { FilesType } from "../common/FilesType";
+
+/**
+ * match icon by files type
+ *
+ * @param fileType the string of files type
+ * @returns react icon
+ */
+function matchFileIcon(fileType: string) {
+  let icon;
+  switch (fileType) {
+    case FilesType.WORD:
+      icon = <WordColorIcon />;
+      break;
+    case FilesType.EXCEL:
+      icon = <ExcelColorIcon />;
+      break;
+    case FilesType.PPT:
+      icon = <PowerPointColorIcon />;
+      break;
+    case FilesType.VISIO:
+      icon = <VisioColorIcon />;
+      break;
+    case FilesType.ONENOTE:
+      icon = <OneNoteColorIcon />;
+      break;
+    default:
+      icon = <FilesTextColoredIcon />;
+      break;
+  }
+  return icon;
+}
 
 export default function FilesWidget() {
   const files = getFiles();
@@ -19,9 +70,9 @@ export default function FilesWidget() {
       title: [{ text: "Files" }],
       body: [
         <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="cardContainer">
-            <div className="smallCardContent">
-              <div className="tab">
+          <div className="card-container">
+            <div className="card-content">
+              <div className="files-tab">
                 <ToggleButton
                   style={{ minWidth: "50px" }}
                   icon={<Box16Regular />}
@@ -55,32 +106,28 @@ export default function FilesWidget() {
                   Favorites
                 </ToggleButton>
               </div>
-
-              {files?.map((file: FilesModel, i) => {
-                return (
-                  <CardHeader
-                    key={file.id}
-                    image={{
-                      as: "img",
-                      src: "20x20.jpg",
-                      alt: "",
-                      height: 30,
-                      width: 30,
-                    }}
-                    header={<Body1>{file.name}</Body1>}
-                    action={
-                      <Button
-                        appearance="transparent"
-                        icon={<MoreHorizontal16Filled />}
-                      />
-                    }
-                  />
-                );
-              })}
+              <div className="files-content">
+                {files?.map((file: FilesModel, i) => {
+                  return (
+                    <div className="files-item">
+                      <div className="files-item-icon">
+                        {matchFileIcon(file.type)}
+                      </div>
+                      <div className="files-item-desc">
+                        <Text weight="semibold">{file.name}</Text>
+                        <Text>{file.description}</Text>
+                      </div>
+                      <div className="files-item-more">
+                        <MoreHorizontal16Filled />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="filesAction">
+            <div className="files-action">
               <Button
-                icon={<ArrowRight24Regular />}
+                icon={<ArrowRight16Regular />}
                 iconPosition="after"
                 appearance="transparent"
                 size="small"

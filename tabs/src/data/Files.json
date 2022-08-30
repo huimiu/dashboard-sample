@@ -1,15 +1,25 @@
 [
   {
       "id": "t1",
-      "name": "file1",
+      "name": "File1",
       "description": "description 1",
+      "type": "Word",
       "url": "",
       "icon": ""
   },
   {
       "id": "t2",
-      "name": "file2",
+      "name": "File2",
       "description": "description 2",
+      "type": "PowerPoint",
+      "url": "",
+      "icon": ""
+  },
+  {
+      "id": "t3",
+      "name": "File3",
+      "description": "description 3",
+      "type": "Excel",
       "url": "",
       "icon": ""
   }

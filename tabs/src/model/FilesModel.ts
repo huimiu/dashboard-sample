@@ -3,6 +3,7 @@ export default interface FilesModel {
   icon?: string;
   name: string;
   description: string;
+  type: string;
   tag?: string;
   url?: string;
 }

@@ -1,13 +1,17 @@
-import '@fluent-blocks/basic-icons';
-import './Styles.css';
+import "@fluent-blocks/basic-icons";
+import "./Styles.css";
 
-import { Escape } from '@fluent-blocks/react';
-import { Body1, Button } from '@fluentui/react-components';
-import { CardHeader } from '@fluentui/react-components/unstable';
-import { ArrowRight24Regular, MoreHorizontal20Filled, Add24Regular } from '@fluentui/react-icons';
+import { Escape } from "@fluent-blocks/react";
+import { Body1, Button } from "@fluentui/react-components";
+import { CardHeader } from "@fluentui/react-components/unstable";
+import {
+  ArrowRight16Regular,
+  MoreHorizontal20Filled,
+  Add24Regular,
+} from "@fluentui/react-icons";
 
-import TaskModel from '../model/TaskModel';
-import { getTask } from '../service/Requests';
+import TaskModel from "../model/TaskModel";
+import { getTask } from "../service/Requests";
 
 export default function TaskWidget() {
   const tasks = getTask();
@@ -43,7 +47,7 @@ export default function TaskWidget() {
             <div className="actions">
               <Button icon={<Add24Regular />}>Create task</Button>
               <Button
-                icon={<ArrowRight24Regular />}
+                icon={<ArrowRight16Regular />}
                 iconPosition="after"
                 appearance="transparent"
                 size="small"
