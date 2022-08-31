@@ -3,7 +3,7 @@ import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { GroupprofileModel } from '../model/GroupprofileModel';
 
-export async function getGroupProfile(profile: any) {
+export async function getGroupProfile() {
   const teamsfx = new TeamsFx();
   try {
     const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(["Directory.ReadWrite.All"]);

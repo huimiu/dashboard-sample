@@ -3,8 +3,6 @@ import './Styles.css';
 import { Escape, View } from '@fluent-blocks/react';
 import { TeamsFx } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "./Context";
-import { getUserprofile } from '../service/GetUserprofile';
-import { getFiles } from '../service/GetFiles';
 
 const scope = ["User.Read", "User.ReadWrite.All", "Files.ReadWrite.All", "Directory.ReadWrite.All"];
 async function loginAction() {
