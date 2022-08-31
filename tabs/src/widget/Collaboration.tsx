@@ -8,7 +8,7 @@ export default function Collaboration() {
     <Card className="card">
       <CardHeader
         header={
-          <Text weight="semibold" size={300}>
+          <Text weight="semibold" size={400}>
             Teams Collaboration
           </Text>
         }
@@ -21,6 +21,7 @@ export default function Collaboration() {
               width="180px"
               src="content1.jpg"
               shape="rounded"
+              onClick={() => alert("ss")}
             />
             <div className="collaborationDes">
               <Label weight="semibold">Code Repository</Label>

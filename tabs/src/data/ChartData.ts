@@ -3,11 +3,11 @@ export const demoData = {
   datasets: [
     {
       label: "Laptops",
-      data: [1860, 2000, 1900, 1800, 1700],
+      data: [1860, 7700, 4100, 3012, 2930],
     },
     {
       label: "Watches",
-      data: [1200, 1000, 2480, 2600, 1900],
+      data: [1200, 3600, 2480, 5049, 4596],
     },
   ],
 };

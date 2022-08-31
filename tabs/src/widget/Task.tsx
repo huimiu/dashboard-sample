@@ -20,14 +20,30 @@ export default function TaskWidget() {
     <Card appearance="filled-alternative" key="files" className="card">
       <CardHeader
         header={
-          <Text weight="semibold" size={300}>
+          <Text weight="semibold" size={400}>
             Your Tasks
           </Text>
         }
       />
       <div className="flex-content">
         <div className="content-between">
-          <Radio label="task1" value="task1" />
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
           <ToggleButton icon={<Star24Regular />} appearance="transparent" />
         </div>
       </div>

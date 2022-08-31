@@ -1,56 +1,43 @@
-import { Escape, View } from "@fluent-blocks/react";
+import "./Styles.css";
 
 import Banner from "../widget/Banner";
-import ChartWidget from "../widget/Chart";
 import Collaboration from "../widget/Collaboration";
-import EventsWidget from "../widget/Events";
-import FilesWidget from "../widget/Files";
-import TaskWidget from "../widget/Task";
+import Events from "../widget/Events";
+import Files from "../widget/Files";
+import TableWidget from "../widget/TableWidget";
+import Task from "../widget/Task";
 
 export default function Dashboard() {
   return (
-    <View
-      accentScheme="teams"
-      themeName="light"
-      main={{
-        title: "",
-        blocks: [
-          <Escape contentMeetsAccessibilityAndDesignStandards>
-            <Banner />
-          </Escape>,
-          {
-            layout: {
-              variant: "flex",
-              items: [
-                {
-                  item: TaskWidget(),
-                  contextualVariant: "flex",
-                },
-                {
-                  item: Collaboration(),
-                  contextualVariant: "flex",
-                },
-                {
-                  item: EventsWidget(),
-                  contextualVariant: "flex",
-                  blockSizeFactor: 2,
-                },
-                {
-                  item: FilesWidget(),
-                  contextualVariant: "flex",
-                  inlineSizeFactor: 1,
-                },
-                {
-                  item: ChartWidget(),
-                  contextualVariant: "flex",
-                  inlineSizeFactor: 2,
-                  blockSizeFactor: 1,
-                },
-              ],
-            },
-          },
-        ],
-      }}
-    />
+    <div className="dashboard">
+      <div className="banner">
+        <Banner />
+      </div>
+      <div className="dashboard-bottom">
+        <div className="dashboard-bottom-left">
+          <div className="widget-row">
+            <div className="widget-small">
+              <Task />
+            </div>
+            <div className="widget-medium">
+              <Collaboration />
+            </div>
+          </div>
+          <div className="widget-row">
+            <div className="widget-small">
+              <Files />
+            </div>
+            <div className="widget-medium">
+              <TableWidget />
+            </div>
+          </div>
+        </div>
+        <div className="dashboard-bottom-right">
+          <div className="fill-container">
+            <Events />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

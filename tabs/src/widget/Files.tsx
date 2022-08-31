@@ -68,7 +68,7 @@ export default function FilesWidget() {
     <Card appearance="filled-alternative" key="files" className="card">
       <CardHeader
         header={
-          <Text weight="semibold" size={300}>
+          <Text weight="semibold" size={400}>
             Your Documents
           </Text>
         }

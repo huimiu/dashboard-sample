@@ -23,7 +23,7 @@ export default function Events() {
     <Card className="card-stretch">
       <CardHeader
         header={
-          <Text weight="semibold" size={300}>
+          <Text weight="semibold" size={400}>
             Your upcoming events
           </Text>
         }
@@ -38,7 +38,7 @@ export default function Events() {
               You have 4 meetings today. The upcoming events
             </Label>
           </div>
-          <div className="eventList">
+          <div className="event-list">
             {events?.map((event: EventsModel, i) => {
               return (
                 <div className="eventsDetail">

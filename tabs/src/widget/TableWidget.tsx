@@ -8,7 +8,7 @@ export default function TableWidget() {
       <CardHeader
         header={
           <Text weight="semibold" size={300}>
-            Teams Collaboration
+            Features backlog
           </Text>
         }
       />

@@ -58,6 +58,7 @@
   justify-content: stretch; 
   flex: 1;
   flex-grow: 1;
+  margin-left: 5px;
 }
 
 .card {
@@ -71,6 +72,14 @@
   flex: 1;
   height: 100%;
 }
+
+.card-content {
+  display: flex;
+  flex-direction: column; 
+  gap:20px;
+  height: 160px;
+}
+
 
 .card-container {
   display: flex;
@@ -116,13 +125,6 @@
 }
 
 
-.eventList {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 18px;
-}
 .eventsDetail {
   display: flex;
   flex-direction: row;

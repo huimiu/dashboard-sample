@@ -3,13 +3,6 @@
   flex-direction: column;
 }
 
-.card-content {
-  display: flex;
-  flex-direction: column; 
-  gap: 10px;
-  height: 160px;
-}
-
 .files-tab {
   display: flex;
   flex-flow: row nowrap;
