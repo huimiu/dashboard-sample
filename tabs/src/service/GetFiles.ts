@@ -16,7 +16,7 @@ export async function getFiles() {
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
     const drives = await graphClient.api("/me/drive/recent").get();
-    const files[] = drives["value"];
+    //const files[] = drives["value"];
     console.log(drives);
 
     return drives;

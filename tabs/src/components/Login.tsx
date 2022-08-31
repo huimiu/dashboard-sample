@@ -6,7 +6,7 @@ import { dashboardTeamsFxContext } from "./Context";
 import { getUserprofile } from '../service/GetUserprofile';
 import { getFiles } from '../service/GetFiles';
 
-const scope = ["User.Read", "Files.Read"];
+const scope = ["User.Read", "User.ReadWrite.All", "Files.ReadWrite.All", "Directory.ReadWrite.All"];
 async function loginAction() {
   const teamsfx = new TeamsFx();
   try {
@@ -36,7 +36,6 @@ export default function Login() {
                   variant: "primary",
                   onAction: () => {
                     loginAction();
-                    getFiles();
                   },
                 },
               },
