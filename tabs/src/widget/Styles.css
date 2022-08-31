@@ -51,17 +51,49 @@
   gap: 4px;
 }
 
-.cardContainer {
+.flex-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
+  align-content: stretch;
+  justify-content: stretch; 
+  flex: 1;
+  flex-grow: 1;
 }
 
-.smallCardContent {
-  display: flex;
-  flex-direction: column; 
-  gap: 8px;
+.card {
   flex: 1;
-  flex-basis: 160px;
+  align-self: stretch;
+  justify-self: stretch;
+  height: 260px;
+}
+
+.card-stretch {
+  flex: 1;
+  height: 100%;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.card-container-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content:flex-start;
+  flex: 1;
+}
+
+.content-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
 }
 
 .tab {
@@ -76,52 +108,13 @@
   margin-bottom: auto;
 }
 
-.collaboration {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
-.collaborationItem {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex-grow: 1;
-}
-
-.collaborationDes {
-  display: flex;
-  flex-direction: column;
-}
-
 .mediumContainer {
   display: flex;
   flex-direction: column; 
   gap: 15px;
   flex: 1;
-  flex-basis: 420px;
 }
 
-.eventsDate {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-}
-
-.today {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 5px;
-}
-
-.todayColor {
-  color: gray;
-}
 
 .eventList {
   display: flex;
@@ -159,9 +152,6 @@
   margin-bottom: 10px;
 }
 
-.filesAction {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;  
-  margin-bottom: 10px;
+.bottom-action {
+  align-self: flex-end;
 }

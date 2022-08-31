@@ -20,35 +20,37 @@ export default function Dashboard() {
           </Escape>,
           {
             layout: {
-              variant: "grid",
+              variant: "flex",
               items: [
                 {
                   item: TaskWidget(),
-                },
-                {
-                  item: ChartWidget(),
-                  inlineSizeFactor: 2,
-                  blockSizeFactor: 1,
+                  contextualVariant: "flex",
                 },
                 {
                   item: Collaboration(),
-                  blockSizeFactor: 1,
-                  inlineSizeFactor: 2,
+                  contextualVariant: "flex",
                 },
                 {
                   item: EventsWidget(),
+                  contextualVariant: "flex",
                   blockSizeFactor: 2,
                 },
                 {
                   item: FilesWidget(),
+                  contextualVariant: "flex",
                   inlineSizeFactor: 1,
+                },
+                {
+                  item: ChartWidget(),
+                  contextualVariant: "flex",
+                  inlineSizeFactor: 2,
+                  blockSizeFactor: 1,
                 },
               ],
             },
           },
         ],
       }}
-      onAction={function noRefCheck() {}}
     />
   );
 }

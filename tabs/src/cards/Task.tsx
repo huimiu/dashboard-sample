@@ -1,16 +1,21 @@
-import { Body1, Button, mergeClasses, Text } from '@fluentui/react-components';
-import { Card, CardFooter, CardHeader } from '@fluentui/react-components/unstable';
-import { ArrowRight16Regular, MoreHorizontal20Filled } from '@fluentui/react-icons';
+import { Body1, Button, mergeClasses, Text } from "@fluentui/react-components";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+} from "@fluentui/react-components/unstable";
+import {
+  ArrowRight16Regular,
+  MoreHorizontal20Filled,
+} from "@fluentui/react-icons";
 
-import TaskModel from '../model/TaskModel';
-import { getTask } from '../service/Requests';
-import { useStyles } from './Styles';
+import TaskModel from "../model/TaskModel";
+import { getTask } from "../service/Requests";
 
 export default function Task() {
   const tasks = getTask();
-  const styles = useStyles();
   return (
-    <Card className={styles.cardContainer} appearance="filled-alternative">
+    <Card>
       <CardHeader
         header={
           <Text weight="semibold" size={400}>
@@ -41,7 +46,6 @@ export default function Task() {
       })}
 
       <CardFooter
-        className={styles.footerContainer}
         action={
           <Button size="small" appearance="transparent">
             View More

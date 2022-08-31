@@ -1,4 +1,4 @@
-import "./Styles.css";
+import "./style/Banner.css";
 
 import { Avatar, Image, Label } from "@fluentui/react-components";
 import { Card, CardPreview } from "@fluentui/react-components/unstable";
@@ -13,7 +13,7 @@ export default function Banner() {
     <div className="banner">
       <Card>
         <CardPreview className="banner-img">
-          <Image alt="file preview" src="top-img.jpg" fit="cover"/>
+          <Image alt="file preview" src="top-img.jpg" fit="cover" />
         </CardPreview>
         <div className="banner-org-container">
           <Avatar image={{ src: "contoso.png" }} size={56} />

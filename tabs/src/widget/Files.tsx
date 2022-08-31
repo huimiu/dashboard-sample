@@ -1,16 +1,15 @@
-import "@fluent-blocks/basic-icons";
 import "./style/Files.css";
+import "./Styles.css";
 
-import { Escape } from "@fluent-blocks/react";
 import {
+  Avatar,
   Body1,
   Button,
-  ToggleButton,
   Image,
   Text,
-  Avatar,
+  ToggleButton,
 } from "@fluentui/react-components";
-import { CardHeader } from "@fluentui/react-components/unstable";
+import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import {
   ArrowRight16Regular,
   Box16Regular,
@@ -28,9 +27,9 @@ import {
   WordColorIcon,
 } from "@fluentui/react-icons-northstar";
 
+import { FilesType } from "../common/FilesType";
 import FilesModel from "../model/FilesModel";
 import { getFiles } from "../service/Requests";
-import { FilesType } from "../common/FilesType";
 
 /**
  * match icon by files type
@@ -65,79 +64,42 @@ function matchFileIcon(fileType: string) {
 
 export default function FilesWidget() {
   const files = getFiles();
-  return {
-    card: {
-      title: [{ text: "Files" }],
-      body: [
-        <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="card-container">
-            <div className="card-content">
-              <div className="files-tab">
-                <ToggleButton
-                  style={{ minWidth: "50px" }}
-                  icon={<Box16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  All
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<Clock16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Recently
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<People16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Shared
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<Star16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Favorites
-                </ToggleButton>
-              </div>
-              <div className="files-content">
-                {files?.map((file: FilesModel, i) => {
-                  return (
-                    <div className="files-item">
-                      <div className="files-item-icon">
-                        {matchFileIcon(file.type)}
-                      </div>
-                      <div className="files-item-desc">
-                        <Text weight="semibold">{file.name}</Text>
-                        <Text>{file.description}</Text>
-                      </div>
-                      <div className="files-item-more">
-                        <MoreHorizontal16Filled />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="files-action">
-              <Button
-                icon={<ArrowRight16Regular />}
-                iconPosition="after"
-                appearance="transparent"
-                size="small"
-              >
-                View More
-              </Button>
-            </div>
+  return (
+    <Card appearance="filled-alternative" key="files" className="card">
+      <CardHeader
+        header={
+          <Text weight="semibold" size={300}>
+            Your Documents
+          </Text>
+        }
+      />
+      <div className="flex-content">
+        <div className="card-content">
+          <div className="files-content">
+            {files?.map((file: FilesModel, i) => {
+              return (
+                <div className="files-item">
+                  <div className="files-item-icon">
+                    {matchFileIcon(file.type)}
+                  </div>
+                  <div className="files-item-desc">
+                    <Text weight="semibold">{file.name}</Text>
+                    <Text>{file.description}</Text>
+                  </div>
+                  <div className="files-item-more">
+                    <MoreHorizontal16Filled />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </Escape>,
-      ],
-    },
-  };
+          <div className="bottom-action">
+            <Button appearance="transparent" size="small">
+              View all
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
 }

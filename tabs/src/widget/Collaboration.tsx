@@ -1,39 +1,59 @@
-import './Styles.css';
-
-import { Escape } from '@fluent-blocks/react';
-import { Image, Label } from '@fluentui/react-components';
+import "./style/Collaboration.css";
+import "./Styles.css";
+import { Avatar, Image, Label, Text, Button } from "@fluentui/react-components";
+import { Card, CardHeader } from "@fluentui/react-components/unstable";
 
 export default function Collaboration() {
-  return {
-    card: {
-      title: [{ text: "Team collaborations" }],
-      body: [
-        <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="collaboration">
-            <div className="collaborationItem">
-              <Image height="110px" width="180px" src="content1.jpg" />
-              <div className="collaborationDes">
-                <Label weight="semibold">Code Repository</Label>
-                <Label size="small">Uploaded 1h ago</Label>
-              </div>
-            </div>
-            <div className="collaborationItem">
-              <Image bordered height="110px" width="180px" src="content2.png" />
-              <div className="collaborationDes">
-                <Label weight="semibold">Azure DevOps</Label>
-                <Label size="small">Uploaded 1h ago</Label>
-              </div>
-            </div>
-            <div className="collaborationItem">
-              <Image height="110px" width="180px" src="content3.jpg" />
-              <div className="collaborationDes">
-                <Label weight="semibold">Data Analytics</Label>
-                <Label size="small">Uploaded 1h ago</Label>
-              </div>
+  return (
+    <Card className="card">
+      <CardHeader
+        header={
+          <Text weight="semibold" size={300}>
+            Teams Collaboration
+          </Text>
+        }
+      />
+      <div className="flex-content">
+        <div className="card-container-row">
+          <div className="collaborationItem">
+            <Image
+              height="110px"
+              width="180px"
+              src="content1.jpg"
+              shape="rounded"
+            />
+            <div className="collaborationDes">
+              <Label weight="semibold">Code Repository</Label>
+              <Label size="small">Uploaded 1h ago</Label>
             </div>
           </div>
-        </Escape>,
-      ],
-    },
-  };
+          <div className="collaborationItem">
+            <Image
+              bordered
+              height="110px"
+              width="180px"
+              src="content2.png"
+              shape="rounded"
+            />
+            <div className="collaborationDes">
+              <Label weight="semibold">Azure DevOps</Label>
+              <Label size="small">Uploaded 1h ago</Label>
+            </div>
+          </div>
+          <div className="collaborationItem">
+            <Image
+              height="110px"
+              width="180px"
+              src="content3.jpg"
+              shape="rounded"
+            />
+            <div className="collaborationDes">
+              <Label weight="semibold">Data Analytics</Label>
+              <Label size="small">Uploaded 1h ago</Label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
 }

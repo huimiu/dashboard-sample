@@ -1,3 +1,21 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.dashboard::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.banner {
+  display: flex;  
+}
+
 .loginPage {
   display: flex;
   
@@ -8,4 +26,54 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.dashboard-bottom {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 20px;
+  align-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dashboard-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 6;
+}
+
+.dashboard-bottom-right {
+  display: flex;
+  flex-grow: 4;
+}
+
+.widget-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.widget-small { 
+  display: flex;
+  flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  height: 260px;
+}
+
+.widget-medium {
+  display: flex;
+  flex: 5;
+  flex-grow: 5;
+  flex-shrink: 5;
+  height: 260px;
+}
+
+.fill-container {
+  flex-grow: 1;
+  align-self: stretch;
+  justify-self: stretch;
 }
