@@ -23,7 +23,7 @@ export default function ChartWidget(): WidgetPropsOrElement {
                   data: demoData,
                 },
               },
-              variant: "textWidth",
+              variant: "viewportWidth",
             },
           ],
         },

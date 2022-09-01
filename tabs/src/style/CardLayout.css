@@ -1,0 +1,106 @@
+.card {
+  flex: 1;
+  align-self: stretch;
+  justify-self: stretch;
+  height: 260px;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.card-small { 
+  display: flex;
+  flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  height: 260px;
+}
+
+.card-medium {
+  display: flex;
+  flex: 5;
+  flex-grow: 5;
+  flex-shrink: 5;
+  height: 260px;
+}
+
+.card-container-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content:flex-start;
+  flex: 1;
+}
+
+.card-stretch {
+  flex: 1;
+  height: 100%;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column; 
+  gap:5px;
+  height: 160px;
+}
+
+.card-widget {
+  height: 220px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.content-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    flex: 1;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  .card-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card-container-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content:flex-start;
+    flex: 1;
+  }
+
+  .card-small { 
+    display: flex;
+    flex: 2;
+  }
+  
+  .card-medium {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column; 
+    gap:5px;
+  }
+}

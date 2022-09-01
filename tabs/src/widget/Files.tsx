@@ -1,5 +1,6 @@
 import "@fluent-blocks/basic-icons";
 import "../style/Files.css";
+import "../style/CardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
@@ -46,8 +47,10 @@ export default function FilesWidget(): WidgetPropsOrElement {
                             {matchFileIcon(file.type)}
                           </div>
                           <div className="files-item-desc">
-                            <Text weight="semibold">{file.name}</Text>
-                            <Text>{file.description}</Text>
+                            <Text weight="semibold" key={file.id}>
+                              {file.name}
+                            </Text>
+                            <Text key={file.id}>{file.description}</Text>
                           </div>
                           <div className="files-item-more">
                             <MoreHorizontal16Filled />

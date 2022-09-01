@@ -1,10 +1,11 @@
 import "./Styles.css";
+import "../style/Dashboard.css";
+import "../style/CardLayout.css";
 
 import Banner from "../card/Banner";
 import Collaboration from "../card/Collaboration";
 import Events from "../card/Events";
 import Files from "../card/Files";
-import TableWidget from "../card/TableWidget";
 import Task from "../card/Task";
 
 export default function Dashboard() {
@@ -15,19 +16,19 @@ export default function Dashboard() {
       </div>
       <div className="dashboard-bottom">
         <div className="dashboard-bottom-left">
-          <div className="widget-row">
-            <div className="widget-small">
+          <div className="card-row">
+            <div className="card-small">
               <Task />
             </div>
-            <div className="widget-medium">
+            <div className="card-medium">
               <Collaboration />
             </div>
           </div>
-          <div className="widget-row">
-            <div className="widget-small">
+          <div className="card-row">
+            <div className="card-small">
               <Files />
             </div>
-            <div className="widget-medium">
+            <div className="card-medium">
               <Collaboration />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import "./Styles.css";
 import "../style/Task.css";
+import "../style/CardLayout.css";
 
 import {
   Body1,

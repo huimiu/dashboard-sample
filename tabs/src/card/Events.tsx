@@ -1,12 +1,9 @@
 import "./Styles.css";
 import "../style/Events.css";
+import "../style/CardLayout.css";
 
 import { Divider, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
-import {
-  ArrowRight16Regular,
-  CalendarToday24Regular,
-} from "@fluentui/react-icons";
 
 import EventsModel from "../model/EventsModel";
 import { getEvents } from "../service/Requests";
@@ -37,19 +34,23 @@ export default function Events() {
               return (
                 <div className="eventsDetail">
                   <div className="eventsItem">
-                    <Label size="large" weight="semibold">
+                    <Label size="large" weight="semibold" key={event.id}>
                       {event.startTime}
                     </Label>
-                    <Label size="small">{event.duration}</Label>
+                    <Label size="small" key={event.id}>
+                      {event.duration}
+                    </Label>
                   </div>
                   <div className="dividerContainer">
                     <Divider className="divider" vertical />
                   </div>
                   <div className="eventsItem">
-                    <Label size="large" weight="semibold">
+                    <Label size="large" weight="semibold" key={event.id}>
                       {event.title}
                     </Label>
-                    <Label size="small">{event.subTitle}</Label>
+                    <Label size="small" key={event.id}>
+                      {event.subTitle}
+                    </Label>
                   </div>
                 </div>
               );

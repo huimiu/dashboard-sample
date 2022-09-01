@@ -1,6 +1,6 @@
 import "../style/Collaboration.css";
 import "./Styles.css";
-import { Avatar, Image, Label, Text, Button } from "@fluentui/react-components";
+import { Image, Label, Text, Button } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 
 export default function Collaboration() {

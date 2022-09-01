@@ -1,5 +1,6 @@
 import "../style/Files.css";
 import "./Styles.css";
+import "../style/CardLayout.css";
 
 import { Button, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";

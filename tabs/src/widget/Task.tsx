@@ -1,4 +1,5 @@
 import "../card/Styles.css";
+import "../style/CardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { Radio, ToggleButton } from "@fluentui/react-components";

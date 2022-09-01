@@ -23,7 +23,7 @@ export default function PieWidget(): WidgetPropsOrElement {
                   data: demoData,
                 },
               },
-              variant: "narrow",
+              variant: "viewportWidth",
             },
           ],
         },

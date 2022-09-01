@@ -1,4 +1,5 @@
 import "../card/Styles.css";
+import "../style/CardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
@@ -42,19 +43,29 @@ export default function Events(): WidgetPropsOrElement {
                       return (
                         <div className="eventsDetail">
                           <div className="eventsItem">
-                            <Label size="large" weight="semibold">
+                            <Label
+                              size="large"
+                              weight="semibold"
+                              key={event.id}
+                            >
                               {event.startTime}
                             </Label>
                             <Label size="small">{event.duration}</Label>
                           </div>
                           <div className="dividerContainer">
-                            <Divider className="divider" vertical />
+                            <Divider
+                              className="divider"
+                              vertical
+                              key={event.id}
+                            />
                           </div>
                           <div className="eventsItem">
                             <Label size="large" weight="semibold">
                               {event.title}
                             </Label>
-                            <Label size="small">{event.subTitle}</Label>
+                            <Label size="small" key={event.id}>
+                              {event.subTitle}
+                            </Label>
                           </div>
                         </div>
                       );
