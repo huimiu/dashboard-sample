@@ -26,28 +26,27 @@ export default function TaskWidget() {
           </Text>
         }
       />
-      <div className="flex-content">
-        <div className="card-content">
-          <div className="content-between">
-            <Radio label="task" value="task1" />
-            <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-          </div>
-          <div className="content-between">
-            <Radio label="task" value="task1" />
-            <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-          </div>
-          <div className="content-between">
-            <Radio label="task" value="task1" />
-            <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-          </div>
-          <div className="content-between">
-            <Radio label="task" value="task1" />
-            <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-          </div>
-          <div className="content-between">
-            <Radio label="task" value="task1" />
-            <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-          </div>
+
+      <div className="card-content">
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        </div>
+        <div className="content-between">
+          <Radio label="task" value="task1" />
+          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
         </div>
       </div>
     </Card>

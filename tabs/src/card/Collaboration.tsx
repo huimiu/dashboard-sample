@@ -1,6 +1,8 @@
 import "../style/Collaboration.css";
 import "./Styles.css";
-import { Image, Label, Text, Button } from "@fluentui/react-components";
+import "../style/CardLayout.css";
+
+import { Button, Image, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 
 export default function Collaboration() {
@@ -15,7 +17,7 @@ export default function Collaboration() {
       />
       <div className="flex-content">
         <div className="card-container-row">
-          <div className="collaborationItem">
+          <div className="collaboration-item">
             <Image
               height="110px"
               width="180px"
@@ -23,12 +25,12 @@ export default function Collaboration() {
               shape="rounded"
               onClick={() => alert("ss")}
             />
-            <div className="collaborationDes">
+            <div className="collaboration-des">
               <Label weight="semibold">Code Repository</Label>
               <Label size="small">Uploaded 1h ago</Label>
             </div>
           </div>
-          <div className="collaborationItem">
+          <div className="collaboration-item">
             <Image
               bordered
               height="110px"
@@ -36,19 +38,19 @@ export default function Collaboration() {
               src="content2.png"
               shape="rounded"
             />
-            <div className="collaborationDes">
+            <div className="collaboration-des">
               <Label weight="semibold">Azure DevOps</Label>
               <Label size="small">Uploaded 1h ago</Label>
             </div>
           </div>
-          <div className="collaborationItem">
+          <div className="collaboration-item">
             <Image
               height="110px"
               width="180px"
               src="content3.jpg"
               shape="rounded"
             />
-            <div className="collaborationDes">
+            <div className="collaboration-des">
               <Label weight="semibold">Data Analytics</Label>
               <Label size="small">Uploaded 1h ago</Label>
             </div>

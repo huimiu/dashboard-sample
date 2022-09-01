@@ -1,11 +1,11 @@
-.collaborationItem {
+.collaboration-item {
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex: 1;
 }
 
-.collaborationDes {
+.collaboration-des {
   display: flex;
   flex-direction: column;
   flex: 1;

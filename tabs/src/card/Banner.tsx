@@ -40,8 +40,7 @@ export default function Banner() {
               Pellentesque mattis rutrum enim, eget vestibulum nisl fringilla
               in. Nullam nec justo fringilla, lobortis lectus in, interdum diam.
               Donec tempor, neque vel tincidunt volutpat, tellus odio ultricies
-              dui, eu ultricies augue diam a odio. Suspendisse erat arcu, dictum
-              eleifend aliquet nec, iaculis maximus ante.{" "}
+              dui, eu ultricies augue diam a odio.
             </Label>
           </div>
         </div>

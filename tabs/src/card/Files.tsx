@@ -29,31 +29,29 @@ export default function Files() {
           </Text>
         }
       />
-      <div className="flex-content">
-        <div className="card-content">
-          <div className="files-content">
-            {files?.map((file: FilesModel, i) => {
-              return (
-                <div className="files-item">
-                  <div className="files-item-icon">
-                    {matchFileIcon(file.type)}
-                  </div>
-                  <div className="files-item-desc">
-                    <Text weight="semibold">{file.name}</Text>
-                    <Text>{file.description}</Text>
-                  </div>
-                  <div className="files-item-more">
-                    <MoreHorizontal16Filled />
-                  </div>
+      <div className="card-content">
+        <div className="files-content">
+          {files?.map((file: FilesModel, i) => {
+            return (
+              <div className="files-item">
+                <div className="files-item-icon">
+                  {matchFileIcon(file.type)}
                 </div>
-              );
-            })}
-          </div>
-          <div className="bottom-action">
-            <Button appearance="transparent" size="small">
-              View all
-            </Button>
-          </div>
+                <div className="files-item-desc">
+                  <Text weight="semibold">{file.name}</Text>
+                  <Text>{file.description}</Text>
+                </div>
+                <div className="files-item-more">
+                  <MoreHorizontal16Filled />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="bottom-action">
+          <Button appearance="transparent" size="small">
+            View all
+          </Button>
         </div>
       </div>
     </Card>
