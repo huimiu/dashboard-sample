@@ -6,12 +6,7 @@
 .files-tab {
   display: flex;
   flex-flow: row nowrap;
-  overflow: auto;
   align-content: space-around;
-}
-
-.files-tab::-webkit-scrollbar {
-  display: none;
 }
 
 .files-content {

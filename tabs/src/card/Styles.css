@@ -53,12 +53,10 @@
 
 .flex-content {
   display: flex;
-  flex-direction: column;  
-  align-content: stretch;
+  flex-direction: column; 
   justify-content: stretch; 
   flex: 1;
   flex-grow: 1;
-  margin-left: 5px;
 }
 
 .card {
@@ -66,6 +64,10 @@
   align-self: stretch;
   justify-self: stretch;
   height: 260px;
+}
+
+.card-widget {
+  height: 220px;
 }
 
 .card-stretch {
@@ -76,7 +78,7 @@
 .card-content {
   display: flex;
   flex-direction: column; 
-  gap:20px;
+  gap:5px;
   height: 160px;
 }
 
@@ -156,4 +158,13 @@
 
 .bottom-action {
   align-self: flex-end;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: stretch;
+  height: 200px;
+  overflow: hidden;
 }

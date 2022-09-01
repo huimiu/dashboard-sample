@@ -1,4 +1,4 @@
-import "./style/Banner.css";
+import "../style/Banner.css";
 
 import { Avatar, Image, Label } from "@fluentui/react-components";
 import { Card, CardPreview } from "@fluentui/react-components/unstable";

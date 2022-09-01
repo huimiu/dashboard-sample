@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex-grow: 1;
+  flex: 1;
 }
 
 .collaborationDes {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }

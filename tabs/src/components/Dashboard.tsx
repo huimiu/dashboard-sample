@@ -1,11 +1,11 @@
 import "./Styles.css";
 
-import Banner from "../widget/Banner";
-import Collaboration from "../widget/Collaboration";
-import Events from "../widget/Events";
-import Files from "../widget/Files";
-import TableWidget from "../widget/TableWidget";
-import Task from "../widget/Task";
+import Banner from "../card/Banner";
+import Collaboration from "../card/Collaboration";
+import Events from "../card/Events";
+import Files from "../card/Files";
+import TableWidget from "../card/TableWidget";
+import Task from "../card/Task";
 
 export default function Dashboard() {
   return (
@@ -28,7 +28,7 @@ export default function Dashboard() {
               <Files />
             </div>
             <div className="widget-medium">
-              <TableWidget />
+              <Collaboration />
             </div>
           </div>
         </div>
