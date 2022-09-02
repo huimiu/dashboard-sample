@@ -7,9 +7,8 @@ export async function getFiles() {
   const teamsfx = new TeamsFx();
   try {
     const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(["Files.Read"]);
-    let tokenstr;
-    if (!token) tokenstr = ""; 
-    else tokenstr = token.token;
+    let tokenstr = "";
+    if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch(e) {}  
 

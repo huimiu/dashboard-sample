@@ -4,7 +4,14 @@ import { Escape, View } from '@fluent-blocks/react';
 import { TeamsFx } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "./Context";
 
-const scope = ["User.Read", "User.ReadWrite.All", "Files.ReadWrite.All", "Directory.ReadWrite.All"];
+const scope = [
+  "User.Read", 
+  "User.ReadWrite.All", 
+  "Files.ReadWrite.All", 
+  "Directory.ReadWrite.All", 
+  "Tasks.ReadWrite",
+  "Calendars.ReadWrite"
+];
 async function loginAction() {
   const teamsfx = new TeamsFx();
   try {

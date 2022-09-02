@@ -7,9 +7,8 @@ export async function getGroupProfile() {
   const teamsfx = new TeamsFx();
   try {
     const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(["Directory.ReadWrite.All"]);
-    let tokenstr;
-    if (!token) tokenstr = ""; 
-    else tokenstr = token.token;
+    let tokenstr = "";
+    if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch(e) {}
   
@@ -21,7 +20,7 @@ export async function getGroupProfile() {
     const groupDescription = myFirstGroup["description"];
     const groupMail = myFirstGroup["mail"];
     
-    const id = myFirstGroup["id"];
+    const id: string = myFirstGroup["id"];
     const owners = await graphClient.api("/groups/"+id+"/owners").get();
     const ownersArray: Array<any> = owners["value"];
     const ownersNames = ownersArray.map((obj: any) => {return obj["displayName"]});
