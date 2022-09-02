@@ -1,25 +1,26 @@
 [
     {
         "startTime": "10:30 AM",
-        "duration": "30 min",
+        "endTime": "11:00 AM",        
+        "title": "ProjectX Dev Sync",
+        "subTitle": "Daniela Mandera",
+        "location": "Conf Room LSQ/13057"
+    },
+    {
+        "startTime": "10:30 AM",
+        "endTime": "11:00 AM",
         "title": "ProjectX Dev Sync",
         "subTitle": "Daniela Mandera"
     },
     {
         "startTime": "10:30 AM",
-        "duration": "30 min",
+        "endTime": "11:00 AM",
         "title": "ProjectX Dev Sync",
         "subTitle": "Daniela Mandera"
     },
     {
         "startTime": "10:30 AM",
-        "duration": "30 min",
-        "title": "ProjectX Dev Sync",
-        "subTitle": "Daniela Mandera"
-    },
-    {
-        "startTime": "10:30 AM",
-        "duration": "30 min",
+        "endTime": "11:00 AM",
         "title": "ProjectX Dev Sync",
         "subTitle": "Daniela Mandera"
     }

@@ -76,27 +76,6 @@
   flex: 1;
 }
 
-
-.eventsDetail {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  gap: 15px;
-}
-
-.eventsItem {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-}
-
-.dividerContainer {
-  display: flex;
-  overflow: hidden;
-}
-
 .actions {
   display: flex;
   flex: 1;

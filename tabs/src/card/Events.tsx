@@ -1,8 +1,7 @@
-import "./Styles.css";
 import "../style/Events.css";
 import "../style/CardLayout.css";
 
-import { Divider, Label, Text } from "@fluentui/react-components";
+import { Button, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 
 import EventsModel from "../model/EventsModel";
@@ -28,28 +27,56 @@ export default function Events() {
             You have 4 meetings today. The upcoming events
           </Label>
         </div>
-        <div className="event-list">
+        <div className="events-list">
           {events?.map((event: EventsModel, i) => {
             return (
-              <div className="eventsDetail">
-                <div className="eventsItem">
-                  <Label size="large" weight="semibold" key={event.id}>
-                    {event.startTime}
-                  </Label>
-                  <Label size="small" key={event.id}>
-                    {event.duration}
-                  </Label>
+              <div className="events-item">
+                <div className="events-item-left">
+                  <div className="divider" />
+                  <div className="events-content">
+                    <Text
+                      className="events-title"
+                      size={500}
+                      key={event.id?.concat("-title")}
+                    >
+                      {event.title}
+                    </Text>
+                    <Text
+                      className="events-subtitle"
+                      size={400}
+                      key={event.id?.concat("-time")}
+                    >
+                      {event.startTime + "-" + event.endTime}
+                    </Text>
+                    {event.location && (
+                      <Text
+                        className="events-location"
+                        size={300}
+                        key={event.id?.concat("-loc")}
+                      >
+                        {event.location}
+                      </Text>
+                    )}
+                  </div>
                 </div>
-                <div className="dividerContainer">
-                  <Divider className="divider" vertical />
-                </div>
-                <div className="eventsItem">
-                  <Label size="large" weight="semibold" key={event.id}>
-                    {event.title}
-                  </Label>
-                  <Label size="small" key={event.id}>
-                    {event.subTitle}
-                  </Label>
+                <div className="events-item-right">
+                  {i == 0 && (
+                    <Button
+                      className="events-button"
+                      appearance="primary"
+                      key={event.id?.concat("-button")}
+                    >
+                      Join
+                    </Button>
+                  )}
+                  {i > 0 && (
+                    <Button
+                      className="events-button"
+                      key={event.id?.concat("-button")}
+                    >
+                      Chat
+                    </Button>
+                  )}
                 </div>
               </div>
             );

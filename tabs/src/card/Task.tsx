@@ -2,13 +2,7 @@ import "./Styles.css";
 import "../style/Task.css";
 import "../style/CardLayout.css";
 
-import {
-  Body1,
-  Button,
-  Radio,
-  Text,
-  ToggleButton,
-} from "@fluentui/react-components";
+import { Checkbox, Text, ToggleButton } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { Star24Regular } from "@fluentui/react-icons";
 
@@ -26,27 +20,26 @@ export default function TaskWidget() {
           </Text>
         }
       />
-
       <div className="card-content">
-        <div className="content-between">
-          <Radio label="task" value="task1" />
-          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-        </div>
-        <div className="content-between">
-          <Radio label="task" value="task1" />
-          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-        </div>
-        <div className="content-between">
-          <Radio label="task" value="task1" />
-          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-        </div>
-        <div className="content-between">
-          <Radio label="task" value="task1" />
-          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
-        </div>
-        <div className="content-between">
-          <Radio label="task" value="task1" />
-          <ToggleButton icon={<Star24Regular />} appearance="transparent" />
+        <div className="task-list">
+          <div></div>
+          {tasks?.map((t: TaskModel, i) => {
+            return (
+              <div className="content-between task-item">
+                <Checkbox
+                  label={t.name}
+                  shape="circular"
+                  size="large"
+                  key={t.id?.concat("-check")}
+                />
+                <ToggleButton
+                  icon={<Star24Regular />}
+                  key={t.id?.concat("-star")}
+                  appearance="transparent"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </Card>
