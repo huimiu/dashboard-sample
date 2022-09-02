@@ -3,9 +3,15 @@ import './Styles.css';
 import { Escape, View } from '@fluent-blocks/react';
 import { TeamsFx } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "./Context";
-import { getUserprofile } from '../service/GetUserprofile';
 
-const scope = ["User.Read", "Files.Read"];
+const scope = [
+  "User.Read", 
+  "User.ReadWrite.All", 
+  "Files.ReadWrite.All", 
+  "Directory.ReadWrite.All", 
+  "Tasks.ReadWrite",
+  "Calendars.ReadWrite"
+];
 async function loginAction() {
   const teamsfx = new TeamsFx();
   try {
@@ -35,7 +41,6 @@ export default function Login() {
                   variant: "primary",
                   onAction: () => {
                     loginAction();
-                    getUserprofile();
                   },
                 },
               },
