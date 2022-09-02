@@ -1,12 +1,12 @@
 import { Escape, View } from "@fluent-blocks/react";
 
 import Banner from "../card/Banner";
-import TaskWidget from "../widget/Task";
 import ChartWidget from "../widget/Chart";
-import FilesWidget from "../widget/Files";
 import Collaboration from "../widget/Collaboration";
 import Events from "../widget/Events";
+import FilesWidget from "../widget/Files";
 import PieWidget from "../widget/Pie";
+import TaskWidget from "../widget/Task";
 
 export default function BlockDashboard() {
   return (

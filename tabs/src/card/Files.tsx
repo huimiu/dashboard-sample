@@ -24,7 +24,7 @@ export default function Files() {
     <Card key="files" className="card">
       <CardHeader
         header={
-          <Text weight="semibold" size={400}>
+          <Text weight="semibold" size={400} wrap={false}>
             Your Documents
           </Text>
         }
@@ -38,8 +38,12 @@ export default function Files() {
                   {matchFileIcon(file.type)}
                 </div>
                 <div className="files-item-desc">
-                  <Text weight="semibold">{file.name}</Text>
-                  <Text>{file.description}</Text>
+                  <Text weight="semibold" wrap={false} truncate={true}>
+                    {file.name}
+                  </Text>
+                  <Text wrap={false} truncate={true}>
+                    {file.description}
+                  </Text>
                 </div>
                 <div className="files-item-more">
                   <MoreHorizontal16Filled />
