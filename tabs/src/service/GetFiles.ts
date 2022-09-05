@@ -3,6 +3,30 @@ import { createMicrosoftGraphClient, TeamsFx, UserInfo } from '@microsoft/teamsf
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 
+/**
+  * @returns : 
+  * {
+  *   "name": string,
+  *   "webUrl": string, // use it to open the file in the browser
+  *   "createdBy": {
+  *      "user": {
+  *        "email": string,
+  *        "displayName": string
+  *      }
+  *   },
+  *   "lastModifiedBy": {
+  *      "user": {
+  *        "email": string,
+  *        "displayName": string
+  *      }
+  *   },
+  *   "remoteItem": {
+  *     "...": ...,
+  *     "webDavUrl": string // use it to open the file in the corresponded desktop app
+  *     "...": ...
+  *   }
+  * }
+  */
 export async function getFiles() {
   const teamsfx = new TeamsFx();
   try {
@@ -14,10 +38,8 @@ export async function getFiles() {
 
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
-    const drives = await graphClient.api("/me/drive/recent").get();
-    //const files[] = drives["value"];
-    console.log(drives);
-
+    const drives = await graphClient.api("/me/drive/recent?$top=3&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem").get();
+    // console.log(drives);
     return drives;
   } catch(e) {}
 };
