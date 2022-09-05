@@ -1,16 +1,9 @@
-import "../card/Styles.css";
-import "../style/CardLayout.css";
+import "../style/cardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
-import { Image, Label, Divider } from "@fluentui/react-components";
-import { CardHeader } from "@fluentui/react-components/unstable";
-import {
-  Add24Regular,
-  ArrowRight24Regular,
-  MoreHorizontal20Filled,
-  Star24Regular,
-} from "@fluentui/react-icons";
+import { Button, Label, Text } from "@fluentui/react-components";
+import { ArrowRight16Filled } from "@fluentui/react-icons";
 
 import EventsModel from "../model/EventsModel";
 import { getEvents } from "../service/Requests";
@@ -28,8 +21,8 @@ export default function Events(): WidgetPropsOrElement {
           },
           panel: [
             <Escape contentMeetsAccessibilityAndDesignStandards>
-              <div className="flex-content">
-                <div className="card-content">
+              <div className="card-content">
+                <div className="events-container">
                   <div className="summary">
                     <Label size="small" weight="semibold">
                       Aug 31, 2022
@@ -38,39 +31,72 @@ export default function Events(): WidgetPropsOrElement {
                       You have 4 meetings today. The upcoming events
                     </Label>
                   </div>
-                  <div className="event-list">
+                  <div className="events-list">
                     {events?.map((event: EventsModel, i) => {
                       return (
-                        <div className="eventsDetail">
-                          <div className="eventsItem">
-                            <Label
-                              size="large"
-                              weight="semibold"
-                              key={event.id}
-                            >
-                              {event.startTime}
-                            </Label>
-                            <Label size="small">{event.duration}</Label>
+                        <div className="events-item">
+                          <div className="events-item-left">
+                            <div className="divider" />
+                            <div className="events-content">
+                              <Text
+                                className="events-title"
+                                size={500}
+                                key={event.id?.concat("-title")}
+                              >
+                                {event.title}
+                              </Text>
+                              <Text
+                                className="events-subtitle"
+                                size={400}
+                                key={event.id?.concat("-time")}
+                              >
+                                {event.startTime + "-" + event.endTime}
+                              </Text>
+                              {event.location && (
+                                <Text
+                                  className="events-location"
+                                  size={300}
+                                  key={event.id?.concat("-loc")}
+                                >
+                                  {event.location}
+                                </Text>
+                              )}
+                            </div>
                           </div>
-                          <div className="dividerContainer">
-                            <Divider
-                              className="divider"
-                              vertical
-                              key={event.id}
-                            />
-                          </div>
-                          <div className="eventsItem">
-                            <Label size="large" weight="semibold">
-                              {event.title}
-                            </Label>
-                            <Label size="small" key={event.id}>
-                              {event.subTitle}
-                            </Label>
+                          <div className="events-item-right">
+                            {i == 0 && (
+                              <Button
+                                className="events-button"
+                                appearance="primary"
+                                key={event.id?.concat("-button")}
+                              >
+                                Join
+                              </Button>
+                            )}
+                            {i > 0 && (
+                              <Button
+                                className="events-button"
+                                key={event.id?.concat("-button")}
+                              >
+                                Chat
+                              </Button>
+                            )}
                           </div>
                         </div>
                       );
                     })}
                   </div>
+                </div>
+                <div className="bottom-action">
+                  <Button
+                    appearance="transparent"
+                    size="small"
+                    icon={<ArrowRight16Filled />}
+                    iconPosition="after"
+                    style={{ color: "#5B5FC7" }}
+                  >
+                    View calendar
+                  </Button>
                 </div>
               </div>
             </Escape>,

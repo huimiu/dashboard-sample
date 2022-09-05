@@ -1,6 +1,6 @@
 import "@fluent-blocks/basic-icons";
-import "../style/Files.css";
-import "../style/CardLayout.css";
+import "../style/files.css";
+import "../style/cardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";

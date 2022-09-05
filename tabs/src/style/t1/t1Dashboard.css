@@ -14,13 +14,6 @@
     visibility: hidden;
   }
 
-  .dashboard-above {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
   .dashboard-bottom {
     display: flex;
     flex-direction: row;
@@ -29,25 +22,13 @@
     margin-bottom: 20px;
   }
 
-  .dashboard-above-left {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 7;
-  }
-
-  .dashboard-above-right {
+  .dashboard-bottom-left {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 20px;
-    flex: 3;
-  }
-
-  .dashboard-bottom-left {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     flex: 7;
+    flex-shrink: 7;
   }
 
   .dashboard-bottom-right {

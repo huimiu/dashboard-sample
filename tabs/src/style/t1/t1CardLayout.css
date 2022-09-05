@@ -12,16 +12,18 @@
     gap: 20px;
   }
 
-  .card-events { 
+  .card-small { 
     display: flex;
     flex-direction: column;
-    flex: 6;
+    flex: 2;
+    height: 260px;
   }
 
-  .card-task {
+  .card-medium {
     display: flex;
     flex-direction: column;
-    flex: 4;
+    flex: 5;
+    height: 260px;
   }
 
   .card-container-row {

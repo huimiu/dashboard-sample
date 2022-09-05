@@ -1,42 +1,35 @@
-import "./Styles.css";
-import "../style/Dashboard.css";
-import "../style/CardLayout.css";
+import "../style/dashboard.css";
+import "../style/cardLayout.css";
 
-import Banner from "../card/Banner";
-import Collaboration from "../card/Collaboration";
-import Events from "../card/Events";
-import Files from "../card/Files";
-import Task from "../card/Task";
+import Collaboration from "../card/collaboration";
+import Events from "../card/events";
+import Files from "../card/files";
+import Task from "../card/task";
+import Chart from "../card/chart";
 
 export default function Dashboard() {
   return (
     <div className="dashboard">
-      <div className="banner">
-        <Banner />
-      </div>
-      <div className="dashboard-bottom">
-        <div className="dashboard-bottom-left">
-          <div className="card-row">
-            <div className="card-small">
-              <Task />
-            </div>
-            <div className="card-medium">
-              <Collaboration />
-            </div>
-          </div>
-          <div className="card-row">
-            <div className="card-small">
-              <Files />
-            </div>
-            <div className="card-medium">
-              <Collaboration />
-            </div>
-          </div>
+      <div className="dashboard-above">
+        <div className="dashboard-above-left">
+          <Chart />
         </div>
-        <div className="dashboard-bottom-right">
-          <div className="fill-container">
+        <div className="dashboard-above-right">
+          <div className="card-events">
             <Events />
           </div>
+          <div className="card-tasks">
+            <Task />
+          </div>
+        </div>
+      </div>
+
+      <div className="dashboard-bottom">
+        <div className="dashboard-bottom-left">
+          <Collaboration />
+        </div>
+        <div className="dashboard-bottom-right">
+          <Files />
         </div>
       </div>
     </div>

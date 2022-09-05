@@ -1,6 +1,6 @@
-import "../style/Collaboration.css";
+import "../style/collaboration.css";
 import "./Styles.css";
-import "../style/CardLayout.css";
+import "../style/cardLayout.css";
 
 import { Image, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";

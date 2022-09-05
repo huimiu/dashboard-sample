@@ -8,12 +8,11 @@ import {
 
 import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 
-import BlockDashboard from "./BlockDashboard";
-import Dashboard from "./Dashboard";
+import BlockDashboard from "./t1/BlockDashboard";
+import Dashboard from "./dashboard";
 import Login from "./Login";
 
 export default function App() {
-  var basicIcons = require("@fluent-blocks/basic-icons/basic-icons.svg");
   return (
     <FluentProvider theme={teamsLightTheme}>
       <Router>

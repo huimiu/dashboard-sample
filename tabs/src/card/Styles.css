@@ -85,10 +85,6 @@
   margin-bottom: 10px;
 }
 
-.bottom-action {
-  align-self: flex-end;
-}
-
 .chart-content {
   display: flex;
   flex-direction: column;

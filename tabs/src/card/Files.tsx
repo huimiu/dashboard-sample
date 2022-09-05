@@ -1,10 +1,12 @@
-import "../style/Files.css";
-import "./Styles.css";
-import "../style/CardLayout.css";
+import "../style/files.css";
+import "../style/cardLayout.css";
 
 import { Button, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
-import { MoreHorizontal16Filled } from "@fluentui/react-icons";
+import {
+  MoreHorizontal16Filled,
+  ArrowRight16Filled,
+} from "@fluentui/react-icons";
 import {
   ExcelColorIcon,
   FilesTextColoredIcon,
@@ -53,7 +55,13 @@ export default function Files() {
           })}
         </div>
         <div className="bottom-action">
-          <Button appearance="transparent" size="small">
+          <Button
+            appearance="transparent"
+            size="small"
+            icon={<ArrowRight16Filled />}
+            iconPosition="after"
+            style={{ color: "#5B5FC7" }}
+          >
             View all
           </Button>
         </div>
