@@ -9,7 +9,7 @@ import EventsModel from '../model/EventsModel';
  *   "subject": string,
  *   "bodyPreview": string,
  *   "start": {
- *     "dateTime": string,
+ *     "dateTime": string, 
  *     "timeZone": string
  *   },
  *   "end": {
@@ -57,8 +57,8 @@ export async function getCalendar() {
     const myCalendarEvents = tasklists["value"];
     //console.log(myCalendarEvents);
     const returnAnswer: EventsModel = {
-      startTime: myCalendarEvents["startTime"]["dateTime"],
-      endTime: myCalendarEvents["endTime"]["dateTime"],
+      startTime: myCalendarEvents["startTime"],
+      endTime: myCalendarEvents["endTime"],
       title: myCalendarEvents["subject"],
       location: myCalendarEvents["location"]["displayName"],
       url: myCalendarEvents["onlineMeeting"]["joinUrl"]? myCalendarEvents["onlineMeeting"]["joinUrl"]:undefined
