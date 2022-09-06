@@ -22,39 +22,34 @@ const tableProps: TableProps = {
   table: {
     columns: {
       c1: { title: "Title" },
-      c2: { title: "End Date" },
-      c3: { title: "Partner" },
-      c4: { title: "Priority" },
-      c5: { title: "State" },
+      c2: { title: "Partner" },
+      c3: { title: "Priority" },
+      c4: { title: "State" },
     },
     rows: {
       r1: {
         c1: { cell: "End of year business plan evision" },
-        c2: { cell: "Oct. 31, 2022" },
+        c2: { cell: "End of year business plan evision" },
         c3: { cell: "End of year business plan evision" },
         c4: { cell: "End of year business plan evision" },
-        c5: { cell: "End of year business plan evision" },
       },
       r2: {
         c1: { cell: "End of year business plan evision" },
-        c2: { cell: "Oct. 31, 2022" },
+        c2: { cell: "End of year business plan evision" },
         c3: { cell: "End of year business plan evision" },
         c4: { cell: "End of year business plan evision" },
-        c5: { cell: "End of year business plan evision" },
       },
       r3: {
         c1: { cell: "End of year business plan evision" },
-        c2: { cell: "Oct. 31, 2022" },
+        c2: { cell: "End of year business plan evision" },
         c3: { cell: "End of year business plan evision" },
         c4: { cell: "End of year business plan evision" },
-        c5: { cell: "End of year business plan evision" },
       },
       r4: {
         c1: { cell: "End of year business plan evision" },
-        c2: { cell: "Oct. 31, 2022" },
+        c2: { cell: "End of year business plan evision" },
         c3: { cell: "End of year business plan evision" },
         c4: { cell: "End of year business plan evision" },
-        c5: { cell: "End of year business plan evision" },
       },
     },
     caption: "",
@@ -88,7 +83,7 @@ export default function ChartCard() {
             iconPosition="after"
             style={{ color: "#5B5FC7" }}
           >
-            View calendar
+            View query
           </Button>
         </div>
       </div>

@@ -31,8 +31,8 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     this.checkIsConsentNeeded();
     if (this.state.showLogin) {
       try {
-        loginAction();
-        Providers.globalProvider.setState(ProviderState.SignedIn);
+        await loginAction();
+        Providers.globalProvider?.setState(ProviderState.SignedIn);
         this.setState({ showLogin: false });
       } catch (err: any) {
         if (err.message?.includes("CancelledByUser")) {
@@ -77,7 +77,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <div className="card-events">
                   <Events />
                 </div>
-                <div className="card-tasks">
+                <div className="card-task">
                   <Task />
                 </div>
               </div>

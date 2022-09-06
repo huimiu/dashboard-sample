@@ -1,5 +1,4 @@
 import "../style/collaboration.css";
-import "./Styles.css";
 import "../style/cardLayout.css";
 
 import { Image, Label, Text } from "@fluentui/react-components";

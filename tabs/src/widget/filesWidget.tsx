@@ -15,7 +15,7 @@ import {
   WordColorIcon,
 } from "@fluentui/react-icons-northstar";
 
-import { FilesType } from "../common/FilesType";
+import { FilesType } from "../common/filesType";
 import FilesModel from "../model/FilesModel";
 import { getFiles } from "../service/request";
 
