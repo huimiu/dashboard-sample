@@ -1,0 +1,47 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.files-tab {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: space-around;
+}
+
+.files-content {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  gap: 8px;
+  justify-content: start;
+}
+
+
+.files-item {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+}
+
+.files-item-icon {
+  flex-basis: 35px;
+  align-self: center;
+}
+
+.files-item-desc {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  flex: 1
+}
+
+.files-item-more {
+  align-self: center;
+}
+
+.files-action {
+  display: flex;
+  flex-direction: row-reverse;
+}
+

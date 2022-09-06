@@ -1,96 +1,101 @@
-import '@fluent-blocks/basic-icons';
-import './Styles.css';
+import "@fluent-blocks/basic-icons";
+import "../style/files.css";
+import "../style/cardLayout.css";
 
-import { Escape } from '@fluent-blocks/react';
-import { Body1, Button, ToggleButton } from '@fluentui/react-components';
-import { CardHeader } from '@fluentui/react-components/unstable';
+import { Escape } from "@fluent-blocks/react";
+import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
+import { Text, Button } from "@fluentui/react-components";
+import { MoreHorizontal16Filled } from "@fluentui/react-icons";
 import {
-    ArrowRight24Regular, Box16Regular, Clock16Regular,
-    MoreHorizontal16Filled, People16Regular, Star16Regular
-} from '@fluentui/react-icons';
+  ExcelColorIcon,
+  FilesTextColoredIcon,
+  OneNoteColorIcon,
+  PowerPointColorIcon,
+  VisioColorIcon,
+  WordColorIcon,
+} from "@fluentui/react-icons-northstar";
 
-import FilesModel from '../model/FilesModel';
-import { getFiles } from '../service/Requests';
+import { FilesType } from "../common/FilesType";
+import FilesModel from "../model/FilesModel";
+import { getFiles } from "../service/Requests";
 
-export default function FilesWidget() {
+export default function FilesWidget(): WidgetPropsOrElement {
   const files = getFiles();
   return {
-    card: {
-      title: [{ text: "Files" }],
-      body: [
-        <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="cardContainer">
-            <div className="smallCardContent">
-              <div className="tab">
-                <ToggleButton
-                  style={{ minWidth: "50px" }}
-                  icon={<Box16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  All
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<Clock16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Recently
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<People16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Shared
-                </ToggleButton>
-                <ToggleButton
-                  style={{ minWidth: "75px" }}
-                  icon={<Star16Regular />}
-                  size="small"
-                  shape="circular"
-                >
-                  Favorites
-                </ToggleButton>
+    widget: {
+      title: "Files",
+      label: "files-widget",
+      footerAction: {
+        actionId: "files-footer",
+        label: "View all",
+        onAction: () => alert("cliecked"),
+      },
+      tabs: [
+        {
+          tab: {
+            label: "files-content",
+          },
+          panel: [
+            <Escape contentMeetsAccessibilityAndDesignStandards>
+              <div className="flex-content card-widget">
+                <div className="card-content">
+                  <div className="files-content">
+                    {files?.map((file: FilesModel, i) => {
+                      return (
+                        <div className="files-item">
+                          <div className="files-item-icon">
+                            {matchFileIcon(file.type)}
+                          </div>
+                          <div className="files-item-desc">
+                            <Text weight="semibold" key={file.id}>
+                              {file.name}
+                            </Text>
+                            <Text key={file.id}>{file.description}</Text>
+                          </div>
+                          <div className="files-item-more">
+                            <MoreHorizontal16Filled />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-
-              {files?.map((file: FilesModel, i) => {
-                return (
-                  <CardHeader
-                    key={file.id}
-                    image={{
-                      as: "img",
-                      src: "20x20.jpg",
-                      alt: "",
-                      height: 30,
-                      width: 30,
-                    }}
-                    header={<Body1>{file.name}</Body1>}
-                    action={
-                      <Button
-                        appearance="transparent"
-                        icon={<MoreHorizontal16Filled />}
-                      />
-                    }
-                  />
-                );
-              })}
-            </div>
-            <div className="filesAction">
-              <Button
-                icon={<ArrowRight24Regular />}
-                iconPosition="after"
-                appearance="transparent"
-                size="small"
-              >
-                View More
-              </Button>
-            </div>
-          </div>
-        </Escape>,
+            </Escape>,
+          ],
+        },
       ],
     },
   };
+}
+
+/**
+ * match icon by files type
+ *
+ * @param fileType the string of files type
+ * @returns react icon
+ */
+function matchFileIcon(fileType: string) {
+  let icon;
+  switch (fileType) {
+    case FilesType.WORD:
+      icon = <WordColorIcon />;
+      break;
+    case FilesType.EXCEL:
+      icon = <ExcelColorIcon />;
+      break;
+    case FilesType.PPT:
+      icon = <PowerPointColorIcon />;
+      break;
+    case FilesType.VISIO:
+      icon = <VisioColorIcon />;
+      break;
+    case FilesType.ONENOTE:
+      icon = <OneNoteColorIcon />;
+      break;
+    default:
+      icon = <FilesTextColoredIcon />;
+      break;
+  }
+  return icon;
 }

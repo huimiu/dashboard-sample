@@ -9,3 +9,10 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.fill-container {
+  flex-grow: 1;
+  align-self: stretch;
+  justify-self: stretch;
+}

@@ -1,0 +1,95 @@
+.banner {
+  width: 100%;
+}
+
+.banner-img {
+  height: 65px;
+}
+
+.banner-org-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;  
+  align-items: stretch;
+  justify-content: center;
+}
+.banner-org-container-avatar {
+  display: flex;  
+  gap: 20px;
+}
+
+.banner-org-container-des {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  gap: 10px;
+}
+
+.banner-org-container-desc-tooltip {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  row-gap: 3px;
+  column-gap: 20px;
+}
+
+
+.banner-org-container-desc-tooltip-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px
+}
+
+
+.bannerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.flex-content {
+  display: flex;
+  flex-direction: column; 
+  justify-content: stretch; 
+  flex: 1;
+}
+
+.tab {
+  display:flex;
+  white-space: nowrap;
+  flex-direction: row;  
+  justify-content: space-between;
+  gap: 2px;
+}
+
+.footer {
+  margin-bottom: auto;
+}
+
+.mediumContainer {
+  display: flex;
+  flex-direction: column; 
+  gap: 15px;
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: stretch;
+  height: 200px;
+  overflow: hidden;
+}

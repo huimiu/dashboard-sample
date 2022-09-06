@@ -1,58 +1,69 @@
-import '@fluent-blocks/basic-icons';
-import './Styles.css';
+import "../card/Styles.css";
+import "../style/cardLayout.css";
 
-import { Escape } from '@fluent-blocks/react';
-import { Body1, Button } from '@fluentui/react-components';
-import { CardHeader } from '@fluentui/react-components/unstable';
-import { ArrowRight24Regular, MoreHorizontal20Filled, Add24Regular } from '@fluentui/react-icons';
+import { Escape } from "@fluent-blocks/react";
+import { Radio, ToggleButton } from "@fluentui/react-components";
+import { Star24Regular } from "@fluentui/react-icons";
 
-import TaskModel from '../model/TaskModel';
-import { getTask } from '../service/Requests';
+import TaskModel from "../model/TaskModel";
+import { getTask } from "../service/Requests";
+import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
 
-export default function TaskWidget() {
+export default function Task(): WidgetPropsOrElement {
   const tasks = getTask();
   return {
-    card: {
+    widget: {
       title: "Your Tasks",
-      body: [
-        <Escape contentMeetsAccessibilityAndDesignStandards>
-          <div className="cardContainer">
-            <div className="smallCardContent">
-              {tasks.map((task: TaskModel, i) => {
-                return (
-                  <CardHeader
-                    key={task.id}
-                    image={{
-                      as: "img",
-                      src: "20x20.jpg",
-                      alt: "",
-                      height: 30,
-                      width: 30,
-                    }}
-                    header={<Body1>{task.name}</Body1>}
-                    action={
-                      <Button
-                        appearance="transparent"
-                        icon={<MoreHorizontal20Filled />}
-                      />
-                    }
-                  />
-                );
-              })}
-            </div>
-            <div className="actions">
-              <Button icon={<Add24Regular />}>Create task</Button>
-              <Button
-                icon={<ArrowRight24Regular />}
-                iconPosition="after"
-                appearance="transparent"
-                size="small"
-              >
-                View More
-              </Button>
-            </div>
-          </div>
-        </Escape>,
+      label: "task-widget",
+      tabs: [
+        {
+          tab: {
+            label: "task-content",
+          },
+          panel: [
+            <Escape contentMeetsAccessibilityAndDesignStandards>
+              <div className="flex-content card-widget">
+                <div className="card-content">
+                  <div className="content-between">
+                    <Radio label="task" value="task1" />
+                    <ToggleButton
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                  <div className="content-between">
+                    <Radio label="task" value="task1" />
+                    <ToggleButton
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                  <div className="content-between">
+                    <Radio label="task" value="task1" />
+                    <ToggleButton
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                  <div className="content-between">
+                    <Radio label="task" value="task1" />
+                    <ToggleButton
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                  <div className="content-between">
+                    <Radio label="task" value="task1" />
+                    <ToggleButton
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+            </Escape>,
+          ],
+        },
       ],
     },
   };

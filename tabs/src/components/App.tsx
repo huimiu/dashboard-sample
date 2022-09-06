@@ -1,24 +1,28 @@
-import React from 'react';
-import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import React from "react";
+import {
+  HashRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
-import { FluentBlocksProvider } from '@fluent-blocks/react';
+import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 
-import Home from './Home';
-import Dashboard from './Dashboard';
-import Login from './Login';
+import BlockDashboard from "./t1/BlockDashboard";
+import Dashboard from "./dashboard";
+import Login from "./Login";
 
 export default function App() {
-  var basicIcons = require('@fluent-blocks/basic-icons/basic-icons.svg');
   return (
-    <FluentBlocksProvider iconSpriteUrl={basicIcons}>
+    <FluentProvider theme={teamsLightTheme}>
       <Router>
         <Routes>
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/block" element={<BlockDashboard />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-    </FluentBlocksProvider>
+    </FluentProvider>
   );
 }
