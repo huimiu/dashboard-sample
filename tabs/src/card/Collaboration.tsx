@@ -19,7 +19,7 @@ export default function Collaboration() {
         <div className="collaboration-item">
           <Image
             height="110px"
-            width="180px"
+            width="200px"
             src="content1.jpg"
             shape="rounded"
             onClick={() => alert("ss")}
@@ -33,7 +33,7 @@ export default function Collaboration() {
           <Image
             bordered
             height="110px"
-            width="180px"
+            width="200px"
             src="content2.png"
             shape="rounded"
           />
@@ -45,8 +45,20 @@ export default function Collaboration() {
         <div className="collaboration-item">
           <Image
             height="110px"
-            width="180px"
+            width="200px"
             src="content3.jpg"
+            shape="rounded"
+          />
+          <div className="collaboration-des">
+            <Label weight="semibold">Data Analytics</Label>
+            <Label size="small">Uploaded 1h ago</Label>
+          </div>
+        </div>
+        <div className="collaboration-item">
+          <Image
+            height="110px"
+            width="200px"
+            src="content4.png"
             shape="rounded"
           />
           <div className="collaboration-des">

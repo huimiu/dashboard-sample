@@ -6,10 +6,9 @@ import { Button, Label, Text } from "@fluentui/react-components";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
 import EventsModel from "../model/EventsModel";
-import { getEvents } from "../service/Requests";
 
 export default function Events(): WidgetPropsOrElement {
-  const events = getEvents();
+  const events: EventsModel[] = [];
   return {
     widget: {
       title: "Your upcoming events",

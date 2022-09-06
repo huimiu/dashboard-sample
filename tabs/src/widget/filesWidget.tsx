@@ -17,7 +17,7 @@ import {
 
 import { FilesType } from "../common/FilesType";
 import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/Requests";
+import { getFiles } from "../service/request";
 
 export default function FilesWidget(): WidgetPropsOrElement {
   const files = getFiles();

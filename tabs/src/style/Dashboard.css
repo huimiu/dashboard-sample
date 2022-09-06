@@ -8,6 +8,7 @@
     height: 100%;
     padding-left: 5px;
     padding-right: 5px;
+    background-color: #F5F5F5;
   }
 
   .dashboard::-webkit-scrollbar {

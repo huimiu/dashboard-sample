@@ -18,7 +18,7 @@ import {
 } from "@fluentui/react-icons";
 
 import TaskModel from "../model/TaskModel";
-import { getTask } from "../service/Requests";
+import { getTask } from "../service/request";
 
 interface IWidgetProps {}
 

@@ -2,14 +2,70 @@ import "../style/task.css";
 import "../style/chart.css";
 import "../style/cardLayout.css";
 
-import { Escape, View } from "@fluent-blocks/react";
+import { Escape, Media, Table, TableProps } from "@fluent-blocks/react";
 import { Button, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
 import { demoData } from "../data/ChartData";
+import { ChartProps } from "@fluent-blocks/schemas";
 
-export default function Chart() {
+const chartProps: ChartProps = {
+  label: "line area",
+  chart: {
+    type: "line-area",
+    data: demoData,
+  },
+};
+
+const tableProps: TableProps = {
+  table: {
+    columns: {
+      c1: { title: "Title" },
+      c2: { title: "End Date" },
+      c3: { title: "Partner" },
+      c4: { title: "Priority" },
+      c5: { title: "State" },
+    },
+    rows: {
+      r1: {
+        c1: { cell: "End of year business plan evision" },
+        c2: { cell: "Oct. 31, 2022" },
+        c3: { cell: "End of year business plan evision" },
+        c4: { cell: "End of year business plan evision" },
+        c5: { cell: "End of year business plan evision" },
+      },
+      r2: {
+        c1: { cell: "End of year business plan evision" },
+        c2: { cell: "Oct. 31, 2022" },
+        c3: { cell: "End of year business plan evision" },
+        c4: { cell: "End of year business plan evision" },
+        c5: { cell: "End of year business plan evision" },
+      },
+      r3: {
+        c1: { cell: "End of year business plan evision" },
+        c2: { cell: "Oct. 31, 2022" },
+        c3: { cell: "End of year business plan evision" },
+        c4: { cell: "End of year business plan evision" },
+        c5: { cell: "End of year business plan evision" },
+      },
+      r4: {
+        c1: { cell: "End of year business plan evision" },
+        c2: { cell: "Oct. 31, 2022" },
+        c3: { cell: "End of year business plan evision" },
+        c4: { cell: "End of year business plan evision" },
+        c5: { cell: "End of year business plan evision" },
+      },
+    },
+    caption: "",
+    rowHeaderColumn: "c1",
+    minWidthVariant: "auto",
+    maxWidthVariant: "viewportWidth",
+    rowsActivable: true,
+  },
+};
+
+export default function ChartCard() {
   return (
     <Card className="card-stretch">
       <CardHeader
@@ -20,25 +76,10 @@ export default function Chart() {
         }
       />
       <div className="card-content">
-        <View
-          accentScheme="teams"
-          themeName="light"
-          main={{
-            title: "",
-            blocks: [
-              {
-                media: {
-                  label: "c1",
-                  chart: {
-                    type: "line-area",
-                    data: demoData,
-                  },
-                },
-              },
-            ],
-          }}
-        />
-
+        <div>
+          <Media {...chartProps} />
+        </div>
+        <Table {...tableProps} />
         <div className="bottom-action">
           <Button
             appearance="transparent"

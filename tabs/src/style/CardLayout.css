@@ -1,8 +1,6 @@
 @media screen and (min-width: 480px) {
   .card {
     flex: 1;
-    align-self: stretch;
-    justify-self: stretch;
     height: 260px;
   }
 
@@ -15,13 +13,13 @@
   .card-events { 
     display: flex;
     flex-direction: column;
-    flex: 6;
+    flex: 5;
   }
 
   .card-task {
     display: flex;
     flex-direction: column;
-    flex: 4;
+    flex: 5;
   }
 
   .card-container-row {
