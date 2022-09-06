@@ -53,7 +53,7 @@ export default class TaskWidget extends React.Component<
 
   renderPage = () => {
     return (
-      <Card className="card">
+      <Card className="card-task">
         <CardHeader
           header={
             <Text weight="semibold" size={400}>

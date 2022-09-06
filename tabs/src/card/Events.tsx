@@ -11,7 +11,7 @@ import { getCalendar } from "../service/GetCalendar";
 export default function Events() {
   const events: EventsModel[] = [];
   return (
-    <Card className="card">
+    <Card className="card-events">
       <CardHeader
         header={
           <Text weight="semibold" size={400}>
