@@ -1,11 +1,14 @@
 export default interface EventsModel {
   id?: string;
-  startTime: string;
-  endTime: string;
-  duration?: string;
-  repeat?: boolean;
+  startTime: {
+    dateTime: string,
+    timeZone: string
+  };
+  endTime: {
+    dateTime: string,
+    timeZone: string
+  };
   title: string;
-  subTitle: string;
   location?: string;
   url?: string;
 }
