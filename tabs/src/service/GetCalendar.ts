@@ -63,7 +63,7 @@ export async function getCalendar() {
         endTime: obj["endTime"],
         title: obj["subject"],
         location: obj["location"]["displayName"],
-        url: obj["onlineMeeting"]["joinUrl"]? myCalendarEvents["onlineMeeting"]["joinUrl"]:undefined
+        url: obj["onlineMeeting"]["joinUrl"]? obj["onlineMeeting"]["joinUrl"]:undefined
       }
       returnAnswer.push(tmp);
     }

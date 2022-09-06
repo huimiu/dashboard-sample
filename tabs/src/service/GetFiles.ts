@@ -40,14 +40,18 @@ export async function getFiles() {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
     const drives = await graphClient.api("/me/drive/recent?$top=3&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem").get();
     // console.log(drives);
-    const returnAnswer: FilesModel = {
-      name: drives["name"],
-      createdBy: drives["remoteItem"]["createdBy"]["user"]["displayName"],
-      lastModifiedBy: drives["remoteItem"]["lastModifiedBy"]["user"]["displayName"],
-      createdDateTime: drives["remoteItem"]["createdDateTime"],
-      lastModifiedDateTime: drives["remoteItem"]["lastModifiedDateTime"],
-      weburl: drives["remoteItem"]["webUrl"],
-      webDavurl: drives["remoteItem"]["webDavUrl"]
+    let returnAnswer: FilesModel[] = [];
+    for (const obj of drives) { 
+      const tmp: FilesModel = {
+        name: obj["name"],
+        createdBy: obj["remoteItem"]["createdBy"]["user"]["displayName"],
+        lastModifiedBy: obj["remoteItem"]["lastModifiedBy"]["user"]["displayName"],
+        createdDateTime: obj["remoteItem"]["createdDateTime"],
+        lastModifiedDateTime: obj["remoteItem"]["lastModifiedDateTime"],
+        weburl: obj["remoteItem"]["webUrl"],
+        webDavurl: obj["remoteItem"]["webDavUrl"]
+      }
+      returnAnswer.push(tmp);
     }
     return returnAnswer;
   } catch(e) {}

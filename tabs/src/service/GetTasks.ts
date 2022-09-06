@@ -39,12 +39,17 @@ export async function getTasks() {
     const todoTaskListId: string = myFirstTaskList["id"];
     const tasks = await graphClient.api("/me/todo/lists/"+todoTaskListId+"/tasks/?$top=3").get();
     const tasksInfo = tasks["value"];
-    // const returnAnswer : TaskModel = {
-    //   name: tasksInfo["title"],
-    //   status: tasksInfo[]
-    // }
-    // console.log(tasksInfo);
-    // return returnAnswer;
-    return tasksInfo;
+    let returnAnswer: TaskModel[] = [];
+    for (const obj of tasksInfo) {
+      const tmp: TaskModel = {
+        name: obj["title"],
+        status: obj["status"],
+        importance: obj["importance"],
+        content: obj["content"] 
+      }
+      returnAnswer.push(obj);
+    }
+    return returnAnswer;
+    // return tasksInfo;
   } catch(e) {}  
 }
