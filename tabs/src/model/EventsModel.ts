@@ -3,5 +3,6 @@ export default interface EventsModel {
   startTime: string;
   endTime: string;
   title: string;
+  location?: string;
   url?: string;
 }

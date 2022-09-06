@@ -60,7 +60,8 @@ export async function getCalendar() {
       startTime: myCalendarEvents["startTime"]["dateTime"],
       endTime: myCalendarEvents["endTime"]["dateTime"],
       title: myCalendarEvents["subject"],
-      url: myCalendarEvents["onlineMeeting"]["joinUrl"]
+      location: myCalendarEvents["location"]["displayName"],
+      url: myCalendarEvents["onlineMeeting"]["joinUrl"]? myCalendarEvents["onlineMeeting"]["joinUrl"]:undefined
     }
     return returnAnswer;
   } catch(e) {}  
