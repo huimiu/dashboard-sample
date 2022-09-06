@@ -56,12 +56,16 @@ export async function getCalendar() {
     const tasklists = await graphClient.api("/me/events?$top=3&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting").get();
     const myCalendarEvents = tasklists["value"];
     //console.log(myCalendarEvents);
-    const returnAnswer: EventsModel = {
-      startTime: myCalendarEvents["startTime"],
-      endTime: myCalendarEvents["endTime"],
-      title: myCalendarEvents["subject"],
-      location: myCalendarEvents["location"]["displayName"],
-      url: myCalendarEvents["onlineMeeting"]["joinUrl"]? myCalendarEvents["onlineMeeting"]["joinUrl"]:undefined
+    let returnAnswer: EventsModel[] = [];
+    for (const obj of myCalendarEvents) {
+      const tmp: EventsModel = {
+        startTime: obj["startTime"],
+        endTime: obj["endTime"],
+        title: obj["subject"],
+        location: obj["location"]["displayName"],
+        url: obj["onlineMeeting"]["joinUrl"]? myCalendarEvents["onlineMeeting"]["joinUrl"]:undefined
+      }
+      returnAnswer.push(tmp);
     }
     return returnAnswer;
   } catch(e) {}  

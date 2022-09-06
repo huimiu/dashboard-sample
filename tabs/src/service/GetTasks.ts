@@ -2,6 +2,7 @@ import { createMicrosoftGraphClient, TeamsFx } from '@microsoft/teamsfx';
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { TodotaskModel } from '../model/TodotaskModel';
+import TaskModel from '../model/TaskModel';
 
 /**
  * @returns : 
@@ -11,7 +12,7 @@ import { TodotaskModel } from '../model/TodotaskModel';
  *     "importance": string, // normal
  *     "status": string, // notStarted
  *     "title": string,
- *     "createdDateTiem": string,
+ *     "createdDateTime": string,
  *     "lastModifiedDateTime": string,
  *     "categories": [],
  *     "body": {
@@ -38,7 +39,12 @@ export async function getTasks() {
     const todoTaskListId: string = myFirstTaskList["id"];
     const tasks = await graphClient.api("/me/todo/lists/"+todoTaskListId+"/tasks/?$top=3").get();
     const tasksInfo = tasks["value"];
+    // const returnAnswer : TaskModel = {
+    //   name: tasksInfo["title"],
+    //   status: tasksInfo[]
+    // }
     // console.log(tasksInfo);
+    // return returnAnswer;
     return tasksInfo;
   } catch(e) {}  
 }

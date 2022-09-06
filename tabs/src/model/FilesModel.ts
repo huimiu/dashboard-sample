@@ -2,8 +2,11 @@ export default interface FilesModel {
   id?: string;
   icon?: string;
   name: string;
-  description: string;
-  type: string;
+  createdBy: string,
+  lastModifiedBy: string,
+  createdDateTime: string,
+  lastModifiedDateTime: string,
   tag?: string;
-  url?: string;
+  weburl?: string;
+  webDavurl?: string;
 }
