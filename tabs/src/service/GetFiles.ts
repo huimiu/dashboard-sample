@@ -48,6 +48,7 @@ export async function getFiles() {
         lastModifiedBy: obj["remoteItem"]["lastModifiedBy"]["user"]["displayName"],
         createdDateTime: obj["remoteItem"]["createdDateTime"],
         lastModifiedDateTime: obj["remoteItem"]["lastModifiedDateTime"],
+        type: obj["file"]["mimeType"],
         weburl: obj["remoteItem"]["webUrl"],
         webDavurl: obj["remoteItem"]["webDavUrl"]
       }
