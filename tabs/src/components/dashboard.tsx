@@ -24,14 +24,16 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     CacheService.clearCaches();
 
     initTeamsFx();
-    let consentNeeded = this.checkIsConsentNeeded();
-    consentNeeded.then((r) => {
-      if (r) {
-        this.login();
-      } else {
-        this.state = { showLogin: false };
-      }
-    });
+    this.initConsent();
+  }
+
+  async initConsent() {
+    let consentNeeded = await this.checkIsConsentNeeded();
+    if (consentNeeded) {
+      this.login();
+    } else {
+      this.state = { showLogin: false };
+    }
   }
 
   login() {
