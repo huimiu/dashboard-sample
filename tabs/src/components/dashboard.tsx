@@ -13,6 +13,7 @@ import Files from "../card/files";
 import Task from "../card/task";
 import { initTeamsFx, loginAction, scope } from "../service/login";
 import Banner from "../card/banner";
+import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 
 interface IDashboardProp {
   showLogin?: boolean;
@@ -21,8 +22,10 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-    initTeamsFx();
-    this.login();
+    var teamsfx = initTeamsFx();
+    const provider = new TeamsFxProvider(teamsfx, scope);
+    Providers.globalProvider = provider;
+    this.initConsent();
   }
 
   async initConsent() {
@@ -34,9 +37,10 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     }
   }
 
-  login() {
+  async login() {
     try {
-      loginAction();
+      await loginAction();
+      Providers.globalProvider.setState(ProviderState.SignedIn);
       this.state = { showLogin: false };
     } catch (err: any) {
       if (err.message?.includes("CancelledByUser")) {
@@ -63,6 +67,9 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     this.state = {
       showLogin: consentNeeded,
     };
+    Providers.globalProvider.setState(
+      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
+    );
     return consentNeeded;
   }
 
