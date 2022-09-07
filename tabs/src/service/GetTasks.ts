@@ -3,6 +3,7 @@ import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { TodotaskModel } from "../model/TodotaskModel";
 import TaskModel from "../model/TaskModel";
+import { FxContext } from "../components/singletonContext";
 
 /**
  * @returns :
@@ -25,8 +26,8 @@ import TaskModel from "../model/TaskModel";
 export async function getTasks() {
   const teamsfx = new TeamsFx();
   try {
-    const token = await dashboardTeamsFxContext
-      .getTeamsfx()
+    const token = await FxContext.getInstance()
+      .getTeamsFx()
       ?.getCredential()
       .getToken(["Tasks.ReadWrite"]);
     let tokenstr = "";

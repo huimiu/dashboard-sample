@@ -5,7 +5,7 @@ import React from "react";
 
 import { Providers, ProviderState } from "@microsoft/mgt-element";
 import { CacheService } from "@microsoft/mgt-react";
-import { dashboardTeamsFxContext as ctx } from "./Context";
+import { FxContext } from "./singletonContext";
 import Chart from "../card/chart";
 import Collaboration from "../card/collaboration";
 import Events from "../card/events";
@@ -22,10 +22,10 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-    var teamsfx = initTeamsFx();
-    const provider = new TeamsFxProvider(teamsfx, scope);
-    Providers.globalProvider = provider;
-    this.initConsent();
+    this.state = {
+      showLogin: false,
+    };
+    this.login();
   }
 
   async initConsent() {
@@ -40,7 +40,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   async login() {
     try {
       await loginAction();
-      Providers.globalProvider.setState(ProviderState.SignedIn);
       this.state = { showLogin: false };
     } catch (err: any) {
       if (err.message?.includes("CancelledByUser")) {
@@ -60,7 +59,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   async checkIsConsentNeeded() {
     let consentNeeded = false;
     try {
-      ctx.getTeamsfx()?.getCredential().getToken(scope);
+      FxContext.getInstance().getTeamsFx()?.getCredential().getToken(scope);
     } catch (error) {
       consentNeeded = true;
     }

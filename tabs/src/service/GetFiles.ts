@@ -7,6 +7,7 @@ import {
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { scope } from "./login";
+import { FxContext } from "../components/singletonContext";
 
 /**
  * @returns :
@@ -35,15 +36,12 @@ import { scope } from "./login";
 export async function getFiles() {
   const teamsfx = new TeamsFx();
   try {
-    let fx = dashboardTeamsFxContext.getTeamsfx();
-    let cred = fx?.getCredential();
-    let t = await cred?.getToken(scope);
-    const token = await dashboardTeamsFxContext
-      .getTeamsfx()
+    const token = await FxContext.getInstance()
+      .getTeamsFx()
       ?.getCredential()
       .getToken(["Files.Read"]);
     let tokenstr = "";
-    tokenstr = t!.token;
+    if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
     console.log(e);

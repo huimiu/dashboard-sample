@@ -2,6 +2,8 @@ import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import EventsModel from "../model/EventsModel";
+import { loginAction } from "./login";
+import { FxContext } from "../components/singletonContext";
 
 /**
  * @returns :
@@ -45,14 +47,16 @@ import EventsModel from "../model/EventsModel";
 export async function getCalendar() {
   const teamsfx = new TeamsFx();
   try {
-    const token = await dashboardTeamsFxContext
-      .getTeamsfx()
+    const token = await FxContext.getInstance()
+      .getTeamsFx()
       ?.getCredential()
       .getToken(["Calendars.ReadWrite"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
