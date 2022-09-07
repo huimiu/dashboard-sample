@@ -9,4 +9,4 @@ export const getTask = (): TaskModel[] => Tasks;
 
 export const getFiles = (): FilesModel[] => Files;
 
-export const getEvents = (): EventsModel[] => Events;
+//export const getEvents = (): EventsModel[] => Events;

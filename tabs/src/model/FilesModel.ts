@@ -6,6 +6,8 @@ export default interface FilesModel {
   lastModifiedBy?: string,
   createdDateTime?: string,
   lastModifiedDateTime?: string,
+  type: string;
+  description?: string;
   tag?: string;
   weburl?: string;
   webDavurl?: string;
