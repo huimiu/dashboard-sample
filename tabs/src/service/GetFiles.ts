@@ -40,6 +40,20 @@ export async function getFiles() {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
     const drives = await graphClient.api("/me/drive/recent?$top=3&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem").get();
     // console.log(drives);
-    return drives;
+    let returnAnswer: FilesModel[] = [];
+    for (const obj of drives) { 
+      const tmp: FilesModel = {
+        name: obj["name"],
+        createdBy: obj["remoteItem"]["createdBy"]["user"]["displayName"],
+        lastModifiedBy: obj["remoteItem"]["lastModifiedBy"]["user"]["displayName"],
+        createdDateTime: obj["remoteItem"]["createdDateTime"],
+        lastModifiedDateTime: obj["remoteItem"]["lastModifiedDateTime"],
+        type: obj["file"]["mimeType"],
+        weburl: obj["remoteItem"]["webUrl"],
+        webDavurl: obj["remoteItem"]["webDavUrl"]
+      }
+      returnAnswer.push(tmp);
+    }
+    return returnAnswer;
   } catch(e) {}
 };
