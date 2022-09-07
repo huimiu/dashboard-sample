@@ -18,11 +18,9 @@ import {
 
 import { FilesType } from "../common/FilesType";
 import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/GetFiles";
-// import { getFiles } from "../service/Requests";
+import { getFiles } from "../service/Requests";
 
 export default function Files() {
-  // const files = getFiles();
   const files = getFiles();
   return (
     <Card key="files" className="card">
