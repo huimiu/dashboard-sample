@@ -1,7 +1,7 @@
 export enum FilesType {
-  WORD = "Word",
-  EXCEL = "Excel",
-  PPT = "PowerPoint",
+  WORD = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  EXCEL = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  PPT = "application/vnd.openxmlformats-officedocument.presentationml.presentation",
   VISIO = "Visio",
   ONENOTE = "OneNote",
 }

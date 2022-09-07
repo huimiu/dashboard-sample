@@ -38,12 +38,8 @@ export default class TaskWidget extends React.Component<{}, ITaskState> {
     };
   }
 
-  private initTask() {
-    this.setState({ tasks: getTask() });
-  }
-
   async componentDidMount() {
-    this.initTask();
+    this.setState({ tasks: getTask() });
   }
 
   renderPage = () => {

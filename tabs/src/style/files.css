@@ -34,7 +34,9 @@
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
-  flex: 1
+  flex: 1;
+  justify-content: center;
+  
 }
 
 .files-item-more {

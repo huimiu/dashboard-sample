@@ -4,7 +4,7 @@
         "subscriptionId": "1756abc0-3554-4341-8d6a-46674962ea19",
         "subscriptionName": "Teams Cloud - Dev Test with TTL = 3 Days",
         "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-        "needCreateResourceGroup": false,
+        "needCreateResourceGroup": true,
         "resourceGroupName": "dashboard_demo-dev-rg",
         "location": "Southeast Asia",
         "resourceNameSuffix": "3311ae",
@@ -13,12 +13,12 @@
     "fx-resource-appstudio": {
         "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
         "teamsAppId": "e7c90c3b-ce85-4961-89b3-5daf12a381e3",
-        "teamsAppUpdatedAt": 1662089883446
+        "teamsAppUpdatedAt": 1662532297227
     },
     "fx-resource-identity": {
         "identityName": "dashboardddev131aa3",
         "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_demo-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardddev131aa3",
-        "identityClientId": "08561d31-6377-4335-892b-dde2d3317665"
+        "identityClientId": "4ba314a7-b9fb-4a37-95c7-96b4f5c40226"
     },
     "fx-resource-aad-app-for-teams": {
         "clientId": "1d8d5799-e193-4fc3-87c8-3bf03060783d",

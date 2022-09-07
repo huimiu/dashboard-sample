@@ -1,7 +1,7 @@
-import { createMicrosoftGraphClient, TeamsFx } from '@microsoft/teamsfx';
+import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
-import EventsModel from '../model/EventsModel';
+import EventsModel from "../model/EventsModel";
 
 /**
  * @returns :
@@ -9,7 +9,7 @@ import EventsModel from '../model/EventsModel';
  *   "subject": string,
  *   "bodyPreview": string,
  *   "start": {
- *     "dateTime": string, 
+ *     "dateTime": string,
  *     "timeZone": string
  *   },
  *   "end": {
@@ -45,28 +45,39 @@ import EventsModel from '../model/EventsModel';
 export async function getCalendar() {
   const teamsfx = new TeamsFx();
   try {
-    const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(["Calendars.ReadWrite"]);
+    const token = await dashboardTeamsFxContext
+      .getTeamsfx()
+      ?.getCredential()
+      .getToken(["Calendars.ReadWrite"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
-  } catch(e) {}
-  
+  } catch (e) {}
+
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
-    const tasklists = await graphClient.api("/me/events?$top=3&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting").get();
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
+      ".default",
+    ]);
+    const tasklists = await graphClient
+      .api(
+        "/me/events?$top=3&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
+      )
+      .get();
     const myCalendarEvents = tasklists["value"];
     //console.log(myCalendarEvents);
     let returnAnswer: EventsModel[] = [];
     for (const obj of myCalendarEvents) {
       const tmp: EventsModel = {
-        startTime: obj["startTime"],
-        endTime: obj["endTime"],
+        startTime: obj["start"],
+        endTime: obj["end"],
         title: obj["subject"],
         location: obj["location"]["displayName"],
-        url: obj["onlineMeeting"]["joinUrl"]? obj["onlineMeeting"]["joinUrl"]:undefined
-      }
+        url: obj["onlineMeeting"]["joinUrl"]
+          ? obj["onlineMeeting"]["joinUrl"]
+          : undefined,
+      };
       returnAnswer.push(tmp);
     }
     return returnAnswer;
-  } catch(e) {}  
+  } catch (e) {}
 }

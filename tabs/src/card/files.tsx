@@ -3,7 +3,18 @@ import "../style/cardLayout.css";
 
 import React from "react";
 
-import { Button, Text } from "@fluentui/react-components";
+import {
+  Button,
+  Menu,
+  MenuTrigger,
+  Text,
+  MenuPopover,
+  MenuList,
+  MenuItem,
+  Tooltip,
+  MenuButton,
+  Link,
+} from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import {
   MoreHorizontal16Filled,
@@ -20,7 +31,7 @@ import {
 
 import { FilesType } from "../common/filesType";
 import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/request";
+import { getFiles } from "../service/GetFiles";
 
 interface IFileState {
   files: FilesModel[];
@@ -34,8 +45,8 @@ export default class Files extends React.Component<{}, IFileState> {
     };
   }
 
-  private initFiles() {
-    let fs: FilesModel[] = getFiles();
+  private async initFiles() {
+    let fs: FilesModel[] = await getFiles();
     this.setState({ files: fs });
   }
 
@@ -70,12 +81,23 @@ export default class Files extends React.Component<{}, IFileState> {
                     <Text weight="semibold" wrap={false} truncate={true}>
                       {file.name}
                     </Text>
-                    <Text wrap={false} truncate={true}>
-                      {file.description}
-                    </Text>
                   </div>
-                  <div className="files-item-more">
-                    <MoreHorizontal16Filled />
+                  <div>
+                    <Menu>
+                      <MenuTrigger>
+                        <MenuButton
+                          appearance="transparent"
+                          icon={<MoreHorizontal16Filled />}
+                        />
+                      </MenuTrigger>
+                      <MenuPopover>
+                        <MenuList>
+                          <MenuItem onClick={() => window.open(file.weburl)}>
+                            Open
+                          </MenuItem>
+                        </MenuList>
+                      </MenuPopover>
+                    </Menu>
                   </div>
                 </div>
               );
