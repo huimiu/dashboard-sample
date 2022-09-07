@@ -18,10 +18,11 @@ import {
 } from "@fluentui/react-icons";
 
 import TaskModel from "../model/TaskModel";
-import { getTask } from "../service/request";
+import { getTasks } from "../service/GetTasks";
+import { openTodoApp } from "../service/OpenTodoApp";
 
 interface ITaskState {
-  tasks: TaskModel[];
+  tasks?: TaskModel[];
   showAddIcon: boolean;
 }
 
@@ -39,7 +40,7 @@ export default class TaskWidget extends React.Component<{}, ITaskState> {
   }
 
   async componentDidMount() {
-    this.setState({ tasks: getTask() });
+    this.setState({ tasks: await getTasks() });
   }
 
   renderPage = () => {
@@ -113,6 +114,7 @@ export default class TaskWidget extends React.Component<{}, ITaskState> {
               icon={<ArrowRight16Filled />}
               iconPosition="after"
               style={{ color: "#5B5FC7" }}
+              onClick={() => openTodoApp()}
             >
               View all
             </Button>

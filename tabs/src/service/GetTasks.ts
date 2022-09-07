@@ -1,11 +1,11 @@
-import { createMicrosoftGraphClient, TeamsFx } from '@microsoft/teamsfx';
+import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
-import { TodotaskModel } from '../model/TodotaskModel';
-import TaskModel from '../model/TaskModel';
+import { TodotaskModel } from "../model/TodotaskModel";
+import TaskModel from "../model/TaskModel";
 
 /**
- * @returns : 
+ * @returns :
  * [
  *   {
  *     ...,
@@ -25,19 +25,26 @@ import TaskModel from '../model/TaskModel';
 export async function getTasks() {
   const teamsfx = new TeamsFx();
   try {
-    const token = await dashboardTeamsFxContext.getTeamsfx()?.getCredential().getToken(["Tasks.ReadWrite"]);
+    const token = await dashboardTeamsFxContext
+      .getTeamsfx()
+      ?.getCredential()
+      .getToken(["Tasks.ReadWrite"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
-  } catch(e) {}
-  
+  } catch (e) {}
+
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [".default"]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
+      ".default",
+    ]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
 
     const todoTaskListId: string = myFirstTaskList["id"];
-    const tasks = await graphClient.api("/me/todo/lists/"+todoTaskListId+"/tasks/?$top=3").get();
+    const tasks = await graphClient
+      .api("/me/todo/lists/" + todoTaskListId + "/tasks/")
+      .get();
     const tasksInfo = tasks["value"];
     let returnAnswer: TaskModel[] = [];
     for (const obj of tasksInfo) {
@@ -45,11 +52,11 @@ export async function getTasks() {
         name: obj["title"],
         status: obj["status"],
         importance: obj["importance"],
-        content: obj["content"] 
-      }
-      returnAnswer.push(obj);
+        content: obj["content"],
+      };
+      returnAnswer.push(tmp);
     }
     return returnAnswer;
     // return tasksInfo;
-  } catch(e) {}  
+  } catch (e) {}
 }
