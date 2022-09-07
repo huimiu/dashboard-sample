@@ -17,10 +17,11 @@ import {
 
 import { FilesType } from "../common/filesType";
 import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/request";
+import { getFiles } from "../service/GetFiles";
 
 export default function FilesWidget(): WidgetPropsOrElement {
-  const files = getFiles();
+  let files: FilesModel[] = [];
+  getFiles().then((r) => (files = r!));
   return {
     widget: {
       title: "Files",

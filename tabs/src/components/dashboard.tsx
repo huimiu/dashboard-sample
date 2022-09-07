@@ -69,6 +69,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       <>
         {this.state.showLogin === false && (
           <div className="dashboard">
+            <div></div>
             <div className="dashboard-above">
               <div className="dashboard-above-left">
                 <Chart />
