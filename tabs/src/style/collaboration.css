@@ -1,0 +1,27 @@
+.collaboration-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 200px;
+}
+
+.collaboration-des {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.collaboration-share {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collaboration-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+}

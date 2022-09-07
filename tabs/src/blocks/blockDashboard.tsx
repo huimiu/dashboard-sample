@@ -1,12 +1,13 @@
 import { Escape, View } from "@fluent-blocks/react";
 
-import Banner from "../../card/banner";
-import ChartWidget from "../../widget/Chart";
-import Collaboration from "../../widget/Collaboration";
-import Events from "../../widget/Events";
-import FilesWidget from "../../widget/Files";
-import PieWidget from "../../widget/Pie";
-import TaskWidget from "../../widget/Task";
+import Banner from "../card/banner";
+import ChartWidget from "./widget/chartWidget";
+import Collaboration from "./widget/collaborationWidget";
+import Events from "./widget/eventsWidget";
+import FilesWidget from "./widget/filesWidget";
+import PieWidget from "./widget/pieWidget";
+import Task from "./widget/taskWidget";
+import TaskWidget from "./widget/taskWidget";
 
 export default function BlockDashboard() {
   return (
@@ -32,7 +33,8 @@ export default function BlockDashboard() {
                   blockSizeFactor: 1,
                 },
                 {
-                  item: TaskWidget(),
+                  item: Events(),
+                  blockSizeFactor: 1,
                 },
                 {
                   item: FilesWidget(),

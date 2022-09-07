@@ -6,7 +6,8 @@ import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
 import EventsModel from "../model/EventsModel";
-import { getEvents } from "../service/Requests";
+import { getCalendar } from "../service/GetCalendar";
+import { getEvents } from "../service/request";
 
 export default function Events() {
   const events = getEvents();
@@ -14,7 +15,11 @@ export default function Events() {
     <Card className="card-stretch">
       <CardHeader
         header={
-          <Text weight="semibold" size={400}>
+          <Text
+            weight="semibold"
+            size={400}
+            style={{ marginLeft: "10px", marginTop: "10px" }}
+          >
             Your upcoming events
           </Text>
         }
@@ -48,7 +53,9 @@ export default function Events() {
                         size={400}
                         key={event.id?.concat("-time")}
                       >
-                        {event.startTime + "-" + event.endTime}
+                        {event.startTime.dateTime +
+                          "-" +
+                          event.endTime.dateTime}
                       </Text>
                       {event.location && (
                         <Text
@@ -62,7 +69,7 @@ export default function Events() {
                     </div>
                   </div>
                   <div className="events-item-right">
-                    {i == 0 && (
+                    {i === 0 && (
                       <Button
                         className="events-button"
                         appearance="primary"

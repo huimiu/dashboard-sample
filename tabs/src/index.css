@@ -10,4 +10,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   overflow: hidden;
+  overflow-y: hidden; 
+  background-color: #F5F5F5;
+  margin: auto;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+

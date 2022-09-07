@@ -1,11 +1,11 @@
 import "../../style/Dashboard.css";
 import "../../style/CardLayout.css";
 
-import Banner from "../../card/banner";
-import Collaboration from "../../card/collaboration";
-import Events from "../../card/events";
-import Files from "../../card/files";
-import Task from "../../card/task";
+import Banner from "../card/banner";
+import Collaboration from "../card/collaboration";
+import Events from "../card/events";
+import Files from "../card/files";
+import Task from "../card/task";
 
 export default function Dashboard1() {
   return (

@@ -1,27 +1,54 @@
 [
     {
-        "startTime": "10:30 AM",
-        "endTime": "11:00 AM",        
+        "startTime": {
+            "dateTime": "10:30 AM",
+            "timeZone": "UTC"
+        },
+        "endTime": {
+            "dateTime": "11:30 AM",
+            "timeZone": "UTC"
+        },
         "title": "ProjectX Dev Sync",
         "subTitle": "Daniela Mandera",
         "location": "Conf Room LSQ/13057"
     },
     {
-        "startTime": "10:30 AM",
-        "endTime": "11:00 AM",
+        "startTime": {
+            "dateTime": "10:30 AM",
+            "timeZone": "UTC"
+        },
+        "endTime": {
+            "dateTime": "11:30 AM",
+            "timeZone": "UTC"
+        },
         "title": "ProjectX Dev Sync",
-        "subTitle": "Daniela Mandera"
+        "subTitle": "Daniela Mandera",
+        "location": "Conf Room LSQ/13057"
     },
     {
-        "startTime": "10:30 AM",
-        "endTime": "11:00 AM",
+        "startTime": {
+            "dateTime": "10:30 AM",
+            "timeZone": "UTC"
+        },
+        "endTime": {
+            "dateTime": "11:30 AM",
+            "timeZone": "UTC"
+        },
         "title": "ProjectX Dev Sync",
-        "subTitle": "Daniela Mandera"
+        "subTitle": "Daniela Mandera",
+        "location": "Conf Room LSQ/13057"
     },
     {
-        "startTime": "10:30 AM",
-        "endTime": "11:00 AM",
+        "startTime": {
+            "dateTime": "10:30 AM",
+            "timeZone": "UTC"
+        },
+        "endTime": {
+            "dateTime": "11:30 AM",
+            "timeZone": "UTC"
+        },
         "title": "ProjectX Dev Sync",
-        "subTitle": "Daniela Mandera"
+        "subTitle": "Daniela Mandera",
+        "location": "Conf Room LSQ/13057"
     }
 ]

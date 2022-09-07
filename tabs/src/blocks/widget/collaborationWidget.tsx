@@ -1,5 +1,5 @@
-import "../card/Styles.css";
-import "../style/cardLayout.css";
+import "../../card/Styles.css";
+import "../../style/cardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { Label, Image } from "@fluentui/react-components";

@@ -18,19 +18,14 @@ import {
 } from "@fluentui/react-icons";
 
 import TaskModel from "../model/TaskModel";
-import { getTask } from "../service/Requests";
-
-interface IWidgetProps {}
+import { getTask } from "../service/request";
 
 interface ITaskState {
   tasks: TaskModel[];
   showAddIcon: boolean;
 }
 
-export default class TaskWidget extends React.Component<
-  IWidgetProps,
-  ITaskState
-> {
+export default class TaskWidget extends React.Component<{}, ITaskState> {
   render(): JSX.Element {
     return this.renderPage();
   }
@@ -53,10 +48,14 @@ export default class TaskWidget extends React.Component<
 
   renderPage = () => {
     return (
-      <Card className="card">
+      <Card className="card-stretch">
         <CardHeader
           header={
-            <Text weight="semibold" size={400}>
+            <Text
+              weight="semibold"
+              size={400}
+              style={{ marginLeft: "10px", marginTop: "10px" }}
+            >
               Your Tasks
             </Text>
           }
