@@ -1,7 +1,6 @@
 @media screen and (min-width: 480px) {
   .card {
     flex: 1;
-    height: 260px;
   }
 
   .card-row {
@@ -25,9 +24,11 @@
   .card-container-row {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    justify-content: flex-start;
+    gap: 15px;
+    justify-content: space-between;
     flex: 1;
+    margin-top: 10px;
+    margin-left: 20px;
   }
 
   .card-stretch {

@@ -2,7 +2,7 @@ import "../style/task.css";
 import "../style/chart.css";
 import "../style/cardLayout.css";
 
-import { Escape, Media, Table, TableProps } from "@fluent-blocks/react";
+import { Media, Table, TableProps } from "@fluent-blocks/react";
 import { Button, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
