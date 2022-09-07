@@ -25,6 +25,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
 
     initTeamsFx();
     this.initConsent();
+    this.login();
   }
 
   async initConsent() {

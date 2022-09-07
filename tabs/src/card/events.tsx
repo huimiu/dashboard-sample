@@ -44,10 +44,11 @@ export default class Events extends React.Component<{}, IEventState> {
           <div className="events-container">
             <div className="summary">
               <Label size="small" weight="semibold">
-                Aug 31, 2022
+                Sep 7, 2022
               </Label>
               <Label size="small">
-                You have 4 meetings today. The upcoming events
+                You have {this.state.events?.length} meetings today. The
+                upcoming events
               </Label>
             </div>
             <div className="events-list">
@@ -70,7 +71,9 @@ export default class Events extends React.Component<{}, IEventState> {
                           size={400}
                           key={event.id?.concat("-time")}
                         >
-                          {event.startTime + "-" + event.endTime}
+                          {event.startTime.dateTime.substring(11, 16) +
+                            "-" +
+                            event.endTime.dateTime.substring(11, 16)}
                         </Text>
                         {event.location && (
                           <Text
