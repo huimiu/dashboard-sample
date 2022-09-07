@@ -60,7 +60,7 @@ export async function getCalendar() {
     ]);
     const tasklists = await graphClient
       .api(
-        "/me/events?$top=3&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
+        "/me/events?$top=2&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
       )
       .get();
     const myCalendarEvents = tasklists["value"];

@@ -9,6 +9,7 @@ import { ArrowRight16Filled } from "@fluentui/react-icons";
 
 import EventsModel from "../model/EventsModel";
 import { getCalendar } from "../service/GetCalendar";
+import { extractTime } from "../common/dateUtils";
 
 interface IEventState {
   events?: EventsModel[];
@@ -71,9 +72,9 @@ export default class Events extends React.Component<{}, IEventState> {
                           size={400}
                           key={event.id?.concat("-time")}
                         >
-                          {event.startTime.dateTime.substring(11, 16) +
+                          {extractTime(event.startTime.dateTime) +
                             "-" +
-                            event.endTime.dateTime.substring(11, 16)}
+                            extractTime(event.endTime.dateTime)}
                         </Text>
                         {event.location && (
                           <Text

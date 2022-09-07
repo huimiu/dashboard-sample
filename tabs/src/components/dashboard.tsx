@@ -21,10 +21,7 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-    CacheService.clearCaches();
-
     initTeamsFx();
-    this.initConsent();
     this.login();
   }
 
