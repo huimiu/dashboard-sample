@@ -59,9 +59,10 @@ export async function getFiles() {
         "/me/drive/recent?$top=3&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem"
       )
       .get();
-    // console.log(drives);
+    const driveInfo = drives["value"];
+
     let returnAnswer: FilesModel[] = [];
-    for (const obj of drives) {
+    for (const obj of driveInfo) {
       const tmp: FilesModel = {
         name: obj["name"],
         createdBy: obj["remoteItem"]["createdBy"]["user"]["displayName"],
@@ -69,7 +70,7 @@ export async function getFiles() {
           obj["remoteItem"]["lastModifiedBy"]["user"]["displayName"],
         createdDateTime: obj["remoteItem"]["createdDateTime"],
         lastModifiedDateTime: obj["remoteItem"]["lastModifiedDateTime"],
-        type: obj["file"]["mimeType"],
+        type: obj["remoteItem"]["file"]["mimeType"],
         weburl: obj["remoteItem"]["webUrl"],
         webDavurl: obj["remoteItem"]["webDavUrl"],
       };
