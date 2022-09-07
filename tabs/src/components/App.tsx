@@ -8,7 +8,6 @@ import {
 
 import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 
-import BlockDashboard from "./t1/blockDashboard";
 import Dashboard from "./dashboard";
 
 export default function App() {
@@ -18,7 +17,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/block" element={<BlockDashboard />} />
         </Routes>
       </Router>
     </FluentProvider>

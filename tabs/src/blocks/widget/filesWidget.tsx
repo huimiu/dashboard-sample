@@ -1,6 +1,6 @@
 import "@fluent-blocks/basic-icons";
-import "../style/files.css";
-import "../style/cardLayout.css";
+import "../../style/files.css";
+import "../../style/cardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
@@ -15,9 +15,9 @@ import {
   WordColorIcon,
 } from "@fluentui/react-icons-northstar";
 
-import { FilesType } from "../common/filesType";
-import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/GetFiles";
+import { FilesType } from "../../common/filesType";
+import FilesModel from "../../model/FilesModel";
+import { getFiles } from "../../service/GetFiles";
 
 export default function FilesWidget(): WidgetPropsOrElement {
   let files: FilesModel[] = [];

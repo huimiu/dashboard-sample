@@ -2,6 +2,7 @@ import { TeamsFx } from "@microsoft/teamsfx";
 import { dashboardTeamsFxContext as ctx } from "../components/Context";
 
 export const scope = [
+  "Files.Read",
   "User.Read",
   "User.ReadWrite.All",
   "Files.ReadWrite.All",
@@ -19,9 +20,9 @@ export function initTeamsFx() {
   return teamsfx;
 }
 
-export async function loginAction() {
+export function loginAction() {
   try {
-    await ctx.getTeamsfx()?.login(scope);
+    ctx.getTeamsfx()?.login(scope);
   } catch (e) {
     console.log(e);
     throw "Login Error: can not login!";

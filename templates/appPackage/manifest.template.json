@@ -44,24 +44,6 @@
             "scopes": [
                 "personal"
             ]
-        },
-        {
-            "entityId": "index2",
-            "name": "Blocks",
-            "contentUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/block",
-            "websiteUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/block",
-            "scopes": [
-                "personal"
-            ]
-        },
-        {
-            "entityId": "index3",
-            "name": "Login",
-            "contentUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/login",
-            "websiteUrl": "{{state.fx-resource-frontend-hosting.endpoint}}{{state.fx-resource-frontend-hosting.indexPath}}/login",
-            "scopes": [
-                "personal"
-            ]
         }
     ],
     "permissions": [

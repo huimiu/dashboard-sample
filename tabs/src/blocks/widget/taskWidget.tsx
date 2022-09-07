@@ -1,5 +1,5 @@
-import "../card/Styles.css";
-import "../style/cardLayout.css";
+import "../../card/Styles.css";
+import "../../style/cardLayout.css";
 
 import React from "react";
 
@@ -18,8 +18,8 @@ import {
   Star24Regular,
 } from "@fluentui/react-icons";
 
-import TaskModel from "../model/TaskModel";
-import { getTask } from "../service/request";
+import TaskModel from "../../model/TaskModel";
+import { getTask } from "../../service/request";
 
 interface ITaskState {
   tasks: TaskModel[];

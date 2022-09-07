@@ -20,17 +20,12 @@ import {
 import TaskModel from "../model/TaskModel";
 import { getTask } from "../service/request";
 
-interface IWidgetProps {}
-
 interface ITaskState {
   tasks: TaskModel[];
   showAddIcon: boolean;
 }
 
-export default class TaskWidget extends React.Component<
-  IWidgetProps,
-  ITaskState
-> {
+export default class TaskWidget extends React.Component<{}, ITaskState> {
   render(): JSX.Element {
     return this.renderPage();
   }

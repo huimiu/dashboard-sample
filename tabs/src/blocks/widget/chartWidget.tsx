@@ -2,34 +2,33 @@ import "@fluent-blocks/basic-icons";
 
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
 
-import { demoData } from "../data/ChartData";
+import { demoData } from "../../data/ChartData";
 
-export default function PieWidget(): WidgetPropsOrElement {
+export default function ChartWidget(): WidgetPropsOrElement {
   return {
     widget: {
-      title: [{ text: "Doughnut" }],
-      label: "doughnut widget",
+      title: [{ text: "Power BI" }],
+      label: "bi widget",
       tabs: [
         {
           tab: {
-            label: "doughnut",
+            label: "chart",
           },
           panel: [
             {
               media: {
-                label: "doughnut",
+                label: "c1",
                 chart: {
-                  type: "doughnut",
+                  type: "line-area",
                   data: demoData,
                 },
               },
-              variant: "viewportWidth",
             },
           ],
         },
       ],
       footerAction: {
-        actionId: "doughnut-foot",
+        actionId: "chart-foot",
         label: "View details",
       },
     },

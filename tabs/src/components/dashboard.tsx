@@ -12,6 +12,7 @@ import Events from "../card/events";
 import Files from "../card/files";
 import Task from "../card/task";
 import { initTeamsFx, loginAction, scope } from "../service/login";
+import Banner from "../card/banner";
 
 interface IDashboardProp {
   showLogin?: boolean;
@@ -21,46 +22,47 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
     CacheService.clearCaches();
-    this.state = {
-      showLogin: true,
-    };
+
+    initTeamsFx();
+    let consentNeeded = this.checkIsConsentNeeded();
+    consentNeeded.then((r) => {
+      if (r) {
+        this.login();
+      } else {
+        this.state = { showLogin: false };
+      }
+    });
   }
 
-  async componentDidMount() {
-    initTeamsFx();
-    this.checkIsConsentNeeded();
-    if (this.state.showLogin) {
-      try {
-        await loginAction();
-        Providers.globalProvider?.setState(ProviderState.SignedIn);
-        this.setState({ showLogin: false });
-      } catch (err: any) {
-        if (err.message?.includes("CancelledByUser")) {
-          const helpLink = "https://aka.ms/teamsfx-auth-code-flow";
-          err.message +=
-            '\nIf you see "AADSTS50011: The reply URL specified in the request does not match the reply URLs configured for the application" ' +
-            "in the popup window, you may be using unmatched version for TeamsFx SDK (version >= 0.5.0) and Teams Toolkit (version < 3.3.0) or " +
-            `cli (version < 0.11.0). Please refer to the help link for how to fix the issue: ${helpLink}`;
-        }
-        alert("Login failed: " + err);
-        return;
+  login() {
+    try {
+      loginAction();
+      this.state = { showLogin: false };
+    } catch (err: any) {
+      if (err.message?.includes("CancelledByUser")) {
+        const helpLink = "https://aka.ms/teamsfx-auth-code-flow";
+        err.message +=
+          '\nIf you see "AADSTS50011: The reply URL specified in the request does not match the reply URLs configured for the application" ' +
+          "in the popup window, you may be using unmatched version for TeamsFx SDK (version >= 0.5.0) and Teams Toolkit (version < 3.3.0) or " +
+          `cli (version < 0.11.0). Please refer to the help link for how to fix the issue: ${helpLink}`;
       }
+      alert("Login failed: " + err);
+      return;
     }
   }
+
+  async componentDidMount() {}
 
   async checkIsConsentNeeded() {
     let consentNeeded = false;
     try {
-      await ctx.getTeamsfx()?.getCredential().getToken(scope);
+      ctx.getTeamsfx()?.getCredential().getToken(scope);
     } catch (error) {
       consentNeeded = true;
     }
-    this.setState({
+    this.state = {
       showLogin: consentNeeded,
-    });
-    Providers.globalProvider.setState(
-      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
-    );
+    };
     return consentNeeded;
   }
 
@@ -69,7 +71,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       <>
         {this.state.showLogin === false && (
           <div className="dashboard">
-            <div></div>
+            <Banner />
             <div className="dashboard-above">
               <div className="dashboard-above-left">
                 <Chart />
