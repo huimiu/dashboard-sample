@@ -18,7 +18,7 @@ export default function Collaboration() {
           <Text
             weight="semibold"
             size={400}
-            style={{ marginLeft: "20px", marginTop: "10px" }}
+            style={{ marginLeft: "10px", marginTop: "10px" }}
           >
             Teams Collaboration
           </Text>

@@ -15,6 +15,7 @@
   flex-flow: column nowrap;
   gap: 8px;
   justify-content: start;
+  margin-right: 10px;
 }
 
 

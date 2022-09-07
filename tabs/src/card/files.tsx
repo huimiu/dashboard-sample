@@ -10,17 +10,17 @@ import {
   ArrowRight16Filled,
 } from "@fluentui/react-icons";
 import {
-  ExcelColorIcon,
-  FilesTextColoredIcon,
-  OneNoteColorIcon,
-  PowerPointColorIcon,
-  VisioColorIcon,
-  WordColorIcon,
+  ExcelIcon,
+  FilesTxtIcon,
+  OneNoteIcon,
+  PowerPointIcon,
+  VisioIcon,
+  WordIcon,
 } from "@fluentui/react-icons-northstar";
 
 import { FilesType } from "../common/filesType";
 import FilesModel from "../model/FilesModel";
-import { getFiles } from "../service/GetFiles";
+import { getFiles } from "../service/request";
 
 interface IFileState {
   files: FilesModel[];
@@ -35,8 +35,7 @@ export default class Files extends React.Component<{}, IFileState> {
   }
 
   private initFiles() {
-    let fs: FilesModel[] = [];
-    getFiles().then((r) => (fs = r!));
+    let fs: FilesModel[] = getFiles();
     this.setState({ files: fs });
   }
 
@@ -49,7 +48,12 @@ export default class Files extends React.Component<{}, IFileState> {
       <Card key="files" className="card">
         <CardHeader
           header={
-            <Text weight="semibold" size={400} wrap={false}>
+            <Text
+              weight="semibold"
+              size={400}
+              wrap={false}
+              style={{ marginLeft: "10px", marginTop: "10px" }}
+            >
               Your Documents
             </Text>
           }
@@ -104,22 +108,22 @@ function matchFileIcon(fileType: string) {
   let icon;
   switch (fileType) {
     case FilesType.WORD:
-      icon = <WordColorIcon />;
+      icon = <WordIcon />;
       break;
     case FilesType.EXCEL:
-      icon = <ExcelColorIcon />;
+      icon = <ExcelIcon />;
       break;
     case FilesType.PPT:
-      icon = <PowerPointColorIcon />;
+      icon = <PowerPointIcon />;
       break;
     case FilesType.VISIO:
-      icon = <VisioColorIcon />;
+      icon = <VisioIcon />;
       break;
     case FilesType.ONENOTE:
-      icon = <OneNoteColorIcon />;
+      icon = <OneNoteIcon />;
       break;
     default:
-      icon = <FilesTextColoredIcon />;
+      icon = <FilesTxtIcon />;
       break;
   }
   return icon;

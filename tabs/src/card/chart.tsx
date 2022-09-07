@@ -65,7 +65,11 @@ export default function ChartCard() {
     <Card className="card-stretch">
       <CardHeader
         header={
-          <Text weight="semibold" size={400}>
+          <Text
+            weight="semibold"
+            size={400}
+            style={{ marginLeft: "10px", marginTop: "10px" }}
+          >
             Power BI
           </Text>
         }

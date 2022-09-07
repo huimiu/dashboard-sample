@@ -51,7 +51,11 @@ export default class TaskWidget extends React.Component<{}, ITaskState> {
       <Card className="card-stretch">
         <CardHeader
           header={
-            <Text weight="semibold" size={400}>
+            <Text
+              weight="semibold"
+              size={400}
+              style={{ marginLeft: "10px", marginTop: "10px" }}
+            >
               Your Tasks
             </Text>
           }
