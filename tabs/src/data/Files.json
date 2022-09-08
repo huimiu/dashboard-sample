@@ -1,25 +1,24 @@
 [
   {
       "id": "t1",
-      "name": "File1",
-      "description": "description 1",
-      "type": "Word",
+      "name": "Book.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "url": "",
       "icon": ""
   },
   {
       "id": "t2",
-      "name": "File2",
+      "name": "Presentation.pptx",
       "description": "description 2",
-      "type": "PowerPoint",
+      "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       "url": "",
       "icon": ""
   },
   {
       "id": "t3",
-      "name": "File3",
+      "name": "Document.docx",
       "description": "description 3",
-      "type": "Excel",
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       "url": "",
       "icon": ""
   }
