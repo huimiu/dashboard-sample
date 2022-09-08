@@ -11,7 +11,9 @@ export const scope = [
 
 export function loginAction() {
   try {
-    FxContext.getInstance().getTeamsFx()?.login(scope);
+    var teamsfx = FxContext.getInstance().getTeamsFx();
+    teamsfx.login(scope);
+    FxContext.getInstance().setTeamsFx(teamsfx);
   } catch (e) {
     console.log(e);
     throw "Login Error: can not login!";

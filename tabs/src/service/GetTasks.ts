@@ -35,6 +35,7 @@ export async function getTasks() {
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
     console.log("get task error:" + e);
+    throw e;
   }
 
   try {

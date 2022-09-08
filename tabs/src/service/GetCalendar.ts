@@ -43,17 +43,18 @@ import { FxContext } from "../components/singletonContext";
  * }
  */
 export async function getCalendar() {
-  const teamsfx = new TeamsFx();
+  var teamsfx: TeamsFx;
   try {
-    const token = await FxContext.getInstance()
-      .getTeamsFx()
-      ?.getCredential()
+    teamsfx = FxContext.getInstance().getTeamsFx();
+    const token = await teamsfx
+      .getCredential()
       .getToken(["Calendars.ReadWrite"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
     console.log(e);
+    throw e;
   }
 
   try {

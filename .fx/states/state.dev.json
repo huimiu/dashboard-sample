@@ -13,12 +13,12 @@
     "fx-resource-appstudio": {
         "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
         "teamsAppId": "33d5042e-1b62-4130-9e2a-dea132795ee4",
-        "teamsAppUpdatedAt": 1662627900915
+        "teamsAppUpdatedAt": 1662640093819
     },
     "fx-resource-identity": {
         "identityName": "dashboardddev0001",
         "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_new-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardddev0001",
-        "identityClientId": "f9373ee5-e8a8-4fe3-93d4-91f7d55d016f"
+        "identityClientId": "65a23003-7043-485a-ba0d-be015e529ba5"
     },
     "fx-resource-aad-app-for-teams": {
         "clientId": "dbc8761c-222b-42de-9201-9b2586b6442e",

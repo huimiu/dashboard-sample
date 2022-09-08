@@ -100,8 +100,13 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Chart />
               </div>
               <div className="dashboard-above-right">
-                <div className="card-events">{Events(this.state.events)}</div>
-                <div className="card-task">{Task(this.state.tasks)}</div>
+                {this.state.events && (
+                  <div className="card-events">{Events(this.state.events)}</div>
+                )}
+
+                {this.state.tasks && (
+                  <div className="card-task">{Task(this.state.tasks)}</div>
+                )}
               </div>
             </div>
 
@@ -109,9 +114,11 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
               <div className="dashboard-bottom-left">
                 <Collaboration />
               </div>
-              <div className="dashboard-bottom-right">
-                {Files(this.state.files)}
-              </div>
+              {this.state.files && (
+                <div className="dashboard-bottom-right">
+                  {Files(this.state.files)}
+                </div>
+              )}
             </div>
           </div>
         )}
