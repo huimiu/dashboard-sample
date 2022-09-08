@@ -5,37 +5,37 @@
         "subscriptionName": "Teams Cloud - Dev Test with TTL = 3 Days",
         "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
         "needCreateResourceGroup": false,
-        "resourceGroupName": "dashboard_demo-dev-rg",
-        "location": "Southeast Asia",
-        "resourceNameSuffix": "3311ae",
+        "resourceGroupName": "dashboard_new-dev-rg",
+        "location": "eastasia",
+        "resourceNameSuffix": "e62eb5",
         "provisionSucceeded": true
     },
     "fx-resource-appstudio": {
         "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
-        "teamsAppId": "e7c90c3b-ce85-4961-89b3-5daf12a381e3",
-        "teamsAppUpdatedAt": 1662559053375
+        "teamsAppId": "33d5042e-1b62-4130-9e2a-dea132795ee4",
+        "teamsAppUpdatedAt": 1662627900915
     },
     "fx-resource-identity": {
-        "identityName": "dashboardddev131aa3",
-        "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_demo-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardddev131aa3",
-        "identityClientId": "4ba314a7-b9fb-4a37-95c7-96b4f5c40226"
+        "identityName": "dashboardddev0001",
+        "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_new-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardddev0001",
+        "identityClientId": "f9373ee5-e8a8-4fe3-93d4-91f7d55d016f"
     },
     "fx-resource-aad-app-for-teams": {
-        "clientId": "1d8d5799-e193-4fc3-87c8-3bf03060783d",
+        "clientId": "dbc8761c-222b-42de-9201-9b2586b6442e",
         "clientSecret": "{{fx-resource-aad-app-for-teams.clientSecret}}",
-        "objectId": "4ce67f78-93d8-4006-b198-a803f2b706d6",
-        "oauth2PermissionScopeId": "6e581448-f176-425f-bec5-3afe32515ecb",
+        "objectId": "d1968053-54b8-4e1b-a6b7-93e075741e89",
+        "oauth2PermissionScopeId": "4d45fa3c-ff8a-461c-99ce-ffb5a5f01351",
         "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
         "oauthHost": "https://login.microsoftonline.com",
         "oauthAuthority": "https://login.microsoftonline.com/cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
-        "applicationIdUris": "api://dashboardddev131aa3tab.z23.web.core.windows.net/1d8d5799-e193-4fc3-87c8-3bf03060783d",
-        "frontendEndpoint": "https://dashboardddev131aa3tab.z23.web.core.windows.net"
+        "applicationIdUris": "api://dashboardddev0001tab.z7.web.core.windows.net/dbc8761c-222b-42de-9201-9b2586b6442e",
+        "frontendEndpoint": "https://dashboardddev0001tab.z7.web.core.windows.net"
     },
     "fx-resource-frontend-hosting": {
-        "domain": "dashboardddev131aa3tab.z23.web.core.windows.net",
-        "endpoint": "https://dashboardddev131aa3tab.z23.web.core.windows.net",
+        "domain": "dashboardddev0001tab.z7.web.core.windows.net",
+        "endpoint": "https://dashboardddev0001tab.z7.web.core.windows.net",
         "indexPath": "/index.html#",
-        "storageResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_demo-dev-rg/providers/Microsoft.Storage/storageAccounts/dashboardddev131aa3tab"
+        "storageResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboard_new-dev-rg/providers/Microsoft.Storage/storageAccounts/dashboardddev0001tab"
     },
     "fx-resource-cicd": {},
     "fx-resource-api-connector": {}

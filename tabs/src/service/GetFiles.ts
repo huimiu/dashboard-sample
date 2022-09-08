@@ -45,7 +45,6 @@ export async function getFiles() {
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
     console.log(e);
-    throw e;
   }
 
   try {
@@ -77,6 +76,5 @@ export async function getFiles() {
     return returnAnswer;
   } catch (e) {
     console.log(e);
-    throw e;
   }
 }

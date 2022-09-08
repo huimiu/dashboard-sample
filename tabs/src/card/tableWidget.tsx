@@ -1,7 +1,6 @@
 import "./Styles.css";
-import { Avatar, Image, Label, Text, Button } from "@fluentui/react-components";
+import { Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
-import Chart from "./chart";
 
 const chart1Points = [
   {

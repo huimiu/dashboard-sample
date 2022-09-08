@@ -1,12 +1,6 @@
 import "../style/banner.css";
 
-import { Avatar, Image, Label } from "@fluentui/react-components";
-import { Card, CardPreview } from "@fluentui/react-components/unstable";
-import {
-  Earth20Regular,
-  Person20Regular,
-  Star20Regular,
-} from "@fluentui/react-icons";
+import { Image } from "@fluentui/react-components";
 
 export default function Banner() {
   return (

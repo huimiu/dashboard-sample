@@ -18,6 +18,9 @@ export class FxContext {
   }
 
   public getTeamsFx() {
+    if (!this.teamsfx) {
+      this.teamsfx = new TeamsFx();
+    }
     return this.teamsfx;
   }
 }

@@ -4,7 +4,7 @@
   "parameters": {
     "provisionParameters": {
       "value": {
-        "resourceBaseName": "dashboardddev131aa3",
+        "resourceBaseName": "dashboardddev0001",
         "m365ClientId": "{{state.fx-resource-aad-app-for-teams.clientId}}",
         "m365ClientSecret": "{{state.fx-resource-aad-app-for-teams.clientSecret}}",
         "m365TenantId": "{{state.fx-resource-aad-app-for-teams.tenantId}}",

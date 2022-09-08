@@ -1,8 +1,6 @@
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
-import { dashboardTeamsFxContext } from "../components/Context";
 import { Client } from "@microsoft/microsoft-graph-client";
 import EventsModel from "../model/EventsModel";
-import { loginAction } from "./login";
 import { FxContext } from "../components/singletonContext";
 
 /**
@@ -83,5 +81,7 @@ export async function getCalendar() {
       returnAnswer.push(tmp);
     }
     return returnAnswer;
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 }

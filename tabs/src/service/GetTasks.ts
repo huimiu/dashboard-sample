@@ -33,7 +33,9 @@ export async function getTasks() {
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
-  } catch (e) {}
+  } catch (e) {
+    console.log("get task error:" + e);
+  }
 
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
@@ -59,5 +61,7 @@ export async function getTasks() {
     }
     return returnAnswer;
     // return tasksInfo;
-  } catch (e) {}
+  } catch (e) {
+    console.log("get task error:" + e);
+  }
 }

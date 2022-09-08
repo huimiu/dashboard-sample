@@ -5,27 +5,47 @@ import React from "react";
 
 import { Providers, ProviderState } from "@microsoft/mgt-element";
 import { CacheService } from "@microsoft/mgt-react";
-import { FxContext } from "./singletonContext";
+import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
+
+import Banner from "../card/banner";
 import Chart from "../card/chart";
 import Collaboration from "../card/collaboration";
-import Events from "../card/events";
-import Files from "../card/files";
-import Task from "../card/task";
-import { initTeamsFx, loginAction, scope } from "../service/login";
-import Banner from "../card/banner";
-import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
+import { Events } from "../card/events";
+import { Files } from "../card/files";
+import { Task } from "../card/task";
+import EventsModel from "../model/EventsModel";
+import FilesModel from "../model/FilesModel";
+import TaskModel from "../model/TaskModel";
+import { getCalendar } from "../service/GetCalendar";
+import { getFiles } from "../service/GetFiles";
+import { getTasks } from "../service/GetTasks";
+import { loginAction, scope } from "../service/login";
+import { FxContext } from "./singletonContext";
 
 interface IDashboardProp {
   showLogin?: boolean;
+  events?: EventsModel[];
+  files?: FilesModel[];
+  tasks?: TaskModel[];
 }
 
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
     this.state = {
-      showLogin: false,
+      showLogin: true,
+      events: [],
+      tasks: [],
+      files: [],
     };
-    this.login();
+  }
+
+  async componentDidMount() {
+    await this.login();
+    this.setState({ events: await getCalendar() });
+    this.setState({ tasks: await getTasks() });
+    this.setState({ files: await getFiles() });
+    this.setState({ showLogin: false });
   }
 
   async initConsent() {
@@ -33,14 +53,29 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     if (consentNeeded) {
       this.login();
     } else {
-      this.state = { showLogin: false };
+      this.setState({ showLogin: false });
     }
+  }
+
+  async checkIsConsentNeeded() {
+    let consentNeeded = false;
+    try {
+      FxContext.getInstance().getTeamsFx().getCredential().getToken(scope);
+    } catch (error) {
+      consentNeeded = true;
+    }
+    this.setState({
+      showLogin: consentNeeded,
+    });
+    Providers.globalProvider.setState(
+      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
+    );
+    return consentNeeded;
   }
 
   async login() {
     try {
-      await loginAction();
-      this.state = { showLogin: false };
+      loginAction();
     } catch (err: any) {
       if (err.message?.includes("CancelledByUser")) {
         const helpLink = "https://aka.ms/teamsfx-auth-code-flow";
@@ -54,24 +89,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     }
   }
 
-  async componentDidMount() {}
-
-  async checkIsConsentNeeded() {
-    let consentNeeded = false;
-    try {
-      FxContext.getInstance().getTeamsFx()?.getCredential().getToken(scope);
-    } catch (error) {
-      consentNeeded = true;
-    }
-    this.state = {
-      showLogin: consentNeeded,
-    };
-    Providers.globalProvider.setState(
-      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
-    );
-    return consentNeeded;
-  }
-
   render() {
     return (
       <>
@@ -83,12 +100,8 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Chart />
               </div>
               <div className="dashboard-above-right">
-                <div className="card-events">
-                  <Events />
-                </div>
-                <div className="card-task">
-                  <Task />
-                </div>
+                <div className="card-events">{Events(this.state.events)}</div>
+                <div className="card-task">{Task(this.state.tasks)}</div>
               </div>
             </div>
 
@@ -97,7 +110,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Collaboration />
               </div>
               <div className="dashboard-bottom-right">
-                <Files />
+                {Files(this.state.files)}
               </div>
             </div>
           </div>
