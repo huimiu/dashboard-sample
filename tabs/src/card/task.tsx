@@ -22,11 +22,11 @@ import { openTodoApp } from "../service/OpenTodoApp";
 import { addTaskWithData } from "../service/request";
 
 interface ITaskProps {
-  tasks: TaskModel[];
+  tasks?: TaskModel[];
 }
 
 interface ITaskState {
-  tasks: TaskModel[];
+  tasks?: TaskModel[];
 }
 
 export class Task extends React.Component<ITaskProps, ITaskState> {
@@ -97,7 +97,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                 Add
               </Button>
             </div>
-            {this.state.tasks.map((t: TaskModel, i) => {
+            {this.state.tasks?.map((t: TaskModel, i) => {
               return (
                 <div className="content-between task-item">
                   <Checkbox

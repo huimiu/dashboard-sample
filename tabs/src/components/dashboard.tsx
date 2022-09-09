@@ -35,9 +35,9 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     this.state = {
       showLogin: undefined,
       loader: true,
-      events: [],
-      tasks: [],
-      files: [],
+      events: undefined,
+      tasks: undefined,
+      files: undefined,
     };
   }
 
@@ -49,9 +49,11 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       events: EventsModel[];
       files: FilesModel[];
     } = (await acquireData()) ?? { tasks: [], events: [], files: [] };
-    this.setState({ events: data.events });
-    this.setState({ tasks: data.tasks });
-    this.setState({ files: data.files });
+    this.setState({
+      events: data.events,
+      tasks: data.tasks,
+      files: data.files,
+    });
     this.setState({ showLogin: false });
   }
 
@@ -114,7 +116,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
               </div>
               <div className="dashboard-above-right">
                 <div className="card-events">
-                  {this.state.tasks && Events(this.state.events)}
+                  {this.state.events && Events(this.state.events)}
                 </div>
 
                 <div className="card-task" id="task-card">
@@ -128,7 +130,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Collaboration />
               </div>
               <div className="dashboard-bottom-right">
-                {Files(this.state.files)}
+                {this.state.tasks && Files(this.state.files)}
               </div>
             </div>
           </div>
