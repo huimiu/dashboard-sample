@@ -16,14 +16,13 @@ import { Task } from "../card/task";
 import EventsModel from "../model/EventsModel";
 import FilesModel from "../model/FilesModel";
 import TaskModel from "../model/TaskModel";
-import { getCalendar } from "../service/GetCalendar";
-import { getFiles } from "../service/GetFiles";
-import { getTasks } from "../service/GetTasks";
 import { loginAction, scope } from "../service/login";
 import { FxContext } from "./singletonContext";
+import { acquireData } from "../service/request";
 
 interface IDashboardProp {
   showLogin?: boolean;
+  loader: boolean;
   events?: EventsModel[];
   files?: FilesModel[];
   tasks?: TaskModel[];
@@ -32,8 +31,10 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
+    CacheService.clearCaches();
     this.state = {
-      showLogin: true,
+      showLogin: undefined,
+      loader: true,
       events: [],
       tasks: [],
       files: [],
@@ -41,11 +42,23 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   }
 
   async componentDidMount() {
-    await this.login();
-    this.setState({ events: await getCalendar() });
-    this.setState({ tasks: await getTasks() });
-    this.setState({ files: await getFiles() });
+    this.initTeamsFxProvider();
+    await this.initConsent();
+    let data: {
+      tasks: TaskModel[];
+      events: EventsModel[];
+      files: FilesModel[];
+    } = (await acquireData()) ?? { tasks: [], events: [], files: [] };
+    this.setState({ events: data.events });
+    this.setState({ tasks: data.tasks });
+    this.setState({ files: data.files });
     this.setState({ showLogin: false });
+  }
+
+  initTeamsFxProvider() {
+    let teamsfx = FxContext.getInstance().getTeamsFx();
+    const provider = new TeamsFxProvider(teamsfx, scope);
+    Providers.globalProvider = provider;
   }
 
   async initConsent() {
@@ -53,7 +66,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     if (consentNeeded) {
       this.login();
     } else {
-      this.setState({ showLogin: false });
+      this.setState({ showLogin: false, loader: false });
     }
   }
 
@@ -92,7 +105,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   render() {
     return (
       <>
-        {this.state.showLogin === false && (
+        {this.state.showLogin === false && this.state.loader === false && (
           <div className="dashboard">
             <Banner />
             <div className="dashboard-above">
@@ -100,13 +113,13 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Chart />
               </div>
               <div className="dashboard-above-right">
-                {this.state.events && (
-                  <div className="card-events">{Events(this.state.events)}</div>
-                )}
+                <div className="card-events">
+                  {this.state.tasks && Events(this.state.events)}
+                </div>
 
-                {this.state.tasks && (
-                  <div className="card-task">{Task(this.state.tasks)}</div>
-                )}
+                <div className="card-task" id="task-card">
+                  {this.state.tasks && <Task tasks={this.state.tasks} />}
+                </div>
               </div>
             </div>
 
@@ -114,11 +127,9 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
               <div className="dashboard-bottom-left">
                 <Collaboration />
               </div>
-              {this.state.files && (
-                <div className="dashboard-bottom-right">
-                  {Files(this.state.files)}
-                </div>
-              )}
+              <div className="dashboard-bottom-right">
+                {Files(this.state.files)}
+              </div>
             </div>
           </div>
         )}

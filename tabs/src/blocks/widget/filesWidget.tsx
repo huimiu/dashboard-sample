@@ -4,18 +4,10 @@ import "../../style/cardLayout.css";
 
 import { Escape } from "@fluent-blocks/react";
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
-import { Text, Button } from "@fluentui/react-components";
+import { Text } from "@fluentui/react-components";
 import { MoreHorizontal16Filled } from "@fluentui/react-icons";
-import {
-  ExcelColorIcon,
-  FilesTextColoredIcon,
-  OneNoteColorIcon,
-  PowerPointColorIcon,
-  VisioColorIcon,
-  WordColorIcon,
-} from "@fluentui/react-icons-northstar";
 
-import { FilesType } from "../../common/filesType";
+import { matchFileIcon } from "../../common/iconUtils";
 import FilesModel from "../../model/FilesModel";
 import { getFiles } from "../../service/GetFiles";
 
@@ -68,35 +60,4 @@ export default function FilesWidget(): WidgetPropsOrElement {
       ],
     },
   };
-}
-
-/**
- * match icon by files type
- *
- * @param fileType the string of files type
- * @returns react icon
- */
-function matchFileIcon(fileType: string) {
-  let icon;
-  switch (fileType) {
-    case FilesType.WORD:
-      icon = <WordColorIcon />;
-      break;
-    case FilesType.EXCEL:
-      icon = <ExcelColorIcon />;
-      break;
-    case FilesType.PPT:
-      icon = <PowerPointColorIcon />;
-      break;
-    case FilesType.VISIO:
-      icon = <VisioColorIcon />;
-      break;
-    case FilesType.ONENOTE:
-      icon = <OneNoteColorIcon />;
-      break;
-    default:
-      icon = <FilesTextColoredIcon />;
-      break;
-  }
-  return icon;
 }

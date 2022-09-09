@@ -1,10 +1,5 @@
 import FilesModel from "../model/FilesModel";
-import {
-  createMicrosoftGraphClient,
-  TeamsFx,
-  UserInfo,
-} from "@microsoft/teamsfx";
-import { dashboardTeamsFxContext } from "../components/Context";
+import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { scope } from "./login";
 import { FxContext } from "../components/singletonContext";
@@ -34,27 +29,22 @@ import { FxContext } from "../components/singletonContext";
  * }
  */
 export async function getFiles() {
-  const teamsfx = new TeamsFx();
+  let teamsfx: TeamsFx;
   try {
-    const token = await FxContext.getInstance()
-      .getTeamsFx()
-      ?.getCredential()
-      .getToken(["Files.Read"]);
+    teamsfx = FxContext.getInstance().getTeamsFx();
+    const token = await teamsfx?.getCredential().getToken(scope);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
-    console.log(e);
     throw e;
   }
 
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
-      ".default",
-    ]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const drives = await graphClient
       .api(
-        "/me/drive/recent?$top=3&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem"
+        "/me/drive/recent?$top=5&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem"
       )
       .get();
     const driveInfo = drives["value"];
@@ -75,7 +65,5 @@ export async function getFiles() {
       returnAnswer.push(tmp);
     }
     return returnAnswer;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 }

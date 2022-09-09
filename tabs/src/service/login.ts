@@ -1,10 +1,7 @@
 import { FxContext } from "../components/singletonContext";
 
 export const scope = [
-  "User.Read",
-  "User.ReadWrite.All",
   "Files.ReadWrite.All",
-  "Directory.ReadWrite.All",
   "Tasks.ReadWrite",
   "Calendars.ReadWrite",
 ];

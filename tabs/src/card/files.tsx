@@ -10,23 +10,18 @@ import {
   MenuPopover,
   MenuTrigger,
   Text,
+  Image,
 } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import {
   ArrowRight16Filled,
   MoreHorizontal16Filled,
+  ArrowDownload24Regular,
+  Link24Regular,
 } from "@fluentui/react-icons";
-import {
-  ExcelIcon,
-  FilesTxtIcon,
-  OneNoteIcon,
-  PowerPointIcon,
-  VisioIcon,
-  WordIcon,
-} from "@fluentui/react-icons-northstar";
 
-import { FilesType } from "../common/filesType";
 import FilesModel from "../model/FilesModel";
+import { matchFileIcon, matchFileIconUrl } from "../common/iconUtils";
 
 export const Files = (files?: FilesModel[]) => (
   <Card key="files" className="card">
@@ -44,7 +39,7 @@ export const Files = (files?: FilesModel[]) => (
     />
     <div className="card-content">
       <div className="files-content">
-        {files?.map((file: FilesModel, i) => {
+        {files?.map((file: FilesModel) => {
           return (
             <div className="files-item">
               <div className="files-item-icon">{matchFileIcon(file.type)}</div>
@@ -63,8 +58,47 @@ export const Files = (files?: FilesModel[]) => (
                   </MenuTrigger>
                   <MenuPopover>
                     <MenuList>
-                      <MenuItem onClick={() => window.open(file.weburl)}>
-                        Open
+                      <Menu>
+                        <MenuTrigger>
+                          <MenuItem
+                            icon={<Image src={matchFileIconUrl(file.type)} />}
+                          >
+                            Open in
+                          </MenuItem>
+                        </MenuTrigger>
+                        <MenuPopover>
+                          <MenuList>
+                            <MenuItem icon={<Image src="teams.svg" />}>
+                              Teams
+                            </MenuItem>
+                            <MenuItem
+                              icon={<Image src={matchFileIconUrl(file.type)} />}
+                            >
+                              Word desktop app
+                            </MenuItem>
+                            <MenuItem
+                              icon={<Image src={matchFileIconUrl(file.type)} />}
+                              onClick={() => window.open(file.weburl)}
+                            >
+                              Browser
+                            </MenuItem>
+                          </MenuList>
+                        </MenuPopover>
+                      </Menu>
+
+                      <MenuItem
+                        icon={<ArrowDownload24Regular />}
+                        onClick={() => window.open(file.webDavurl)}
+                      >
+                        Download
+                      </MenuItem>
+                      <MenuItem
+                        icon={<Link24Regular />}
+                        onClick={() =>
+                          navigator.clipboard.writeText(file.weburl!)
+                        }
+                      >
+                        Copy link
                       </MenuItem>
                     </MenuList>
                   </MenuPopover>
@@ -88,34 +122,3 @@ export const Files = (files?: FilesModel[]) => (
     </div>
   </Card>
 );
-
-/**
- * match icon by files type
- *
- * @param fileType the string of files type
- * @returns react icon
- */
-function matchFileIcon(fileType: string) {
-  let icon;
-  switch (fileType) {
-    case FilesType.WORD:
-      icon = <WordIcon />;
-      break;
-    case FilesType.EXCEL:
-      icon = <ExcelIcon />;
-      break;
-    case FilesType.PPT:
-      icon = <PowerPointIcon />;
-      break;
-    case FilesType.VISIO:
-      icon = <VisioIcon />;
-      break;
-    case FilesType.ONENOTE:
-      icon = <OneNoteIcon />;
-      break;
-    default:
-      icon = <FilesTxtIcon />;
-      break;
-  }
-  return icon;
-}

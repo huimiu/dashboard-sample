@@ -1,13 +1,12 @@
 import "../style/collaboration.css";
 import "../style/cardLayout.css";
 
-import { Image, Label, Text, Button } from "@fluentui/react-components";
+import { Button, Image, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
-
 import {
-  Share20Regular,
-  CircleSmall20Filled,
   ArrowRight16Filled,
+  CircleSmall20Filled,
+  Share20Regular,
 } from "@fluentui/react-icons";
 
 export default function Collaboration() {

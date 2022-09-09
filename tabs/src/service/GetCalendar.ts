@@ -2,6 +2,7 @@ import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
 import EventsModel from "../model/EventsModel";
 import { FxContext } from "../components/singletonContext";
+import { scope } from "./login";
 
 /**
  * @returns :
@@ -46,28 +47,23 @@ export async function getCalendar() {
   var teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx
-      .getCredential()
-      .getToken(["Calendars.ReadWrite"]);
+    const token = await teamsfx.getCredential().getToken(scope);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
-    console.log(e);
+    alert(e);
     throw e;
   }
 
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
-      ".default",
-    ]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const tasklists = await graphClient
       .api(
         "/me/events?$top=2&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
       )
       .get();
     const myCalendarEvents = tasklists["value"];
-    //console.log(myCalendarEvents);
     let returnAnswer: EventsModel[] = [];
     for (const obj of myCalendarEvents) {
       const tmp: EventsModel = {
@@ -84,5 +80,6 @@ export async function getCalendar() {
     return returnAnswer;
   } catch (e) {
     console.log(e);
+    alert(e);
   }
 }

@@ -4,6 +4,7 @@ import { Client } from "@microsoft/microsoft-graph-client";
 import { TodotaskModel } from "../model/TodotaskModel";
 import TaskModel from "../model/TaskModel";
 import { FxContext } from "../components/singletonContext";
+import { scope } from "./login";
 
 /**
  * @returns :
@@ -24,24 +25,19 @@ import { FxContext } from "../components/singletonContext";
  * ]
  */
 export async function getTasks() {
-  const teamsfx = new TeamsFx();
+  let teamsfx: TeamsFx;
   try {
-    const token = await FxContext.getInstance()
-      .getTeamsFx()
-      ?.getCredential()
-      .getToken(["Tasks.ReadWrite"]);
+    teamsfx = FxContext.getInstance().getTeamsFx();
+    const token = await teamsfx?.getCredential().getToken(scope);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
   } catch (e) {
-    console.log("get task error:" + e);
     throw e;
   }
 
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
-      ".default",
-    ]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
 
@@ -63,6 +59,6 @@ export async function getTasks() {
     return returnAnswer;
     // return tasksInfo;
   } catch (e) {
-    console.log("get task error:" + e);
+    alert(e);
   }
 }
