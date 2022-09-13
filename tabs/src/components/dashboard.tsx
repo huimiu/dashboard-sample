@@ -127,7 +127,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Collaboration />
               </div>
               <div className="dashboard-bottom-right">
-                {this.state.tasks && Files(this.state.files)}
+                {this.state.tasks && <Files files={this.state.files} />}
               </div>
             </div>
           </div>
