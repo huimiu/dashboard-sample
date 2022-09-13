@@ -4,7 +4,6 @@ import "../style/cardLayout.css";
 import React from "react";
 
 import { Providers, ProviderState } from "@microsoft/mgt-element";
-import { CacheService } from "@microsoft/mgt-react";
 import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 
 import Banner from "../card/banner";
@@ -22,7 +21,6 @@ import { acquireData } from "../service/request";
 
 interface IDashboardProp {
   showLogin?: boolean;
-  loader: boolean;
   events?: EventsModel[];
   files?: FilesModel[];
   tasks?: TaskModel[];
@@ -31,10 +29,9 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-    CacheService.clearCaches();
+
     this.state = {
       showLogin: undefined,
-      loader: true,
       events: undefined,
       tasks: undefined,
       files: undefined,
@@ -66,16 +63,19 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   async initConsent() {
     let consentNeeded = await this.checkIsConsentNeeded();
     if (consentNeeded) {
-      this.login();
+      await this.login();
     } else {
-      this.setState({ showLogin: false, loader: false });
+      this.setState({ showLogin: false });
     }
   }
 
   async checkIsConsentNeeded() {
     let consentNeeded = false;
     try {
-      FxContext.getInstance().getTeamsFx().getCredential().getToken(scope);
+      await FxContext.getInstance()
+        .getTeamsFx()
+        .getCredential()
+        .getToken(scope);
     } catch (error) {
       consentNeeded = true;
     }
@@ -90,7 +90,9 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
 
   async login() {
     try {
-      loginAction();
+      await loginAction();
+      this.setState({ showLogin: false });
+      Providers.globalProvider.setState(ProviderState.SignedIn);
     } catch (err: any) {
       if (err.message?.includes("CancelledByUser")) {
         const helpLink = "https://aka.ms/teamsfx-auth-code-flow";
@@ -105,9 +107,10 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   }
 
   render() {
+    let d = this.state.showLogin;
     return (
       <>
-        {this.state.showLogin === false && this.state.loader === false && (
+        {this.state.showLogin === false && (
           <div className="dashboard">
             <Banner />
             <div className="dashboard-above">
