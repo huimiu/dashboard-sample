@@ -11,6 +11,7 @@ import {
   MenuTrigger,
   Text,
   Image,
+  Label,
 } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import {
@@ -31,7 +32,7 @@ interface IFilesProps {
 
 interface IFilesState {
   files?: FilesModel[];
-  backColor?: string;
+  activeIndex?: number;
 }
 
 export class Files extends React.Component<IFilesProps, IFilesState> {
@@ -39,7 +40,7 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
     super(props);
     this.state = {
       files: props.files,
-      backColor: "",
+      activeIndex: -1,
     };
   }
 
@@ -60,11 +61,16 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
         />
         <div className="card-content">
           <div className="files-content">
-            {this.state.files?.map((file: FilesModel) => {
+            {this.state.files?.map((file: FilesModel, i) => {
               return (
                 <div
                   className="files-item"
-                  style={{ backgroundColor: this.state.backColor }}
+                  onMouseOver={() => this.setState({ activeIndex: i })}
+                  onMouseLeave={() => this.setState({ activeIndex: -1 })}
+                  style={{
+                    backgroundColor:
+                      i == this.state.activeIndex ? "#F2F2F2" : "#FFFFFF",
+                  }}
                 >
                   <div
                     className="files-item-icon"
@@ -76,9 +82,7 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
                     className="files-item-desc"
                     onClick={() => window.open(file.weburl)}
                   >
-                    <Text weight="semibold" wrap={false} truncate={true}>
-                      {file.name}
-                    </Text>
+                    <Label weight="semibold">{file.name}</Label>
                   </div>
                   <div>
                     <Menu>

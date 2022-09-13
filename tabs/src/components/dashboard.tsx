@@ -101,7 +101,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   }
 
   render() {
-    let d = this.state.showLogin;
     return (
       <>
         {this.state.showLogin === false && (

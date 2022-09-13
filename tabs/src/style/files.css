@@ -13,8 +13,6 @@
   display: flex;
   flex: 1;
   flex-flow: column nowrap;
-  gap: 8px;
-  justify-content: start;
   margin-right: 10px;
 }
 
@@ -22,7 +20,11 @@
 .files-item {
   display: flex;
   flex-flow: row nowrap;
-  gap: 15px;
+  height: 48px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 4px;
+  align-items: center;
 }
 
 .files-item-icon {
@@ -35,6 +37,7 @@
   flex-flow: column nowrap;
   overflow: hidden;
   flex: 1;
+  margin-left: 10px;
   justify-content: center;
   
 }

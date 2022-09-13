@@ -50,6 +50,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
         <CardHeader
           header={
             <Text
+              key="task-title"
               weight="semibold"
               size={400}
               style={{ marginLeft: "10px", marginTop: "10px" }}
@@ -62,8 +63,9 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
           <div className="task-list">
             <div className="task-add content-between">
               <div className="task-add-left">
-                <Add20Filled color="#2266E3" key="add-icon" />
+                <Add20Filled key="add-icon" color="#2266E3" />
                 <Input
+                  key="task-input"
                   onFocus={() => {
                     let btn = document.getElementById("add-task-btn");
                     btn!.style.visibility = "visible";
@@ -74,12 +76,6 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                     this.setState({ taskInput: e.target.value });
                   }}
                   placeholder="Add a task"
-                  input={{
-                    className: "inputClass",
-                    style: {
-                      textDecoration: "none",
-                    },
-                  }}
                   style={{
                     border: "none",
                     backgroundColor: "#F2F2F2",
@@ -88,6 +84,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                 />
               </div>
               <Button
+                key="add-task-btn"
                 id="add-task-btn"
                 style={{
                   display: "flex",
@@ -132,6 +129,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
           </div>
           <div className="bottom-action">
             <Button
+              key="task-more-btn"
               appearance="transparent"
               size="small"
               icon={<ArrowRight16Filled />}
