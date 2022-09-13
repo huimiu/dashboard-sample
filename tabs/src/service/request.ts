@@ -37,8 +37,6 @@ export async function acquireData() {
     const calendars = await graphClient.api(CALENDAR_API_URL).get();
     const myCalendars = calendars["value"];
     let calendarRes: EventsModel[] = [];
-    console.log(myCalendars);
-
     for (const obj of myCalendars) {
       const tmp: EventsModel = {
         startTime: obj["start"],
