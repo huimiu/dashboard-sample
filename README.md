@@ -6,6 +6,8 @@
 1. Open a new terminal, and enter `tabs` folder, then execute `npm i --legacy-peer-deps`.
 1. Press `F5` to open a browser window.
 
+> If prompted that you cannot authorize access to calendar, tasks and files, please use onmicrosoft's M365 account.
+
 # Known Issues
 
 1. Opening files in teams is still under investigation.
