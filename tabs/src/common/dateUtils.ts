@@ -6,3 +6,13 @@ export function extractTime(dt: string) {
   var date = new Date(dt.concat("Z"));
   return padTo2Digits(date.getHours()) + ":" + padTo2Digits(date.getMinutes());
 }
+
+export function isToday(dt: string) {
+  var date = new Date(dt.concat("Z"));
+  var now = new Date();
+  return (
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate()
+  );
+}

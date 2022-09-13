@@ -72,9 +72,10 @@ export const Files = (files?: FilesModel[]) => (
                               Teams
                             </MenuItem>
                             <MenuItem
+                              onClick={() => window.open(file.webDavurl)}
                               icon={<Image src={matchFileIconUrl(file.type)} />}
                             >
-                              Word desktop app
+                              Desktop app
                             </MenuItem>
                             <MenuItem
                               icon={<Image src={matchFileIconUrl(file.type)} />}
@@ -115,6 +116,9 @@ export const Files = (files?: FilesModel[]) => (
           icon={<ArrowRight16Filled />}
           iconPosition="after"
           style={{ color: "#5B5FC7" }}
+          onClick={() => {
+            window.open("https://www.office.com/mycontent");
+          }}
         >
           View all
         </Button>

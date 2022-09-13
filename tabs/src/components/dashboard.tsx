@@ -29,7 +29,6 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-
     this.state = {
       showLogin: undefined,
       events: undefined,
@@ -50,8 +49,8 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       events: data.events,
       tasks: data.tasks,
       files: data.files,
+      showLogin: false,
     });
-    this.setState({ showLogin: false });
   }
 
   initTeamsFxProvider() {
@@ -66,6 +65,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       await this.login();
     } else {
       this.setState({ showLogin: false });
+      Providers.globalProvider.setState(ProviderState.SignedIn);
     }
   }
 
@@ -79,12 +79,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     } catch (error) {
       consentNeeded = true;
     }
-    this.setState({
-      showLogin: consentNeeded,
-    });
-    Providers.globalProvider.setState(
-      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
-    );
     return consentNeeded;
   }
 
@@ -119,7 +113,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
               </div>
               <div className="dashboard-above-right">
                 <div className="card-events">
-                  {this.state.events && Events(this.state.events)}
+                  {this.state.events && <Events events={this.state.events} />}
                 </div>
 
                 <div className="card-task" id="task-card">
