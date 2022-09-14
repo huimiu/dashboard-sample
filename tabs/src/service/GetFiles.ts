@@ -3,6 +3,7 @@ import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { scope } from "./login";
 import { FxContext } from "../components/singletonContext";
+import { FilesType } from "../common/filesType"
 
 /**
  * @returns :
@@ -28,6 +29,33 @@ import { FxContext } from "../components/singletonContext";
  *   }
  * }
  */
+export function generateTeamsUrl(obj: any): string {
+  let url = "https://teams.microsoft.com/l/file/";
+  // fileId
+  const webUrl: string = obj["webUrl"];
+  url += webUrl.substring(webUrl.indexOf("sourcedoc=%7B")+13, webUrl.indexOf("%7D"))+"?";
+  // filetype
+  const fileType: string = obj["remoteItem"]["file"]["mimeType"];
+  url += "fileType=" + 
+  (fileType==FilesType.WORD? "docx":(
+    fileType==FilesType.EXCEL? "xlsx":(
+      fileType==FilesType.PPT? "pptx":(
+        fileType==FilesType.VISIO? "vsd":fileType.substring(fileType.indexOf("application/"+12))
+      )
+    )
+  ));
+  // objectUrl
+  const objectURL: string = obj["remoteItem"]["webDavUrl"];
+  url += "&objectUrl=" + objectURL.replace(":", "%3A").replace("/", "%2F");
+  // baseUrl
+  const baseUrl: string = obj["remoteItem"]["sharepointIds"]["siteUrl"];
+  url += "&baseUrl=" + baseUrl.replace(":", "%3A").replace("/", "%2F");
+
+  console.log(url);
+
+  return url;
+}
+
 export async function getFiles() {
   let teamsfx: TeamsFx;
   try {
@@ -61,6 +89,7 @@ export async function getFiles() {
         type: obj["remoteItem"]["file"]["mimeType"],
         weburl: obj["remoteItem"]["webUrl"],
         webDavurl: obj["remoteItem"]["webDavUrl"],
+        teamsurl: generateTeamsUrl(obj)
       };
       returnAnswer.push(tmp);
     }

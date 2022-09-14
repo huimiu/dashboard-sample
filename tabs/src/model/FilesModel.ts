@@ -11,4 +11,5 @@ export default interface FilesModel {
   tag?: string;
   weburl?: string;
   webDavurl?: string;
+  teamsurl?: string;
 }

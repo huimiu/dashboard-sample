@@ -5,7 +5,7 @@ import Files from "../data/Files.json";
 import EventsModel from "../model/EventsModel";
 import FilesModel from "../model/FilesModel";
 import TaskModel from "../model/TaskModel";
-import {} from "./GetFiles";
+import { generateTeamsUrl } from "./GetFiles";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { FxContext } from "../components/singletonContext";
@@ -84,6 +84,7 @@ export async function acquireData() {
         type: obj["remoteItem"]["file"]["mimeType"],
         weburl: obj["remoteItem"]["webUrl"],
         webDavurl: obj["remoteItem"]["webDavUrl"],
+        teamsurl: generateTeamsUrl(obj)
       };
       filesResult.push(tmp);
     }
