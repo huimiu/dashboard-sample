@@ -7,7 +7,7 @@ import { Providers, ProviderState } from "@microsoft/mgt-element";
 import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 
 import Banner from "../card/banner";
-import Chart from "../card/chart";
+import { ChartCard } from "../card/chart";
 import Collaboration from "../card/collaboration";
 import { Events } from "../card/events";
 import { Files } from "../card/files";
@@ -108,7 +108,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
             <Banner />
             <div className="dashboard-above">
               <div className="dashboard-above-left">
-                <Chart />
+                <ChartCard />
               </div>
               <div className="dashboard-above-right">
                 <div className="card-events">

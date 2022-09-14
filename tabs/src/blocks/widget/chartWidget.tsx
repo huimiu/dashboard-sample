@@ -2,7 +2,7 @@ import "@fluent-blocks/basic-icons";
 
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
 
-import { demoData } from "../../data/ChartData";
+import { demoData30 } from "../../data/ChartData";
 
 export default function ChartWidget(): WidgetPropsOrElement {
   return {
@@ -20,7 +20,7 @@ export default function ChartWidget(): WidgetPropsOrElement {
                 label: "c1",
                 chart: {
                   type: "line-area",
-                  data: demoData,
+                  data: demoData30,
                 },
               },
             },
