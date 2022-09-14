@@ -6,7 +6,7 @@ import React from "react";
 
 import { Media, Table, TableProps } from "@fluent-blocks/react";
 import { ChartProps } from "@fluent-blocks/schemas";
-import { Button, Text, ToggleButton } from "@fluentui/react-components";
+import { Button, Label, Text, ToggleButton } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
@@ -114,7 +114,7 @@ export class ChartCard extends React.Component<{}, IChartState> {
           header={
             <Text
               weight="semibold"
-              size={400}
+              size={500}
               style={{ marginLeft: "10px", marginTop: "10px" }}
             >
               Power BI
@@ -123,6 +123,36 @@ export class ChartCard extends React.Component<{}, IChartState> {
         />
         <div className="card-content">
           <div className="chart-layout">
+            <div className="legend">
+              <div>
+                <Label weight="semibold">Sept 14, 2022 </Label>
+                <Label>11:59 am (PT)</Label>
+              </div>
+              <div className="legend-divider" />
+              <div>
+                <Label>Location: </Label>
+                <Label weight="semibold">All</Label>
+              </div>
+              <div className="legend-divider" />
+              <div>
+                <Label>Groups: </Label>
+                <Label weight="semibold">All</Label>
+              </div>
+              <div>
+                <Label>Date range: </Label>
+                {this.state.timeSpan === "7D" && (
+                  <Label weight="semibold">Aug 1, 2022 - Aug 7, 2022</Label>
+                )}
+                {this.state.timeSpan === "30D" && (
+                  <Label weight="semibold">Aug 1, 2022 - Aug 31, 2022</Label>
+                )}
+                {this.state.timeSpan === "60D" && (
+                  <Label className="legend-font" weight="semibold">
+                    Jul 1, 2022 - Aug 31, 2022
+                  </Label>
+                )}
+              </div>
+            </div>
             <div className="time-span">
               <ToggleButton
                 appearance="transparent"
@@ -133,21 +163,21 @@ export class ChartCard extends React.Component<{}, IChartState> {
                   })
                 }
               >
-                7 days
+                7 Days
               </ToggleButton>
               <ToggleButton
                 appearance="transparent"
                 checked={this.state.timeSpan === "30D"}
                 onClick={() => this.setState({ timeSpan: "30D" })}
               >
-                30 days
+                30 Days
               </ToggleButton>
               <ToggleButton
                 appearance="transparent"
                 checked={this.state.timeSpan === "60D"}
                 onClick={() => this.setState({ timeSpan: "60D" })}
               >
-                60 days
+                60 Days
               </ToggleButton>
             </div>
           </div>

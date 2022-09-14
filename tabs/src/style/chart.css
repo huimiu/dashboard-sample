@@ -4,9 +4,26 @@
   align-items: flex-start;
 }
 
+.legend {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-left: 10px;
+  align-items: center;
+}
+
 .time-span {
   display: flex;
   flex-direction: row;
-  gap: 65px;
+  gap: 65px;  
+  margin-top: 20px;
+  margin-left: -15px;
 }
 
+.legend-divider {
+  display: flex;
+  height: 18px;
+  width: 2px;
+  border-radius: 2px;
+  background-color: #717070;
+}
