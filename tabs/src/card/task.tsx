@@ -31,8 +31,13 @@ interface ITaskState {
 }
 
 export class Task extends React.Component<ITaskProps, ITaskState> {
+  inputDivRef;
+  btnRef;
+
   constructor(props: ITaskProps) {
     super(props);
+    this.inputDivRef = React.createRef<HTMLDivElement>();
+    this.btnRef = React.createRef<HTMLButtonElement>();
     this.state = {
       tasks: props.tasks,
       taskInput: "",
@@ -40,9 +45,25 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
     };
   }
 
-  onAddButtonClick = async (taskTitle: string) => {
-    let tasks = await addTaskWithData(taskTitle);
-    this.setState({ tasks: tasks! });
+  componentDidMount(): void {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount(): void {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside(event: any) {
+    if (this.inputDivRef && !this.inputDivRef.current?.contains(event.target)) {
+      this.setState({ inputFocused: false });
+    }
+  }
+
+  onAddButtonClick = async (taskTitle?: string) => {
+    if (this.state.taskInput && this.state.taskInput.length > 0) {
+      let tasks = await addTaskWithData(taskTitle!);
+      this.setState({ tasks: tasks!, taskInput: "", inputFocused: false });
+    }
   };
 
   render() {
@@ -62,7 +83,15 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
         />
         <div className="card-content">
           <div className="task-list">
-            <div className="task-add content-between">
+            <div
+              ref={this.inputDivRef}
+              className="task-add content-between"
+              style={{
+                backgroundColor: this.state.inputFocused
+                  ? "#D2D2D2"
+                  : "#F2F2F2",
+              }}
+            >
               <div className="task-add-left">
                 <Add20Filled
                   key="add-icon"
@@ -73,6 +102,11 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                   key="task-input"
                   type="text"
                   id="task-input"
+                  style={{
+                    backgroundColor: this.state.inputFocused
+                      ? "#D2D2D2"
+                      : "#F2F2F2",
+                  }}
                   onFocus={() => {
                     this.setState({ inputFocused: true });
                   }}
@@ -90,16 +124,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                   id="add-task-btn"
                   className="task-add-btn"
                   onClick={() => {
-                    alert("clicked");
-                    if (
-                      this.state.taskInput &&
-                      this.state.taskInput.length > 0
-                    ) {
-                      this.onAddButtonClick(this.state.taskInput);
-                      this.setState({ taskInput: "" });
-                      let btn = document.getElementById("add-task-btn");
-                      btn!.style.visibility = "hidden";
-                    }
+                    this.onAddButtonClick(this.state.taskInput);
                   }}
                 >
                   Add
