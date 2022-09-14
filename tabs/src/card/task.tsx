@@ -27,6 +27,7 @@ interface ITaskProps {
 
 interface ITaskState {
   tasks?: TaskModel[];
+  taskInput?: string;
 }
 
 export class Task extends React.Component<ITaskProps, ITaskState> {
@@ -34,6 +35,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
     super(props);
     this.state = {
       tasks: props.tasks,
+      taskInput: "",
     };
   }
 
@@ -48,6 +50,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
         <CardHeader
           header={
             <Text
+              key="task-title"
               weight="semibold"
               size={400}
               style={{ marginLeft: "10px", marginTop: "10px" }}
@@ -60,21 +63,29 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
           <div className="task-list">
             <div className="task-add content-between">
               <div className="task-add-left">
-                <Add20Filled
-                  color="#2266E3"
-                  className="task-add-left"
-                  key="add-icon"
-                />
+                <Add20Filled key="add-icon" color="#2266E3" />
                 <Input
+                  key="task-input"
+                  onFocus={() => {
+                    let btn = document.getElementById("add-task-btn");
+                    btn!.style.visibility = "visible";
+                  }}
                   id="task-input"
+                  value={this.state.taskInput}
+                  onChange={(e) => {
+                    this.setState({ taskInput: e.target.value });
+                  }}
                   placeholder="Add a task"
                   style={{
                     border: "none",
                     backgroundColor: "#F2F2F2",
+                    textDecoration: "none",
                   }}
                 />
               </div>
               <Button
+                key="add-task-btn"
+                id="add-task-btn"
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -84,13 +95,14 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                   width: "20px",
                   fontSize: "12px",
                   fontWeight: "600",
+                  visibility: "hidden",
                 }}
                 onClick={() => {
-                  let taskTitle = document
-                    .getElementById("task-input")
-                    ?.getAttribute("value");
-                  if (taskTitle && taskTitle.length > 0) {
-                    this.onAddButtonClick(taskTitle);
+                  if (this.state.taskInput && this.state.taskInput.length > 0) {
+                    this.onAddButtonClick(this.state.taskInput);
+                    this.setState({ taskInput: "" });
+                    let btn = document.getElementById("add-task-btn");
+                    btn!.style.visibility = "hidden";
                   }
                 }}
               >
@@ -117,6 +129,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
           </div>
           <div className="bottom-action">
             <Button
+              key="task-more-btn"
               appearance="transparent"
               size="small"
               icon={<ArrowRight16Filled />}

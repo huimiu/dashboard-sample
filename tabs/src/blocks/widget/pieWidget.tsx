@@ -2,7 +2,7 @@ import "@fluent-blocks/basic-icons";
 
 import { WidgetPropsOrElement } from "@fluent-blocks/react/types/blocks/Card/exemplars/Widget";
 
-import { demoData } from "../../data/ChartData";
+import { demoData30 } from "../../data/ChartData";
 
 export default function PieWidget(): WidgetPropsOrElement {
   return {
@@ -20,7 +20,7 @@ export default function PieWidget(): WidgetPropsOrElement {
                 label: "doughnut",
                 chart: {
                   type: "doughnut",
-                  data: demoData,
+                  data: demoData30,
                 },
               },
               variant: "viewportWidth",

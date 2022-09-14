@@ -117,14 +117,14 @@ export default function Collaboration() {
               shape="rounded"
             />
             <div className="collaboration-des">
-              <Label weight="semibold">Data Analytics</Label>
+              <Label weight="semibold">Fuis Blandit</Label>
               <Text
                 size={300}
                 style={{ color: "#616161", marginTop: "4px" }}
                 wrap
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim,
-                elementum sed
+                Fusce id posuere nisi. In cursus arcu lectus, non posuere magna
+                commodo a.
               </Text>
             </div>
             <div className="collaboration-share">

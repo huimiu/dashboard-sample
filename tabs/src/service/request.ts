@@ -43,9 +43,10 @@ export async function acquireData() {
         endTime: obj["end"],
         title: obj["subject"],
         location: obj["location"]["displayName"],
-        url: obj["onlineMeeting"]&&obj["onlineMeeting"]["joinUrl"]
-          ? obj["onlineMeeting"]["joinUrl"]
-          : undefined,
+        url:
+          obj["onlineMeeting"] && obj["onlineMeeting"]["joinUrl"]
+            ? obj["onlineMeeting"]["joinUrl"]
+            : undefined,
       };
       calendarRes.push(tmp);
     }
@@ -61,6 +62,7 @@ export async function acquireData() {
     let taskResult: TaskModel[] = [];
     for (const obj of tasksInfo) {
       const tmp: TaskModel = {
+        id: obj["id"],
         name: obj["title"],
         status: obj["status"],
         importance: obj["importance"],

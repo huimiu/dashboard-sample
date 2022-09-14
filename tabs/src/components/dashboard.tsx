@@ -7,7 +7,7 @@ import { Providers, ProviderState } from "@microsoft/mgt-element";
 import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 
 import Banner from "../card/banner";
-import Chart from "../card/chart";
+import { ChartCard } from "../card/chart";
 import Collaboration from "../card/collaboration";
 import { Events } from "../card/events";
 import { Files } from "../card/files";
@@ -29,7 +29,6 @@ interface IDashboardProp {
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
   constructor(props: any) {
     super(props);
-
     this.state = {
       showLogin: undefined,
       events: undefined,
@@ -50,8 +49,8 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       events: data.events,
       tasks: data.tasks,
       files: data.files,
+      showLogin: false,
     });
-    this.setState({ showLogin: false });
   }
 
   initTeamsFxProvider() {
@@ -66,6 +65,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
       await this.login();
     } else {
       this.setState({ showLogin: false });
+      Providers.globalProvider.setState(ProviderState.SignedIn);
     }
   }
 
@@ -79,12 +79,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     } catch (error) {
       consentNeeded = true;
     }
-    this.setState({
-      showLogin: consentNeeded,
-    });
-    Providers.globalProvider.setState(
-      consentNeeded ? ProviderState.SignedOut : ProviderState.SignedIn
-    );
     return consentNeeded;
   }
 
@@ -107,7 +101,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
   }
 
   render() {
-    let d = this.state.showLogin;
     return (
       <>
         {this.state.showLogin === false && (
@@ -115,11 +108,11 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
             <Banner />
             <div className="dashboard-above">
               <div className="dashboard-above-left">
-                <Chart />
+                <ChartCard />
               </div>
               <div className="dashboard-above-right">
                 <div className="card-events">
-                  {this.state.events && Events(this.state.events)}
+                  {this.state.events && <Events events={this.state.events} />}
                 </div>
 
                 <div className="card-task" id="task-card">
@@ -133,7 +126,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Collaboration />
               </div>
               <div className="dashboard-bottom-right">
-                {this.state.tasks && Files(this.state.files)}
+                {this.state.tasks && <Files files={this.state.files} />}
               </div>
             </div>
           </div>
