@@ -1,12 +1,11 @@
 import "../style/task.css";
 import "../style/cardLayout.css";
 
-import React from "react";
+import React, { useRef } from "react";
 
 import {
   Button,
   Checkbox,
-  Input,
   Text,
   ToggleButton,
 } from "@fluentui/react-components";
@@ -28,6 +27,7 @@ interface ITaskProps {
 interface ITaskState {
   tasks?: TaskModel[];
   taskInput?: string;
+  inputFocused: boolean;
 }
 
 export class Task extends React.Component<ITaskProps, ITaskState> {
@@ -36,6 +36,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
     this.state = {
       tasks: props.tasks,
       taskInput: "",
+      inputFocused: false,
     };
   }
 
@@ -63,51 +64,47 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
           <div className="task-list">
             <div className="task-add content-between">
               <div className="task-add-left">
-                <Add20Filled key="add-icon" color="#2266E3" />
-                <Input
+                <Add20Filled
+                  key="add-icon"
+                  color="#2266E3"
+                  style={{ marginLeft: "5px" }}
+                />
+                <input
                   key="task-input"
-                  onFocus={() => {
-                    let btn = document.getElementById("add-task-btn");
-                    btn!.style.visibility = "visible";
-                  }}
+                  type="text"
                   id="task-input"
+                  onFocus={() => {
+                    this.setState({ inputFocused: true });
+                  }}
                   value={this.state.taskInput}
                   onChange={(e) => {
                     this.setState({ taskInput: e.target.value });
                   }}
                   placeholder="Add a task"
-                  style={{
-                    border: "none",
-                    backgroundColor: "#F2F2F2",
-                    textDecoration: "none",
-                  }}
+                  className="task-input"
                 />
               </div>
-              <Button
-                key="add-task-btn"
-                id="add-task-btn"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  maxWidth: "20px",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  width: "20px",
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  visibility: "hidden",
-                }}
-                onClick={() => {
-                  if (this.state.taskInput && this.state.taskInput.length > 0) {
-                    this.onAddButtonClick(this.state.taskInput);
-                    this.setState({ taskInput: "" });
-                    let btn = document.getElementById("add-task-btn");
-                    btn!.style.visibility = "hidden";
-                  }
-                }}
-              >
-                Add
-              </Button>
+              {this.state.inputFocused && (
+                <button
+                  key="add-task-btn"
+                  id="add-task-btn"
+                  className="task-add-btn"
+                  onClick={() => {
+                    alert("clicked");
+                    if (
+                      this.state.taskInput &&
+                      this.state.taskInput.length > 0
+                    ) {
+                      this.onAddButtonClick(this.state.taskInput);
+                      this.setState({ taskInput: "" });
+                      let btn = document.getElementById("add-task-btn");
+                      btn!.style.visibility = "hidden";
+                    }
+                  }}
+                >
+                  Add
+                </button>
+              )}
             </div>
             {this.state.tasks?.map((t: TaskModel, i) => {
               return (

@@ -74,13 +74,13 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
                 >
                   <div
                     className="files-item-icon"
-                    onClick={() => window.open(file.weburl)}
+                    onClick={() => window.open(file.teamsurl)}
                   >
                     {matchFileIcon(file.type)}
                   </div>
                   <div
                     className="files-item-desc"
-                    onClick={() => window.open(file.weburl)}
+                    onClick={() => window.open(file.teamsurl)}
                   >
                     <Label weight="semibold">{file.name}</Label>
                   </div>
@@ -106,7 +106,10 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
                             </MenuTrigger>
                             <MenuPopover>
                               <MenuList>
-                                <MenuItem icon={<Image src="teams.svg" />}>
+                                <MenuItem
+                                  icon={<Image src="teams.svg" />}
+                                  onClick={() => window.open(file.teamsurl)}
+                                >
                                   Teams
                                 </MenuItem>
                                 <MenuItem
