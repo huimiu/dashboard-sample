@@ -10,6 +10,5 @@
 
 # Known Issues
 
-1. Opening files in teams is still under investigation.
-1. If there is a token error in page rendering, please try to refresh the page, it may be a problem of silent login.
-1. Component has not loading animation yet.
+- If there is a token error in page rendering, please try to refresh the page, it may be a problem of silent login.
+- Component has not loading animation yet.
