@@ -1,13 +1,14 @@
 import "../style/task.css";
 import "../style/cardLayout.css";
 
-import React, { useRef } from "react";
+import React from "react";
 
 import {
   Button,
   Checkbox,
   Text,
   ToggleButton,
+  tokens,
 } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import {
@@ -28,6 +29,7 @@ interface ITaskState {
   tasks?: TaskModel[];
   taskInput?: string;
   inputFocused: boolean;
+  addBtnOver: boolean;
 }
 
 export class Task extends React.Component<ITaskProps, ITaskState> {
@@ -42,6 +44,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
       tasks: props.tasks,
       taskInput: "",
       inputFocused: false,
+      addBtnOver: false,
     };
   }
 
@@ -120,12 +123,19 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
               </div>
               {this.state.inputFocused && (
                 <button
+                  style={{
+                    backgroundColor: this.state.addBtnOver
+                      ? tokens.colorNeutralBackground1Hover
+                      : tokens.colorNeutralBackground1,
+                  }}
                   key="add-task-btn"
                   id="add-task-btn"
                   className="task-add-btn"
                   onClick={() => {
                     this.onAddButtonClick(this.state.taskInput);
                   }}
+                  onMouseEnter={() => this.setState({ addBtnOver: true })}
+                  onMouseLeave={() => this.setState({ addBtnOver: false })}
                 >
                   Add
                 </button>
