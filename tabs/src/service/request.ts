@@ -86,7 +86,7 @@ export async function acquireData() {
         type: obj["remoteItem"]["file"]["mimeType"],
         weburl: obj["remoteItem"]["webUrl"],
         webDavurl: obj["remoteItem"]["webDavUrl"],
-        teamsurl: generateTeamsUrl(obj)
+        teamsurl: generateTeamsUrl(obj),
       };
       filesResult.push(tmp);
     }

@@ -66,15 +66,14 @@ export class ChartCard extends React.Component<{}, IChartState> {
     };
   }
 
-  getCharData_7D = () => {
-    const chartProps: ChartProps = {
+  getCharData_7D = (): ChartProps => {
+    return {
       label: "line area",
       chart: {
         type: "line-area",
         data: demoData7,
       },
     };
-    return chartProps;
   };
 
   getCharData_30D = () => {

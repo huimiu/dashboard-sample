@@ -106,10 +106,12 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
         {this.state.showLogin === false && (
           <div className="dashboard">
             <Banner />
+
             <div className="dashboard-above">
               <div className="dashboard-above-left">
                 <ChartCard />
               </div>
+
               <div className="dashboard-above-right">
                 <div className="card-events">
                   {this.state.events && <Events events={this.state.events} />}
