@@ -46,6 +46,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
       inputFocused: false,
       addBtnOver: false,
     };
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   componentDidMount(): void {
