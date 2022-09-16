@@ -20,28 +20,24 @@ import {
 import TaskModel from "../model/TaskModel";
 import { openTodoApp } from "../service/OpenTodoApp";
 import { addTaskWithData } from "../service/request";
+import { getTasks } from "../service/GetTasks";
 
-interface ITaskProps {
-  tasks?: TaskModel[];
-}
-
-interface ITaskState {
-  tasks?: TaskModel[];
+interface ICardState {
+  data?: TaskModel[];
   taskInput?: string;
   inputFocused: boolean;
   addBtnOver: boolean;
 }
 
-export class Task extends React.Component<ITaskProps, ITaskState> {
+export class Task extends React.Component<{}, ICardState> {
   inputDivRef;
   btnRef;
 
-  constructor(props: ITaskProps) {
+  constructor(props: any) {
     super(props);
     this.inputDivRef = React.createRef<HTMLDivElement>();
     this.btnRef = React.createRef<HTMLButtonElement>();
     this.state = {
-      tasks: props.tasks,
       taskInput: "",
       inputFocused: false,
       addBtnOver: false,
@@ -49,7 +45,8 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
-  componentDidMount(): void {
+  async componentDidMount() {
+    this.setState({ data: await getTasks() });
     document.addEventListener("mousedown", this.handleClickOutside);
   }
 
@@ -66,7 +63,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
   onAddButtonClick = async (taskTitle?: string) => {
     if (this.state.taskInput && this.state.taskInput.length > 0) {
       let tasks = await addTaskWithData(taskTitle!);
-      this.setState({ tasks: tasks!, taskInput: "", inputFocused: false });
+      this.setState({ data: tasks!, taskInput: "", inputFocused: false });
     }
   };
 
@@ -142,7 +139,7 @@ export class Task extends React.Component<ITaskProps, ITaskState> {
                 </button>
               )}
             </div>
-            {this.state.tasks?.map((t: TaskModel, i) => {
+            {this.state.data?.map((t: TaskModel, i) => {
               return (
                 <div className="content-between task-item">
                   <Checkbox

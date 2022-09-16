@@ -25,23 +25,27 @@ import React from "react";
 
 import FilesModel from "../model/FilesModel";
 import { matchFileIcon, matchFileIconUrl } from "../common/iconUtils";
+import { getFiles } from "../service/GetFiles";
 
-interface IFilesProps {
+interface ICardProps {
   files?: FilesModel[];
 }
 
-interface IFilesState {
+interface ICardState {
   files?: FilesModel[];
   activeIndex?: number;
 }
 
-export class Files extends React.Component<IFilesProps, IFilesState> {
-  constructor(props: IFilesProps) {
+export class Files extends React.Component<ICardProps, ICardState> {
+  constructor(props: ICardProps) {
     super(props);
     this.state = {
-      files: props.files,
       activeIndex: -1,
     };
+  }
+
+  async componentDidMount() {
+    this.setState({ files: await getFiles() });
   }
 
   render() {

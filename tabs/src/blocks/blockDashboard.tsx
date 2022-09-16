@@ -1,4 +1,4 @@
-import { Escape, View } from "@fluent-blocks/react";
+import { View } from "@fluent-blocks/react";
 
 export default function BlockDashboard() {
   return (
@@ -46,6 +46,7 @@ export default function BlockDashboard() {
                                   },
                                 },
                               },
+                              variant: "viewportWidth",
                             },
                           ],
                         },
@@ -60,6 +61,55 @@ export default function BlockDashboard() {
                   },
                   inlineSizeFactor: 2,
                   blockSizeFactor: 2,
+                },
+                {
+                  item: {
+                    widget: {
+                      title: "Line Area",
+                      label: "sss",
+                      tabs: [
+                        {
+                          tab: { label: "tab1" },
+                          panel: [
+                            {
+                              media: {
+                                label: "media1",
+                                chart: {
+                                  type: "line-area",
+                                  data: {
+                                    labels: [
+                                      "Jan",
+                                      "Feb",
+                                      "March",
+                                      "April",
+                                      "May",
+                                    ],
+                                    datasets: [
+                                      {
+                                        label: "Laptops",
+                                        data: [1860, 7700, 4100, 3012, 2930],
+                                      },
+                                      {
+                                        label: "Watches",
+                                        data: [1200, 3600, 2480, 5049, 4596],
+                                      },
+                                    ],
+                                  },
+                                },
+                              },
+                              variant: "narrow",
+                            },
+                          ],
+                        },
+                      ],
+                      footerAction: {
+                        actionId: "chart-action2",
+                        label: "View more",
+                        icon: "arrow_right",
+                        iconPosition: "after",
+                      },
+                    },
+                  },
                 },
                 {
                   item: {
@@ -168,7 +218,7 @@ export default function BlockDashboard() {
                         },
                       ],
                       footerAction: {
-                        actionId: "description-action",
+                        actionId: "description-action2",
                         label: "View more",
                         icon: "arrow_right",
                         iconPosition: "after",

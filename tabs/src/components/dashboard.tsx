@@ -12,18 +12,11 @@ import Collaboration from "../card/collaboration";
 import { Events } from "../card/events";
 import { Files } from "../card/files";
 import { Task } from "../card/task";
-import EventsModel from "../model/EventsModel";
-import FilesModel from "../model/FilesModel";
-import TaskModel from "../model/TaskModel";
 import { loginAction, scope } from "../service/login";
 import { FxContext } from "./singletonContext";
-import { acquireData } from "../service/request";
 
 interface IDashboardProp {
   showLogin?: boolean;
-  events?: EventsModel[];
-  files?: FilesModel[];
-  tasks?: TaskModel[];
 }
 
 export default class Dashboard extends React.Component<{}, IDashboardProp> {
@@ -31,24 +24,13 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
     super(props);
     this.state = {
       showLogin: undefined,
-      events: undefined,
-      tasks: undefined,
-      files: undefined,
     };
   }
 
   async componentDidMount() {
     this.initTeamsFxProvider();
     await this.initConsent();
-    let data: {
-      tasks: TaskModel[];
-      events: EventsModel[];
-      files: FilesModel[];
-    } = (await acquireData()) ?? { tasks: [], events: [], files: [] };
     this.setState({
-      events: data.events,
-      tasks: data.tasks,
-      files: data.files,
       showLogin: false,
     });
   }
@@ -114,11 +96,11 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
 
               <div className="dashboard-above-right">
                 <div className="card-events">
-                  {this.state.events && <Events events={this.state.events} />}
+                  {this.state.showLogin === false && <Events />}
                 </div>
 
                 <div className="card-task" id="task-card">
-                  {this.state.tasks && <Task tasks={this.state.tasks} />}
+                  {this.state.showLogin === false && <Task />}
                 </div>
               </div>
             </div>
@@ -128,7 +110,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
                 <Collaboration />
               </div>
               <div className="dashboard-bottom-right">
-                {this.state.tasks && <Files files={this.state.files} />}
+                {this.state.showLogin === false && <Files />}
               </div>
             </div>
           </div>

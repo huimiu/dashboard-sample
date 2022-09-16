@@ -1,14 +1,16 @@
-import Events from "../data/Events.json";
-import Tasks from "../data/Task.json";
+import { Client } from "@microsoft/microsoft-graph-client";
+import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 
+import { FxContext } from "../components/singletonContext";
+import Events from "../data/Events.json";
 import Files from "../data/Files.json";
+import Tasks from "../data/Task.json";
+import Contacts from "../data/Contacts.json";
+import ContactsModel from "../model/ContactModel";
 import EventsModel from "../model/EventsModel";
 import FilesModel from "../model/FilesModel";
 import TaskModel from "../model/TaskModel";
 import { generateTeamsUrl } from "./GetFiles";
-import { Client } from "@microsoft/microsoft-graph-client";
-import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
-import { FxContext } from "../components/singletonContext";
 import { scope } from "./login";
 
 const CALENDAR_API_URL =
@@ -22,6 +24,8 @@ export const getTask = (): TaskModel[] => Tasks;
 export const getEvents = (): EventsModel[] => Events;
 
 export const getFiles = (): FilesModel[] => Files;
+
+export const getContacts = (): ContactsModel[] => Contacts;
 
 export async function acquireData() {
   try {
