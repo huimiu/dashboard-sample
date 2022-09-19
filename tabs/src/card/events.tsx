@@ -8,7 +8,7 @@ import { Button, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
-import { extractTime, isToday } from "../common/dateUtils";
+import { extractTime, isToday, laterThanNow } from "../common/dateUtils";
 import EventsModel from "../model/EventsModel";
 import { getCalendar } from "../service/GetCalendar";
 
@@ -32,11 +32,11 @@ export class Events extends React.Component<{}, ICardState> {
   todayEvents(events: EventsModel[]): EventsModel[] {
     let todayEvents: EventsModel[] = [];
     for (const e of events) {
-      if (isToday(e.startTime.dateTime)) {
+      if (isToday(e.startTime.dateTime) && !laterThanNow(e.endTime.dateTime)) {
         todayEvents.push(e);
       }
     }
-    return todayEvents;
+    return todayEvents.reverse();
   }
 
   render() {

@@ -16,3 +16,9 @@ export function isToday(dt: string) {
     date.getDate() === now.getDate()
   );
 }
+
+export function laterThanNow(dt: string) {
+  var date = new Date(dt.concat("Z"));
+  var now = new Date();
+  return date < now;
+}

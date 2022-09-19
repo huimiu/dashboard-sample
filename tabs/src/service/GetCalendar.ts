@@ -60,7 +60,7 @@ export async function getCalendar() {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const tasklists = await graphClient
       .api(
-        "/me/events?$top=2&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
+        "/me/events?$top=5&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
       )
       .get();
     const myCalendarEvents = tasklists["value"];
