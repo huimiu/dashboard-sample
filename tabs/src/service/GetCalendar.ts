@@ -70,9 +70,9 @@ export async function getCalendar() {
         startTime: obj["start"],
         endTime: obj["end"],
         title: obj["subject"],
-        location: obj["location"]["displayName"],
-        url: obj["onlineMeeting"]["joinUrl"]
-          ? obj["onlineMeeting"]["joinUrl"]
+        location: obj["location"] ? obj["location"]["displayName"] : undefined,
+        url: obj["onlineMeeting"] && obj["onlineMeeting"]["joinUrl"]
+          ? obj["onlineMeeting"]["joinUrl"] 
           : undefined,
       };
       returnAnswer.push(tmp);
