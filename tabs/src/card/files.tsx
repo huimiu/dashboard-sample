@@ -25,23 +25,27 @@ import React from "react";
 
 import FilesModel from "../model/FilesModel";
 import { matchFileIcon, matchFileIconUrl } from "../common/iconUtils";
+import { getFiles } from "../service/GetFiles";
 
-interface IFilesProps {
+interface ICardProps {
   files?: FilesModel[];
 }
 
-interface IFilesState {
+interface ICardState {
   files?: FilesModel[];
   activeIndex?: number;
 }
 
-export class Files extends React.Component<IFilesProps, IFilesState> {
-  constructor(props: IFilesProps) {
+export class Files extends React.Component<ICardProps, ICardState> {
+  constructor(props: ICardProps) {
     super(props);
     this.state = {
-      files: props.files,
       activeIndex: -1,
     };
+  }
+
+  async componentDidMount() {
+    this.setState({ files: await getFiles() });
   }
 
   render() {
@@ -74,13 +78,13 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
                 >
                   <div
                     className="files-item-icon"
-                    onClick={() => window.open(file.weburl)}
+                    onClick={() => window.open(file.teamsurl)}
                   >
                     {matchFileIcon(file.type)}
                   </div>
                   <div
                     className="files-item-desc"
-                    onClick={() => window.open(file.weburl)}
+                    onClick={() => window.open(file.teamsurl)}
                   >
                     <Label weight="semibold">{file.name}</Label>
                   </div>
@@ -106,7 +110,10 @@ export class Files extends React.Component<IFilesProps, IFilesState> {
                             </MenuTrigger>
                             <MenuPopover>
                               <MenuList>
-                                <MenuItem icon={<Image src="teams.svg" />}>
+                                <MenuItem
+                                  icon={<Image src="teams.svg" />}
+                                  onClick={() => window.open(file.teamsurl)}
+                                >
                                   Teams
                                 </MenuItem>
                                 <MenuItem

@@ -8,34 +8,35 @@ import { Button, Label, Text } from "@fluentui/react-components";
 import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowRight16Filled } from "@fluentui/react-icons";
 
-import { extractTime, isToday } from "../common/dateUtils";
+import { extractTime, isToday, laterThanNow } from "../common/dateUtils";
 import EventsModel from "../model/EventsModel";
+import { getCalendar } from "../service/GetCalendar";
 
-interface IEventProps {
-  events?: EventsModel[];
+interface ICardState {
+  data?: EventsModel[];
 }
 
-interface IEventState {
-  events?: EventsModel[];
-}
-
-export class Events extends React.Component<IEventProps, IEventState> {
-  constructor(props: IEventProps) {
+export class Events extends React.Component<{}, ICardState> {
+  constructor(props: any) {
     super(props);
-    const todayEvents = this.todayEvents(props.events!);
     this.state = {
-      events: todayEvents,
+      data: [],
     };
+  }
+
+  async componentDidMount() {
+    let events = await getCalendar();
+    this.setState({ data: this.todayEvents(events ?? []) });
   }
 
   todayEvents(events: EventsModel[]): EventsModel[] {
     let todayEvents: EventsModel[] = [];
     for (const e of events) {
-      if (isToday(e.startTime.dateTime)) {
+      if (isToday(e.startTime.dateTime) && !laterThanNow(e.endTime.dateTime)) {
         todayEvents.push(e);
       }
     }
-    return todayEvents;
+    return todayEvents.reverse();
   }
 
   render() {
@@ -53,19 +54,19 @@ export class Events extends React.Component<IEventProps, IEventState> {
           }
         />
         <div className="card-content">
-          {this.state.events && (
+          {this.state.data && (
             <div className="events-container">
               <div className="summary">
                 <Label size="small" weight="semibold">
                   {moment().format("ll")}
                 </Label>
                 <Label size="small">
-                  You have {this.state.events.length} meetings today. The
-                  upcoming events
+                  You have {this.state.data.length} meetings today. The upcoming
+                  events
                 </Label>
               </div>
               <div className="events-list">
-                {this.state.events.map((event: EventsModel, i) => {
+                {this.state.data.map((event: EventsModel, i) => {
                   return (
                     <div className="events-item">
                       <div className="events-item-left">
