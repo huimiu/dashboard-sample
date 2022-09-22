@@ -8,6 +8,12 @@
 
 > If prompted that you cannot authorize access to calendar, tasks and files, please use onmicrosoft's M365 account.
 
+# Add a new Graph API call
+
+1. Add consent scope first.
+2. Create a graph client by adding the scope related to the Graph API you want to call.
+3. Call the Graph API, and parse the response into a certain model, which will be used by front-end.
+
 # Known Issues
 
 - If there is a token error in page rendering, please try to refresh the page, it may be a problem of silent login.
