@@ -6,7 +6,7 @@ export const scope = [
   "Calendars.ReadWrite",
 ];
 
-export function loginAction() {
+export function loginAction(scope: string[]) {
   try {
     var teamsfx = FxContext.getInstance().getTeamsFx();
     teamsfx.login(scope);

@@ -28,19 +28,10 @@ export async function getTasks() {
   let teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx?.getCredential().getToken(scope);
-    let tokenstr = "";
-    if (token) tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
-  } catch (e) {
-    throw e;
-  }
-
-  try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const tasklists = await graphClient.api("/me/todo/lists").get();
-    const myFirstTaskList = tasklists["value"][0];
 
+    const myFirstTaskList = tasklists["value"][0];
     const todoTaskListId: string = myFirstTaskList["id"];
     const tasks = await graphClient
       .api("/me/todo/lists/" + todoTaskListId + "/tasks/")

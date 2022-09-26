@@ -66,7 +66,7 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
 
   async login() {
     try {
-      await loginAction();
+      await loginAction(scope);
       this.setState({ showLogin: false });
       Providers.globalProvider.setState(ProviderState.SignedIn);
     } catch (err: any) {
