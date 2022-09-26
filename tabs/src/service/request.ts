@@ -30,11 +30,6 @@ export const getContacts = (): ContactsModel[] => Contacts;
 export async function acquireData() {
   try {
     var teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx.getCredential().getToken(scope);
-    let tokenstr = "";
-    if (token) tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
-
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
 
     // query calendar
@@ -109,10 +104,6 @@ export async function addTaskWithData(title: string) {
   try {
     let teamsfx: TeamsFx;
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx?.getCredential().getToken(scope);
-    let tokenstr = "";
-    if (token) tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
 
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
     const tasklists = await graphClient.api("/me/todo/lists").get();
