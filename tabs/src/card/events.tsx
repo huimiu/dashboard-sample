@@ -26,7 +26,6 @@ export class Events extends React.Component<{}, ICardState> {
   }
 
   async componentDidMount() {
-    await addNewScope(["TeamsAppInstallation.ReadForUser.All"]);
     let events = await getCalendar();
     this.setState({ data: this.todayEvents(events ?? []) });
   }
