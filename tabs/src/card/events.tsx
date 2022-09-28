@@ -11,7 +11,6 @@ import { ArrowRight16Filled } from "@fluentui/react-icons";
 import { extractTime, isToday, laterThanNow } from "../common/dateUtils";
 import EventsModel from "../model/EventsModel";
 import { getCalendar } from "../service/GetCalendar";
-import { addNewScope } from "../service/AddNewScope";
 
 interface ICardState {
   data?: EventsModel[];
