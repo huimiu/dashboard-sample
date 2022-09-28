@@ -3,7 +3,7 @@ import { FxContext } from "../components/singletonContext";
 export const scope = [
   "Files.ReadWrite.All",
   "Tasks.ReadWrite",
-  "Calendars.ReadWrite",
+  "Calendars.ReadWrite"
 ];
 
 export function loginAction(scope: string[]) {

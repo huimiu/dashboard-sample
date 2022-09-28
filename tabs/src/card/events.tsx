@@ -11,6 +11,7 @@ import { ArrowRight16Filled } from "@fluentui/react-icons";
 import { extractTime, isToday, laterThanNow } from "../common/dateUtils";
 import EventsModel from "../model/EventsModel";
 import { getCalendar } from "../service/GetCalendar";
+import { addNewScope } from "../service/AddNewScope";
 
 interface ICardState {
   data?: EventsModel[];
@@ -25,6 +26,7 @@ export class Events extends React.Component<{}, ICardState> {
   }
 
   async componentDidMount() {
+    await addNewScope(["TeamsAppInstallation.ReadForUser.All"]);
     let events = await getCalendar();
     this.setState({ data: this.todayEvents(events ?? []) });
   }
