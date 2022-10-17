@@ -22,6 +22,8 @@ import { openTodoApp } from "../service/OpenTodoApp";
 import { addTaskWithData } from "../service/request";
 import { getTasks } from "../service/GetTasks";
 
+import { callFunction } from "../service/CallFunction";
+
 interface ICardState {
   data?: TaskModel[];
   taskInput?: string;
@@ -131,6 +133,7 @@ export class Task extends React.Component<{}, ICardState> {
                   className="task-add-btn"
                   onClick={() => {
                     this.onAddButtonClick(this.state.taskInput);
+                    callFunction(this.state.taskInput);
                   }}
                   onMouseEnter={() => this.setState({ addBtnOver: true })}
                   onMouseLeave={() => this.setState({ addBtnOver: false })}

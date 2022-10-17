@@ -7,20 +7,72 @@
         "name": "fx-solution-azure",
         "version": "1.0.0",
         "hostType": "Azure",
-        "azureResources": [],
+        "azureResources": [
+            "function"
+        ],
         "capabilities": [
             "Tab",
             "TabSSO"
         ],
         "activeResourcePlugins": [
-            "fx-resource-frontend-hosting",
-            "fx-resource-identity",
-            "fx-resource-aad-app-for-teams",
             "fx-resource-local-debug",
             "fx-resource-appstudio",
             "fx-resource-cicd",
-            "fx-resource-api-connector"
+            "fx-resource-api-connector",
+            "fx-resource-aad-app-for-teams",
+            "fx-resource-frontend-hosting",
+            "fx-resource-identity",
+            "fx-resource-function"
         ]
     },
-    "programmingLanguage": "typescript"
+    "programmingLanguage": "typescript",
+    "components": [
+        {
+            "name": "aad-app",
+            "provision": true,
+            "deploy": true
+        },
+        {
+            "hosting": "azure-storage",
+            "name": "teams-tab",
+            "build": true,
+            "provision": true,
+            "folder": "tabs",
+            "sso": true,
+            "deploy": true
+        },
+        {
+            "name": "azure-storage",
+            "connections": [
+                "teams-tab"
+            ],
+            "provision": true
+        },
+        {
+            "name": "identity"
+        },
+        {
+            "name": "teams-api",
+            "hosting": "azure-function",
+            "functionNames": [
+                "finishTaskNotification"
+            ],
+            "deploy": true,
+            "build": true,
+            "folder": "api",
+            "artifactFolder": "api"
+        },
+        {
+            "name": "azure-function",
+            "scenario": "Api",
+            "provision": true,
+            "connections": [
+                "identity",
+                "aad-app",
+                "teams-tab",
+                "teams-api"
+            ]
+        }
+    ],
+    "defaultFunctionName": "finishTaskNotification"
 }
