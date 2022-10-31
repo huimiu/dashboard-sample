@@ -10,7 +10,8 @@ const scope = [
   "Files.ReadWrite.All", 
   "Directory.ReadWrite.All", 
   "Tasks.ReadWrite",
-  "Calendars.ReadWrite"
+  "Calendars.ReadWrite",
+  "TeamsAppInstallation.ReadForUser"
 ];
 async function loginAction() {
   const teamsfx = new TeamsFx();

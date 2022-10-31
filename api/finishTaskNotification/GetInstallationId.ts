@@ -1,7 +1,21 @@
-// import {} from "../../.fx/states/state.local.json";
+import localInfo from "../../.fx/states/state.local.json";
+// import devInfo from "../../.fx/states/state.dev.json";
 
-export async function getInstallationId() {
-    const installationId = "ZmYxMGY2MjgtYjJjMC00MzRmLTgzZmItNmY3MGZmZWEzNmFkIyNiMWE3NjUxMy0wNGNmLTQ3ZjAtOTljNi1lZWRmMmYwOTE3NWU=";
-    return installationId;
+import { Client } from "@microsoft/microsoft-graph-client";
+import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
+
+export async function getInstallationId(teamsfx: TeamsFx, userId: string) {
+    try {
+        const info = localInfo;
+        const teamsAppId: string = info["fx-resource-appstudio"]["teamsAppId"];
+        const apiPath = "/users/"+userId+"/teamwork/installedApps?$expand=teamsApp,teamsAppDefinition&$filter=teamsApp/externalId eq "+teamsAppId;
+
+        const graphClient: Client = await createMicrosoftGraphClient(teamsfx, ["User.Read"]);
+        const appInstallationInfo = await graphClient.api(apiPath).get()["value"];
+ 
+        const installationId = appInstallationInfo["id"];
+        return installationId;
+    } catch(e) {
+    }
 }
 

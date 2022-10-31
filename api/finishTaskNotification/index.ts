@@ -91,7 +91,7 @@ export default async function run(
     const userIdRes = await graphClient_userId.api("/me").get();
     const userId = userIdRes["id"];
     // get installationId
-    const installationId = getInstallationId();
+    const installationId = await getInstallationId(teamsfx, userId);
     let postbody = {
       topic: {
         source: "entityUrl",
