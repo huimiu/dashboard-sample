@@ -9,6 +9,8 @@ import { Context, HttpRequest } from "@azure/functions";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { createMicrosoftGraphClient, TeamsFx, UserInfo, IdentityType } from "@microsoft/teamsfx";
 
+import { getInstallationId } from "./GetInstallationId";
+
 interface Response {
   status: number;
   body: { [key: string]: any };
@@ -89,8 +91,7 @@ export default async function run(
     const userIdRes = await graphClient_userId.api("/me").get();
     const userId = userIdRes["id"];
     // get installationId
-    const installationId =
-      "ZmYxMGY2MjgtYjJjMC00MzRmLTgzZmItNmY3MGZmZWEzNmFkIyNiMWE3NjUxMy0wNGNmLTQ3ZjAtOTljNi1lZWRmMmYwOTE3NWU=";
+    const installationId = getInstallationId();
     let postbody = {
       topic: {
         source: "entityUrl",
