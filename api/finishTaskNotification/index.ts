@@ -88,8 +88,7 @@ export default async function run(
       teamsfx,
       ["User.Read"]
     );
-    const userIdRes = await graphClient_userId.api("/me").get();
-    const userId = userIdRes["id"];
+    const userId = await graphClient_userId.api("/me").get()["id"];
     // get installationId
     const installationId = await getInstallationId(teamsfx, userId);
     let postbody = {
