@@ -72,6 +72,18 @@
             "presentation": {
                 "reveal": "silent"
             }
+        },
+        {
+            "type": "npm",
+            "script": "dev:teamsfx",
+            "path": "tabs",
+            "problemMatcher": [],
+            "label": "npm: dev:teamsfx - tabs",
+            "detail": "env-cmd --silent -f .env.teamsfx.local npm run start",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
