@@ -121,9 +121,5 @@
   .dashboard-bottom-right {
     display: flex;
     flex: 3;
-    flex-shrink: 3;
   }
-
-
-
 }
