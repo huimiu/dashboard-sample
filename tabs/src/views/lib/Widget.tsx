@@ -51,11 +51,7 @@ export abstract class Widget<T> extends React.Component<
 
         {/** Card content */}
         <Flex fill column gap="gap.medium" vAlign="stretch" hAlign="stretch">
-          {this.bodyContent() && (
-            <Card.Body styles={{ marginTop: "1rem" }}>
-              {this.bodyContent()}
-            </Card.Body>
-          )}
+          {this.bodyContent() && <Card.Body>{this.bodyContent()}</Card.Body>}
         </Flex>
 
         {/** Card footer */}

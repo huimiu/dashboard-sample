@@ -1,6 +1,6 @@
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
-import { TaskItem }from "../models/taskModel";
+import { TaskItem, TaskModel } from "../models/taskModel";
 import { FxContext } from "../internal/singletonContext";
 
 /**
@@ -21,7 +21,7 @@ import { FxContext } from "../internal/singletonContext";
  *   }
  * ]
  */
-export async function getTasks() {
+export async function getTasks(): Promise<TaskModel> {
   let teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
@@ -34,7 +34,9 @@ export async function getTasks() {
   }
 
   try {
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.ReadWrite"]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
+      "Tasks.ReadWrite",
+    ]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
 
@@ -53,9 +55,8 @@ export async function getTasks() {
       };
       returnAnswer.push(tmp);
     }
-    return returnAnswer;
-    // return tasksInfo;
+    return { data: returnAnswer };
   } catch (e) {
-    alert(e);
+    throw e;
   }
 }

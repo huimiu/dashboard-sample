@@ -22,7 +22,7 @@ export default class IDashboard extends Dashboard {
   }
 
   protected columnWidths(): string | undefined {
-    return "6fr 4fr";
+    return "7fr 3fr";
   }
 
   protected dashboardLayout(): JSX.Element | undefined {

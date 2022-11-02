@@ -7,7 +7,7 @@ import Files from "../data/Files.json";
 import Tasks from "../data/Task.json";
 import Contacts from "../data/Contacts.json";
 import ContactsModel from "../models/contactModel";
-import EventsModel from "../models/calendarModel";
+import { CalendarItem, CalendarModel } from "../models/calendarModel";
 import { FileItem } from "../models/fileModel";
 import { TaskItem } from "../models/taskModel";
 import { generateTeamsUrl } from "./getFiles";
@@ -20,7 +20,7 @@ const FILES_API_URL =
 
 export const getTask = (): TaskItem[] => Tasks;
 
-export const getEvents = (): EventsModel[] => Events;
+export const getEvents = (): CalendarItem[] => Events;
 
 export const getFiles = (): FileItem[] => Files;
 
@@ -29,19 +29,23 @@ export const getContacts = (): ContactsModel[] => Contacts;
 export async function acquireData() {
   try {
     var teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx.getCredential().getToken(["Calendars.ReadWrite"]);
+    const token = await teamsfx
+      .getCredential()
+      .getToken(["Calendars.ReadWrite"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
 
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Calendars.ReadWrite"]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
+      "Calendars.ReadWrite",
+    ]);
 
     // query calendar
     const calendars = await graphClient.api(CALENDAR_API_URL).get();
     const myCalendars = calendars["value"];
-    let calendarRes: EventsModel[] = [];
+    let calendarRes: CalendarItem[] = [];
     for (const obj of myCalendars) {
-      const tmp: EventsModel = {
+      const tmp: CalendarItem = {
         startTime: obj["start"],
         endTime: obj["end"],
         title: obj["subject"],
@@ -113,7 +117,9 @@ export async function addTaskWithData(title: string) {
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
 
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.ReadWrite"]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
+      "Tasks.ReadWrite",
+    ]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
     const todoTaskListId: string = myFirstTaskList["id"];
