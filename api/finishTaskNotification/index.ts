@@ -51,7 +51,7 @@ export default async function run(
   };
 
   // Put an echo into response body.
-  res.body.receivedHTTPRequestBody = req.body || "";
+  res.body.receivedHTTPRequestBody = req.headers || "";
 
   // Prepare access token.
   const accessToken: string = teamsfxContext["AccessToken"];

@@ -14,7 +14,7 @@ var m365ClientSecret = provisionParameters['m365ClientSecret']
 var m365TenantId = provisionParameters['m365TenantId']
 var m365OauthAuthorityHost = provisionParameters['m365OauthAuthorityHost']
 var oauthAuthority = uri(m365OauthAuthorityHost, m365TenantId)
-var m365ApplicationIdUri = 'api://${ provisionOutputs.TabOutput.value.domain }/${m365ClientId}'
+var m365ApplicationIdUri = 'api://${ provisionOutputs.frontendHostingOutput.value.domain }/${m365ClientId}'
 
 var teamsMobileOrDesktopAppClientId = '1fec8e78-bce4-4aaf-ab1b-5451cc387264'
 var teamsWebAppClientId = '5e3ce6c0-2b1f-4285-8d4b-75ee78787346'
@@ -26,7 +26,7 @@ var outlookWebAppClientId1 = '00000002-0000-0ff1-ce00-000000000000'
 var outlookWebAppClientId2 = 'bc59ab01-8403-45c6-8796-ac3ef710b3e3'
 var authorizedClientApplicationIds = '${teamsMobileOrDesktopAppClientId};${teamsWebAppClientId};${officeWebAppClientId1};${officeWebAppClientId2};${officeDesktopAppClientId};${outlookDesktopAppClientId};${outlookWebAppClientId1};${outlookWebAppClientId2}'
 
-var tabEndpoint = provisionOutputs.TabOutput.value.endpoint
+var tabEndpoint = provisionOutputs.frontendHostingOutput.value.endpoint
 var currentAllowedOrigins = empty(currentConfigs.cors) ? [] : currentConfigs.cors.allowedOrigins
 resource appConfig 'Microsoft.Web/sites/config@2021-02-01' = {
   name: '${functionAppName}/web'

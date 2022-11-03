@@ -41,7 +41,7 @@ export async function callFunction(params?: string) {
         }
       }
     
-      throw new Error(funcErrorMsg);
+      throw new Error(funcErrorMsg+"\n"+err);
     }
     throw err;
   }    
