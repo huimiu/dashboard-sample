@@ -9,15 +9,10 @@ import { cardStyles, headerStyles } from "./Widget.styles";
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
  * T is the model type of the widget.
  */
-export abstract class Widget<T> extends React.Component<
-  {},
-  { data?: T | undefined }
-> {
+export abstract class Widget<T> extends React.Component<{}, { data?: T }> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      data: undefined,
-    };
+    this.state = { data: undefined };
   }
 
   /**
@@ -26,7 +21,8 @@ export abstract class Widget<T> extends React.Component<
    * For more information about react lifecycle, please refer to https://reactjs.org/docs/react-component.html#componentdidmount
    */
   async componentDidMount() {
-    this.setState({ data: this.getData() });
+    this.setState({ data: await this.getData() });
+    console.log(this.state.data);
   }
 
   /**
@@ -66,8 +62,8 @@ export abstract class Widget<T> extends React.Component<
    * Get data required by the widget, you can get data from a api call or static data stored in a file. Override this method according to your needs.
    * @returns data for the widget
    */
-  protected getData(): T | undefined {
-    return undefined;
+  protected async getData(): Promise<T> {
+    return new Promise<T>(() => {});
   }
 
   /**

@@ -2,6 +2,7 @@ import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { CalendarItem, CalendarModel } from "../models/calendarModel";
 import { FxContext } from "../internal/singletonContext";
+import { loginAction } from "../internal/login";
 
 /**
  * @returns :
@@ -45,10 +46,9 @@ import { FxContext } from "../internal/singletonContext";
 export async function getCalendar(): Promise<CalendarModel> {
   var teamsfx: TeamsFx;
   try {
+    loginAction(["Calendars.Read"]);
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx
-      .getCredential()
-      .getToken(["Calendars.ReadWrite"]);
+    const token = await teamsfx.getCredential().getToken(["Calendars.Read"]);
     let tokenstr = "";
     if (token) tokenstr = token.token;
     teamsfx.setSsoToken(tokenstr);
@@ -59,16 +59,16 @@ export async function getCalendar(): Promise<CalendarModel> {
 
   try {
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
-      "Calendars.ReadWrite",
+      "Calendars.Read",
     ]);
-    const tasklists = await graphClient
+    const calendarResponse = await graphClient
       .api(
         "/me/events?$top=5&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
       )
       .get();
-    const myCalendarEvents = tasklists["value"];
-    let returnAnswer: CalendarItem[] = [];
-    for (const obj of myCalendarEvents) {
+    const calendarValue = calendarResponse["value"];
+    let calendarItems: CalendarItem[] = [];
+    for (const obj of calendarValue) {
       const tmp: CalendarItem = {
         startTime: obj["start"],
         endTime: obj["end"],
@@ -78,9 +78,9 @@ export async function getCalendar(): Promise<CalendarModel> {
           ? obj["onlineMeeting"]["joinUrl"]
           : undefined,
       };
-      returnAnswer.push(tmp);
+      calendarItems.push(tmp);
     }
-    return { items: returnAnswer };
+    return { items: calendarItems };
   } catch (e) {
     console.log(e);
     alert(e);

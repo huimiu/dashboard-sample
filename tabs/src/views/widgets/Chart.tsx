@@ -28,27 +28,7 @@ enum DayRange {
 }
 
 export class Chart extends Widget<IChartProps> {
-  protected getData(): IChartProps | undefined {
-    const chartPoints = [
-      {
-        legend: "Line 1",
-        data: chart1Points_7D,
-        color: "#6264A7",
-      },
-      {
-        legend: "Line 2",
-        data: chart2Points_7D,
-        color: "#D9DBDB",
-      },
-    ];
-    const chartData = {
-      chartTitle: "Area chart multiple example",
-      lineChartData: chartPoints,
-    };
-    return chartData;
-  }
-
-  headerContent(): JSX.Element | undefined {
+    headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
         <DataPieRegular style={{ height: "1.5rem", width: "1.5rem" }} />
@@ -61,54 +41,7 @@ export class Chart extends Widget<IChartProps> {
   bodyContent(): JSX.Element | undefined {
     return (
       <>
-        <div>
-          <Menu
-            style={{ gap: "3rem" }}
-            defaultActiveIndex={0}
-            items={[
-              {
-                key: "1",
-                content: "7 days",
-                onClick: () =>
-                  this.setState({
-                    data: this.retriveChartsData(DayRange.Seven),
-                  }),
-              },
-              {
-                key: "2",
-                content: "30 days",
-                onClick: () =>
-                  this.setState({
-                    data: this.retriveChartsData(DayRange.Thirty),
-                  }),
-              },
-              {
-                key: "3",
-                content: "60 days",
-                onClick: () =>
-                  this.setState({
-                    data: this.retriveChartsData(DayRange.Sixty),
-                  }),
-              },
-            ]}
-            iconOnly
-            accessibility={menuAsToolbarBehavior}
-          />
-        </div>
-
-        <div style={{ position: "relative", height: "200px", width: "100%" }}>
-          {this.state.data && (
-            <AreaChart
-              data={this.state.data}
-              legendsOverflowText={"Overflow Items"}
-              yAxisTickFormat={d3.format(".1s")}
-              wrapXAxisLables={false}
-              legendProps={{
-                allowFocusOnLegends: true,
-              }}
-            />
-          )}
-        </div>
+        
       </>
     );
   }
@@ -119,6 +52,7 @@ export class Chart extends Widget<IChartProps> {
         primary
         text
         icon={<ArrowRight24Filled />}
+        iconOnly
         iconPosition="after"
         content="View details"
         size="small"

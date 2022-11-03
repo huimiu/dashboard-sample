@@ -40,7 +40,6 @@ export class Dashboard extends Component<{}, IDashboardState> {
         if (entry.target === this.ref.current) {
           const { width } = entry.contentRect;
           this.setState({ isMobile: width < 600 });
-          console.log(this.state.isMobile + " " + width);
         }
       }
     });

@@ -29,6 +29,7 @@ export class File extends Widget<FileModel> {
         primary
         text
         icon={<ArrowRight16Filled />}
+        iconOnly
         iconPosition="after"
         content="View all"
         size="small"
