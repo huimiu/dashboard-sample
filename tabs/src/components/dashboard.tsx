@@ -78,7 +78,6 @@ export default class Dashboard extends React.Component<{}, IDashboardProp> {
           `cli (version < 0.11.0). Please refer to the help link for how to fix the issue: ${helpLink}`;
       }
       alert("Login failed: " + err);
-      return;
     }
   }
 
