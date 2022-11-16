@@ -7,9 +7,9 @@ import Files from "../data/Files.json";
 import Tasks from "../data/Task.json";
 import Contacts from "../data/Contacts.json";
 import ContactsModel from "../models/contactModel";
-import { CalendarItem, CalendarModel } from "../models/calendarModel";
+import { CalendarModel } from "../models/calendarModel";
 import { FileItem } from "../models/fileModel";
-import { TaskItem } from "../models/taskModel";
+import { TaskModel } from "../models/taskModel";
 import { generateTeamsUrl } from "./getFiles";
 
 const CALENDAR_API_URL =
@@ -18,9 +18,9 @@ const CALENDAR_API_URL =
 const FILES_API_URL =
   "/me/drive/recent?$top=5&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem";
 
-export const getTask = (): TaskItem[] => Tasks;
+export const getTask = (): TaskModel[] => Tasks;
 
-export const getEvents = (): CalendarItem[] => Events;
+export const getEvents = (): CalendarModel[] => Events;
 
 export const getFiles = (): FileItem[] => Files;
 
@@ -43,9 +43,9 @@ export async function acquireData() {
     // query calendar
     const calendars = await graphClient.api(CALENDAR_API_URL).get();
     const myCalendars = calendars["value"];
-    let calendarRes: CalendarItem[] = [];
+    let calendarRes: CalendarModel[] = [];
     for (const obj of myCalendars) {
-      const tmp: CalendarItem = {
+      const tmp: CalendarModel = {
         startTime: obj["start"],
         endTime: obj["end"],
         title: obj["subject"],
@@ -66,9 +66,9 @@ export async function acquireData() {
       .api("/me/todo/lists/" + todoTaskListId + "/tasks/")
       .get();
     const tasksInfo = tasks["value"];
-    let taskResult: TaskItem[] = [];
+    let taskResult: TaskModel[] = [];
     for (const obj of tasksInfo) {
-      const tmp: TaskItem = {
+      const tmp: TaskModel = {
         id: obj["id"],
         name: obj["title"],
         status: obj["status"],
@@ -132,9 +132,9 @@ export async function addTaskWithData(title: string) {
       .api("/me/todo/lists/" + todoTaskListId + "/tasks/")
       .get();
     const tasksInfo = tasks["value"];
-    let taskResult: TaskItem[] = [];
+    let taskResult: TaskModel[] = [];
     for (const obj of tasksInfo) {
-      const tmp: TaskItem = {
+      const tmp: TaskModel = {
         name: obj["title"],
         status: obj["status"],
         importance: obj["importance"],

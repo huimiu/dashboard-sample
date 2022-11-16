@@ -1,8 +1,8 @@
 import { CSSProperties } from "react";
 
 export const cardStyles = (): CSSProperties => ({
-  paddingLeft: "2.3rem",
-  paddingRight: "2.3rem",
+  paddingLeft: "1.3rem",
+  paddingRight: "1.25rem",
   paddingTop: "1rem",
 });
 

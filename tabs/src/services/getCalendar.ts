@@ -1,49 +1,10 @@
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
-import { CalendarItem, CalendarModel } from "../models/calendarModel";
+import { CalendarModel } from "../models/calendarModel";
 import { FxContext } from "../internal/singletonContext";
 import { loginAction } from "../internal/login";
 
-/**
- * @returns :
- * {
- *   "subject": string,
- *   "bodyPreview": string,
- *   "start": {
- *     "dateTime": string,
- *     "timeZone": string
- *   },
- *   "end": {
- *     "dateTime": string,
- *     "timeZone": string
- *   },
- *   "location": {
- *     "displayName": string,
- *     "locationType": "default",
- *     "uniqueIdType": "unknown",
- *     "address": {},
- *     "coordinates": {}
- *   },
- *   "attendees": [{
- *     "type": string // required, optional
- *     "status": {},
- *     "emailAddress": {
- *       "name": string,
- *       "address": string
- *     }
- *   }],
- *   "organizer": {
- *     "emailAddress": {
- *       "name": string,
- *       "address": string
- *     }
- *   },
- *   onlineMeeting: {
- *     "joinUrl": string // use it to join the meeting
- *   }
- * }
- */
-export async function getCalendar(): Promise<CalendarModel> {
+export async function getCalendar(): Promise<CalendarModel[]> {
   var teamsfx: TeamsFx;
   try {
     loginAction(["Calendars.Read"]);
@@ -63,13 +24,13 @@ export async function getCalendar(): Promise<CalendarModel> {
     ]);
     const calendarResponse = await graphClient
       .api(
-        "/me/events?$top=5&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"
+        `/me/events?$top=2&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting&$filter=start/dateTime ge '${new Date().toDateString()}'`
       )
       .get();
     const calendarValue = calendarResponse["value"];
-    let calendarItems: CalendarItem[] = [];
+    let calendarItems: CalendarModel[] = [];
     for (const obj of calendarValue) {
-      const tmp: CalendarItem = {
+      const tmp: CalendarModel = {
         startTime: obj["start"],
         endTime: obj["end"],
         title: obj["subject"],
@@ -77,10 +38,10 @@ export async function getCalendar(): Promise<CalendarModel> {
         url: obj["onlineMeeting"]["joinUrl"]
           ? obj["onlineMeeting"]["joinUrl"]
           : undefined,
-      };
+      };      
       calendarItems.push(tmp);
     }
-    return { items: calendarItems };
+    return calendarItems.reverse();
   } catch (e) {
     console.log(e);
     alert(e);

@@ -1,6 +1,6 @@
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
-import { TaskItem, TaskModel } from "../models/taskModel";
+import { TaskModel } from "../models/taskModel";
 import { FxContext } from "../internal/singletonContext";
 
 /**
@@ -21,7 +21,7 @@ import { FxContext } from "../internal/singletonContext";
  *   }
  * ]
  */
-export async function getTasks(): Promise<TaskModel> {
+export async function getTasks(): Promise<TaskModel[]> {
   let teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
@@ -41,21 +41,21 @@ export async function getTasks(): Promise<TaskModel> {
     const myFirstTaskList = tasklists["value"][0];
 
     const todoTaskListId: string = myFirstTaskList["id"];
-    const tasks = await graphClient
+    const resp = await graphClient
       .api("/me/todo/lists/" + todoTaskListId + "/tasks/")
       .get();
-    const tasksInfo = tasks["value"];
-    let returnAnswer: TaskItem[] = [];
+    const tasksInfo = resp["value"];
+    let tasks: TaskModel[] = [];
     for (const obj of tasksInfo) {
-      const tmp: TaskItem = {
+      const tmp: TaskModel = {
         name: obj["title"],
         status: obj["status"],
         importance: obj["importance"],
         content: obj["content"],
       };
-      returnAnswer.push(tmp);
+      tasks.push(tmp);
     }
-    return { data: returnAnswer };
+    return tasks;
   } catch (e) {
     throw e;
   }

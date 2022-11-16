@@ -10,7 +10,7 @@ import {
 } from "@fluentui/react-northstar";
 
 import { extractTime } from "../../common/dateUtils";
-import { CalendarItem, CalendarModel } from "../../models/calendarModel";
+import { CalendarModel } from "../../models/calendarModel";
 import { getCalendar } from "../../services/getCalendar";
 import { Widget } from "../lib/Widget";
 import { headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
@@ -24,7 +24,7 @@ import {
   todayText,
 } from "../styles/Calendar.styles";
 
-export class Calendar extends Widget<CalendarModel> {
+export class Calendar extends Widget<CalendarModel[]> {
   protected async getData() {
     return await getCalendar();
   }
@@ -48,11 +48,11 @@ export class Calendar extends Widget<CalendarModel> {
             <Text
               style={meetingSummary()}
               content={`You have ${
-                this.state.data?.items.length ?? 0
+                this.state.data?.length ?? 0
               } meetings today. The upcoming events`}
             />
           </div>
-          {this.state.data?.items.map((item: CalendarItem, index) => {
+          {this.state.data?.map((item: CalendarModel, index) => {
             return (
               <div style={meetingItemLayout()}>
                 <div style={divider()} />
@@ -76,7 +76,7 @@ export class Calendar extends Widget<CalendarModel> {
                     primary
                     flat
                     tinted
-                    content="Join"
+                    content="Chat"
                     onClick={() => window.open(item.url)}
                   />
                 )}
@@ -106,7 +106,7 @@ export class Calendar extends Widget<CalendarModel> {
     );
   }
 
-  private getMeetingTime = (item: CalendarItem) => {
+  private getMeetingTime = (item: CalendarModel) => {
     return (
       extractTime(item.startTime.dateTime) +
       " - " +

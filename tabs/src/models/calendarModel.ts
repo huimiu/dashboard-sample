@@ -1,4 +1,4 @@
-export interface CalendarItem {
+export interface CalendarModel {
   id?: string;
   startTime: {
     dateTime: string;
@@ -11,8 +11,4 @@ export interface CalendarItem {
   title: string;
   location?: string;
   url?: string;
-}
-
-export interface CalendarModel {
-  items: CalendarItem[];
 }

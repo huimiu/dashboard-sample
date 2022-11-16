@@ -13,14 +13,23 @@ import {
   Text,
   CircleIcon,
   StarIcon,
+  AddIcon,
+  Provider,
+  teamsTheme
 } from "@fluentui/react-northstar";
 
 import { TaskModel } from "../../models/taskModel";
 import { Widget } from "../lib/Widget";
 import { headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
 import { itemContainer } from "../styles/Task.styles";
+import { getTasks } from "../../services/getTasks";
+import { useTeamsFx } from '@microsoft/teamsfx-react';
 
-export class Task extends Widget<TaskModel> {
+export class Task extends Widget<TaskModel[]> {
+  async getData() {
+    return await getTasks();
+  }
+
   headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
@@ -34,13 +43,23 @@ export class Task extends Widget<TaskModel> {
   protected bodyContent(): JSX.Element | undefined {
     return (
       <>
+      <Provider theme={teamsTheme}>      
         <div style={{ display: "grid", gap: "0.25rem" }}>
           <div style={itemContainer()}>
-            <CircleIcon outline/>
-            <Text content="Create a new task" />
-            <Button iconOnly text icon={<StarIcon />}   />
+            <AddIcon style={{color: "var(--Foreground Focus)"}}/>
+            <Text content="Add a task" />
           </div>
+          {this.state.data?.map((item: TaskModel, index) => {
+            return (
+              <div style={itemContainer()}>
+                <CircleIcon outline />
+                <Text content={item.name} />
+                <Button iconOnly text icon={<StarIcon />} />
+              </div>
+            );
+          })}
         </div>
+        </Provider>
       </>
     );
   }

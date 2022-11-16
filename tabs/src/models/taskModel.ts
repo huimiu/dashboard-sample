@@ -1,4 +1,4 @@
-export interface TaskItem {
+export interface TaskModel {
   id?: string;
   name: string;
   status?: string;
@@ -8,8 +8,4 @@ export interface TaskItem {
   lastModifiedDateTime?: string;
   url?: string;
   icon?: string;
-}
-
-export interface TaskModel {
-  data: TaskItem[];
 }
