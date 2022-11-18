@@ -45,7 +45,8 @@
         const scopesRequest = {
           scopes: scopesArray,
           redirectUri: window.location.origin + `/auth-end.html?clientId=${clientId}`,
-          loginHint: loginHint
+          loginHint: loginHint,
+          prompt : "consent"
         };
         await msalInstance.loginRedirect(scopesRequest);
       });

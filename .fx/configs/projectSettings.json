@@ -7,7 +7,9 @@
         "name": "fx-solution-azure",
         "version": "1.0.0",
         "hostType": "Azure",
-        "azureResources": [],
+        "azureResources": [
+            "function"
+        ],
         "capabilities": [
             "Tab",
             "TabSSO"
@@ -19,7 +21,8 @@
             "fx-resource-api-connector",
             "fx-resource-aad-app-for-teams",
             "fx-resource-frontend-hosting",
-            "fx-resource-identity"
+            "fx-resource-identity",
+            "fx-resource-function"
         ]
     },
     "programmingLanguage": "typescript",
@@ -36,7 +39,8 @@
             "provision": true,
             "folder": "tabs",
             "sso": true,
-            "deploy": true
+            "deploy": true,
+            "artifactFolder": "tabs\\build"
         },
         {
             "name": "azure-storage",
@@ -47,6 +51,29 @@
         },
         {
             "name": "identity"
+        },
+        {
+            "name": "teams-api",
+            "hosting": "azure-function",
+            "functionNames": [
+                "finishTaskNotification"
+            ],
+            "deploy": true,
+            "build": true,
+            "folder": "api",
+            "artifactFolder": "api"
+        },
+        {
+            "name": "azure-function",
+            "scenario": "Api",
+            "provision": true,
+            "connections": [
+                "identity",
+                "aad-app",
+                "teams-tab",
+                "teams-api"
+            ]
         }
-    ]
+    ],
+    "defaultFunctionName": "finishTaskNotification"
 }

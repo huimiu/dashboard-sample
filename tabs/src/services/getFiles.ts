@@ -74,6 +74,7 @@ export async function getFiles() {
         "/me/drive/recent?$top=5&$select=name,webUrl,createdBy,lastModifiedBy,remoteItem"
       )
       .get();
+
     const driveInfo = drives["value"];
 
     let returnAnswer: FileItem[] = [];

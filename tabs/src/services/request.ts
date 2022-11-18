@@ -1,13 +1,14 @@
 import { Client } from "@microsoft/microsoft-graph-client";
 import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 
-import { FxContext } from "../internal/singletonContext";
+import Contacts from "../data/Contacts.json";
 import Events from "../data/Events.json";
 import Files from "../data/Files.json";
 import Tasks from "../data/Task.json";
-import Contacts from "../data/Contacts.json";
-import ContactsModel from "../models/contactModel";
+import { scope } from "../internal/login";
+import { FxContext } from "../internal/singletonContext";
 import { CalendarModel } from "../models/calendarModel";
+import ContactsModel from "../models/contactModel";
 import { FileItem } from "../models/fileModel";
 import { TaskModel } from "../models/taskModel";
 import { generateTeamsUrl } from "./getFiles";
@@ -29,16 +30,7 @@ export const getContacts = (): ContactsModel[] => Contacts;
 export async function acquireData() {
   try {
     var teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx
-      .getCredential()
-      .getToken(["Calendars.ReadWrite"]);
-    let tokenstr = "";
-    if (token) tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
-
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
-      "Calendars.ReadWrite",
-    ]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
 
     // query calendar
     const calendars = await graphClient.api(CALENDAR_API_URL).get();
@@ -112,10 +104,6 @@ export async function addTaskWithData(title: string) {
   try {
     let teamsfx: TeamsFx;
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const token = await teamsfx?.getCredential().getToken(["Tasks.ReadWrite"]);
-    let tokenstr = "";
-    if (token) tokenstr = token.token;
-    teamsfx.setSsoToken(tokenstr);
 
     const graphClient: Client = createMicrosoftGraphClient(teamsfx, [
       "Tasks.ReadWrite",

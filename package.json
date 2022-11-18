@@ -9,5 +9,11 @@
     "devDependencies": {
         "@microsoft/teamsfx-cli": "1.*"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "@microsoft/teamsfx-api": "^0.20.7",
+        "@types/fs-extra": "^9.0.13",
+        "@types/node": "^18.11.8",
+        "node": "^19.0.0"
+    }
 }

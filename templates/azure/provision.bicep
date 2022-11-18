@@ -29,3 +29,27 @@ output identityOutput object = {
   identityResourceId: userAssignedIdentityProvision.outputs.identityResourceId
   identityClientId: userAssignedIdentityProvision.outputs.identityClientId
 }
+
+// Resources Azure Function App
+module azureFunctionApiProvision './provision/azureFunctionApi.bicep' = {
+  name: 'azureFunctionApiProvision'
+  params: {
+    provisionParameters: provisionParameters
+    userAssignedIdentityId: userAssignedIdentityProvision.outputs.identityResourceId
+  }
+}
+
+output azureFunctionApiOutput object = {
+  teamsFxPluginId: 'teams-api'
+  sku: azureFunctionApiProvision.outputs.sku
+  appName: azureFunctionApiProvision.outputs.appName
+  domain: azureFunctionApiProvision.outputs.domain
+  appServicePlanName: azureFunctionApiProvision.outputs.appServicePlanName
+  functionAppResourceId: azureFunctionApiProvision.outputs.functionAppResourceId
+  functionEndpoint: azureFunctionApiProvision.outputs.functionEndpoint
+}
+
+output ApiOutput object = {
+  domain: azureFunctionApiProvision.outputs.domain
+  endpoint: azureFunctionApiProvision.outputs.functionEndpoint
+}
