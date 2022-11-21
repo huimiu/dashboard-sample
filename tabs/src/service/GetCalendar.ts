@@ -51,7 +51,7 @@ export async function getCalendar() {
     let curTime = new Date();
     const tasklists = await graphClient
       .api(
-        "/me/events?$top=5&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting"+'&$filter=start/dateTime ge \''+curTime.toDateString()+'\''
+        "/me/events?$top=5&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting&$filter=start/dateTime ge \'"+curTime.toDateString()+'\''
       )
       .get();
       

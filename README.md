@@ -1,4 +1,4 @@
-# Try the Sample
+# Prerequisite steps to set up the sample
 
 1. Clone the repo to your local workspace or directly download the source code.
 2. Download [Visual Studio Code](https://code.visualstudio.com) and install 'Teams Toolkit' extension.
@@ -13,30 +13,28 @@
 
 > If prompted that you cannot authorize access to calendar, tasks and files, please use onmicrosoft's M365 account.
 
-# Add a new Graph API call
+# Try the sample
 
-1. Add consent scope first.
+   <img src="images\dashboard.png" style="zoom: 35%">
 
-   You can call `addNewScope(scopes: string[])` to consent the scopes of permissions you want to add. And the consented status will be preserved in a global context `FxContext`.
-2. Create a graph client by adding the scope related to the Graph API you want to call. 
+1. You can see several widgets in the dashboard, some show data charts and others show informations with interactive buttons.
+2. In the `Area chart` widget, you can see selling data curves and a table with some informations, like features names, owners, priorities, and processing states.
+3. In the `Teams Collaboration` widget, you can see some news with pictures and words to help you quickly obtain the most recent news.
+4. In the `Your upcoming events` widget, you can see the upcoming events on your calendar. And you can click the `Join` button to join a meeting.
 
-   You can refer to the following code snippet:
-   ```ts
-   let teamsfx: TeamsFx;
-   teamsfx = FxContext.getInstance().getTeamsFx();
-   ```
-3. Call the Graph API, and parse the response into a certain model, which will be used by front-end.
+   <img src="images\join-meeting.png" style="zoom: 30%">
 
-   You can refer to the following code snippet:
-   ```ts
-   try {
-     const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
-     const graphApiResult = await graphClient.api("<GRAPH_API_PATH>").get();
-     // Parse the graphApiResult into a Model you defined, used by the front-end.
-   } catch(e) {} 
-   ```
+5. In the `Your Tasks` widget, you can see your tasks list. You can click and enter a task name to add a new task. After you successfully add a task, you will receive a notification.
 
-# Known Issues
+   <img src="images\add-task.png" style="zoom: 30%">
+
+   <img src="images\task-notification.png" style="zoom: 30%">
+
+6. In the `Your Documents` widget, you can see your documents. You can click one to open it. You can also click the `...` button on the right to choose the way to open the file, download the file or copy the file link.
+
+   <img src="images\file.png" style="zoom: 30%">
+
+# Known issues
 
 - If there is a token error in page rendering, please try to refresh the page, it may be a problem of silent login.
 - Component has not loading animation yet.
