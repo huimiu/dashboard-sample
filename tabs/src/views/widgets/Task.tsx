@@ -1,41 +1,32 @@
 import React from "react";
 
+import { Button, Image, Text, tokens } from "@fluentui/react-components";
 import {
   Add20Filled,
   ArrowRight16Filled,
   Circle24Regular,
+  MoreHorizontal32Regular,
   Star24Regular,
 } from "@fluentui/react-icons";
-import {
-  Button,
-  Image,
-  MoreIcon,
-  Text,
-  CircleIcon,
-  StarIcon,
-  AddIcon,
-  Provider,
-  teamsTheme
-} from "@fluentui/react-northstar";
 
 import { TaskModel } from "../../models/taskModel";
+import { getTasks } from "../../services/taskService";
 import { Widget } from "../lib/Widget";
 import { headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
 import { itemContainer } from "../styles/Task.styles";
-import { getTasks } from "../../services/getTasks";
-import { useTeamsFx } from '@microsoft/teamsfx-react';
 
 export class Task extends Widget<TaskModel[]> {
   async getData() {
-    return await getTasks();
+    // return await getTasks();
+    return new Promise<TaskModel[]>(() => {});
   }
 
   headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
         <Image src="task-icon.png" />
-        <Text style={headerTextStyle()} content="Your tasks" />
-        <Button icon={<MoreIcon size="large" />} iconOnly text title="more" />
+        <Text style={headerTextStyle()}>Your tasks</Text>
+        <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
   }
@@ -43,23 +34,21 @@ export class Task extends Widget<TaskModel[]> {
   protected bodyContent(): JSX.Element | undefined {
     return (
       <>
-      <Provider theme={teamsTheme}>      
         <div style={{ display: "grid", gap: "0.25rem" }}>
           <div style={itemContainer()}>
-            <AddIcon style={{color: "var(--Foreground Focus)"}}/>
-            <Text content="Add a task" />
+            <Add20Filled style={{ color: "var(--Foreground Focus)" }} />
+            <Text>Add a task</Text>
           </div>
           {this.state.data?.map((item: TaskModel, index) => {
             return (
               <div style={itemContainer()}>
-                <CircleIcon outline />
-                <Text content={item.name} />
-                <Button iconOnly text icon={<StarIcon />} />
+                <Button icon={<Circle24Regular />} appearance="transparent" />
+                <Text>{item.content}</Text>
+                <Button icon={<Star24Regular />} appearance="transparent" />
               </div>
             );
           })}
         </div>
-        </Provider>
       </>
     );
   }
@@ -67,16 +56,15 @@ export class Task extends Widget<TaskModel[]> {
   footerContent(): JSX.Element | undefined {
     return (
       <Button
-        primary
-        text
+        appearance="transparent"
         icon={<ArrowRight16Filled />}
-        iconOnly
         iconPosition="after"
-        content="View all"
         size="small"
-        style={{ width: "fit-content" }}
-        onClick={() => {}}
-      />
+        style={{ width: "fit-content", color: tokens.colorBrandForeground1 }}
+        onClick={() => {}} // navigate to detailed page
+      >
+        View all
+      </Button>
     );
   }
 }

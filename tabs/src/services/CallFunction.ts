@@ -1,6 +1,6 @@
 import * as axios from "axios";
 import { BearerTokenAuthProvider, createApiClient, TeamsFx } from "@microsoft/teamsfx";
-import { FxContext } from "../components/singletonContext";
+import { FxContext } from "../internal/singletonContext";
 
 const functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";
 export let taskName: string;

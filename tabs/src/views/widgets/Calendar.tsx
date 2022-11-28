@@ -1,13 +1,11 @@
 import moment from "moment-timezone";
-import React from "react";
 
-import { ArrowRight24Filled } from "@fluentui/react-icons";
+import { Button, Text, tokens } from "@fluentui/react-components";
 import {
-  Button,
-  CalendarIcon,
-  MoreIcon,
-  Text,
-} from "@fluentui/react-northstar";
+  ArrowRight16Filled,
+  CalendarLtr32Regular,
+  MoreHorizontal32Regular,
+} from "@fluentui/react-icons";
 
 import { extractTime } from "../../common/dateUtils";
 import { CalendarModel } from "../../models/calendarModel";
@@ -26,15 +24,16 @@ import {
 
 export class Calendar extends Widget<CalendarModel[]> {
   protected async getData() {
-    return await getCalendar();
+    // return await getCalendar();
+    return new Promise<CalendarModel[]>(() => {});
   }
 
   protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
-        <CalendarIcon size="large" outline />
-        <Text style={headerTextStyle()} content="Your upcoming events" />
-        <Button icon={<MoreIcon size="large" />} iconOnly text title="more" />
+        <CalendarLtr32Regular style={{ height: "1.5rem", width: "1.5rem" }} />
+        <Text style={headerTextStyle()}>Area chart</Text>
+        <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
   }
@@ -44,42 +43,28 @@ export class Calendar extends Widget<CalendarModel[]> {
       <>
         <div style={{ display: "grid", gap: "1.25rem" }}>
           <div style={{ display: "grid", gap: "0.25rem" }}>
-            <Text style={todayText()} content={moment().format("ll")} />
-            <Text
-              style={meetingSummary()}
-              content={`You have ${
+            <Text style={todayText()}>{moment().format("ll")}</Text>
+            <Text style={meetingSummary()}>
+              {`You have ${
                 this.state.data?.length ?? 0
               } meetings today. The upcoming events`}
-            />
+            </Text>
           </div>
           {this.state.data?.map((item: CalendarModel, index) => {
             return (
               <div style={meetingItemLayout()}>
                 <div style={divider()} />
                 <div style={{ display: "grid", gap: "0.25rem" }}>
-                  <Text style={meetingTitle()} content={item.title} />
-                  <Text
-                    style={meetingTime()}
-                    content={this.getMeetingTime(item)}
-                  />
-                  <Text style={meetingLocation()} content={item.location} />
+                  <Text style={meetingTitle()}>{item.title}</Text>
+                  <Text style={meetingTime()}>{this.getMeetingTime(item)}</Text>
+                  <Text style={meetingLocation()}>{item.location}</Text>
                 </div>
-                {index === 0 ? (
-                  <Button
-                    primary
-                    flat
-                    content="Join"
-                    onClick={() => window.open(item.url)}
-                  />
-                ) : (
-                  <Button
-                    primary
-                    flat
-                    tinted
-                    content="Chat"
-                    onClick={() => window.open(item.url)}
-                  />
-                )}
+                <Button
+                  appearance={index === 0 ? "primary" : "transparent"}
+                  onClick={() => window.open(item.url)}
+                >
+                  {index === 0 ? "Join" : "Chat"}
+                </Button>
               </div>
             );
           })}
@@ -91,18 +76,15 @@ export class Calendar extends Widget<CalendarModel[]> {
   protected footerContent(): JSX.Element | undefined {
     return (
       <Button
-        primary
-        text
-        iconOnly
-        icon={<ArrowRight24Filled />}
+        appearance="transparent"
+        icon={<ArrowRight16Filled />}
         iconPosition="after"
-        content="View calendar"
         size="small"
-        style={{ width: "fit-content" }}
-        onClick={() => {
-          window.open("https://outlook.office.com/calendar/view/day");
-        }} // navigate to detailed page
-      />
+        style={{ width: "fit-content", color: tokens.colorBrandForeground1 }}
+        onClick={() => {}} // navigate to detailed page
+      >
+        View all
+      </Button>
     );
   }
 

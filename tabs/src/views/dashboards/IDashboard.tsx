@@ -1,16 +1,12 @@
-import React from "react";
-
-import { Providers, ProviderState } from "@microsoft/mgt-element";
-import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
+import { Image } from "@fluentui/react-components";
 
 import { Dashboard } from "../lib/Dashboard";
 import { oneColumn } from "../lib/Dashboard.styles";
 import { Calendar } from "../widgets/Calendar";
 import { Chart } from "../widgets/Chart";
 import { Collaboration } from "../widgets/Collaboration";
+import { Documents } from "../widgets/Document";
 import { Task } from "../widgets/Task";
-import { File } from "../widgets/File";
-import { Image } from "@fluentui/react-northstar";
 
 interface IDashboardProp {
   showLogin?: boolean;
@@ -18,7 +14,7 @@ interface IDashboardProp {
 
 export default class IDashboard extends Dashboard {
   protected headerImage(): JSX.Element | undefined {
-    return <Image src="bg.png" style={{ marginBottom: "-9rem" }} fluid />;
+    return <Image src="bg.png" style={{ marginBottom: "-9rem" }} />;
   }
 
   protected columnWidths(): string | undefined {
@@ -34,7 +30,7 @@ export default class IDashboard extends Dashboard {
           <Task />
         </div>
         <Collaboration />
-        <File />
+        <Documents />
       </>
     );
   }

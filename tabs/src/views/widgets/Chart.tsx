@@ -1,14 +1,10 @@
-import * as d3 from "d3-format";
-
 import { AreaChart, IChartProps } from "@fluentui/react-charting";
-import { ArrowRight24Filled, DataPieRegular } from "@fluentui/react-icons";
 import {
-  Button,
-  Menu,
-  menuAsToolbarBehavior,
-  MoreIcon,
-  Text,
-} from "@fluentui/react-northstar";
+  ArrowRight16Filled,
+  DataPieRegular,
+  MoreHorizontal32Regular,
+} from "@fluentui/react-icons";
+import { Button, Text, tokens } from "@fluentui/react-components";
 
 import {
   chart1Points_30D,
@@ -28,37 +24,32 @@ enum DayRange {
 }
 
 export class Chart extends Widget<IChartProps> {
-    headerContent(): JSX.Element | undefined {
+  headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
         <DataPieRegular style={{ height: "1.5rem", width: "1.5rem" }} />
-        <Text style={headerTextStyle()} content="Area chart" />
-        <Button icon={<MoreIcon size="large" />} iconOnly text title="more" />
+        <Text style={headerTextStyle()}>Area chart</Text>
+        <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
   }
 
   bodyContent(): JSX.Element | undefined {
-    return (
-      <>
-        
-      </>
-    );
+    return <></>;
   }
 
   footerContent(): JSX.Element | undefined {
     return (
       <Button
-        primary
-        text
-        icon={<ArrowRight24Filled />}
-        iconOnly
+        appearance="transparent"
+        icon={<ArrowRight16Filled />}
         iconPosition="after"
-        content="View details"
         size="small"
-        style={{ width: "fit-content" }}
+        style={{ width: "fit-content", color: tokens.colorBrandForeground1 }}
         onClick={() => {}} // navigate to detailed page
-      />
+      >
+        View query
+      </Button>
     );
   }
 

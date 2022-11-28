@@ -9,9 +9,9 @@ import { scope } from "../internal/login";
 import { FxContext } from "../internal/singletonContext";
 import { CalendarModel } from "../models/calendarModel";
 import ContactsModel from "../models/contactModel";
-import { FileItem } from "../models/fileModel";
+import { DocumentModel } from "../models/documentModel";
 import { TaskModel } from "../models/taskModel";
-import { generateTeamsUrl } from "./getFiles";
+import { generateTeamsUrl } from "./documentService";
 
 const CALENDAR_API_URL =
   "/me/events?$top=2&$select=subject,bodyPreview,organizer,attendees,start,end,location,onlineMeeting";
@@ -23,7 +23,7 @@ export const getTask = (): TaskModel[] => Tasks;
 
 export const getEvents = (): CalendarModel[] => Events;
 
-export const getFiles = (): FileItem[] => Files;
+export const getFiles = (): DocumentModel[] => Files;
 
 export const getContacts = (): ContactsModel[] => Contacts;
 
@@ -73,9 +73,9 @@ export async function acquireData() {
     // query documents
     const files = await graphClient.api(FILES_API_URL).get();
     const filesInfo = files["value"];
-    let filesResult: FileItem[] = [];
+    let filesResult: DocumentModel[] = [];
     for (const obj of filesInfo) {
-      const tmp: FileItem = {
+      const tmp: DocumentModel = {
         name: obj["name"],
         createdBy: obj["remoteItem"]["createdBy"]["user"]["displayName"],
         lastModifiedBy:

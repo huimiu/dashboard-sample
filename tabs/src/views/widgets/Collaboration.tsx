@@ -1,35 +1,39 @@
-import React from "react";
+import { Button, Text, tokens } from "@fluentui/react-components";
+import {
+  ArrowRight16Filled,
+  MoreHorizontal32Regular,
+} from "@fluentui/react-icons";
 
-import { ArrowRight16Filled } from "@fluentui/react-icons";
-import { Button, MoreIcon, Text } from "@fluentui/react-northstar";
-
-import { Widget } from "../lib/Widget";
-import { headerContentStyle, headerTextStyle, headerStyleWithoutIcon} from "../lib/Widget.styles";
 import { CollaborationModel } from "../../models/collaborationModel";
+import { Widget } from "../lib/Widget";
+import { headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
 
 export class Collaboration extends Widget<CollaborationModel> {
   headerContent(): JSX.Element | undefined {
     return (
       <div style={headerStyleWithoutIcon()}>
-        <Text style={headerTextStyle()} content="Team collaborations" />
-        <Button icon={<MoreIcon size="large" />} iconOnly text title="more" />
+        <Text style={headerTextStyle()}>Area chart</Text>
+        <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
+  }
+
+  bodyContent(): JSX.Element | undefined {
+    return <></>;
   }
 
   footerContent(): JSX.Element | undefined {
     return (
       <Button
-        primary
-        text
+        appearance="transparent"
         icon={<ArrowRight16Filled />}
-        iconOnly
         iconPosition="after"
-        content="View all"
         size="small"
-        style={{ width: "fit-content" }}
-        onClick={() => {}}
-      />
+        style={{ width: "fit-content", color: tokens.colorBrandForeground1 }}
+        onClick={() => {}} // navigate to detailed page
+      >
+        View all
+      </Button>
     );
   }
 }

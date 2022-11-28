@@ -1,18 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
 
-import { Card, Flex } from "@fluentui/react-northstar";
-
-import { cardStyles, headerStyles } from "./Widget.styles";
+import { headerStyles, widgetStyles } from "./Widget.styles";
 
 /**
  * Defined a widget, it's also a react component.
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
  * T is the model type of the widget.
  */
-export abstract class Widget<T> extends React.Component<{}, { data?: T }> {
+export abstract class Widget<T> extends Component<{}, { data?: T | void }> {
   constructor(props: any) {
     super(props);
-    this.state = { data: undefined };
+    this.state = {
+      data: undefined,
+    };
   }
 
   /**
@@ -22,7 +22,6 @@ export abstract class Widget<T> extends React.Component<{}, { data?: T }> {
    */
   async componentDidMount() {
     this.setState({ data: await this.getData() });
-    console.log(this.state.data);
   }
 
   /**
@@ -30,31 +29,13 @@ export abstract class Widget<T> extends React.Component<{}, { data?: T }> {
    */
   render() {
     return (
-      <Card
-        fluid
-        elevated
-        style={cardStyles()}
-        styles={{
-          ":hover": "backgroud-color: var(--Foreground)",
-        }}
-      >
-        {/** Card header */}
+      <div style={widgetStyles()}>
         {this.headerContent() && (
-          <Card.Header style={headerStyles()}>
-            {this.headerContent()}
-          </Card.Header>
+          <div style={headerStyles()}>{this.headerContent()}</div>
         )}
-
-        {/** Card content */}
-        <Flex fill column gap="gap.medium" vAlign="stretch" hAlign="stretch">
-          {this.bodyContent() && <Card.Body>{this.bodyContent()}</Card.Body>}
-        </Flex>
-
-        {/** Card footer */}
-        {this.footerContent() && (
-          <Card.Footer fitted>{this.footerContent()}</Card.Footer>
-        )}
-      </Card>
+        {this.bodyContent() && <div>{this.bodyContent()}</div>}
+        {this.footerContent() && <div>{this.footerContent()}</div>}
+      </div>
     );
   }
 

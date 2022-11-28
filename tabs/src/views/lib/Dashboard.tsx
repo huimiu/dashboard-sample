@@ -1,4 +1,3 @@
-import { Image } from "@fluentui/react-northstar";
 import React, { Component } from "react";
 
 import { dashboardStyles } from "./Dashboard.styles";
@@ -63,7 +62,6 @@ export class Dashboard extends Component<{}, IDashboardState> {
   render() {
     return (
       <>
-        {this.headerImage()}
         <div
           ref={this.ref}
           style={dashboardStyles(
@@ -78,12 +76,9 @@ export class Dashboard extends Component<{}, IDashboardState> {
     );
   }
 
-  protected headerImage(): JSX.Element | undefined {
-    return undefined;
-  }
-
   /**
    * Implement this method to define the row heights of the dashboard.
+   * For example, if you want to have 3 rows, and the height of the first row is 100px, the height of the second row is 200px, and the height of the third row is 300px, you can return "100px 200px 300px".
    * @returns The row heights of the dashboard.
    */
   protected rowHeights(): string | undefined {
@@ -92,6 +87,7 @@ export class Dashboard extends Component<{}, IDashboardState> {
 
   /**
    * Implement this method to define the column widths of the dashboard.
+   * For example, if you want to have 3 columns, and each column occupies 1/3 of the full width, you can return "1fr 1fr 1fr".
    * @returns The column widths of the dashboard.
    */
   protected columnWidths(): string | undefined {

@@ -1,4 +1,4 @@
-export interface FileItem {
+export interface DocumentModel {
   id?: string;
   icon?: string;
   name: string;
@@ -12,8 +12,4 @@ export interface FileItem {
   weburl?: string;
   webDavurl?: string;
   teamsurl?: string;
-}
-
-export interface FileModel {
-  data: FileItem[];
 }

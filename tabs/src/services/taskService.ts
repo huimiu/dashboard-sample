@@ -25,7 +25,7 @@ export async function getTasks(): Promise<TaskModel[]> {
   let teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, scope);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.Read"]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
 
     const myFirstTaskList = tasklists["value"][0];

@@ -1,22 +1,33 @@
-import { HashRouter as Router, Redirect, Route } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Route } from "react-router-dom";
 
-import { Loader, Provider, teamsTheme } from '@fluentui/react-northstar';
-import { useTeamsFx } from '@microsoft/teamsfx-react';
+import {
+  FluentProvider,
+  Spinner,
+  teamsLightTheme,
+  teamsDarkTheme,
+  teamsHighContrastTheme,
+} from "@fluentui/react-components";
+import { useTeamsFx } from "@microsoft/teamsfx-react";
 
-import { TeamsFxContext } from './internal/context';
-import IDashboard from './views/dashboards/IDashboard';
-import Privacy from './views/Privacy';
-import TabConfig from './views/TabConfig';
-import TermsOfUse from './views/TermsOfUse';
+import { TeamsFxContext } from "./internal/context";
+import IDashboard from "./views/dashboards/IDashboard";
+import Privacy from "./views/Privacy";
+import TabConfig from "./views/TabConfig";
+import TermsOfUse from "./views/TermsOfUse";
 
 export default function App() {
-  const { loading, theme, themeString, teamsfx } = useTeamsFx();
+  const { loading, themeString, teamsfx } = useTeamsFx();
   return (
-    <TeamsFxContext.Provider value={{ theme, themeString, teamsfx }}>
-      <Provider
-        theme={theme || teamsTheme}
+    <TeamsFxContext.Provider value={{ themeString, teamsfx }}>
+      <FluentProvider
+        theme={
+          themeString === "dark"
+            ? teamsDarkTheme
+            : themeString === "contrast"
+            ? teamsHighContrastTheme
+            : teamsLightTheme
+        }
         style={{
-          overflow: "auto",
           height: "100vh",
           background: "var(--Background)",
         }}
@@ -26,7 +37,7 @@ export default function App() {
             <Redirect to="/tab" />
           </Route>
           {loading ? (
-            <Loader style={{ margin: 100 }} />
+            <Spinner style={{ margin: 100 }} />
           ) : (
             <>
               <Route exact path="/privacy" component={Privacy} />
@@ -36,7 +47,7 @@ export default function App() {
             </>
           )}
         </Router>
-      </Provider>
+      </FluentProvider>
     </TeamsFxContext.Provider>
   );
 }
