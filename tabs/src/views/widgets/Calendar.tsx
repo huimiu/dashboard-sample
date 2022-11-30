@@ -24,15 +24,14 @@ import {
 
 export class Calendar extends Widget<CalendarModel[]> {
   protected async getData() {
-    // return await getCalendar();
-    return new Promise<CalendarModel[]>(() => {});
+    return await getCalendar();
   }
 
   protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle()}>
         <CalendarLtr32Regular style={{ height: "1.5rem", width: "1.5rem" }} />
-        <Text style={headerTextStyle()}>Area chart</Text>
+        <Text style={headerTextStyle()}>Your upcoming events</Text>
         <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );

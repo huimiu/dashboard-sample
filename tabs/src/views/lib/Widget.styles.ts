@@ -4,9 +4,9 @@ import { tokens } from "@fluentui/react-components";
 export const widgetStyles = (): CSSProperties => ({
   display: "grid",
   paddingLeft: "2.3rem",
-  paddingRight: "2.3rem",
+  paddingRight: "1.25rem",
   paddingTop: "1rem",
-  paddingBottom: "1.25rem",
+  paddingBottom: "1rem",
   backgroundColor: tokens.colorNeutralBackground1,
   borderWidth: "1px",
   borderStyle: "solid",

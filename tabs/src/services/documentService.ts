@@ -67,7 +67,6 @@ export function generateTeamsUrl(obj: any): string {
 export async function getDocuments(): Promise<DocumentModel[]> {
   let teamsfx: TeamsFx;
   try {
-    loginAction(["Files.Read"]);
     teamsfx = FxContext.getInstance().getTeamsFx();
     const token = await teamsfx?.getCredential().getToken(["Files.Read"]);
     let tokenstr = "";

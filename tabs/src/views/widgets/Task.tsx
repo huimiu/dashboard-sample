@@ -15,10 +15,31 @@ import { Widget } from "../lib/Widget";
 import { headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
 import { itemContainer } from "../styles/Task.styles";
 
-export class Task extends Widget<TaskModel[]> {
-  async getData() {
-    // return await getTasks();
-    return new Promise<TaskModel[]>(() => {});
+interface ITaskState {
+  tasks?: TaskModel[];
+  inputFocused?: boolean;
+  taskInput?: string;
+  addBtnOver?: boolean;
+}
+
+export class Task extends Widget<ITaskState> {
+  inputDivRef;
+  btnRef;
+
+  constructor(props: any) {
+    super(props);
+    this.inputDivRef = React.createRef<HTMLDivElement>();
+    this.btnRef = React.createRef<HTMLButtonElement>();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  async getData(): Promise<ITaskState> {
+    return {
+      tasks: await getTasks(),
+      taskInput: "",
+      inputFocused: false,
+      addBtnOver: false,
+    };
   }
 
   headerContent(): JSX.Element | undefined {
@@ -36,14 +57,27 @@ export class Task extends Widget<TaskModel[]> {
       <>
         <div style={{ display: "grid", gap: "0.25rem" }}>
           <div style={itemContainer()}>
-            <Add20Filled style={{ color: "var(--Foreground Focus)" }} />
-            <Text>Add a task</Text>
+            <Add20Filled
+              style={{
+                color: tokens.colorBrandForeground1,
+                marginLeft: "0.35rem",
+              }}
+            />
+            <Text
+              truncate
+              style={{
+                color: tokens.colorBrandForeground1,
+                marginLeft: "0.35rem",
+              }}
+            >
+              Add a task
+            </Text>
           </div>
-          {this.state.data?.map((item: TaskModel, index) => {
+          {this.state.data?.tasks?.map((item: TaskModel, index) => {
             return (
               <div style={itemContainer()}>
                 <Button icon={<Circle24Regular />} appearance="transparent" />
-                <Text>{item.content}</Text>
+                <Text truncate>{item.name}</Text>
                 <Button icon={<Star24Regular />} appearance="transparent" />
               </div>
             );
@@ -67,4 +101,30 @@ export class Task extends Widget<TaskModel[]> {
       </Button>
     );
   }
+
+  async componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount(): void {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside(event: any) {
+    if (this.inputDivRef && !this.inputDivRef.current?.contains(event.target)) {
+      this.setState({
+        data: {
+          ...this.state.data,
+          inputFocused: false,
+        },
+      });
+    }
+  }
+
+  onAddButtonClick = async (taskTitle?: string) => {
+    if (this.state.data?.taskInput && this.state.data.taskInput.length > 0) {
+      this.setState({ data: { ...this.state.data, taskInput: "" } });
+    }
+  };
 }

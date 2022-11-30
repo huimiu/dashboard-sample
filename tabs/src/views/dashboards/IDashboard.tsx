@@ -1,4 +1,6 @@
 import { Image } from "@fluentui/react-components";
+import { loginAction } from "../../internal/login";
+import { FxContext } from "../../internal/singletonContext";
 
 import { Dashboard } from "../lib/Dashboard";
 import { oneColumn } from "../lib/Dashboard.styles";
@@ -8,11 +10,14 @@ import { Collaboration } from "../widgets/Collaboration";
 import { Documents } from "../widgets/Document";
 import { Task } from "../widgets/Task";
 
-interface IDashboardProp {
-  showLogin?: boolean;
-}
+const scope = ["Files.Read", "Tasks.ReadWrite", "Calendars.Read"];
 
 export default class IDashboard extends Dashboard {
+  async componentDidMount() {
+    super.componentDidMount();
+    await this.initConsent();
+  }
+
   protected headerImage(): JSX.Element | undefined {
     return <Image src="bg.png" style={{ marginBottom: "-9rem" }} />;
   }
@@ -24,14 +29,40 @@ export default class IDashboard extends Dashboard {
   protected dashboardLayout(): JSX.Element | undefined {
     return (
       <>
-        <Chart />
-        <div style={oneColumn()}>
-          <Calendar />
-          <Task />
-        </div>
-        <Collaboration />
-        <Documents />
+        {this.state.showLogin === false && (
+          <>
+            <Chart />
+            <div style={oneColumn()}>
+              <Calendar />
+              <Task />
+            </div>
+            <Collaboration />
+            <Documents />
+          </>
+        )}
       </>
     );
   }
+
+  async initConsent() {
+    let consentNeeded = await this.checkIsConsentNeeded();
+    if (consentNeeded) {
+      await loginAction(scope);      
+    }
+    this.setState({ showLogin: false });
+  }
+
+  async checkIsConsentNeeded() {
+    let consentNeeded = false;
+    try {
+      await FxContext.getInstance()
+        .getTeamsFx()
+        .getCredential()
+        .getToken(scope);
+    } catch (error) {
+      consentNeeded = true;
+    }
+    return consentNeeded;
+  }
+  
 }

@@ -3,29 +3,12 @@ import { Client } from "@microsoft/microsoft-graph-client";
 import { TaskModel } from "../models/taskModel";
 import { FxContext } from "../internal/singletonContext";
 
-/**
- * @returns :
- * [
- *   {
- *     ...,
- *     "importance": string, // normal
- *     "status": string, // notStarted
- *     "title": string,
- *     "createdDateTime": string,
- *     "lastModifiedDateTime": string,
- *     "categories": [],
- *     "body": {
- *       "content": string,
- *       "contentType": "text"
- *     }
- *   }
- * ]
- */
+
 export async function getTasks(): Promise<TaskModel[]> {
   let teamsfx: TeamsFx;
   try {
     teamsfx = FxContext.getInstance().getTeamsFx();
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.Read"]);
+    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.ReadWrite"]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
 
     const myFirstTaskList = tasklists["value"][0];

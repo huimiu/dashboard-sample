@@ -1,12 +1,8 @@
-export interface CollaboarationItem {
+export interface CollaborationModel {
   id: string;
   img: string;
   title: string;
   description: string;
-  link: string;
-  updated: string;
-}
-
-export interface CollaborationModel {
-  data: CollaboarationItem[];
+  updateTime: string;
+  link?: string;
 }

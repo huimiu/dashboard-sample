@@ -2,12 +2,10 @@ import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { CalendarModel } from "../models/calendarModel";
 import { FxContext } from "../internal/singletonContext";
-import { loginAction } from "../internal/login";
 
 export async function getCalendar(): Promise<CalendarModel[]> {
   var teamsfx: TeamsFx;
   try {
-    loginAction(["Calendars.Read"]);
     teamsfx = FxContext.getInstance().getTeamsFx();
     const token = await teamsfx.getCredential().getToken(["Calendars.Read"]);
     let tokenstr = "";
