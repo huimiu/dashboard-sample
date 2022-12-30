@@ -15,13 +15,13 @@
 4. Press `F5` to open a browser window.
 5. The first time you run this sample, you need to login to consent some delegated permissions. After login, you may need to restart the sample. If you don't see the consent page, please check if your browser blocks the pop-up window.
 
-   ![popup-block](tabs\public\popup-block.png)
+   <img src="tabs\public\popup-block.png">
 
 > If prompted that you cannot authorize access to calendar, tasks and files, please use onmicrosoft's M365 account.
 
 # Try the sample
 
-   ![](tabs\public\dashboard.png)
+   <img src="tabs\public\dashboard.png">
 
 1. You can see several widgets in the dashboard, some show data charts and others show informations with interactive buttons.
 2. In the `Area chart` widget, you can see selling data curves and a table with some informations, like features names, owners, priorities, and processing states.
