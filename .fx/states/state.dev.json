@@ -1,0 +1,39 @@
+{
+    "solution": {
+        "provisionSucceeded": true,
+        "teamsAppTenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
+        "subscriptionId": "1756abc0-3554-4341-8d6a-46674962ea19",
+        "subscriptionName": "Teams Cloud - Dev Test with TTL = 3 Days",
+        "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "needCreateResourceGroup": true,
+        "resourceGroupName": "dashboardsample-dev-rg-001",
+        "location": "Southeast Asia",
+        "resourceNameSuffix": "b78f3d"
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
+        "teamsAppId": "49916f73-4282-454f-8c7c-e74c8edac1d8"
+    },
+    "fx-resource-frontend-hosting": {
+        "indexPath": "/index.html#",
+        "domain": "dashboards174cc9tab.z23.web.core.windows.net",
+        "endpoint": "https://dashboards174cc9tab.z23.web.core.windows.net",
+        "storageResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboardsample-dev-rg-001/providers/Microsoft.Storage/storageAccounts/dashboards174cc9tab"
+    },
+    "fx-resource-aad-app-for-teams": {
+        "clientId": "c1ed2bfc-4e7f-49a7-9243-e7589f1cc303",
+        "clientSecret": "{{fx-resource-aad-app-for-teams.clientSecret}}",
+        "objectId": "3c11a736-2dea-4628-917e-33df6678872d",
+        "oauth2PermissionScopeId": "8012b20f-82ab-469c-b72d-1390db8c4432",
+        "tenantId": "cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
+        "oauthHost": "https://login.microsoftonline.com",
+        "oauthAuthority": "https://login.microsoftonline.com/cf8cf50d-83dd-4225-a262-2abe9e2ae7a7",
+        "applicationIdUris": "api://dashboards174cc9tab.z23.web.core.windows.net/c1ed2bfc-4e7f-49a7-9243-e7589f1cc303",
+        "frontendEndpoint": "https://dashboards174cc9tab.z23.web.core.windows.net"
+    },
+    "fx-resource-identity": {
+        "identityName": "dashboards174cc9",
+        "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/dashboardsample-dev-rg-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboards174cc9",
+        "identityClientId": "4ddbb195-2685-47e8-915e-d554f4f4ee66"
+    }
+}
