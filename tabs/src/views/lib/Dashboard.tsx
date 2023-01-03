@@ -12,7 +12,7 @@ interface IDashboardState {
 /**
  * The dashboard class which is the base class for all dashboard components.
  */
-export class Dashboard extends Component<{}, IDashboardState> {
+export class Dashboard extends Component<any, IDashboardState> {
   private ref: React.RefObject<HTMLDivElement>;
 
   /**

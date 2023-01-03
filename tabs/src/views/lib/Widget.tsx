@@ -7,7 +7,7 @@ import { headerStyles, widgetStyles } from "./Widget.styles";
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
  * T is the model type of the widget.
  */
-export abstract class Widget<T> extends Component<{}, { data?: T | void }> {
+export abstract class Widget<T> extends Component<any, { data?: T | void }> {
   constructor(props: any) {
     super(props);
     this.state = {

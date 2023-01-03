@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 
-import { Button, Text, tokens } from "@fluentui/react-components";
+import { Button, Image, Text } from "@fluentui/react-components";
 import {
   ArrowRight16Filled,
   CalendarLtr24Regular,
@@ -8,6 +8,7 @@ import {
 } from "@fluentui/react-icons";
 
 import { extractTime } from "../../common/dateUtils";
+import { TeamsFxContext } from "../../internal/context";
 import { CalendarModel } from "../../models/calendarModel";
 import { getCalendar } from "../../services/calendarService";
 import { Widget } from "../lib/Widget";
@@ -51,25 +52,36 @@ export class Calendar extends Widget<CalendarModel[]> {
               {`You have ${this.state.data?.length ?? 0} meetings today. The upcoming events`}
             </Text>
           </div>
-          {this.state.data?.map((item: CalendarModel, index) => {
-            return (
-              <div style={meetingItemLayout}>
-                <div style={divider} />
-                <div style={meetingLayout}>
-                  <Text style={meetingTitle}>{item.title}</Text>
-                  <Text style={meetingTime}>{this.getMeetingTime(item)}</Text>
-                  <Text style={meetingLocation}>{item.location}</Text>
+          {!this.state.data || this.state.data.length === 0 ? (
+            <TeamsFxContext.Consumer>
+              {({ themeString }) => (
+                <Image
+                  src={`empty-${themeString}.svg`}
+                  style={{ justifySelf: "center", maxHeight: "200px" }}
+                />
+              )}
+            </TeamsFxContext.Consumer>
+          ) : (
+            this.state.data?.map((item: CalendarModel, index) => {
+              return (
+                <div style={meetingItemLayout}>
+                  <div style={divider} />
+                  <div style={meetingLayout}>
+                    <Text style={meetingTitle}>{item.title}</Text>
+                    <Text style={meetingTime}>{this.getMeetingTime(item)}</Text>
+                    <Text style={meetingLocation}>{item.location}</Text>
+                  </div>
+                  <Button
+                    appearance={index === 0 ? "primary" : "secondary"}
+                    onClick={() => window.open(item.url)}
+                    style={meetingActionBtn}
+                  >
+                    {index === 0 ? "Join" : "Chat"}
+                  </Button>
                 </div>
-                <Button
-                  appearance={index === 0 ? "primary" : "secondary"}
-                  onClick={() => window.open(item.url)}
-                  style={meetingActionBtn}
-                >
-                  {index === 0 ? "Join" : "Chat"}
-                </Button>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </>
     );
