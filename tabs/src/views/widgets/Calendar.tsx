@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 
-import { Button, Image, Text } from "@fluentui/react-components";
+import { Button, Text } from "@fluentui/react-components";
 import {
   ArrowRight16Filled,
   CalendarLtr24Regular,
@@ -8,9 +8,9 @@ import {
 } from "@fluentui/react-icons";
 
 import { extractTime } from "../../common/dateUtils";
-import { TeamsFxContext } from "../../internal/context";
 import { CalendarModel } from "../../models/calendarModel";
 import { getCalendar } from "../../services/calendarService";
+import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
 import {
@@ -26,10 +26,16 @@ import {
   todayLayout,
   todayText,
 } from "../styles/Calendar.styles";
+import { emptyLayout } from "../styles/Common.styles";
 
-export class Calendar extends Widget<CalendarModel[]> {
-  protected async getData() {
-    return await getCalendar();
+interface ICalendarState {
+  meetings?: CalendarModel[];
+  loading?: boolean;
+}
+
+export class Calendar extends Widget<ICalendarState> {
+  protected async getData(): Promise<ICalendarState> {
+    return { meetings: await getCalendar(), loading: false };
   }
 
   protected headerContent(): JSX.Element | undefined {
@@ -43,44 +49,49 @@ export class Calendar extends Widget<CalendarModel[]> {
   }
 
   protected bodyContent(): JSX.Element | undefined {
+    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
+    const hasMeeting = this.state.data?.meetings?.length !== 0;
     return (
       <>
         <div style={bodyLayout}>
-          <div style={todayLayout}>
-            <Text style={todayText}>{moment().format("ll")}</Text>
-            <Text style={meetingSummary}>
-              {`You have ${this.state.data?.length ?? 0} meetings today. The upcoming events`}
-            </Text>
-          </div>
-          {!this.state.data || this.state.data.length === 0 ? (
-            <TeamsFxContext.Consumer>
-              {({ themeString }) => (
-                <Image
-                  src={`empty-${themeString}.svg`}
-                  style={{ justifySelf: "center", maxHeight: "200px" }}
-                />
-              )}
-            </TeamsFxContext.Consumer>
-          ) : (
-            this.state.data?.map((item: CalendarModel, index) => {
-              return (
-                <div style={meetingItemLayout}>
-                  <div style={divider} />
-                  <div style={meetingLayout}>
-                    <Text style={meetingTitle}>{item.title}</Text>
-                    <Text style={meetingTime}>{this.getMeetingTime(item)}</Text>
-                    <Text style={meetingLocation}>{item.location}</Text>
+          {loading ? (
+            <></>
+          ) : hasMeeting ? (
+            <>
+              <div style={todayLayout}>
+                <Text style={todayText}>{moment().format("ll")}</Text>
+                <Text style={meetingSummary}>
+                  {`You have ${
+                    this.state.data?.meetings?.length ?? 0
+                  } meetings today. The upcoming events`}
+                </Text>
+              </div>
+
+              {this.state.data?.meetings?.map((item: CalendarModel, index) => {
+                return (
+                  <div style={meetingItemLayout}>
+                    <div style={divider} />
+                    <div style={meetingLayout}>
+                      <Text style={meetingTitle}>{item.title}</Text>
+                      <Text style={meetingTime}>{this.getMeetingTime(item)}</Text>
+                      <Text style={meetingLocation}>{item.location}</Text>
+                    </div>
+                    <Button
+                      appearance={index === 0 ? "primary" : "secondary"}
+                      onClick={() => window.open(item.url)}
+                      style={meetingActionBtn}
+                    >
+                      {index === 0 ? "Join" : "Chat"}
+                    </Button>
                   </div>
-                  <Button
-                    appearance={index === 0 ? "primary" : "secondary"}
-                    onClick={() => window.open(item.url)}
-                    style={meetingActionBtn}
-                  >
-                    {index === 0 ? "Join" : "Chat"}
-                  </Button>
-                </div>
-              );
-            })
+                );
+              })}
+            </>
+          ) : (
+            <div style={emptyLayout}>
+              <EmptyThemeImg />
+              <Text weight="semibold">No meeting today</Text>
+            </div>
           )}
         </div>
       </>

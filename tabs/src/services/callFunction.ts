@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { BearerTokenAuthProvider, createApiClient, TeamsFx } from "@microsoft/teamsfx";
+import { BearerTokenAuthProvider, createApiClient } from "@microsoft/teamsfx";
 import { FxContext } from "../internal/singletonContext";
 
 const functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";

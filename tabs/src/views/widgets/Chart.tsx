@@ -1,12 +1,11 @@
 import * as d3 from "d3-format";
 
 import { AreaChart, IChartProps } from "@fluentui/react-charting";
-import { Avatar, Button, Text, ToggleButton, tokens } from "@fluentui/react-components";
+import { Avatar, Button, Text, ToggleButton } from "@fluentui/react-components";
 import {
   ArrowMaximize20Regular,
   ArrowRight16Filled,
   ChevronRight20Regular,
-  DataPieRegular,
   MoreHorizontal32Regular,
   Rocket20Regular,
   Search20Regular,
@@ -25,12 +24,7 @@ import {
   chart2Points_7D,
 } from "../../services/sampleRequest";
 import { Widget } from "../lib/Widget";
-import {
-  footerBtnStyle,
-  headerContentStyle,
-  headerStyleWithoutIcon,
-  headerTextStyle,
-} from "../lib/Widget.styles";
+import { footerBtnStyle, headerStyleWithoutIcon } from "../lib/Widget.styles";
 import {
   actionLayout,
   areaChartLayout,
@@ -201,40 +195,46 @@ export class Chart extends Widget<IChartWidgetState> {
           {tableData.map((item: TableModel, index) => {
             return (
               <>
-                {index !== 0 && <div key={`table-divider-${index}`} style={divider} />}
-                <div key={`table-column-${index}`} style={tableColumnStyle}>
-                  <div key={`table-title-${index}`} style={titleStyle}>
-                    <ChevronRight20Regular key={`chevron-${index}`} />
+                {index !== 0 && <div key={`table-divider-${item.id}`} style={divider} />}
+                <div key={`table-column-${item.id}`} style={tableColumnStyle}>
+                  <div key={`table-title-${item.id}`} style={titleStyle}>
+                    <ChevronRight20Regular key={`chevron-${item.id}`} />
                     {index !== 3 ? (
-                      <Rocket20Regular key={`rocket-${index}`} />
+                      <Rocket20Regular key={`rocket-${item.id}`} />
                     ) : (
-                      <Trophy20Regular key={`trophy-${index}`} />
+                      <Trophy20Regular key={`trophy-${item.id}`} />
                     )}
-                    <Text key={`title-${index}`}>{item.title}</Text>
+                    <Text key={`title-${item.id}`}>{item.title}</Text>
                   </div>
 
-                  <div key={`table-avatar-${index}`} style={avatarStyle}>
+                  <div key={`table-avatar-${item.id}`} style={avatarStyle}>
                     <Avatar
-                      key={`avatar-${index}`}
+                      key={`avatar-${item.id}`}
                       name="John Doe"
                       image={{ src: `${item.avatar}` }}
                       size={16}
                     />
-                    <Text key={`name-${index}`}>{item.name}</Text>
+                    <Text key={`name-${item.id}`}>{item.name}</Text>
                   </div>
-                  <div key={`table-avatar-two-${index}`} style={avatarStyle}>
+                  <div key={`table-avatar-two-${item.id}`} style={avatarStyle}>
                     <Avatar
-                      key={`avatar-two-${index}`}
+                      key={`avatar-two-${item.id}`}
                       name="John Doe"
                       image={{ src: `${item.avatar}` }}
                       size={16}
                     />
-                    <Text key={`name-two-${index}`}>{item.name}</Text>
+                    <Text key={`name-two-${item.id}`}>{item.name}</Text>
                   </div>
-                  <Text key={`priority-${index}`}>{item.priority}</Text>
-                  <div key={`state-${index}`} style={stateLayout}>
-                    <ProgressBar bgcolor={item.color} completed={item.state} />
-                    <Text style={stateStyle}>{`${item.state}%`}</Text>
+                  <Text key={`priority-${item.id}`}>{item.priority}</Text>
+                  <div key={`state-${item.id}`} style={stateLayout}>
+                    <ProgressBar
+                      key={`progress-${item.id}`}
+                      bgcolor={item.color}
+                      completed={item.state}
+                    />
+                    <Text key={`progress-text-${item.id}`} style={stateStyle}>
+                      {`${item.state}%`}
+                    </Text>
                   </div>
                 </div>
               </>

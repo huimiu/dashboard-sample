@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Checkbox, Image, Text, tokens } from "@fluentui/react-components";
+import { Button, Checkbox, Image, Text } from "@fluentui/react-components";
 import {
   Add20Filled,
   ArrowRight16Filled,
@@ -8,11 +8,14 @@ import {
   Star24Regular,
 } from "@fluentui/react-icons";
 
+import { TeamsFxContext } from "../../internal/context";
 import { TaskModel } from "../../models/taskModel";
 import { callFunction } from "../../services/callFunction";
 import { addTask, getTasks } from "../../services/taskService";
+import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
+import { emptyLayout } from "../styles/Common.styles";
 import {
   addBtnStyle,
   addTaskBtnStyle,
@@ -24,6 +27,7 @@ import {
 
 interface ITaskState {
   tasks?: TaskModel[];
+  loading?: boolean;
   inputFocused?: boolean;
   addBtnOver?: boolean;
 }
@@ -46,14 +50,18 @@ export class Task extends Widget<ITaskState> {
       tasks: await getTasks(),
       inputFocused: false,
       addBtnOver: false,
+      loading: false,
     };
   }
 
   headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle}>
-        <Image src="task.svg" />
-        
+        <TeamsFxContext.Consumer>
+          {({ themeString }) =>
+            themeString === "default" ? <Image src={`task.svg`} /> : <Image src={`task-dark.svg`} />
+          }
+        </TeamsFxContext.Consumer>
         <Text style={headerTextStyle}>Your tasks</Text>
         <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
@@ -61,6 +69,8 @@ export class Task extends Widget<ITaskState> {
   }
 
   protected bodyContent(): JSX.Element | undefined {
+    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
+    const hasTask = this.state.data && this.state.data.tasks && this.state.data.tasks.length !== 0;
     return (
       <>
         <div style={bodyLayout}>
@@ -72,60 +82,45 @@ export class Task extends Widget<ITaskState> {
               type="text"
               id="task-input"
               style={inputStyle(this.state.data?.inputFocused)}
-              onFocus={() => {
-                this.setState({
-                  data: {
-                    tasks: this.state.data?.tasks,
-                    inputFocused: true,
-                    addBtnOver: this.state.data?.addBtnOver,
-                  },
-                });
-              }}
+              onFocus={() => this.inputFocusedState()}
               placeholder="Add a task"
             />
             {this.state.data?.inputFocused && (
               <button
-                style={addTaskBtnStyle(this.state.data?.addBtnOver)}
                 key="add-task-btn"
                 id="add-task-btn"
+                style={addTaskBtnStyle(this.state.data?.addBtnOver)}
                 onClick={() => {
                   this.onAddButtonClick();
                 }}
-                onMouseEnter={() =>
-                  this.setState({
-                    data: {
-                      tasks: this.state.data?.tasks,
-                      inputFocused: this.state.data?.inputFocused,
-                      addBtnOver: true,
-                    },
-                  })
-                }
-                onMouseLeave={() =>
-                  this.setState({
-                    data: {
-                      tasks: this.state.data?.tasks,
-                      inputFocused: this.state.data?.inputFocused,
-                      addBtnOver: false,
-                    },
-                  })
-                }
+                onMouseEnter={() => this.mouseEnterState()}
+                onMouseLeave={() => this.mouseLeaveState()}
               >
                 Add
               </button>
             )}
           </div>
-          {this.state.data?.tasks?.map((item: TaskModel, index) => {
-            return (
-              <div key={`task-container-${item.id}`} style={existingTaskLayout}>
-                <Checkbox key={`task-circle-${item.id}`} shape="circular" label={item.name} />
-                <Button
-                  key={`task-star-${item.id}`}
-                  icon={<Star24Regular />}
-                  appearance="transparent"
-                />
-              </div>
-            );
-          })}
+          {loading ? (
+            <></>
+          ) : hasTask ? (
+            this.state.data?.tasks?.map((item: TaskModel) => {
+              return (
+                <div key={`task-container-${item.id}`} style={existingTaskLayout}>
+                  <Checkbox key={`task-circle-${item.id}`} shape="circular" label={item.name} />
+                  <Button
+                    key={`task-star-${item.id}`}
+                    icon={<Star24Regular />}
+                    appearance="transparent"
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div style={emptyLayout}>
+              <EmptyThemeImg />
+              <Text weight="semibold">Once you have a task, you'll find it here</Text>
+            </div>
+          )}
         </div>
       </>
     );
@@ -162,6 +157,7 @@ export class Task extends Widget<ITaskState> {
           tasks: this.state.data?.tasks,
           inputFocused: false,
           addBtnOver: this.state.data?.addBtnOver,
+          loading: false,
         },
       });
     }
@@ -175,10 +171,44 @@ export class Task extends Widget<ITaskState> {
           tasks: tasks,
           inputFocused: false,
           addBtnOver: false,
+          loading: false,
         },
       });
       this.inputRef.current.value = "";
       callFunction(this.inputRef.current.value);
     }
+  };
+
+  inputFocusedState = () => {
+    this.setState({
+      data: {
+        tasks: this.state.data?.tasks,
+        inputFocused: true,
+        addBtnOver: this.state.data?.addBtnOver,
+        loading: false,
+      },
+    });
+  };
+
+  mouseEnterState = () => {
+    this.setState({
+      data: {
+        tasks: this.state.data?.tasks,
+        inputFocused: this.state.data?.inputFocused,
+        addBtnOver: true,
+        loading: false,
+      },
+    });
+  };
+
+  mouseLeaveState = () => {
+    this.setState({
+      data: {
+        tasks: this.state.data?.tasks,
+        inputFocused: this.state.data?.inputFocused,
+        addBtnOver: false,
+        loading: false,
+      },
+    });
   };
 }

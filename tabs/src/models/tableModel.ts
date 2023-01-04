@@ -1,5 +1,5 @@
 export interface TableModel {
-  id?: string;
+  id: string;
   title: string;
   avatar: string;
   name: string;

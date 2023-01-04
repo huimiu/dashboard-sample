@@ -13,6 +13,6 @@ export async function loginAction(scope: string[]) {
     FxContext.getInstance().setTeamsFx(teamsfx);
   } catch (e) {
     console.log(e);
-    throw "Login Error: can not login!";
+    throw e;
   }
 }

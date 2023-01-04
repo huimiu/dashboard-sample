@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { dashboardStyles } from "./Dashboard.styles";
-import { Image } from "@fluentui/react-components";
 
 interface IDashboardState {
   isMobile?: boolean;

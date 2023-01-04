@@ -20,24 +20,21 @@ import {
 
 import { DocumentModel } from "../../models/documentModel";
 import { getDocuments, getIconByFileType } from "../../services/documentService";
+import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
-import {
-  bodyLayout,
-  divider,
-  itemContent,
-  taskContainer,
-  titleStyle,
-} from "../styles/Document.styles";
+import { emptyLayout } from "../styles/Common.styles";
+import { bodyLayout, divider, itemContent, taskContainer } from "../styles/Document.styles";
 
 interface IDocumentState {
   activeIndex: number;
   documents?: DocumentModel[];
+  loading?: boolean;
 }
 
 export class Documents extends Widget<IDocumentState> {
   async getData(): Promise<IDocumentState> {
-    return { documents: await getDocuments(), activeIndex: -1 };
+    return { documents: await getDocuments(), activeIndex: -1, loading: false };
   }
 
   headerContent(): JSX.Element | undefined {
@@ -50,108 +47,122 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   bodyContent(): JSX.Element | undefined {
+    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
+    const hasDocument =
+      this.state.data && this.state.data.documents && this.state.data.documents.length !== 0;
     return (
       <div style={bodyLayout}>
-        {this.state.data?.documents?.map((item: DocumentModel, i) => {
-          return (
-            <div
-              key={`container-${item.id}`}
-              style={taskContainer(i == this.state.data?.activeIndex)}
-              onMouseOver={() =>
-                this.setState({
-                  data: {
-                    activeIndex: i,
-                    documents: this.state.data?.documents,
-                  },
-                })
-              }
-              onMouseLeave={() =>
-                this.setState({
-                  data: {
-                    activeIndex: -1,
-                    documents: this.state.data?.documents,
-                  },
-                })
-              }
-            >
-              {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
-              <div key={`content-${item.id}`} style={itemContent}>
-                <Image
-                  key={`img-${item.id}`}
-                  src={getIconByFileType(item.type)}
-                  width="28px"
-                  height="28px"
-                />
-                <Label key={`label-${item.id}`} weight="semibold">
-                  {item.name}
-                </Label>
-                <Menu key={`menu-more-${item.id}`}>
-                  <MenuTrigger key={`menu-more-trigger-${item.id}`}>
-                    <MenuButton
-                      key={`menu-more-button-${item.id}`}
-                      appearance="transparent"
-                      icon={<MoreHorizontal16Filled />}
-                    />
-                  </MenuTrigger>
-                  <MenuPopover key={`menu-pop-${item.id}`}>
-                    <MenuList key={`menu-list-${item.id}`}>
-                      <Menu key={`menu-${item.id}`}>
-                        <MenuTrigger key={`menu-trigger-${item.id}`}>
-                          <MenuItem
-                            key={`menu-item-${item.id}`}
-                            icon={<Image src={getIconByFileType(item.type)} />}
-                          >
-                            Open in
-                          </MenuItem>
-                        </MenuTrigger>
-                        <MenuPopover key={`menu-open-pop-${item.id}`}>
-                          <MenuList key={`menu-open-list-${item.id}`}>
+        {loading ? (
+          <></>
+        ) : !hasDocument ? (
+          <div style={emptyLayout}>
+            <EmptyThemeImg />
+            <Text weight="semibold">
+              Once you have a document, you'll find it here
+            </Text>
+          </div>
+        ) : (
+          this.state.data?.documents?.map((item: DocumentModel, i) => {
+            return (
+              <div
+                key={`container-${item.id}`}
+                style={taskContainer(i === this.state.data?.activeIndex)}
+                onMouseOver={() =>
+                  this.setState({
+                    data: {
+                      activeIndex: i,
+                      documents: this.state.data?.documents,
+                    },
+                  })
+                }
+                onMouseLeave={() =>
+                  this.setState({
+                    data: {
+                      activeIndex: -1,
+                      documents: this.state.data?.documents,
+                    },
+                  })
+                }
+              >
+                {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
+                <div key={`content-${item.id}`} style={itemContent}>
+                  <Image
+                    key={`img-${item.id}`}
+                    src={getIconByFileType(item.type)}
+                    width="28px"
+                    height="28px"
+                  />
+                  <Label key={`label-${item.id}`} weight="semibold">
+                    {item.name}
+                  </Label>
+                  <Menu key={`menu-more-${item.id}`}>
+                    <MenuTrigger key={`menu-more-trigger-${item.id}`}>
+                      <MenuButton
+                        key={`menu-more-button-${item.id}`}
+                        appearance="transparent"
+                        icon={<MoreHorizontal16Filled />}
+                      />
+                    </MenuTrigger>
+                    <MenuPopover key={`menu-pop-${item.id}`}>
+                      <MenuList key={`menu-list-${item.id}`}>
+                        <Menu key={`menu-${item.id}`}>
+                          <MenuTrigger key={`menu-trigger-${item.id}`}>
                             <MenuItem
-                              key={`menu-teams-${item.id}`}
-                              icon={<Image src="teams.svg" />}
-                              onClick={() => window.open(item.teamsurl)}
-                            >
-                              Teams
-                            </MenuItem>
-                            <MenuItem
-                              key={`menu-desktop-${item.id}`}
-                              onClick={() => window.open(item.webDavurl)}
+                              key={`menu-item-${item.id}`}
                               icon={<Image src={getIconByFileType(item.type)} />}
                             >
-                              Desktop app
+                              Open in
                             </MenuItem>
-                            <MenuItem
-                              key={`menu-browser-${item.id}`}
-                              icon={<Image src={getIconByFileType(item.type)} />}
-                              onClick={() => window.open(item.weburl)}
-                            >
-                              Browser
-                            </MenuItem>
-                          </MenuList>
-                        </MenuPopover>
-                      </Menu>
+                          </MenuTrigger>
+                          <MenuPopover key={`menu-open-pop-${item.id}`}>
+                            <MenuList key={`menu-open-list-${item.id}`}>
+                              <MenuItem
+                                key={`menu-teams-${item.id}`}
+                                icon={<Image src="teams.svg" />}
+                                onClick={() => window.open(item.teamsurl)}
+                              >
+                                Teams
+                              </MenuItem>
+                              <MenuItem
+                                key={`menu-desktop-${item.id}`}
+                                onClick={() => window.open(item.webDavurl)}
+                                icon={<Image src={getIconByFileType(item.type)} />}
+                              >
+                                Desktop app
+                              </MenuItem>
+                              <MenuItem
+                                key={`menu-browser-${item.id}`}
+                                icon={<Image src={getIconByFileType(item.type)} />}
+                                onClick={() => window.open(item.weburl)}
+                              >
+                                Browser
+                              </MenuItem>
+                            </MenuList>
+                          </MenuPopover>
+                        </Menu>
 
-                      <MenuItem
-                        key={`menu-download-${item.id}`}
-                        icon={<ArrowDownload24Regular />}
-                        onClick={() => window.open(item.webDavurl)}
-                      >
-                        Download
-                      </MenuItem>
-                      <MenuItem
-                        key={`menu-copy-${item.id}`}
-                        icon={<Link24Regular />}
-                        onClick={() => navigator.clipboard.writeText(item.weburl!)}
-                      >
-                        Copy link
-                      </MenuItem>
-                    </MenuList>
-                  </MenuPopover>
-                </Menu>
+                        <MenuItem
+                          key={`menu-download-${item.id}`}
+                          icon={<ArrowDownload24Regular />}
+                          onClick={() => window.open(item.webDavurl)}
+                        >
+                          Download
+                        </MenuItem>
+                        <MenuItem
+                          key={`menu-copy-${item.id}`}
+                          icon={<Link24Regular />}
+                          onClick={() => navigator.clipboard.writeText(item.weburl!)}
+                        >
+                          Copy link
+                        </MenuItem>
+                      </MenuList>
+                    </MenuPopover>
+                  </Menu>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     );
   }

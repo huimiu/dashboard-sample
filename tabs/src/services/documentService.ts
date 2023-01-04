@@ -4,7 +4,6 @@ import { Client } from "@microsoft/microsoft-graph-client";
 import { FxContext } from "../internal/singletonContext";
 import { FilesType } from "../common/filesType";
 import { EXCEL_SVG, PPT_SVG, VISIO_SVG, WORD_SVG } from "../common/constants";
-import { loginAction } from "../internal/login";
 
 /**
  * @returns :
@@ -43,13 +42,13 @@ export function generateTeamsUrl(obj: any): string {
   const fileType: string = obj["remoteItem"]["file"]["mimeType"];
   url +=
     "fileType=" +
-    (fileType == FilesType.WORD
+    (fileType === FilesType.WORD
       ? "docx"
-      : fileType == FilesType.EXCEL
+      : fileType === FilesType.EXCEL
       ? "xlsx"
-      : fileType == FilesType.PPT
+      : fileType === FilesType.PPT
       ? "pptx"
-      : fileType == FilesType.VISIO
+      : fileType === FilesType.VISIO
       ? "vsd"
       : fileType.substring(fileType.indexOf("application/" + 12)));
   // objectUrl

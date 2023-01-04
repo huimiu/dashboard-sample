@@ -74,7 +74,7 @@ export const areaChartLayout: CSSProperties = {
 export const tableLayout: CSSProperties = {
   display: "grid",
   gap: "0.69rem",
-  marginTop: "1.1875rem",
+  marginTop: "2.5rem",
   paddingRight: "1.5rem",
 };
 
