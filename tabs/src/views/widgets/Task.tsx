@@ -4,6 +4,7 @@ import { Button, Checkbox, Image, Text } from "@fluentui/react-components";
 import {
   Add20Filled,
   ArrowRight16Filled,
+  Circle20Regular,
   MoreHorizontal32Regular,
   Star24Regular,
 } from "@fluentui/react-icons";
@@ -75,7 +76,12 @@ export class Task extends Widget<ITaskState> {
       <>
         <div style={bodyLayout}>
           <div ref={this.inputDivRef} style={addTaskContainer(this.state.data?.inputFocused)}>
-            <Add20Filled style={addBtnStyle} />
+            {this.state.data?.inputFocused ? (
+              <Circle20Regular style={addBtnStyle} />
+            ) : (
+              <Add20Filled style={addBtnStyle} />
+            )}
+
             <input
               ref={this.inputRef}
               key="task-input"
@@ -134,7 +140,12 @@ export class Task extends Widget<ITaskState> {
         iconPosition="after"
         size="small"
         style={footerBtnStyle}
-        onClick={() => {}} // navigate to detailed page
+        onClick={() =>
+          window.open(
+            "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
+            "_blank"
+          )
+        } // navigate to detailed page
       >
         View all
       </Button>

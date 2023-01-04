@@ -106,7 +106,7 @@ export class Calendar extends Widget<ICalendarState> {
         iconPosition="after"
         size="small"
         style={footerBtnStyle}
-        onClick={() => {}} // navigate to detailed page
+        onClick={() => window.open("https://outlook.office.com/calendar/view/day")}
       >
         View all
       </Button>

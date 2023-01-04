@@ -54,35 +54,14 @@ export class Documents extends Widget<IDocumentState> {
       <div style={bodyLayout}>
         {loading ? (
           <></>
-        ) : !hasDocument ? (
-          <div style={emptyLayout}>
-            <EmptyThemeImg />
-            <Text weight="semibold">
-              Once you have a document, you'll find it here
-            </Text>
-          </div>
-        ) : (
+        ) : hasDocument ? (
           this.state.data?.documents?.map((item: DocumentModel, i) => {
             return (
               <div
                 key={`container-${item.id}`}
                 style={taskContainer(i === this.state.data?.activeIndex)}
-                onMouseOver={() =>
-                  this.setState({
-                    data: {
-                      activeIndex: i,
-                      documents: this.state.data?.documents,
-                    },
-                  })
-                }
-                onMouseLeave={() =>
-                  this.setState({
-                    data: {
-                      activeIndex: -1,
-                      documents: this.state.data?.documents,
-                    },
-                  })
-                }
+                onMouseOver={() => this.mouseOver(i)}
+                onMouseLeave={() => this.mouseLeave()}
               >
                 {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
                 <div key={`content-${item.id}`} style={itemContent}>
@@ -162,6 +141,11 @@ export class Documents extends Widget<IDocumentState> {
               </div>
             );
           })
+        ) : (
+          <div style={emptyLayout}>
+            <EmptyThemeImg />
+            <Text weight="semibold">Once you have a document, you'll find it here</Text>
+          </div>
         )}
       </div>
     );
@@ -175,10 +159,30 @@ export class Documents extends Widget<IDocumentState> {
         iconPosition="after"
         size="small"
         style={footerBtnStyle}
-        onClick={() => {}} // navigate to detailed page
+        onClick={() => window.open("https://www.office.com/mycontent")}
       >
         View all
       </Button>
     );
   }
+
+  mouseOver = (i: number) => {
+    this.setState({
+      data: {
+        activeIndex: i,
+        documents: this.state.data?.documents,
+        loading: false,
+      },
+    });
+  };
+
+  mouseLeave = () => {
+    this.setState({
+      data: {
+        activeIndex: -1,
+        documents: this.state.data?.documents,
+        loading: false,
+      },
+    });
+  };
 }

@@ -16,7 +16,8 @@ export const inputStyle = (focused?: boolean): CSSProperties => ({
   outline: "medium",
   height: "1.75rem",
   marginLeft: "-0.3rem",
-  backgroundColor: focused ? tokens.colorNeutralBackground1Pressed : tokens.colorNeutralBackground3,
+  color: tokens.colorNeutralForeground1,
+  backgroundColor: focused ? tokens.colorNeutralBackground5 : tokens.colorNeutralBackground3,
 });
 
 export const addTaskContainer = (focused?: boolean): CSSProperties => ({
@@ -24,7 +25,7 @@ export const addTaskContainer = (focused?: boolean): CSSProperties => ({
   gridTemplateColumns: "max-content 1fr max-content",
   gap: "1rem",
   alignItems: "center",
-  backgroundColor: focused ? tokens.colorNeutralBackground1Pressed : tokens.colorNeutralBackground3,
+  backgroundColor: focused ? tokens.colorNeutralBackground5 : tokens.colorNeutralBackground3,
   borderRadius: "4px",
   height: "2.25rem",
   paddingLeft: "0.875rem",
