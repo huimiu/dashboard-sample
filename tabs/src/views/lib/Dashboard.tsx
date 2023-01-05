@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, CSSProperties } from "react";
 
 import { dashboardStyles } from "./Dashboard.styles";
 
@@ -63,15 +63,15 @@ export class Dashboard extends Component<any, IDashboardState> {
    */
   render() {
     return (
-      <>
-        {this.headerLayout()}
-        <div
-          ref={this.ref}
-          style={dashboardStyles(this.state.isMobile, this.rowHeights(), this.columnWidths())}
-        >
-          {this.dashboardLayout()}
-        </div>
-      </>
+      <div
+        ref={this.ref}
+        style={{
+          ...dashboardStyles(this.state.isMobile, this.rowHeights(), this.columnWidths()),
+          ...this.customiseDashboardStyle(),
+        }}
+      >
+        {this.dashboardLayout()}
+      </div>
     );
   }
 
@@ -93,14 +93,14 @@ export class Dashboard extends Component<any, IDashboardState> {
     return undefined;
   }
 
-  protected headerLayout(): JSX.Element | undefined {
-    return undefined;
-  }
-
   /**
    * Implement this method to define the dashboard layout.
    */
   protected dashboardLayout(): JSX.Element | undefined {
+    return undefined;
+  }
+
+  protected customiseDashboardStyle(): CSSProperties | undefined {
     return undefined;
   }
 }

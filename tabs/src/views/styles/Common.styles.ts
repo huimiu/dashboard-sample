@@ -2,9 +2,14 @@ import { CSSProperties } from "react";
 
 export const emptyLayout: CSSProperties = {
   display: "grid",
-  justifyItems: "center",
   gap: "1rem",
-  marginTop: "1rem",
-  gridTemplateRows: "1fr max-content",
-  alignSelf: "center",
+};
+
+export const emptyImgStyle: CSSProperties = {
+  height: "120px",
+  justifySelf: "center",
+};
+
+export const emptyTextStyle: CSSProperties = {
+  justifySelf: "center",
 };

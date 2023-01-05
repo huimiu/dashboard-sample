@@ -1,4 +1,5 @@
 import { Image, Spinner } from "@fluentui/react-components";
+import { CSSProperties } from "react";
 
 import { loginAction } from "../../internal/login";
 import { FxContext } from "../../internal/singletonContext";
@@ -14,24 +15,12 @@ import { Task } from "../widgets/Task";
 const scope = ["Files.Read", "Tasks.ReadWrite", "Calendars.Read"];
 
 export default class MyDashboard extends Dashboard {
-  async componentDidMount() {
-    super.componentDidMount();
-    await this.initConsent();
-  }
-
-  protected headerLayout(): JSX.Element | undefined {
-    return <Image src="bg.png" style={imgStyle} />;
-  }
-
-  protected columnWidths(): string | undefined {
-    return "7fr 3fr";
-  }
-
   protected dashboardLayout(): JSX.Element | undefined {
     return (
       <>
         {this.state.showLogin === false ? (
           <>
+            <Image style={imgStyle} src="bg.png" />
             <Chart />
             <div style={oneColumn()}>
               <Calendar />
@@ -55,6 +44,21 @@ export default class MyDashboard extends Dashboard {
         )}
       </>
     );
+  }
+
+  protected columnWidths(): string | undefined {
+    return "7fr 3fr";
+  }
+
+  async componentDidMount() {
+    super.componentDidMount();
+    await this.initConsent();
+  }
+
+  protected customiseDashboardStyle(): CSSProperties | undefined {
+    return {
+      marginTop: "3.7rem",
+    };
   }
 
   async initConsent() {

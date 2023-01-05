@@ -1,9 +1,18 @@
 import { tokens } from "@fluentui/react-components";
 import { CSSProperties } from "react";
 
-export const bodyLayout: CSSProperties = {
-  display: "grid",
-  gap: "0.25rem",
+export const bodyLayout = (hasTask: boolean): CSSProperties => {
+  if (hasTask) {
+    return {
+      display: "grid",
+      gap: "0.25rem",
+    };
+  } else {
+    return {
+      display: "grid",
+      gap: "1.8rem",
+    };
+  }
 };
 
 export const addBtnStyle: CSSProperties = {
@@ -15,22 +24,41 @@ export const inputStyle = (focused?: boolean): CSSProperties => ({
   border: "none",
   outline: "medium",
   height: "1.75rem",
-  marginLeft: "-0.3rem",
+  marginLeft: "-0.35rem",
   color: tokens.colorNeutralForeground1,
-  backgroundColor: focused ? tokens.colorNeutralBackground5 : tokens.colorNeutralBackground3,
+  backgroundColor: focused ? tokens.colorNeutralBackground6 : tokens.colorNeutralBackground3,
 });
 
-export const addTaskContainer = (focused?: boolean): CSSProperties => ({
-  display: "grid",
-  gridTemplateColumns: "max-content 1fr max-content",
-  gap: "1rem",
-  alignItems: "center",
-  backgroundColor: focused ? tokens.colorNeutralBackground5 : tokens.colorNeutralBackground3,
-  borderRadius: "4px",
-  height: "2.25rem",
-  paddingLeft: "0.875rem",
-  paddingRight: "0.7rem",
-});
+export const addTaskContainer = (themeString: string, focused?: boolean): CSSProperties => {
+  if (themeString === "contrast") {
+    return {
+      display: "grid",
+      gridTemplateColumns: "max-content 1fr max-content",
+      gap: "1rem",
+      alignItems: "center",
+      backgroundColor: focused ? tokens.colorNeutralBackground6 : tokens.colorNeutralBackground3,
+      borderRadius: "4px",
+      height: "2.25rem",
+      paddingLeft: "0.875rem",
+      paddingRight: "0.7rem",
+      borderStyle: "solid",
+      borderWidth: "1px",
+      borderColor: "white",
+    };
+  } else {
+    return {
+      display: "grid",
+      gridTemplateColumns: "max-content 1fr max-content",
+      gap: "1rem",
+      alignItems: "center",
+      backgroundColor: focused ? tokens.colorNeutralBackground6 : tokens.colorNeutralBackground3,
+      borderRadius: "4px",
+      height: "2.25rem",
+      paddingLeft: "0.875rem",
+      paddingRight: "0.7rem",
+    };
+  }
+};
 
 export const addTaskBtnStyle = (mouseEnter?: boolean): CSSProperties => ({
   borderRadius: "4px",
@@ -39,9 +67,7 @@ export const addTaskBtnStyle = (mouseEnter?: boolean): CSSProperties => ({
   border: "none",
   fontWeight: "600",
   transition: "visibility 0s ease 50ms",
-  backgroundColor: mouseEnter
-    ? tokens.colorNeutralForegroundInvertedLinkHover
-    : tokens.colorNeutralForegroundInvertedLink,
+  backgroundColor: mouseEnter ? tokens.colorNeutralStroke1Hover : tokens.colorNeutralStrokeOnBrand2,
 });
 
 export const existingTaskLayout: CSSProperties = {

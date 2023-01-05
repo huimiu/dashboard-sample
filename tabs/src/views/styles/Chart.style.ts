@@ -78,6 +78,12 @@ export const tableLayout: CSSProperties = {
   paddingRight: "1.5rem",
 };
 
+export const backlogLayout: CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "1fr max-content",
+  alignItems: "center",
+};
+
 export const backlogStyle: CSSProperties = {
   fontFamily: "Segoe UI",
   fontStyle: "normal",

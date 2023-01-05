@@ -1,8 +1,10 @@
 export interface TableModel {
   id: string;
   title: string;
-  avatar: string;
-  name: string;
+  assignedAvatar: string;
+  assignedName: string;
+  ownerAvatar: string;
+  ownerName: string;
   priority: string;
   color: string;
   state: number;

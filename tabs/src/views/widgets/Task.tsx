@@ -16,7 +16,7 @@ import { addTask, getTasks } from "../../services/taskService";
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout } from "../styles/Common.styles";
+import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
 import {
   addBtnStyle,
   addTaskBtnStyle,
@@ -71,41 +71,13 @@ export class Task extends Widget<ITaskState> {
 
   protected bodyContent(): JSX.Element | undefined {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
-    const hasTask = this.state.data && this.state.data.tasks && this.state.data.tasks.length !== 0;
+    const hasTask = this.state.data?.tasks?.length !== 0;
     return (
       <>
-        <div style={bodyLayout}>
-          <div ref={this.inputDivRef} style={addTaskContainer(this.state.data?.inputFocused)}>
-            {this.state.data?.inputFocused ? (
-              <Circle20Regular style={addBtnStyle} />
-            ) : (
-              <Add20Filled style={addBtnStyle} />
-            )}
-
-            <input
-              ref={this.inputRef}
-              key="task-input"
-              type="text"
-              id="task-input"
-              style={inputStyle(this.state.data?.inputFocused)}
-              onFocus={() => this.inputFocusedState()}
-              placeholder="Add a task"
-            />
-            {this.state.data?.inputFocused && (
-              <button
-                key="add-task-btn"
-                id="add-task-btn"
-                style={addTaskBtnStyle(this.state.data?.addBtnOver)}
-                onClick={() => {
-                  this.onAddButtonClick();
-                }}
-                onMouseEnter={() => this.mouseEnterState()}
-                onMouseLeave={() => this.mouseLeaveState()}
-              >
-                Add
-              </button>
-            )}
-          </div>
+        <div style={bodyLayout(hasTask)}>
+          <TeamsFxContext.Consumer>
+            {({ themeString }) => this.inputLayout(themeString)}
+          </TeamsFxContext.Consumer>
           {loading ? (
             <></>
           ) : hasTask ? (
@@ -124,7 +96,9 @@ export class Task extends Widget<ITaskState> {
           ) : (
             <div style={emptyLayout}>
               <EmptyThemeImg />
-              <Text weight="semibold">Once you have a task, you'll find it here</Text>
+              <Text weight="semibold" style={emptyTextStyle}>
+                Once you have a task, you'll find it here
+              </Text>
             </div>
           )}
         </div>
@@ -133,22 +107,65 @@ export class Task extends Widget<ITaskState> {
   }
 
   footerContent(): JSX.Element | undefined {
+    if (this.state.data?.tasks?.length !== 0) {
+      return (
+        <Button
+          appearance="transparent"
+          icon={<ArrowRight16Filled />}
+          iconPosition="after"
+          size="small"
+          style={footerBtnStyle}
+          onClick={() =>
+            window.open(
+              "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
+              "_blank"
+            )
+          } // navigate to detailed page
+        >
+          View all
+        </Button>
+      );
+    } else {
+      return undefined;
+    }
+  }
+
+  inputLayout(themeString: string): JSX.Element | undefined {
     return (
-      <Button
-        appearance="transparent"
-        icon={<ArrowRight16Filled />}
-        iconPosition="after"
-        size="small"
-        style={footerBtnStyle}
-        onClick={() =>
-          window.open(
-            "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
-            "_blank"
-          )
-        } // navigate to detailed page
+      <div
+        ref={this.inputDivRef}
+        style={addTaskContainer(themeString, this.state.data?.inputFocused)}
       >
-        View all
-      </Button>
+        {this.state.data?.inputFocused ? (
+          <Circle20Regular style={addBtnStyle} />
+        ) : (
+          <Add20Filled style={addBtnStyle} />
+        )}
+
+        <input
+          ref={this.inputRef}
+          key="task-input"
+          type="text"
+          id="task-input"
+          style={inputStyle(this.state.data?.inputFocused)}
+          onFocus={() => this.inputFocusedState()}
+          placeholder="Add a task"
+        />
+        {this.state.data?.inputFocused && (
+          <button
+            key="add-task-btn"
+            id="add-task-btn"
+            style={addTaskBtnStyle(this.state.data?.addBtnOver)}
+            onClick={() => {
+              this.onAddButtonClick();
+            }}
+            onMouseEnter={() => this.mouseEnterState()}
+            onMouseLeave={() => this.mouseLeaveState()}
+          >
+            Add
+          </button>
+        )}
+      </div>
     );
   }
 

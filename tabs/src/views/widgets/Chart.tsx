@@ -6,6 +6,7 @@ import {
   ArrowMaximize20Regular,
   ArrowRight16Filled,
   ChevronRight20Regular,
+  MoreHorizontal16Filled,
   MoreHorizontal32Regular,
   Rocket20Regular,
   Search20Regular,
@@ -13,8 +14,9 @@ import {
   Trophy20Regular,
 } from "@fluentui/react-icons";
 
+import { DayRange, DayRangeModel } from "../../models/dayRangeModel";
 import { TableModel } from "../../models/tableModel";
-import { tableData } from "../../services/chartService";
+import { dayRangeData, tableData } from "../../services/chartService";
 import {
   chart1Points_30D,
   chart1Points_60D,
@@ -23,6 +25,7 @@ import {
   chart2Points_60D,
   chart2Points_7D,
 } from "../../services/sampleRequest";
+import ProgressBar from "../components/Progress";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon } from "../lib/Widget.styles";
 import {
@@ -30,6 +33,7 @@ import {
   areaChartLayout,
   areaChartStyle,
   avatarStyle,
+  backlogLayout,
   backlogStyle,
   divider,
   legendBoldStyle,
@@ -46,13 +50,6 @@ import {
   timeSpanStyle,
   titleStyle,
 } from "../styles/Chart.style";
-import ProgressBar from "../components/Progress";
-
-enum DayRange {
-  Seven,
-  Thirty,
-  Sixty,
-}
 
 interface IChartWidgetState {
   dayRange: DayRange;
@@ -122,51 +119,26 @@ export class Chart extends Widget<IChartWidgetState> {
           </div>
         </div>
         <div style={timeSpanLayout}>
-          <ToggleButton
-            appearance="transparent"
-            checked={this.state.data?.dayRange === DayRange.Seven}
-            style={timeSpanStyle}
-            onClick={() =>
-              this.setState({
-                data: {
-                  chartProps: this.retriveChartsData(DayRange.Seven),
-                  dayRange: DayRange.Seven,
-                },
-              })
-            }
-          >
-            7 Days
-          </ToggleButton>
-          <ToggleButton
-            appearance="transparent"
-            checked={this.state.data?.dayRange === DayRange.Thirty}
-            style={timeSpanStyle}
-            onClick={() =>
-              this.setState({
-                data: {
-                  chartProps: this.retriveChartsData(DayRange.Thirty),
-                  dayRange: DayRange.Thirty,
-                },
-              })
-            }
-          >
-            30 Days
-          </ToggleButton>
-          <ToggleButton
-            appearance="transparent"
-            checked={this.state.data?.dayRange === DayRange.Sixty}
-            style={timeSpanStyle}
-            onClick={() =>
-              this.setState({
-                data: {
-                  chartProps: this.retriveChartsData(DayRange.Sixty),
-                  dayRange: DayRange.Sixty,
-                },
-              })
-            }
-          >
-            60 Days
-          </ToggleButton>
+          {dayRangeData.map((item: DayRangeModel) => {
+            return (
+              <ToggleButton
+                key={`day-range-${item.id}`}
+                appearance="transparent"
+                checked={this.state.data?.dayRange === item.dayRange}
+                style={timeSpanStyle}
+                onClick={() =>
+                  this.setState({
+                    data: {
+                      chartProps: this.retriveChartsData(item.dayRange),
+                      dayRange: item.dayRange,
+                    },
+                  })
+                }
+              >
+                {item.displayName}
+              </ToggleButton>
+            );
+          })}
         </div>
 
         <div style={areaChartLayout}>
@@ -184,7 +156,11 @@ export class Chart extends Widget<IChartWidgetState> {
         </div>
 
         <div style={tableLayout}>
-          <Text style={backlogStyle}>Features backlog (57)</Text>
+          <div style={backlogLayout}>
+            <Text style={backlogStyle}>Features backlog (57)</Text>
+            <Button icon={<MoreHorizontal16Filled />} appearance="transparent" />
+          </div>
+
           <div style={tableColumnStyle}>
             <Text style={tableHeaderStyle}>Title</Text>
             <Text style={tableHeaderStyle}>Assigned To</Text>
@@ -210,20 +186,20 @@ export class Chart extends Widget<IChartWidgetState> {
                   <div key={`table-avatar-${item.id}`} style={avatarStyle}>
                     <Avatar
                       key={`avatar-${item.id}`}
-                      name="John Doe"
-                      image={{ src: `${item.avatar}` }}
+                      name={item.assignedName}
+                      image={{ src: `${item.assignedAvatar}` }}
                       size={16}
                     />
-                    <Text key={`name-${item.id}`}>{item.name}</Text>
+                    <Text key={`name-${item.id}`}>{item.assignedName}</Text>
                   </div>
                   <div key={`table-avatar-two-${item.id}`} style={avatarStyle}>
                     <Avatar
                       key={`avatar-two-${item.id}`}
-                      name="John Doe"
-                      image={{ src: `${item.avatar}` }}
+                      name={item.ownerName}
+                      image={{ src: `${item.ownerAvatar}` }}
                       size={16}
                     />
-                    <Text key={`name-two-${item.id}`}>{item.name}</Text>
+                    <Text key={`name-two-${item.id}`}>{item.ownerName}</Text>
                   </div>
                   <Text key={`priority-${item.id}`}>{item.priority}</Text>
                   <div key={`state-${item.id}`} style={stateLayout}>

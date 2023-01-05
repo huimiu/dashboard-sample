@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 
-import { Button, Text } from "@fluentui/react-components";
+import { Button, Image, Text } from "@fluentui/react-components";
 import {
   ArrowRight16Filled,
   CalendarLtr24Regular,
@@ -10,7 +10,6 @@ import {
 import { extractTime } from "../../common/dateUtils";
 import { CalendarModel } from "../../models/calendarModel";
 import { getCalendar } from "../../services/calendarService";
-import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
 import {
@@ -26,7 +25,7 @@ import {
   todayLayout,
   todayText,
 } from "../styles/Calendar.styles";
-import { emptyLayout } from "../styles/Common.styles";
+import { emptyImgStyle, emptyLayout, emptyTextStyle } from "../styles/Common.styles";
 
 interface ICalendarState {
   meetings?: CalendarModel[];
@@ -53,7 +52,7 @@ export class Calendar extends Widget<ICalendarState> {
     const hasMeeting = this.state.data?.meetings?.length !== 0;
     return (
       <>
-        <div style={bodyLayout}>
+        <div style={bodyLayout(hasMeeting)}>
           {loading ? (
             <></>
           ) : hasMeeting ? (
@@ -89,8 +88,10 @@ export class Calendar extends Widget<ICalendarState> {
             </>
           ) : (
             <div style={emptyLayout}>
-              <EmptyThemeImg />
-              <Text weight="semibold">No meeting today</Text>
+              <Image src={`no-meeting.svg`} style={emptyImgStyle} />
+              <Text weight="semibold" style={emptyTextStyle}>
+                No meeting today
+              </Text>
             </div>
           )}
         </div>
@@ -108,7 +109,7 @@ export class Calendar extends Widget<ICalendarState> {
         style={footerBtnStyle}
         onClick={() => window.open("https://outlook.office.com/calendar/view/day")}
       >
-        View all
+        View calendar
       </Button>
     );
   }

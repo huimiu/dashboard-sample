@@ -1,8 +1,19 @@
 import { tokens } from "@fluentui/react-theme";
 import { CSSProperties } from "react";
 
-export const bodyLayout: CSSProperties = {
-  display: "grid",
+export const bodyLayout = (hasDocument: boolean): CSSProperties => {
+  if (hasDocument) {
+    return {
+      display: "grid",
+    };
+  } else {
+    return {
+      display: "grid",
+      height: "100%",
+      justifyContent: "center",
+      alignContent: "center",
+    };
+  }
 };
 
 export const taskContainer = (active: boolean): CSSProperties => ({

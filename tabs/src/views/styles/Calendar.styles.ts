@@ -1,8 +1,19 @@
 import { CSSProperties } from "react";
 
-export const bodyLayout: CSSProperties = {
-  display: "grid",
-  gap: "1.25rem",
+export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
+  if (hasMeeting) {
+    return {
+      display: "grid",
+      gap: "1.25rem",
+    };
+  } else {
+    return {
+      display: "grid",
+      height: "100%",
+      justifyContent: "center",
+      alignContent: "center",
+    };
+  }
 };
 
 export const todayLayout: CSSProperties = {

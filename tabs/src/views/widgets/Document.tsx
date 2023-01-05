@@ -23,7 +23,7 @@ import { getDocuments, getIconByFileType } from "../../services/documentService"
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout } from "../styles/Common.styles";
+import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
 import { bodyLayout, divider, itemContent, taskContainer } from "../styles/Document.styles";
 
 interface IDocumentState {
@@ -48,10 +48,9 @@ export class Documents extends Widget<IDocumentState> {
 
   bodyContent(): JSX.Element | undefined {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
-    const hasDocument =
-      this.state.data && this.state.data.documents && this.state.data.documents.length !== 0;
+    const hasDocument = this.state.data?.documents?.length !== 0;
     return (
-      <div style={bodyLayout}>
+      <div style={bodyLayout(hasDocument)}>
         {loading ? (
           <></>
         ) : hasDocument ? (
@@ -144,7 +143,9 @@ export class Documents extends Widget<IDocumentState> {
         ) : (
           <div style={emptyLayout}>
             <EmptyThemeImg />
-            <Text weight="semibold">Once you have a document, you'll find it here</Text>
+            <Text weight="semibold" style={emptyTextStyle}>
+              Once you have a document, you'll find it here
+            </Text>
           </div>
         )}
       </div>
@@ -152,18 +153,22 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    return (
-      <Button
-        appearance="transparent"
-        icon={<ArrowRight16Filled />}
-        iconPosition="after"
-        size="small"
-        style={footerBtnStyle}
-        onClick={() => window.open("https://www.office.com/mycontent")}
-      >
-        View all
-      </Button>
-    );
+    if (this.state.data?.documents?.length !== 0) {
+      return (
+        <Button
+          appearance="transparent"
+          icon={<ArrowRight16Filled />}
+          iconPosition="after"
+          size="small"
+          style={footerBtnStyle}
+          onClick={() => window.open("https://www.office.com/mycontent")}
+        >
+          View all
+        </Button>
+      );
+    } else {
+      return undefined;
+    }
   }
 
   mouseOver = (i: number) => {
