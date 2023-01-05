@@ -33,7 +33,7 @@ export default class MyDashboard extends Dashboard {
           <div
             style={{
               width: "100vw",
-              height: "100vh",
+              height: "80vh",
               display: "grid",
               alignItems: "center",
               justifyItems: "center",

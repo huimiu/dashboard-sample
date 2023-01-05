@@ -83,14 +83,18 @@ export class Task extends Widget<ITaskState> {
           ) : hasTask ? (
             this.state.data?.tasks?.map((item: TaskModel) => {
               return (
-                <div key={`task-container-${item.id}`} style={existingTaskLayout}>
-                  <Checkbox key={`task-circle-${item.id}`} shape="circular" label={item.name} />
-                  <Button
-                    key={`task-star-${item.id}`}
-                    icon={<Star24Regular />}
-                    appearance="transparent"
-                  />
-                </div>
+                <TeamsFxContext.Consumer>
+                  {({ themeString }) => (
+                    <div key={`task-container-${item.id}`} style={existingTaskLayout(themeString)}>
+                      <Checkbox key={`task-circle-${item.id}`} shape="circular" label={item.name} />
+                      <Button
+                        key={`task-star-${item.id}`}
+                        icon={<Star24Regular />}
+                        appearance="transparent"
+                      />
+                    </div>
+                  )}
+                </TeamsFxContext.Consumer>
               );
             })
           ) : (
