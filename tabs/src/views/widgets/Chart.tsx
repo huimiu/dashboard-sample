@@ -1,7 +1,7 @@
 import * as d3 from "d3-format";
 
 import { AreaChart, IChartProps } from "@fluentui/react-charting";
-import { Avatar, Button, Text, ToggleButton } from "@fluentui/react-components";
+import { Avatar, Button, Text, ToggleButton, tokens } from "@fluentui/react-components";
 import {
   ArrowMaximize20Regular,
   ArrowRight16Filled,
@@ -41,9 +41,11 @@ import {
   legendItemLayout,
   legendLayout,
   legendNormalStyle,
+  minWidthStyle,
   stateLayout,
   stateStyle,
   tableColumnStyle,
+  tableContentLayout,
   tableHeaderStyle,
   tableLayout,
   timeSpanLayout,
@@ -150,6 +152,7 @@ export class Chart extends Widget<IChartWidgetState> {
               wrapXAxisLables={false}
               legendProps={{
                 allowFocusOnLegends: true,
+                styles: { text: { color: tokens.colorNeutralForeground1 } },
               }}
             />
           )}
@@ -161,61 +164,67 @@ export class Chart extends Widget<IChartWidgetState> {
             <Button icon={<MoreHorizontal16Filled />} appearance="transparent" />
           </div>
 
-          <div style={tableColumnStyle}>
-            <Text style={tableHeaderStyle}>Title</Text>
-            <Text style={tableHeaderStyle}>Assigned To</Text>
-            <Text style={tableHeaderStyle}>PM Owner</Text>
-            <Text style={tableHeaderStyle}>Priority</Text>
-            <Text style={tableHeaderStyle}>State</Text>
-          </div>
-          {tableData.map((item: TableModel, index) => {
-            return (
-              <>
-                {index !== 0 && <div key={`table-divider-${item.id}`} style={divider} />}
-                <div key={`table-column-${item.id}`} style={tableColumnStyle}>
-                  <div key={`table-title-${item.id}`} style={titleStyle}>
-                    <ChevronRight20Regular key={`chevron-${item.id}`} />
-                    {index !== 3 ? (
-                      <Rocket20Regular key={`rocket-${item.id}`} />
-                    ) : (
-                      <Trophy20Regular key={`trophy-${item.id}`} />
-                    )}
-                    <Text key={`title-${item.id}`}>{item.title}</Text>
-                  </div>
+          <div style={tableContentLayout}>
+            <div style={tableColumnStyle}>
+              <Text style={{ ...minWidthStyle(16), ...tableHeaderStyle }}>Title</Text>
+              <Text style={{ ...minWidthStyle(8), ...tableHeaderStyle }}>Assigned To</Text>
+              <Text style={{ ...minWidthStyle(8), ...tableHeaderStyle }}>PM Owner</Text>
+              <Text style={{ ...minWidthStyle(4), ...tableHeaderStyle }}>Priority</Text>
+              <Text style={{ ...minWidthStyle(6), ...tableHeaderStyle }}>State</Text>
+            </div>
+            {tableData.map((item: TableModel, index) => {
+              return (
+                <>
+                  {index !== 0 && <div key={`table-divider-${item.id}`} style={divider} />}
+                  <div key={`table-column-${item.id}`} style={tableColumnStyle}>
+                    <div key={`table-title-${item.id}`} style={titleStyle}>
+                      <ChevronRight20Regular key={`chevron-${item.id}`} />
+                      {index !== 3 ? (
+                        <Rocket20Regular key={`rocket-${item.id}`} />
+                      ) : (
+                        <Trophy20Regular key={`trophy-${item.id}`} />
+                      )}
+                      <Text key={`title-${item.id}`} wrap={false}>
+                        {item.title}
+                      </Text>
+                    </div>
 
-                  <div key={`table-avatar-${item.id}`} style={avatarStyle}>
-                    <Avatar
-                      key={`avatar-${item.id}`}
-                      name={item.assignedName}
-                      image={{ src: `${item.assignedAvatar}` }}
-                      size={16}
-                    />
-                    <Text key={`name-${item.id}`}>{item.assignedName}</Text>
-                  </div>
-                  <div key={`table-avatar-two-${item.id}`} style={avatarStyle}>
-                    <Avatar
-                      key={`avatar-two-${item.id}`}
-                      name={item.ownerName}
-                      image={{ src: `${item.ownerAvatar}` }}
-                      size={16}
-                    />
-                    <Text key={`name-two-${item.id}`}>{item.ownerName}</Text>
-                  </div>
-                  <Text key={`priority-${item.id}`}>{item.priority}</Text>
-                  <div key={`state-${item.id}`} style={stateLayout}>
-                    <ProgressBar
-                      key={`progress-${item.id}`}
-                      bgcolor={item.color}
-                      completed={item.state}
-                    />
-                    <Text key={`progress-text-${item.id}`} style={stateStyle}>
-                      {`${item.state}%`}
+                    <div key={`table-avatar-${item.id}`} style={avatarStyle}>
+                      <Avatar
+                        key={`avatar-${item.id}`}
+                        name={item.assignedName}
+                        image={{ src: `${item.assignedAvatar}` }}
+                        size={16}
+                      />
+                      <Text key={`name-${item.id}`}>{item.assignedName}</Text>
+                    </div>
+                    <div key={`table-avatar-two-${item.id}`} style={avatarStyle}>
+                      <Avatar
+                        key={`avatar-two-${item.id}`}
+                        name={item.ownerName}
+                        image={{ src: `${item.ownerAvatar}` }}
+                        size={16}
+                      />
+                      <Text key={`name-two-${item.id}`}>{item.ownerName}</Text>
+                    </div>
+                    <Text key={`priority-${item.id}`} style={{ minWidth: "4rem" }}>
+                      {item.priority}
                     </Text>
+                    <div key={`state-${item.id}`} style={stateLayout}>
+                      <ProgressBar
+                        key={`progress-${item.id}`}
+                        bgcolor={item.color}
+                        completed={item.state}
+                      />
+                      <Text key={`progress-text-${item.id}`} style={stateStyle}>
+                        {`${item.state}%`}
+                      </Text>
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+          </div>
         </div>
       </>
     );

@@ -31,7 +31,7 @@ export abstract class Widget<T> extends Component<any, { data?: T | void }> {
     return (
       <div style={widgetStyles}>
         {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
-        {this.bodyContent() && <div>{this.bodyContent()}</div>}
+        {this.bodyContent() && <div style={{overflowX: "hidden"}}>{this.bodyContent()}</div>}
         {this.footerContent() && <div>{this.footerContent()}</div>}
       </div>
     );

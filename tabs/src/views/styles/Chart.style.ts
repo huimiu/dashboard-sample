@@ -84,6 +84,12 @@ export const backlogLayout: CSSProperties = {
   alignItems: "center",
 };
 
+export const tableContentLayout: CSSProperties = {
+  display: "grid",
+  overflowX: "auto",
+  gap: "0.75rem",
+};
+
 export const backlogStyle: CSSProperties = {
   fontFamily: "Segoe UI",
   fontStyle: "normal",
@@ -99,6 +105,12 @@ export const tableColumnStyle: CSSProperties = {
   alignItems: "center",
 };
 
+export const minWidthStyle = (v: number): CSSProperties => {
+  return {
+    minWidth: `${v}rem`,
+  };
+};
+
 export const tableHeaderStyle: CSSProperties = {
   fontFamily: "Segoe UI",
   fontStyle: "normal",
@@ -112,6 +124,7 @@ export const titleStyle: CSSProperties = {
   display: "grid",
   gap: "0.6rem",
   gridTemplateColumns: "max-content max-content 1fr",
+  minWidth: "16rem",
 };
 
 export const avatarStyle: CSSProperties = {
@@ -119,6 +132,7 @@ export const avatarStyle: CSSProperties = {
   gap: "0.25rem",
   alignItems: "center",
   gridTemplateColumns: "max-content 1fr",
+  minWidth: "8rem",
 };
 
 export const stateLayout: CSSProperties = {
@@ -126,6 +140,7 @@ export const stateLayout: CSSProperties = {
   alignItems: "center",
   gridTemplateColumns: "1fr 1fr",
   gap: "0.375rem",
+  minWidth: "6rem",
 };
 
 export const stateStyle: CSSProperties = {
