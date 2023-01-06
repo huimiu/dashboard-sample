@@ -35,6 +35,7 @@ import {
   avatarStyle,
   backlogLayout,
   backlogStyle,
+  bodyLayout,
   divider,
   legendBoldStyle,
   legendDividerStyle,
@@ -98,7 +99,7 @@ export class Chart extends Widget<IChartWidgetState> {
 
   bodyContent(): JSX.Element | undefined {
     return (
-      <>
+      <div style={bodyLayout}>
         <div style={legendLayout}>
           <div style={legendItemLayout}>
             <Text style={legendBoldStyle}>Feb 1, 2020</Text>
@@ -124,7 +125,7 @@ export class Chart extends Widget<IChartWidgetState> {
           {dayRangeData.map((item: DayRangeModel) => {
             return (
               <ToggleButton
-                key={`day-range-${item.id}`}
+                key={`tb-day-range-${item.id}`}
                 appearance="transparent"
                 checked={this.state.data?.dayRange === item.dayRange}
                 style={timeSpanStyle}
@@ -146,6 +147,7 @@ export class Chart extends Widget<IChartWidgetState> {
         <div style={areaChartLayout}>
           {this.state.data?.chartProps && (
             <AreaChart
+              key={`area-chart-${this.state.data.dayRange}`}
               data={this.state.data.chartProps}
               legendsOverflowText={"Overflow Items"}
               yAxisTickFormat={d3.format(".1s")}
@@ -166,57 +168,82 @@ export class Chart extends Widget<IChartWidgetState> {
 
           <div style={tableContentLayout}>
             <div style={tableColumnStyle}>
-              <Text style={{ ...minWidthStyle(16), ...tableHeaderStyle }}>Title</Text>
-              <Text style={{ ...minWidthStyle(8), ...tableHeaderStyle }}>Assigned To</Text>
-              <Text style={{ ...minWidthStyle(8), ...tableHeaderStyle }}>PM Owner</Text>
-              <Text style={{ ...minWidthStyle(4), ...tableHeaderStyle }}>Priority</Text>
-              <Text style={{ ...minWidthStyle(6), ...tableHeaderStyle }}>State</Text>
+              <Text
+                key="text-table-header-title"
+                style={{ ...minWidthStyle(18), ...tableHeaderStyle }}
+              >
+                Title
+              </Text>
+              <Text
+                key="text-table-header-assigned"
+                style={{ ...minWidthStyle(8), ...tableHeaderStyle }}
+              >
+                Assigned To
+              </Text>
+              <Text
+                key="text-table-header-owner"
+                style={{ ...minWidthStyle(8), ...tableHeaderStyle }}
+              >
+                PM Owner
+              </Text>
+              <Text
+                key="text-table-header-priority"
+                style={{ ...minWidthStyle(4), ...tableHeaderStyle }}
+              >
+                Priority
+              </Text>
+              <Text
+                key="text-table-header-state"
+                style={{ ...minWidthStyle(6), ...tableHeaderStyle }}
+              >
+                State
+              </Text>
             </div>
             {tableData.map((item: TableModel, index) => {
               return (
                 <>
                   {index !== 0 && <div key={`table-divider-${item.id}`} style={divider} />}
-                  <div key={`table-column-${item.id}`} style={tableColumnStyle}>
-                    <div key={`table-title-${item.id}`} style={titleStyle}>
-                      <ChevronRight20Regular key={`chevron-${item.id}`} />
+                  <div key={`div-table-column-${item.id}`} style={tableColumnStyle}>
+                    <div key={`div-table-title-${item.id}`} style={titleStyle}>
+                      <ChevronRight20Regular key={`icon-chevron-${item.id}`} />
                       {index !== 3 ? (
-                        <Rocket20Regular key={`rocket-${item.id}`} />
+                        <Rocket20Regular key={`icon-rocket-${item.id}`} />
                       ) : (
-                        <Trophy20Regular key={`trophy-${item.id}`} />
+                        <Trophy20Regular key={`icon-trophy-${item.id}`} />
                       )}
-                      <Text key={`title-${item.id}`} wrap={false}>
+                      <Text key={`text-title-${item.id}`} wrap={false}>
                         {item.title}
                       </Text>
                     </div>
 
-                    <div key={`table-avatar-${item.id}`} style={avatarStyle}>
+                    <div key={`div-table-avatar-${item.id}`} style={avatarStyle}>
                       <Avatar
-                        key={`avatar-${item.id}`}
+                        key={`avatar-assigned-${item.id}`}
                         name={item.assignedName}
                         image={{ src: `${item.assignedAvatar}` }}
                         size={16}
                       />
-                      <Text key={`name-${item.id}`}>{item.assignedName}</Text>
+                      <Text key={`text-assigned-${item.id}`}>{item.assignedName}</Text>
                     </div>
-                    <div key={`table-avatar-two-${item.id}`} style={avatarStyle}>
+                    <div key={`div-table-avatar2-${item.id}`} style={avatarStyle}>
                       <Avatar
-                        key={`avatar-two-${item.id}`}
+                        key={`avatar-owner-${item.id}`}
                         name={item.ownerName}
                         image={{ src: `${item.ownerAvatar}` }}
                         size={16}
                       />
-                      <Text key={`name-two-${item.id}`}>{item.ownerName}</Text>
+                      <Text key={`text-owner-${item.id}`}>{item.ownerName}</Text>
                     </div>
-                    <Text key={`priority-${item.id}`} style={{ minWidth: "4rem" }}>
+                    <Text key={`text-priority-${item.id}`} style={{ minWidth: "4rem" }}>
                       {item.priority}
                     </Text>
-                    <div key={`state-${item.id}`} style={stateLayout}>
+                    <div key={`div-state-${item.id}`} style={stateLayout}>
                       <ProgressBar
-                        key={`progress-${item.id}`}
+                        key={`pb-state-${item.id}`}
                         bgcolor={item.color}
                         completed={item.state}
                       />
-                      <Text key={`progress-text-${item.id}`} style={stateStyle}>
+                      <Text key={`text-state-${item.id}`} style={stateStyle}>
                         {`${item.state}%`}
                       </Text>
                     </div>
@@ -226,7 +253,7 @@ export class Chart extends Widget<IChartWidgetState> {
             })}
           </div>
         </div>
-      </>
+      </div>
     );
   }
 

@@ -19,6 +19,8 @@ export const dashboardStyles = (
     padding: "20px",
     gridTemplateColumns: isMobile ? "1fr" : columnWidths ?? "4fr 6fr",
     gridTemplateRows: rowHeighs ?? "1fr",
+    wordWrap: "break-word",
+    wordBreak:"break-all",
   };
 };
 

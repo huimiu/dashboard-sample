@@ -12,12 +12,13 @@ import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
 import {
   colorNeutralForeground3,
-  contentLayout,
+  bodyLayout,
   descriptionStyle,
   footerLayout,
   gridDisplay,
   shareBtnStyle,
   titleStyle,
+  bodyContent,
 } from "../styles/Collaboration.styles";
 
 export class Collaboration extends Widget<CollaborationModel[]> {
@@ -36,8 +37,8 @@ export class Collaboration extends Widget<CollaborationModel[]> {
 
   bodyContent(): JSX.Element | undefined {
     return (
-      <>
-        <div style={contentLayout}>
+      <div style={bodyLayout}>
+        <div style={bodyContent}>
           {this.state.data?.map((item: CollaborationModel) => {
             return (
               <div key={`collaboration-container-${item.id}`} style={gridDisplay}>
@@ -72,7 +73,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 

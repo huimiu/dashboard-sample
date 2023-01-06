@@ -1,3 +1,4 @@
+import { tokens } from "@fluentui/react-theme";
 import { CSSProperties } from "react";
 
 export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
@@ -5,6 +6,9 @@ export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
     return {
       display: "grid",
       gap: "1.25rem",
+      overflowX: "hidden",
+      minWidth: "18rem",
+      gridTemplateRows: "repeat(2, max-content)",
     };
   } else {
     return {
@@ -12,6 +16,8 @@ export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
       height: "100%",
       justifyContent: "center",
       alignContent: "center",
+      overflowX: "hidden",
+      minWidth: "18rem",
     };
   }
 };
@@ -25,19 +31,18 @@ export const todayText: CSSProperties = {
   fontWeight: "700",
   lineHeight: "1rem",
   fontSize: "0.75rem",
-  fontFamily: "Segoe UI",
 };
 
 export const meetingLayout: CSSProperties = {
   display: "grid",
   gap: "0.25rem",
+  gridTemplateRows: "repeat(3, max-content)",
 };
 
 export const meetingSummary: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1rem",
   fontSize: "0.75rem",
-  fontFamily: "Segoe UI",
 };
 
 export const meetingItemLayout: CSSProperties = {
@@ -51,14 +56,13 @@ export const divider: CSSProperties = {
   width: "6px",
   height: "1fr",
   borderRadius: "3px",
-  backgroundColor: "#5b5fc7",
+  backgroundColor: tokens.colorBrandStroke1,
 };
 
 export const meetingTitle: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1.5rem",
   fontSize: "1rem",
-  fontFamily: "Segoe UI",
   fontStyle: "normal",
 };
 
@@ -66,18 +70,16 @@ export const meetingTime: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1rem",
   fontSize: "0.875rem",
-  fontFamily: "Roboto",
   fontStyle: "normal",
-  color: "#6E6E6E",
+  color: tokens.colorNeutralStrokeAccessible,
 };
 
 export const meetingLocation: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1rem",
   fontSize: "0.75rem",
-  fontFamily: "Roboto",
   fontStyle: "normal",
-  color: "#6E6E6E",
+  color: tokens.colorNeutralStrokeAccessible,
 };
 
 export const meetingActionBtn: CSSProperties = {

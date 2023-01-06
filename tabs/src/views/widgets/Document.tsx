@@ -29,7 +29,7 @@ import { bodyLayout, divider, itemContent, taskContainer } from "../styles/Docum
 interface IDocumentState {
   activeIndex: number;
   documents?: DocumentModel[];
-  loading?: boolean;
+  loading: boolean;
 }
 
 export class Documents extends Widget<IDocumentState> {
@@ -153,7 +153,7 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (this.state.data?.documents?.length !== 0) {
+    if (this.state.data?.loading && this.state.data?.documents?.length !== 0) {
       return (
         <Button
           appearance="transparent"

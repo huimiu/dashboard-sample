@@ -1,6 +1,10 @@
 import { tokens } from "@fluentui/react-components";
 import { CSSProperties } from "react";
 
+export const bodyLayout: CSSProperties = {
+  overflowX: "hidden",
+}
+
 export const areaChartStyle: CSSProperties = {
   fontWeight: 700,
   fontSize: "1.125rem",
@@ -19,6 +23,7 @@ export const legendLayout: CSSProperties = {
   gridTemplateColumns: "repeat(7, max-content)",
   alignItems: "center",
   marginBottom: "1.25rem",
+  overflowX: "auto",
 };
 
 export const legendItemLayout: CSSProperties = {
@@ -91,7 +96,6 @@ export const tableContentLayout: CSSProperties = {
 };
 
 export const backlogStyle: CSSProperties = {
-  fontFamily: "Segoe UI",
   fontStyle: "normal",
   fontWeight: "600",
   fontSize: "0.75rem",
@@ -112,7 +116,6 @@ export const minWidthStyle = (v: number): CSSProperties => {
 };
 
 export const tableHeaderStyle: CSSProperties = {
-  fontFamily: "Segoe UI",
   fontStyle: "normal",
   fontWeight: "400",
   fontSize: "0.75rem",
@@ -124,7 +127,7 @@ export const titleStyle: CSSProperties = {
   display: "grid",
   gap: "0.6rem",
   gridTemplateColumns: "max-content max-content 1fr",
-  minWidth: "16rem",
+  minWidth: "18rem",
 };
 
 export const avatarStyle: CSSProperties = {

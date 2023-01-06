@@ -29,7 +29,7 @@ import { emptyImgStyle, emptyLayout, emptyTextStyle } from "../styles/Common.sty
 
 interface ICalendarState {
   meetings?: CalendarModel[];
-  loading?: boolean;
+  loading: boolean;
 }
 
 export class Calendar extends Widget<ICalendarState> {
@@ -51,51 +51,56 @@ export class Calendar extends Widget<ICalendarState> {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
     const hasMeeting = this.state.data?.meetings?.length !== 0;
     return (
-      <>
-        <div style={bodyLayout(hasMeeting)}>
-          {loading ? (
-            <></>
-          ) : hasMeeting ? (
-            <>
-              <div style={todayLayout}>
-                <Text style={todayText}>{moment().format("ll")}</Text>
-                <Text style={meetingSummary}>
-                  {`You have ${
-                    this.state.data?.meetings?.length ?? 0
-                  } meetings today. The upcoming events`}
-                </Text>
-              </div>
-
-              {this.state.data?.meetings?.map((item: CalendarModel, index) => {
-                return (
-                  <div style={meetingItemLayout}>
-                    <div style={divider} />
-                    <div style={meetingLayout}>
-                      <Text style={meetingTitle}>{item.title}</Text>
-                      <Text style={meetingTime}>{this.getMeetingTime(item)}</Text>
-                      <Text style={meetingLocation}>{item.location}</Text>
-                    </div>
-                    <Button
-                      appearance={index === 0 ? "primary" : "secondary"}
-                      onClick={() => window.open(item.url)}
-                      style={meetingActionBtn}
-                    >
-                      {index === 0 ? "Join" : "Chat"}
-                    </Button>
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <div style={emptyLayout}>
-              <Image src={`no-meeting.svg`} style={emptyImgStyle} />
-              <Text weight="semibold" style={emptyTextStyle}>
-                No meeting today
+      <div style={bodyLayout(hasMeeting)}>
+        {loading ? (
+          <></>
+        ) : hasMeeting ? (
+          <>
+            <div style={todayLayout}>
+              <Text style={todayText}>{moment().format("ll")}</Text>
+              <Text style={meetingSummary}>
+                {`You have ${
+                  this.state.data?.meetings?.length ?? 0
+                } meetings today. The upcoming events`}
               </Text>
             </div>
-          )}
-        </div>
-      </>
+
+            {this.state.data?.meetings?.map((item: CalendarModel, index) => {
+              return (
+                <div key="div-meeting-item" style={meetingItemLayout}>
+                  <div key="div-divider" style={divider} />
+                  <div key="div-meeting-content" style={meetingLayout}>
+                    <Text key="text-meeting-title" style={meetingTitle}>
+                      {item.title}
+                    </Text>
+                    <Text key="text-meeting-time" style={meetingTime}>
+                      {this.getMeetingTime(item)}
+                    </Text>
+                    <Text key="text-meeting-loc" style={meetingLocation}>
+                      {item.location}
+                    </Text>
+                  </div>
+                  <Button
+                    key="bt-meeting-action"
+                    appearance={index === 0 ? "primary" : "secondary"}
+                    onClick={() => window.open(item.url)}
+                    style={meetingActionBtn}
+                  >
+                    {index === 0 ? "Join" : "Chat"}
+                  </Button>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <div style={emptyLayout}>
+            <Image src={`no-meeting.svg`} style={emptyImgStyle} />
+            <Text weight="semibold" style={emptyTextStyle}>
+              No meeting today
+            </Text>
+          </div>
+        )}
+      </div>
     );
   }
 

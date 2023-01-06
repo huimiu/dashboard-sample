@@ -8,9 +8,9 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-  overflow: auto; 
+  height: 100%; 
   margin: auto;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

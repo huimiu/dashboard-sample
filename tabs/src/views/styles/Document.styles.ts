@@ -5,6 +5,8 @@ export const bodyLayout = (hasDocument: boolean): CSSProperties => {
   if (hasDocument) {
     return {
       display: "grid",
+      overflowX: "hidden",
+      minWidth: "18rem",
     };
   } else {
     return {
@@ -12,6 +14,8 @@ export const bodyLayout = (hasDocument: boolean): CSSProperties => {
       height: "100%",
       justifyContent: "center",
       alignContent: "center",
+      overflowX: "hidden",
+      minWidth: "18rem",
     };
   }
 };
@@ -36,7 +40,6 @@ export const itemContent: CSSProperties = {
 
 export const titleStyle: CSSProperties = {
   overflow: "ellipsis",
-  fontFamily: "Segoe UI",
   fontStyle: "normal",
   fontSize: "0.875rem",
   lineHeight: "1.25rem",

@@ -13,11 +13,15 @@ export const bodyLayout = (hasTask: boolean): CSSProperties => {
     return {
       display: "grid",
       gap: "0.25rem",
+      overflowX: "hidden",
+      minWidth: "18rem",
     };
   } else {
     return {
       display: "grid",
       gap: "1.8rem",
+      overflowX: "hidden",
+      minWidth: "18rem",
     };
   }
 };
@@ -32,6 +36,7 @@ export const inputStyle = (focused?: boolean): CSSProperties => ({
   outline: "medium",
   height: "1.75rem",
   marginLeft: "-0.35rem",
+  fontSize: "0.875rem",
   color: tokens.colorNeutralForeground1,
   backgroundColor: focused ? tokens.colorNeutralBackground6 : tokens.colorNeutralBackground3,
 });
@@ -59,6 +64,7 @@ export const addTaskBtnStyle = (mouseEnter?: boolean): CSSProperties => ({
   border: "none",
   fontWeight: "600",
   transition: "visibility 0s ease 50ms",
+  textAlign: "center",
   backgroundColor: mouseEnter ? tokens.colorNeutralStroke1Hover : tokens.colorNeutralStrokeOnBrand2,
 });
 

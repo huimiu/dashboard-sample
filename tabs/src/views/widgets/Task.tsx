@@ -28,7 +28,7 @@ import {
 
 interface ITaskState {
   tasks?: TaskModel[];
-  loading?: boolean;
+  loading: boolean;
   inputFocused?: boolean;
   addBtnOver?: boolean;
 }
@@ -60,11 +60,17 @@ export class Task extends Widget<ITaskState> {
       <div style={headerContentStyle}>
         <TeamsFxContext.Consumer>
           {({ themeString }) =>
-            themeString === "default" ? <Image src={`task.svg`} /> : <Image src={`task-dark.svg`} />
+            themeString === "default" ? (
+              <Image key="icon-task-default" src={`task.svg`} />
+            ) : (
+              <Image key="icon-task-dark" src={`task-dark.svg`} />
+            )
           }
         </TeamsFxContext.Consumer>
-        <Text style={headerTextStyle}>Your tasks</Text>
-        <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
+        <Text key="text-task-title" style={headerTextStyle}>
+          Your tasks
+        </Text>
+        <Button key="bt-task-more" icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
   }
@@ -73,45 +79,43 @@ export class Task extends Widget<ITaskState> {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
     const hasTask = this.state.data?.tasks?.length !== 0;
     return (
-      <>
-        <div style={bodyLayout(hasTask)}>
-          <TeamsFxContext.Consumer>
-            {({ themeString }) => this.inputLayout(themeString)}
-          </TeamsFxContext.Consumer>
-          {loading ? (
-            <></>
-          ) : hasTask ? (
-            this.state.data?.tasks?.map((item: TaskModel) => {
-              return (
-                <TeamsFxContext.Consumer>
-                  {({ themeString }) => (
-                    <div key={`task-container-${item.id}`} style={existingTaskLayout(themeString)}>
-                      <Checkbox key={`task-circle-${item.id}`} shape="circular" label={item.name} />
-                      <Button
-                        key={`task-star-${item.id}`}
-                        icon={<Star24Regular />}
-                        appearance="transparent"
-                      />
-                    </div>
-                  )}
-                </TeamsFxContext.Consumer>
-              );
-            })
-          ) : (
-            <div style={emptyLayout}>
-              <EmptyThemeImg />
-              <Text weight="semibold" style={emptyTextStyle}>
-                Once you have a task, you'll find it here
-              </Text>
-            </div>
-          )}
-        </div>
-      </>
+      <div style={bodyLayout(hasTask)}>
+        <TeamsFxContext.Consumer>
+          {({ themeString }) => this.inputLayout(themeString)}
+        </TeamsFxContext.Consumer>
+        {loading ? (
+          <></>
+        ) : hasTask ? (
+          this.state.data?.tasks?.map((item: TaskModel) => {
+            return (
+              <TeamsFxContext.Consumer key={`consumer-task-${item.id}`}>
+                {({ themeString }) => (
+                  <div key={`div-task-${item.id}`} style={existingTaskLayout(themeString)}>
+                    <Checkbox key={`cb-task-${item.id}`} shape="circular" label={item.name} />
+                    <Button
+                      key={`bt-task-${item.id}`}
+                      icon={<Star24Regular />}
+                      appearance="transparent"
+                    />
+                  </div>
+                )}
+              </TeamsFxContext.Consumer>
+            );
+          })
+        ) : (
+          <div style={emptyLayout}>
+            <EmptyThemeImg key="img-empty" />
+            <Text key="text-empty" weight="semibold" style={emptyTextStyle}>
+              Once you have a task, you'll find it here
+            </Text>
+          </div>
+        )}
+      </div>
     );
   }
 
   footerContent(): JSX.Element | undefined {
-    if (this.state.data?.tasks?.length !== 0) {
+    if (!this.state.data?.loading && this.state.data?.tasks?.length !== 0) {
       return (
         <Button
           appearance="transparent"
@@ -148,17 +152,13 @@ export class Task extends Widget<ITaskState> {
 
         <input
           ref={this.inputRef}
-          key="task-input"
           type="text"
-          id="task-input"
           style={inputStyle(this.state.data?.inputFocused)}
           onFocus={() => this.inputFocusedState()}
           placeholder="Add a task"
         />
         {this.state.data?.inputFocused && (
           <button
-            key="add-task-btn"
-            id="add-task-btn"
             style={addTaskBtnStyle(this.state.data?.addBtnOver)}
             onClick={() => {
               this.onAddButtonClick();

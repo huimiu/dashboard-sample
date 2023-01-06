@@ -47,7 +47,7 @@ export default class MyDashboard extends Dashboard {
   }
 
   protected columnWidths(): string | undefined {
-    return "7fr 3fr";
+    return "repeat(auto-fit, minmax(320px, 1fr))";
   }
 
   async componentDidMount() {
