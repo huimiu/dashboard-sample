@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import { Button, Image, Text } from "@fluentui/react-components";
 import {
   ArrowRight16Filled,
@@ -11,15 +13,16 @@ import { getCollaborationData } from "../../services/collaborationService";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
 import {
-  colorNeutralForeground3,
+  bodyContent,
   bodyLayout,
+  colorNeutralForeground3,
   descriptionStyle,
   footerLayout,
   gridDisplay,
   shareBtnStyle,
   titleStyle,
-  bodyContent,
 } from "../styles/Collaboration.styles";
+import { widgetPaddingStyle } from "../styles/Common.styles";
 
 export class Collaboration extends Widget<CollaborationModel[]> {
   async getData(): Promise<CollaborationModel[]> {
@@ -90,5 +93,9 @@ export class Collaboration extends Widget<CollaborationModel[]> {
         View all
       </Button>
     );
+  }
+
+  customiseWidgetStyle(): CSSProperties | undefined {
+    return widgetPaddingStyle;
   }
 }

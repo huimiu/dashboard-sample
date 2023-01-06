@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { Button, Checkbox, Image, Text } from "@fluentui/react-components";
 import {
@@ -16,7 +16,7 @@ import { addTask, getTasks } from "../../services/taskService";
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
+import { emptyLayout, emptyTextStyle, widgetPaddingStyle } from "../styles/Common.styles";
 import {
   addBtnStyle,
   addTaskBtnStyle,
@@ -75,7 +75,7 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  protected bodyContent(): JSX.Element | undefined {
+  bodyContent(): JSX.Element | undefined {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
     const hasTask = this.state.data?.tasks?.length !== 0;
     return (
@@ -138,7 +138,7 @@ export class Task extends Widget<ITaskState> {
     }
   }
 
-  inputLayout(themeString: string): JSX.Element | undefined {
+  private inputLayout(themeString: string): JSX.Element | undefined {
     return (
       <div
         ref={this.inputDivRef}
@@ -173,6 +173,10 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
+  customiseWidgetStyle(): CSSProperties | undefined {
+    return widgetPaddingStyle;
+  }
+
   async componentDidMount() {
     super.componentDidMount();
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -182,7 +186,7 @@ export class Task extends Widget<ITaskState> {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  handleClickOutside(event: any) {
+  private handleClickOutside(event: any) {
     if (!this.inputDivRef.current?.contains(event.target)) {
       this.setState({
         data: {
@@ -195,7 +199,7 @@ export class Task extends Widget<ITaskState> {
     }
   }
 
-  onAddButtonClick = async () => {
+  private onAddButtonClick = async () => {
     if (this.inputRef.current && this.inputRef.current.value.length > 0) {
       const tasks: TaskModel[] = await addTask(this.inputRef.current.value);
       this.setState({
@@ -211,7 +215,7 @@ export class Task extends Widget<ITaskState> {
     }
   };
 
-  inputFocusedState = () => {
+  private inputFocusedState = () => {
     this.setState({
       data: {
         tasks: this.state.data?.tasks,
@@ -222,7 +226,7 @@ export class Task extends Widget<ITaskState> {
     });
   };
 
-  mouseEnterState = () => {
+  private mouseEnterState = () => {
     this.setState({
       data: {
         tasks: this.state.data?.tasks,
@@ -233,7 +237,7 @@ export class Task extends Widget<ITaskState> {
     });
   };
 
-  mouseLeaveState = () => {
+  private mouseLeaveState = () => {
     this.setState({
       data: {
         tasks: this.state.data?.tasks,

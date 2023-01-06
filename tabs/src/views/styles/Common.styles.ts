@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 
 export const emptyLayout: CSSProperties = {
   display: "grid",
@@ -13,4 +13,8 @@ export const emptyImgStyle: CSSProperties = {
 export const emptyTextStyle: CSSProperties = {
   justifyContent: "center",
   textAlign: "center",
+};
+
+export const widgetPaddingStyle: CSSProperties = {
+  padding: "1.25rem",
 };

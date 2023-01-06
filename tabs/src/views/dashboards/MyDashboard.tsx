@@ -50,7 +50,7 @@ export default class MyDashboard extends Dashboard {
   }
 
   protected columnWidths(): string | undefined {
-    return "minmax(7fr, 1fr) minmax(3fr, 1fr)";
+    return "7fr 3fr";
   }
 
   async componentDidMount() {
@@ -61,7 +61,7 @@ export default class MyDashboard extends Dashboard {
 
   protected customiseDashboardStyle(): CSSProperties | undefined {
     return {
-      marginTop: "3.7rem",
+      marginTop: "60px",
     };
   }
 

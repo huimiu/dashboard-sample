@@ -1,5 +1,8 @@
-import { tokens } from "@fluentui/react-theme";
 import { CSSProperties } from "react";
+
+import { tokens } from "@fluentui/react-theme";
+
+import { widgetPaddingStyle } from "./Common.styles";
 
 export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
   if (hasMeeting) {
@@ -20,6 +23,11 @@ export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
       minWidth: "18rem",
     };
   }
+};
+
+export const widgetCustomiseStyle: CSSProperties = {
+  ...widgetPaddingStyle,
+  gap: "0.625rem",
 };
 
 export const todayLayout: CSSProperties = {
@@ -63,14 +71,12 @@ export const meetingTitle: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1.5rem",
   fontSize: "1rem",
-  fontStyle: "normal",
 };
 
 export const meetingTime: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1rem",
   fontSize: "0.875rem",
-  fontStyle: "normal",
   color: tokens.colorNeutralStrokeAccessible,
 };
 
@@ -78,7 +84,6 @@ export const meetingLocation: CSSProperties = {
   fontWeight: "400",
   lineHeight: "1rem",
   fontSize: "0.75rem",
-  fontStyle: "normal",
   color: tokens.colorNeutralStrokeAccessible,
 };
 
@@ -86,5 +91,4 @@ export const meetingActionBtn: CSSProperties = {
   alignSelf: "start",
   minWidth: "3.375rem",
   fontWeight: 500,
-  fontStyle: "normal",
 };

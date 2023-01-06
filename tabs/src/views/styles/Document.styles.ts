@@ -23,8 +23,8 @@ export const bodyLayout = (hasDocument: boolean): CSSProperties => {
 export const taskContainer = (active: boolean): CSSProperties => ({
   display: "grid",
   height: "3rem",
-  marginLeft: "-2.3rem",
-  marginRight: "-1.2rem",
+  marginLeft: "-1.25rem",
+  marginRight: "-1.25rem",
   backgroundColor: active ? tokens.colorNeutralBackground5Hover : tokens.colorNeutralBackground1,
 });
 
@@ -34,13 +34,12 @@ export const itemContent: CSSProperties = {
   gap: "1rem",
   alignItems: "center",
   height: "2.75rem",
-  marginLeft: "2.25rem",
+  marginLeft: "1.25rem",
   marginRight: "1.25rem",
 };
 
 export const titleStyle: CSSProperties = {
   overflow: "ellipsis",
-  fontStyle: "normal",
   fontSize: "0.875rem",
   lineHeight: "1.25rem",
 };

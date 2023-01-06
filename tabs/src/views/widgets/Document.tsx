@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import {
   Button,
   Image,
@@ -23,7 +25,7 @@ import { getDocuments, getIconByFileType } from "../../services/documentService"
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
+import { emptyLayout, emptyTextStyle, widgetPaddingStyle } from "../styles/Common.styles";
 import { bodyLayout, divider, itemContent, taskContainer } from "../styles/Document.styles";
 
 interface IDocumentState {
@@ -169,6 +171,10 @@ export class Documents extends Widget<IDocumentState> {
     } else {
       return undefined;
     }
+  }
+
+  customiseWidgetStyle(): CSSProperties | undefined {
+    return widgetPaddingStyle;
   }
 
   mouseOver = (i: number) => {

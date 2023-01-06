@@ -3,10 +3,7 @@ import { tokens } from "@fluentui/react-components";
 
 export const widgetStyles: CSSProperties = {
   display: "grid",
-  paddingLeft: "2.3rem",
-  paddingRight: "1.25rem",
-  paddingTop: "1rem",
-  paddingBottom: "1rem",
+  padding: "1rem 1.25rem 1rem 2.3rem",
   backgroundColor: tokens.colorNeutralBackground1,
   borderWidth: "1px",
   borderStyle: "solid",
@@ -40,7 +37,6 @@ export const headerContentStyle: CSSProperties = {
 export const headerTextStyle: CSSProperties = {
   fontWeight: "600",
   lineHeight: "1rem",
-  fontStyle: "normal",
   fontSize: "0.75rem",
 };
 

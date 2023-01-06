@@ -1,4 +1,5 @@
 import moment from "moment-timezone";
+import { CSSProperties } from "react";
 
 import { Button, Image, Text } from "@fluentui/react-components";
 import {
@@ -24,8 +25,13 @@ import {
   meetingTitle,
   todayLayout,
   todayText,
+  widgetCustomiseStyle,
 } from "../styles/Calendar.styles";
-import { emptyImgStyle, emptyLayout, emptyTextStyle } from "../styles/Common.styles";
+import {
+  emptyImgStyle,
+  emptyLayout,
+  emptyTextStyle,
+} from "../styles/Common.styles";
 
 interface ICalendarState {
   meetings?: CalendarModel[];
@@ -33,11 +39,11 @@ interface ICalendarState {
 }
 
 export class Calendar extends Widget<ICalendarState> {
-  protected async getData(): Promise<ICalendarState> {
+  async getData(): Promise<ICalendarState> {
     return { meetings: await getCalendar(), loading: false };
   }
 
-  protected headerContent(): JSX.Element | undefined {
+  headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle}>
         <CalendarLtr24Regular />
@@ -47,7 +53,7 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  protected bodyContent(): JSX.Element | undefined {
+  bodyContent(): JSX.Element | undefined {
     const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
     const hasMeeting = this.state.data?.meetings?.length !== 0;
     return (
@@ -104,7 +110,7 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  protected footerContent(): JSX.Element | undefined {
+  footerContent(): JSX.Element | undefined {
     return (
       <Button
         appearance="transparent"
@@ -117,6 +123,10 @@ export class Calendar extends Widget<ICalendarState> {
         View calendar
       </Button>
     );
+  }
+
+  customiseWidgetStyle(): CSSProperties | undefined {
+    return widgetCustomiseStyle;
   }
 
   private getMeetingTime = (item: CalendarModel) => {

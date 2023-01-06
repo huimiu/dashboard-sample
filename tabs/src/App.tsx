@@ -2,7 +2,6 @@ import { HashRouter as Router, Redirect, Route } from "react-router-dom";
 
 import {
   FluentProvider,
-  Spinner,
   teamsDarkTheme,
   teamsHighContrastTheme,
   teamsLightTheme,
