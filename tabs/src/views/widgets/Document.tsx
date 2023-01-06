@@ -26,7 +26,14 @@ import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
 import { emptyLayout, emptyTextStyle, widgetPaddingStyle } from "../styles/Common.styles";
-import { bodyLayout, divider, itemContent, taskContainer } from "../styles/Document.styles";
+import {
+  bodyLayout,
+  divider,
+  headerStyle,
+  itemContent,
+  taskContainer,
+  widgetStyle,
+} from "../styles/Document.styles";
 
 interface IDocumentState {
   activeIndex: number;
@@ -41,7 +48,7 @@ export class Documents extends Widget<IDocumentState> {
 
   headerContent(): JSX.Element | undefined {
     return (
-      <div style={headerStyleWithoutIcon}>
+      <div style={{ ...headerStyleWithoutIcon, ...headerStyle }}>
         <Text style={headerTextStyle}>Your documents</Text>
         <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
@@ -174,7 +181,7 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   customiseWidgetStyle(): CSSProperties | undefined {
-    return widgetPaddingStyle;
+    return widgetStyle;
   }
 
   mouseOver = (i: number) => {

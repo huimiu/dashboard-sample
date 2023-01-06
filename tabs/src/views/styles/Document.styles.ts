@@ -1,10 +1,21 @@
-import { tokens } from "@fluentui/react-theme";
 import { CSSProperties } from "react";
+
+import { tokens } from "@fluentui/react-theme";
+
+export const widgetStyle: CSSProperties = {
+  padding: 0,
+  gap: 0,
+};
+
+export const headerStyle: CSSProperties = {
+  padding: "1.25rem",
+}
 
 export const bodyLayout = (hasDocument: boolean): CSSProperties => {
   if (hasDocument) {
     return {
       display: "grid",
+      alignContent: "start",
       overflowX: "hidden",
       minWidth: "18rem",
     };
@@ -23,8 +34,7 @@ export const bodyLayout = (hasDocument: boolean): CSSProperties => {
 export const taskContainer = (active: boolean): CSSProperties => ({
   display: "grid",
   height: "3rem",
-  marginLeft: "-1.25rem",
-  marginRight: "-1.25rem",
+  alignContent: "center",
   backgroundColor: active ? tokens.colorNeutralBackground5Hover : tokens.colorNeutralBackground1,
 });
 

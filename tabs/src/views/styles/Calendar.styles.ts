@@ -25,7 +25,7 @@ export const bodyLayout = (hasMeeting: boolean): CSSProperties => {
   }
 };
 
-export const widgetCustomiseStyle: CSSProperties = {
+export const widgetStyle: CSSProperties = {
   ...widgetPaddingStyle,
   gap: "0.625rem",
 };

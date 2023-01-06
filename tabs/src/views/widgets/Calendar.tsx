@@ -25,7 +25,7 @@ import {
   meetingTitle,
   todayLayout,
   todayText,
-  widgetCustomiseStyle,
+  widgetStyle,
 } from "../styles/Calendar.styles";
 import {
   emptyImgStyle,
@@ -126,7 +126,7 @@ export class Calendar extends Widget<ICalendarState> {
   }
 
   customiseWidgetStyle(): CSSProperties | undefined {
-    return widgetCustomiseStyle;
+    return widgetStyle;
   }
 
   private getMeetingTime = (item: CalendarModel) => {
