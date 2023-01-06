@@ -29,6 +29,7 @@ export const bodyLayout = (hasTask: boolean): CSSProperties => {
 export const addBtnStyle: CSSProperties = {
   color: tokens.colorBrandForeground1,
   marginLeft: "0.35rem",
+  padding: 0,
 };
 
 export const inputStyle = (focused?: boolean): CSSProperties => ({
@@ -59,11 +60,10 @@ export const addTaskContainer = (themeString: string, focused?: boolean): CSSPro
 
 export const addTaskBtnStyle = (mouseEnter?: boolean): CSSProperties => ({
   borderRadius: "4px",
-  width: "2.4rem",
+  width: "max-content",
   height: "1.5rem",
   border: "none",
   fontWeight: "600",
-  transition: "visibility 0s ease 50ms",
   textAlign: "center",
   backgroundColor: mouseEnter ? tokens.colorNeutralStroke1Hover : tokens.colorNeutralStrokeOnBrand2,
 });

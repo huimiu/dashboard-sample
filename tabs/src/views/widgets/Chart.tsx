@@ -85,13 +85,15 @@ export class Chart extends Widget<IChartWidgetState> {
 
   headerContent(): JSX.Element | undefined {
     return (
-      <div style={headerStyleWithoutIcon}>
-        <Text style={areaChartStyle}>Area chart</Text>
-        <div style={actionLayout}>
-          <Button icon={<Search20Regular />} appearance="transparent" />
-          <Button icon={<ArrowMaximize20Regular />} appearance="transparent" />
-          <Button icon={<Settings20Regular />} appearance="transparent" />
-          <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
+      <div key="div-chart-header" style={headerStyleWithoutIcon}>
+        <Text key="text-chart-title" style={areaChartStyle}>
+          Area chart
+        </Text>
+        <div key="div-chart-actions" style={actionLayout}>
+          <Button key="bt-chart-search" icon={<Search20Regular />} appearance="transparent" />
+          <Button key="bt-chart-max" icon={<ArrowMaximize20Regular />} appearance="transparent" />
+          <Button key="bt-chart-setting" icon={<Settings20Regular />} appearance="transparent" />
+          <Button key="bt-chart-more" icon={<MoreHorizontal32Regular />} appearance="transparent" />
         </div>
       </div>
     );
@@ -99,29 +101,45 @@ export class Chart extends Widget<IChartWidgetState> {
 
   bodyContent(): JSX.Element | undefined {
     return (
-      <div style={bodyLayout}>
-        <div style={legendLayout}>
-          <div style={legendItemLayout}>
-            <Text style={legendBoldStyle}>Feb 1, 2020</Text>
-            <Text style={legendNormalStyle}>11:59 am (PT)</Text>
+      <div key="div-chart-body" style={bodyLayout}>
+        <div key="div-chart-legend" style={legendLayout}>
+          <div key="div-legend-time" style={legendItemLayout}>
+            <Text key="text-legend-date" style={legendBoldStyle}>
+              Feb 1, 2020
+            </Text>
+            <Text key="text-legend-time" style={legendNormalStyle}>
+              11:59 am (PT)
+            </Text>
           </div>
-          <div style={legendDividerStyle} />
-          <div style={legendItemLayout}>
-            <Text style={legendNormalStyle}>Location:</Text>
-            <Text style={legendBoldStyle}>All</Text>
+          <div key="div-legend-divider1" style={legendDividerStyle} />
+          <div key="div-legend-loc" style={legendItemLayout}>
+            <Text key="text-legend-loc" style={legendNormalStyle}>
+              Location:
+            </Text>
+            <Text key="text-legend-loc-all" style={legendBoldStyle}>
+              All
+            </Text>
           </div>
-          <div style={legendDividerStyle} />
-          <div style={legendItemLayout}>
-            <Text style={legendNormalStyle}>Groups:</Text>
-            <Text style={legendBoldStyle}>All</Text>
+          <div key="div-legend-divider2" style={legendDividerStyle} />
+          <div key="div-legend-groups" style={legendItemLayout}>
+            <Text key="text-legend-groups" style={legendNormalStyle}>
+              Groups:
+            </Text>
+            <Text key="text-legend-groups-all" style={legendBoldStyle}>
+              All
+            </Text>
           </div>
-          <div style={legendDividerStyle} />
-          <div style={legendItemLayout}>
-            <Text style={legendNormalStyle}>Date range:</Text>
-            <Text style={legendBoldStyle}>Jan 1, 2020 - Jan 30, 2020</Text>
+          <div key="div-legend-divider3" style={legendDividerStyle} />
+          <div key="div-legend-range" style={legendItemLayout}>
+            <Text key="text-legend-range" style={legendNormalStyle}>
+              Date range:
+            </Text>
+            <Text key="text-legend-range-time" style={legendBoldStyle}>
+              Jan 1, 2020 - Jan 30, 2020
+            </Text>
           </div>
         </div>
-        <div style={timeSpanLayout}>
+        <div key="div-time-span" style={timeSpanLayout}>
           {dayRangeData.map((item: DayRangeModel) => {
             return (
               <ToggleButton
@@ -144,7 +162,7 @@ export class Chart extends Widget<IChartWidgetState> {
           })}
         </div>
 
-        <div style={areaChartLayout}>
+        <div key="div-area-chart" style={areaChartLayout}>
           {this.state.data?.chartProps && (
             <AreaChart
               key={`area-chart-${this.state.data.dayRange}`}
@@ -160,14 +178,20 @@ export class Chart extends Widget<IChartWidgetState> {
           )}
         </div>
 
-        <div style={tableLayout}>
-          <div style={backlogLayout}>
-            <Text style={backlogStyle}>Features backlog (57)</Text>
-            <Button icon={<MoreHorizontal16Filled />} appearance="transparent" />
+        <div key="div-table-layout" style={tableLayout}>
+          <div key="div-back-log" style={backlogLayout}>
+            <Text key="text-back-log" style={backlogStyle}>
+              Features backlog (57)
+            </Text>
+            <Button
+              key="bt-back-log-more"
+              icon={<MoreHorizontal16Filled />}
+              appearance="transparent"
+            />
           </div>
 
-          <div style={tableContentLayout}>
-            <div style={tableColumnStyle}>
+          <div key="div-table-content" style={tableContentLayout}>
+            <div key="div-table-column" style={tableColumnStyle}>
               <Text
                 key="text-table-header-title"
                 style={{ ...minWidthStyle(18), ...tableHeaderStyle }}
@@ -260,6 +284,7 @@ export class Chart extends Widget<IChartWidgetState> {
   footerContent(): JSX.Element | undefined {
     return (
       <Button
+        key="bt-chart-footer"
         appearance="transparent"
         icon={<ArrowRight16Filled />}
         iconPosition="after"

@@ -1,10 +1,6 @@
 import { FxContext } from "./singletonContext";
 
-export const scope = [
-  "Files.ReadWrite.All",
-  "Tasks.ReadWrite",
-  "Calendars.ReadWrite"
-];
+export const scope = ["Files.Read", "Tasks.ReadWrite", "Calendars.Read"];
 
 export async function loginAction(scope: string[]) {
   try {

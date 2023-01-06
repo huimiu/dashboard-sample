@@ -1,5 +1,6 @@
-import { Image, Spinner } from "@fluentui/react-components";
 import { CSSProperties } from "react";
+
+import { Image, Spinner } from "@fluentui/react-components";
 
 import { loginAction } from "../../internal/login";
 import { FxContext } from "../../internal/singletonContext";
@@ -11,6 +12,8 @@ import { Chart } from "../widgets/Chart";
 import { Collaboration } from "../widgets/Collaboration";
 import { Documents } from "../widgets/Document";
 import { Task } from "../widgets/Task";
+import { Providers, ProviderState } from "@microsoft/mgt-element";
+import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 
 const scope = ["Files.Read", "Tasks.ReadWrite", "Calendars.Read"];
 
@@ -47,11 +50,12 @@ export default class MyDashboard extends Dashboard {
   }
 
   protected columnWidths(): string | undefined {
-    return "repeat(auto-fit, minmax(320px, 1fr))";
+    return "minmax(7fr, 1fr) minmax(3fr, 1fr)";
   }
 
   async componentDidMount() {
     super.componentDidMount();
+    await this.initGraphToolkit();
     await this.initConsent();
   }
 
@@ -61,12 +65,18 @@ export default class MyDashboard extends Dashboard {
     };
   }
 
+  async initGraphToolkit() {
+    const provider = new TeamsFxProvider(FxContext.getInstance().getTeamsFx(), scope);
+    Providers.globalProvider = provider;
+  }
+
   async initConsent() {
     let consentNeeded = await this.checkIsConsentNeeded();
     if (consentNeeded) {
       await loginAction(scope);
     }
     this.setState({ showLogin: false });
+    Providers.globalProvider.setState(ProviderState.SignedIn);
   }
 
   async checkIsConsentNeeded() {
