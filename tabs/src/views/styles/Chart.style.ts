@@ -63,7 +63,6 @@ export const timeSpanStyle: CSSProperties = {
   fontSize: "0.6875rem",
   fontWeight: "400",
   lineHeight: "0.625rem",
-  fontStyle: "normal",
   width: "min-content",
   minWidth: "max-content",
   paddingLeft: 0,
@@ -96,7 +95,6 @@ export const tableContentLayout: CSSProperties = {
 };
 
 export const backlogStyle: CSSProperties = {
-  fontStyle: "normal",
   fontWeight: "600",
   fontSize: "0.75rem",
   lineHeight: "1rem",
@@ -116,7 +114,6 @@ export const minWidthStyle = (v: number): CSSProperties => {
 };
 
 export const tableHeaderStyle: CSSProperties = {
-  fontStyle: "normal",
   fontWeight: "400",
   fontSize: "0.75rem",
   lineHeight: "2rem",

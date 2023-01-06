@@ -18,7 +18,6 @@ export const gridDisplay: CSSProperties = {
 };
 
 export const titleStyle: CSSProperties = {
-  fontStyle: "normal",
   fontWeight: "600",
   fontSize: "0.75rem",
   lineHeight: "1rem",
@@ -26,7 +25,6 @@ export const titleStyle: CSSProperties = {
 };
 
 export const descriptionStyle: CSSProperties = {
-  fontStyle: "normal",
   fontWeight: "400",
   fontSize: "0.75rem",
   lineHeight: "1rem",

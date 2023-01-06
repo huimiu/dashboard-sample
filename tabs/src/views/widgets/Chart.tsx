@@ -53,6 +53,8 @@ import {
   timeSpanStyle,
   titleStyle,
 } from "../styles/Chart.style";
+import { CSSProperties } from "react";
+import { widgetPaddingStyle } from "../styles/Common.styles";
 
 interface IChartWidgetState {
   dayRange: DayRange;
@@ -295,6 +297,10 @@ export class Chart extends Widget<IChartWidgetState> {
         View query
       </Button>
     );
+  }
+
+  customiseWidgetStyle(): CSSProperties | undefined {
+    return widgetPaddingStyle;
   }
 
   private retriveChartsData(r: DayRange): IChartProps {
