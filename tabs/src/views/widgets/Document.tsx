@@ -20,6 +20,7 @@ import {
   MoreHorizontal32Regular,
 } from "@fluentui/react-icons";
 
+import { TEAMS_SVG } from "../../common/constants";
 import { DocumentModel } from "../../models/documentModel";
 import { getDocuments, getIconByFileType } from "../../services/documentService";
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
@@ -115,7 +116,7 @@ export class Documents extends Widget<IDocumentState> {
                             <MenuList key={`menu-open-list-${item.id}`}>
                               <MenuItem
                                 key={`menu-teams-${item.id}`}
-                                icon={<Image src="teams.svg" />}
+                                icon={<Image src={TEAMS_SVG} width="20px" />}
                                 onClick={() => window.open(item.teamsurl)}
                               >
                                 Teams
@@ -179,7 +180,7 @@ export class Documents extends Widget<IDocumentState> {
           icon={<ArrowRight16Filled />}
           iconPosition="after"
           size="small"
-          style={{...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem"}}
+          style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
           onClick={() => window.open("https://www.office.com/mycontent")}
         >
           View all

@@ -36,10 +36,9 @@ export default class MyDashboard extends Dashboard {
           <div
             style={{
               width: "100vw",
-              height: "80vh",
+              height: "100vh",
               display: "grid",
-              alignItems: "center",
-              justifyItems: "center",
+              placeItems: "center",
             }}
           >
             <Spinner size="huge" />
@@ -60,9 +59,14 @@ export default class MyDashboard extends Dashboard {
   }
 
   protected customiseDashboardStyle(): CSSProperties | undefined {
-    return {
-      marginTop: "60px",
-    };
+    return this.state.showLogin === false
+      ? {
+          marginTop: "100",
+        }
+      : {
+          padding: 0,
+          marginTop: 0,
+        };
   }
 
   async initGraphToolkit() {
