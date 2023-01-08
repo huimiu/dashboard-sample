@@ -4,11 +4,10 @@ import { tokens } from "@fluentui/react-theme";
 
 export const widgetStyle: CSSProperties = {
   padding: 0,
-  gap: 0,
 };
 
 export const headerStyle: CSSProperties = {
-  padding: "1.25rem",
+  padding: "1.25rem 1.25rem 0 1.25rem",
 };
 
 export const bodyLayout = (hasDocument: boolean): CSSProperties => {
