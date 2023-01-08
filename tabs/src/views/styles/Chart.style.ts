@@ -79,7 +79,6 @@ export const tableLayout: CSSProperties = {
   display: "grid",
   gap: "0.69rem",
   marginTop: "2.5rem",
-  paddingRight: "1.5rem",
 };
 
 export const backlogLayout: CSSProperties = {
@@ -102,7 +101,7 @@ export const backlogStyle: CSSProperties = {
 
 export const tableColumnStyle: CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "8fr 4fr 4fr 2fr 3fr",
+  gridTemplateColumns: "8fr 4fr 4fr 2fr 2fr",
   gap: "0.6rem",
   alignItems: "center",
 };

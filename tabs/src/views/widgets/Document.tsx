@@ -25,10 +25,11 @@ import { getDocuments, getIconByFileType } from "../../services/documentService"
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout, emptyTextStyle, widgetPaddingStyle } from "../styles/Common.styles";
+import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
 import {
   bodyLayout,
   divider,
+  docInfoLayout,
   headerStyle,
   itemContent,
   taskContainer,
@@ -66,22 +67,31 @@ export class Documents extends Widget<IDocumentState> {
           this.state.data?.documents?.map((item: DocumentModel, i) => {
             return (
               <div
-                key={`container-${item.id}`}
-                style={taskContainer(i === this.state.data?.activeIndex)}
+                key={`div-container-${item.id}`}
+                style={taskContainer}
                 onMouseOver={() => this.mouseOver(i)}
                 onMouseLeave={() => this.mouseLeave()}
               >
                 {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
-                <div key={`content-${item.id}`} style={itemContent}>
-                  <Image
-                    key={`img-${item.id}`}
-                    src={getIconByFileType(item.type)}
-                    width="28px"
-                    height="28px"
-                  />
-                  <Label key={`label-${item.id}`} weight="semibold">
-                    {item.name}
-                  </Label>
+                <div
+                  key={`div-content-${item.id}`}
+                  style={itemContent(i === this.state.data?.activeIndex)}
+                >
+                  <div
+                    key={`div-doc-info-${item.id}`}
+                    style={docInfoLayout}
+                    onClick={() => window.open(item.teamsurl)}
+                  >
+                    <Image
+                      key={`img-${item.id}`}
+                      src={getIconByFileType(item.type)}
+                      width="28px"
+                      height="28px"
+                    />
+                    <Label key={`label-${item.id}`} weight="semibold">
+                      {item.name}
+                    </Label>
+                  </div>
                   <Menu key={`menu-more-${item.id}`}>
                     <MenuTrigger key={`menu-more-trigger-${item.id}`}>
                       <MenuButton
@@ -162,14 +172,14 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (this.state.data?.loading && this.state.data?.documents?.length !== 0) {
+    if (!this.state.data?.loading && this.state.data?.documents?.length !== 0) {
       return (
         <Button
           appearance="transparent"
           icon={<ArrowRight16Filled />}
           iconPosition="after"
           size="small"
-          style={footerBtnStyle}
+          style={{...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem"}}
           onClick={() => window.open("https://www.office.com/mycontent")}
         >
           View all

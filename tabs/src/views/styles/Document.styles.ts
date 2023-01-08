@@ -9,7 +9,7 @@ export const widgetStyle: CSSProperties = {
 
 export const headerStyle: CSSProperties = {
   padding: "1.25rem",
-}
+};
 
 export const bodyLayout = (hasDocument: boolean): CSSProperties => {
   if (hasDocument) {
@@ -31,21 +31,28 @@ export const bodyLayout = (hasDocument: boolean): CSSProperties => {
   }
 };
 
-export const taskContainer = (active: boolean): CSSProperties => ({
+export const taskContainer: CSSProperties = {
   display: "grid",
-  height: "3rem",
+  height: "max-content",
   alignContent: "center",
-  backgroundColor: active ? tokens.colorNeutralBackground5Hover : tokens.colorNeutralBackground1,
-});
+};
 
-export const itemContent: CSSProperties = {
+export const itemContent = (active: boolean): CSSProperties => ({
   display: "grid",
-  gridTemplateColumns: "max-content 1fr max-content",
+  gridTemplateColumns: "1fr max-content",
   gap: "1rem",
   alignItems: "center",
   height: "2.75rem",
-  marginLeft: "1.25rem",
-  marginRight: "1.25rem",
+  paddingLeft: "1.25rem",
+  paddingRight: "1.25rem",
+  backgroundColor: active ? tokens.colorNeutralBackground5Hover : tokens.colorNeutralBackground1,
+});
+
+export const docInfoLayout: CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "max-content 1fr",
+  gap: "1rem",
+  alignItems: "center",
 };
 
 export const titleStyle: CSSProperties = {
