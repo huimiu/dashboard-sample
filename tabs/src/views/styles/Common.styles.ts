@@ -16,5 +16,5 @@ export const emptyTextStyle: CSSProperties = {
 };
 
 export const widgetPaddingStyle: CSSProperties = {
-  padding: "1.25rem",
+  padding: "0.75rem 1.25rem 1rem 1.25rem",
 };

@@ -7,7 +7,7 @@ export const widgetStyle: CSSProperties = {
 };
 
 export const headerStyle: CSSProperties = {
-  padding: "1.25rem 1.25rem 0 1.25rem",
+  padding: "0.75rem 1.25rem 1rem 1.25rem",
 };
 
 export const bodyLayout = (hasDocument: boolean): CSSProperties => {
