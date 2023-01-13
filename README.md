@@ -53,21 +53,21 @@ This widget displays some collaboration cards with dummy data.
 
 This widget displays the upcoming events on your calendar. You can click the `Join` button to join a meeting, and click the `View calendar` button to open your calendar app.
 
-<img src="tabs\public\join-meeting.png" style="zoom: 50%">
+<img src="tabs\public\join-meeting.png" style="zoom: 30%">
 
 
 ### Your tasks
 
 This widget displays your to-do tasks. Your can input a task name and click the `Add` button to add a new task. You also can click the `View all` button to open your task app.
 
-<img src="tabs\public\add-task.png" style="zoom: 50%">
+<img src="tabs\public\add-task.png" style="zoom: 30%">
 
-<img src="tabs\public\task-notification.png" style="zoom: 50%">
+<img src="tabs\public\task-notification.png" style="zoom: 30%">
 
 ### Your documents
 This widget displays your content files in OneDrive. You can click one to open it. You can also click the `...` button on the right to choose the way to open the file, download the file or copy the file link.
 
-<img src="tabs\public\document.png" style="zoom: 50%">
+<img src="tabs\public\document.png" style="zoom: 30%">
 
 ## Edit the manifest
 
