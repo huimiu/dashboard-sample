@@ -41,22 +41,33 @@ Team Central Dashboard shows you how to build a tab with data chats and content 
 
 ## Implemented Features  
 
-1. You can see several widgets in the dashboard, some show data charts and others show informations with interactive buttons.
-2. In the `Area chart` widget, you can see selling data curves and a table with some informations, like features names, owners, priorities, and processing states.
-3. In the `Teams Collaboration` widget, you can see some news with pictures and words to help you quickly obtain the most recent news.
-4. In the `Your upcoming events` widget, you can see the upcoming events on your calendar. And you can click the `Join` button to join a meeting.
+### Area Chart
+This widget displays a chart and a table with dummy data. You can select a date range to filter the data. 
 
-   <img src="tabs\public\join-meeting.png" style="zoom: 50%">
+### Team Collaboration
+This widget displays some collaboration cards with dummy data.
 
-5. In the `Your Tasks` widget, you can see your tasks list. You can click and enter a task name to add a new task. After you successfully add a task, you will receive a notification.
+<img src="public\collaborations.png" style="zoom: 30%">
 
-   <img src="tabs\public\add-task.png" style="zoom: 50%">
+### Your upcoming events
 
-   <img src="tabs\public\task-notification.png" style="zoom: 30%">
+This widget displays the upcoming events on your calendar. You can click the `Join` button to join a meeting, and click the `View calendar` button to open your calendar app.
 
-6. In the `Your Documents` widget, you can see your documents. You can click one to open it. You can also click the `...` button on the right to choose the way to open the file, download the file or copy the file link.
+<img src="public\join-meeting.png" style="zoom: 50%">
 
-   <img src="tabs\public\document.png" style="zoom: 50%">
+
+### Your tasks
+
+This widget displays your to-do tasks. Your can input a task name and click the `Add` button to add a new task. You also can click the `View all` button to open your task app.
+
+<img src="public\add-task.png" style="zoom: 50%">
+
+<img src="public\task-notification.png" style="zoom: 50%">
+
+### Your documents
+This widget displays your content files in OneDrive. You can click one to open it. You can also click the `...` button on the right to choose the way to open the file, download the file or copy the file link.
+
+<img src="public\document.png" style="zoom: 50%">
 
 ## Edit the manifest
 
