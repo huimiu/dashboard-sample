@@ -2,8 +2,9 @@ import { TeamsFx } from "@microsoft/teamsfx";
 
 export class FxContext {
   private static instance: FxContext;
+  private isMobile: boolean;
   private teamsfx: TeamsFx | undefined;
-  private constructor() {}
+  private constructor() { this.isMobile = false; }
 
   public static getInstance(): FxContext {
     if (!FxContext.instance) {
@@ -22,5 +23,13 @@ export class FxContext {
       this.teamsfx = new TeamsFx();
     }
     return this.teamsfx;
+  }
+
+  public setIsMobile(isMobile: boolean) {
+    this.isMobile = isMobile;
+  }
+
+  public getIsMobile() {
+    return this.isMobile;
   }
 }

@@ -36,6 +36,7 @@ import {
   taskContainer,
   widgetStyle,
 } from "../styles/Document.styles";
+import { FxContext } from "../../internal/singletonContext";
 
 interface IDocumentState {
   activeIndex: number;
@@ -123,7 +124,11 @@ export class Documents extends Widget<IDocumentState> {
                               </MenuItem>
                               <MenuItem
                                 key={`menu-desktop-${item.id}`}
-                                onClick={() => window.open(item.webDavurl)}
+                                onClick={() => {
+                                  if (!FxContext.getInstance().getIsMobile()) {
+                                    window.open(item.webDavurl)}
+                                  }
+                                }
                                 icon={<Image src={getIconByFileType(item.type)} />}
                               >
                                 Desktop app
