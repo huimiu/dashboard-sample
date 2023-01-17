@@ -53,9 +53,9 @@ export default class MyDashboard extends Dashboard {
   async componentDidMount() {
     super.componentDidMount();
     if (await this.checkIsConsentNeeded()) {
-      await loginAction(scope);
-      this.setState({ showLogin: false });
+      await loginAction(scope);      
     }
+    this.setState({ showLogin: false });
   }
 
   protected customiseDashboardStyle(): CSSProperties | undefined {
