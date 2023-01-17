@@ -76,7 +76,7 @@ export class Task extends Widget<ITaskState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
+    const loading: boolean = this.state.data === undefined || this.state.data.loading === true;
     const hasTask = this.state.data?.tasks?.length !== 0;
     return (
       <div style={bodyLayout(hasTask)}>
