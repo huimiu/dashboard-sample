@@ -36,7 +36,6 @@ import {
   taskContainer,
   widgetStyle,
 } from "../styles/Document.styles";
-import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 interface IDocumentState {
   activeIndex: number;
@@ -124,11 +123,7 @@ export class Documents extends Widget<IDocumentState> {
                               </MenuItem>
                               <MenuItem
                                 key={`menu-desktop-${item.id}`}
-                                onClick={() => {
-                                  if (!TeamsUserCredentialContext.getInstance().getIsMobile()) {
-                                    window.open(item.webDavurl)}
-                                  }
-                                }
+                                onClick={() => window.open(item.webDavurl)}
                                 icon={<Image src={getIconByFileType(item.type)} />}
                               >
                                 Desktop app
