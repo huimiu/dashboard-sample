@@ -24,7 +24,7 @@ import {
   chart2Points_30D,
   chart2Points_60D,
   chart2Points_7D,
-} from "../../services/sampleRequest";
+} from "../../services/chartService";
 import ProgressBar from "../components/Progress";
 import { Widget } from "../lib/Widget";
 import { footerBtnStyle, headerStyleWithoutIcon } from "../lib/Widget.styles";

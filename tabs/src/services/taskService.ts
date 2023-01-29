@@ -1,13 +1,19 @@
-import { createMicrosoftGraphClient, TeamsFx } from "@microsoft/teamsfx";
 import { Client } from "@microsoft/microsoft-graph-client";
+import {
+  createMicrosoftGraphClientWithCredential,
+  TeamsUserCredential,
+} from "@microsoft/teamsfx";
+
+import { TeamsUserCredentialContext } from "../internal/singletonContext";
 import { TaskModel } from "../models/taskModel";
-import { FxContext } from "../internal/singletonContext";
 
 export async function getTasks(): Promise<TaskModel[]> {
-  let teamsfx: TeamsFx;
+  let credential: TeamsUserCredential;
   try {
-    teamsfx = FxContext.getInstance().getTeamsFx();
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.ReadWrite"]);
+    credential = TeamsUserCredentialContext.getInstance().getCredential();
+    const graphClient: Client = createMicrosoftGraphClientWithCredential(credential, [
+      "Tasks.ReadWrite",
+    ]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
     const todoTaskListId: string = myFirstTaskList["id"];
@@ -32,10 +38,12 @@ export async function getTasks(): Promise<TaskModel[]> {
 
 export async function addTask(title: string): Promise<TaskModel[]> {
   try {
-    let teamsfx: TeamsFx;
-    teamsfx = FxContext.getInstance().getTeamsFx();
+    let credential: TeamsUserCredential;
+    credential = TeamsUserCredentialContext.getInstance().getCredential();
 
-    const graphClient: Client = createMicrosoftGraphClient(teamsfx, ["Tasks.ReadWrite"]);
+    const graphClient: Client = createMicrosoftGraphClientWithCredential(credential, [
+      "Tasks.ReadWrite",
+    ]);
     const tasklists = await graphClient.api("/me/todo/lists").get();
     const myFirstTaskList = tasklists["value"][0];
     const todoTaskListId: string = myFirstTaskList["id"];
@@ -61,7 +69,7 @@ export async function addTask(title: string): Promise<TaskModel[]> {
 
 // obseleted
 export function openTaskApp() {
-  if (!FxContext.getInstance().getIsMobile()) {
+  if (!TeamsUserCredentialContext.getInstance().getIsMobile()) {
     console.log("not mobile");
     window.open(
       "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",

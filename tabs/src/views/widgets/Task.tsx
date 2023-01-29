@@ -25,7 +25,7 @@ import {
   existingTaskLayout,
   inputStyle,
 } from "../styles/Task.styles";
-import { FxContext } from "../../internal/singletonContext";
+import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 interface ITaskState {
   tasks?: TaskModel[];
@@ -77,7 +77,7 @@ export class Task extends Widget<ITaskState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
+    const loading: boolean = this.state.data === undefined || this.state.data.loading === true;
     const hasTask = this.state.data?.tasks?.length !== 0;
     return (
       <div style={bodyLayout(hasTask)}>
@@ -125,7 +125,7 @@ export class Task extends Widget<ITaskState> {
           size="small"
           style={footerBtnStyle}
           onClick={() => {
-            if (!FxContext.getInstance().getIsMobile()) {
+            if (!TeamsUserCredentialContext.getInstance().getIsMobile()) {
               // not mobile
               window.open(
                 "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
