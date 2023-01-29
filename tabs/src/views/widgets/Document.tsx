@@ -36,7 +36,7 @@ import {
   taskContainer,
   widgetStyle,
 } from "../styles/Document.styles";
-import { FxContext } from "../../internal/singletonContext";
+import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 interface IDocumentState {
   activeIndex: number;
@@ -125,7 +125,7 @@ export class Documents extends Widget<IDocumentState> {
                               <MenuItem
                                 key={`menu-desktop-${item.id}`}
                                 onClick={() => {
-                                  if (!FxContext.getInstance().getIsMobile()) {
+                                  if (!TeamsUserCredentialContext.getInstance().getIsMobile()) {
                                     window.open(item.webDavurl)}
                                   }
                                 }

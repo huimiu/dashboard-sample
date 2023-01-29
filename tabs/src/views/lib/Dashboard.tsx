@@ -1,5 +1,5 @@
 import React, { Component, CSSProperties } from "react";
-import { FxContext } from "../../internal/singletonContext";
+import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 import { dashboardStyles } from "./Dashboard.styles";
 
@@ -64,7 +64,7 @@ export class Dashboard extends Component<any, IDashboardState> {
    */
   render() {
     if (this.state.isMobile) {
-      FxContext.getInstance().setIsMobile(true);
+      TeamsUserCredentialContext.getInstance().setIsMobile(true);
     }
 
     return (
