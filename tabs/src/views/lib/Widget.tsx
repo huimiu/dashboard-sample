@@ -27,7 +27,7 @@ export abstract class Widget<T> extends Component<{}, T> {
    */
   render() {
     return (
-      <div style={{ ...widgetStyles(), ...this.widgetStyle() }}>
+      <div style={{ ...widgetStyles, ...this.widgetStyle() }}>
         {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
         {this.bodyContent() !== undefined && this.bodyContent()}
         {this.bodyContent() !== undefined && this.footerContent()}
