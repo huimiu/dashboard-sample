@@ -27,11 +27,7 @@ import {
   todayText,
   widgetStyle,
 } from "../styles/Calendar.styles";
-import {
-  emptyImgStyle,
-  emptyLayout,
-  emptyTextStyle,
-} from "../styles/Common.styles";
+import { emptyImgStyle, emptyLayout, emptyTextStyle } from "../styles/Common.styles";
 
 interface ICalendarState {
   meetings?: CalendarModel[];
@@ -54,8 +50,8 @@ export class Calendar extends Widget<ICalendarState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
-    const hasMeeting = this.state.data?.meetings?.length !== 0;
+    const loading: boolean = this.state.loading ?? true;
+    const hasMeeting = this.state.meetings?.length !== 0;
     return (
       <div style={bodyLayout(hasMeeting)}>
         {loading ? (
@@ -65,13 +61,11 @@ export class Calendar extends Widget<ICalendarState> {
             <div style={todayLayout}>
               <Text style={todayText}>{moment().format("ll")}</Text>
               <Text style={meetingSummary}>
-                {`You have ${
-                  this.state.data?.meetings?.length ?? 0
-                } meetings today. The upcoming events`}
+                {`You have ${this.state.meetings?.length ?? 0} meetings today. The upcoming events`}
               </Text>
             </div>
 
-            {this.state.data?.meetings?.map((item: CalendarModel, index) => {
+            {this.state.meetings?.map((item: CalendarModel, index) => {
               return (
                 <div key="div-meeting-item" style={meetingItemLayout}>
                   <div key="div-divider" style={divider} />
@@ -125,7 +119,7 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  widgetStyle(): CSSProperties | undefined {
     return widgetStyle;
   }
 

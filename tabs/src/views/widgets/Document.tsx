@@ -58,14 +58,14 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
-    const hasDocument = this.state.data?.documents?.length !== 0;
+    const loading: boolean = this.state.loading ?? true;
+    const hasDocument = this.state.documents?.length !== 0;
     return (
       <div style={bodyLayout(hasDocument)}>
         {loading ? (
           <></>
         ) : hasDocument ? (
-          this.state.data?.documents?.map((item: DocumentModel, i) => {
+          this.state.documents?.map((item: DocumentModel, i) => {
             return (
               <div
                 key={`div-container-${item.id}`}
@@ -76,7 +76,7 @@ export class Documents extends Widget<IDocumentState> {
                 {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
                 <div
                   key={`div-content-${item.id}`}
-                  style={itemContent(i === this.state.data?.activeIndex)}
+                  style={itemContent(i === this.state.activeIndex)}
                 >
                   <div
                     key={`div-doc-info-${item.id}`}
@@ -173,7 +173,7 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (!this.state.data?.loading && this.state.data?.documents?.length !== 0) {
+    if (!this.state.loading && this.state.documents?.length !== 0) {
       return (
         <Button
           appearance="transparent"
@@ -191,27 +191,23 @@ export class Documents extends Widget<IDocumentState> {
     }
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  widgetStyle(): CSSProperties | undefined {
     return widgetStyle;
   }
 
   mouseOver = (i: number) => {
     this.setState({
-      data: {
-        activeIndex: i,
-        documents: this.state.data?.documents,
-        loading: false,
-      },
+      activeIndex: i,
+      documents: this.state.documents,
+      loading: false,
     });
   };
 
   mouseLeave = () => {
     this.setState({
-      data: {
-        activeIndex: -1,
-        documents: this.state.data?.documents,
-        loading: false,
-      },
+      activeIndex: -1,
+      documents: this.state.documents,
+      loading: false,
     });
   };
 }

@@ -1,18 +1,16 @@
-import { Component, CSSProperties } from 'react';
+import React, { Component, CSSProperties } from "react";
 
-import { headerStyles, widgetStyles } from './Widget.styles';
+import { headerStyles, widgetStyles } from "./Widget.styles";
 
 /**
  * Defined a widget, it's also a react component.
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
  * T is the model type of the widget.
  */
-export abstract class Widget<T> extends Component<any, { data?: T | void }> {
+export abstract class Widget<T> extends Component<{}, T> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      data: undefined,
-    };
+    this.state = {} as T;
   }
 
   /**
@@ -21,7 +19,7 @@ export abstract class Widget<T> extends Component<any, { data?: T | void }> {
    * For more information about react lifecycle, please refer to https://reactjs.org/docs/react-component.html#componentdidmount
    */
   async componentDidMount() {
-    this.setState({ data: await this.getData() });
+    this.setState(await this.getData());
   }
 
   /**
@@ -29,10 +27,10 @@ export abstract class Widget<T> extends Component<any, { data?: T | void }> {
    */
   render() {
     return (
-      <div style={{ ...widgetStyles, ...this.customiseWidgetStyle() }}>
+      <div style={{ ...widgetStyles(), ...this.widgetStyle() }}>
         {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
-        {this.bodyContent()}
-        {this.footerContent()}
+        {this.bodyContent() !== undefined && this.bodyContent()}
+        {this.bodyContent() !== undefined && this.footerContent()}
       </div>
     );
   }
@@ -41,8 +39,8 @@ export abstract class Widget<T> extends Component<any, { data?: T | void }> {
    * Get data required by the widget, you can get data from a api call or static data stored in a file. Override this method according to your needs.
    * @returns data for the widget
    */
-  protected async getData(): Promise<T> {
-    return new Promise<T>(() => {});
+  protected async getData<K extends keyof T>(): Promise<Pick<T, K>> {
+    return {} as Pick<T, K>;
   }
 
   /**
@@ -73,7 +71,7 @@ export abstract class Widget<T> extends Component<any, { data?: T | void }> {
    * Override this method to customize the widget style.
    * @returns custom style for the widget
    */
-  protected customiseWidgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return undefined;
   }
 }

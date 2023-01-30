@@ -76,8 +76,8 @@ export class Task extends Widget<ITaskState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = this.state.data === undefined || this.state.data.loading === true;
-    const hasTask = this.state.data?.tasks?.length !== 0;
+    const loading: boolean = this.state.loading === true;
+    const hasTask = this.state.tasks?.length !== 0;
     return (
       <div style={bodyLayout(hasTask)}>
         <TeamsFxContext.Consumer>
@@ -86,7 +86,7 @@ export class Task extends Widget<ITaskState> {
         {loading ? (
           <></>
         ) : hasTask ? (
-          this.state.data?.tasks?.map((item: TaskModel) => {
+          this.state.tasks?.map((item: TaskModel) => {
             return (
               <TeamsFxContext.Consumer key={`consumer-task-${item.id}`}>
                 {({ themeString }) => (
@@ -115,7 +115,7 @@ export class Task extends Widget<ITaskState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (!this.state.data?.loading && this.state.data?.tasks?.length !== 0) {
+    if (!this.state.loading && this.state.tasks?.length !== 0) {
       return (
         <Button
           appearance="transparent"
@@ -140,11 +140,8 @@ export class Task extends Widget<ITaskState> {
 
   private inputLayout(themeString: string): JSX.Element | undefined {
     return (
-      <div
-        ref={this.inputDivRef}
-        style={addTaskContainer(themeString, this.state.data?.inputFocused)}
-      >
-        {this.state.data?.inputFocused ? (
+      <div ref={this.inputDivRef} style={addTaskContainer(themeString, this.state.inputFocused)}>
+        {this.state.inputFocused ? (
           <Circle20Regular style={addBtnStyle} />
         ) : (
           <Add20Filled style={addBtnStyle} />
@@ -153,13 +150,13 @@ export class Task extends Widget<ITaskState> {
         <input
           ref={this.inputRef}
           type="text"
-          style={inputStyle(this.state.data?.inputFocused)}
+          style={inputStyle(this.state.inputFocused)}
           onFocus={() => this.inputFocusedState()}
           placeholder="Add a task"
         />
-        {this.state.data?.inputFocused && (
+        {this.state.inputFocused && (
           <button
-            style={addTaskBtnStyle(this.state.data?.addBtnOver)}
+            style={addTaskBtnStyle(this.state.addBtnOver)}
             onClick={() => {
               this.onAddButtonClick();
             }}
@@ -173,7 +170,7 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 
@@ -189,12 +186,10 @@ export class Task extends Widget<ITaskState> {
   private handleClickOutside(event: any) {
     if (!this.inputDivRef.current?.contains(event.target)) {
       this.setState({
-        data: {
-          tasks: this.state.data?.tasks,
-          inputFocused: false,
-          addBtnOver: this.state.data?.addBtnOver,
-          loading: false,
-        },
+        tasks: this.state.tasks,
+        inputFocused: false,
+        addBtnOver: this.state.addBtnOver,
+        loading: false,
       });
     }
   }
@@ -203,12 +198,10 @@ export class Task extends Widget<ITaskState> {
     if (this.inputRef.current && this.inputRef.current.value.length > 0) {
       const tasks: TaskModel[] = await addTask(this.inputRef.current.value);
       this.setState({
-        data: {
-          tasks: tasks,
-          inputFocused: false,
-          addBtnOver: false,
-          loading: false,
-        },
+        tasks: tasks,
+        inputFocused: false,
+        addBtnOver: false,
+        loading: false,
       });
       this.inputRef.current.value = "";
       callFunction(this.inputRef.current.value);
@@ -217,34 +210,28 @@ export class Task extends Widget<ITaskState> {
 
   private inputFocusedState = () => {
     this.setState({
-      data: {
-        tasks: this.state.data?.tasks,
-        inputFocused: true,
-        addBtnOver: this.state.data?.addBtnOver,
-        loading: false,
-      },
+      tasks: this.state.tasks,
+      inputFocused: true,
+      addBtnOver: this.state.addBtnOver,
+      loading: false,
     });
   };
 
   private mouseEnterState = () => {
     this.setState({
-      data: {
-        tasks: this.state.data?.tasks,
-        inputFocused: this.state.data?.inputFocused,
-        addBtnOver: true,
-        loading: false,
-      },
+      tasks: this.state.tasks,
+      inputFocused: this.state.inputFocused,
+      addBtnOver: true,
+      loading: false,
     });
   };
 
   private mouseLeaveState = () => {
     this.setState({
-      data: {
-        tasks: this.state.data?.tasks,
-        inputFocused: this.state.data?.inputFocused,
-        addBtnOver: false,
-        loading: false,
-      },
+      tasks: this.state.tasks,
+      inputFocused: this.state.inputFocused,
+      addBtnOver: false,
+      loading: false,
     });
   };
 }

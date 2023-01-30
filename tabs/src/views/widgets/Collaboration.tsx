@@ -42,7 +42,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
     return (
       <div style={bodyLayout}>
         <div style={bodyContent}>
-          {this.state.data?.map((item: CollaborationModel) => {
+          {this.state.map((item: CollaborationModel) => {
             return (
               <div key={`collaboration-container-${item.id}`} style={gridDisplay}>
                 <Image
@@ -95,7 +95,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 }

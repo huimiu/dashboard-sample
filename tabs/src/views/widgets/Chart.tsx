@@ -147,14 +147,12 @@ export class Chart extends Widget<IChartWidgetState> {
               <ToggleButton
                 key={`tb-day-range-${item.id}`}
                 appearance="transparent"
-                checked={this.state.data?.dayRange === item.dayRange}
+                checked={this.state.dayRange === item.dayRange}
                 style={timeSpanStyle}
                 onClick={() =>
                   this.setState({
-                    data: {
-                      chartProps: this.retriveChartsData(item.dayRange),
-                      dayRange: item.dayRange,
-                    },
+                    chartProps: this.retriveChartsData(item.dayRange),
+                    dayRange: item.dayRange,
                   })
                 }
               >
@@ -165,10 +163,10 @@ export class Chart extends Widget<IChartWidgetState> {
         </div>
 
         <div key="div-area-chart" style={areaChartLayout}>
-          {this.state.data?.chartProps && (
+          {this.state.chartProps && (
             <AreaChart
-              key={`area-chart-${this.state.data.dayRange}`}
-              data={this.state.data.chartProps}
+              key={`area-chart-${this.state.dayRange}`}
+              data={this.state.chartProps}
               legendsOverflowText={"Overflow Items"}
               yAxisTickFormat={d3.format(".1s")}
               wrapXAxisLables={false}
@@ -299,7 +297,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 
