@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
+  Spinner,
   Text,
 } from "@fluentui/react-components";
 import {
@@ -40,12 +41,11 @@ import {
 interface IDocumentState {
   activeIndex: number;
   documents?: DocumentModel[];
-  loading: boolean;
 }
 
 export class Documents extends Widget<IDocumentState> {
   async getData(): Promise<IDocumentState> {
-    return { documents: await getDocuments(), activeIndex: -1, loading: false };
+    return { documents: await getDocuments(), activeIndex: -1 };
   }
 
   headerContent(): JSX.Element | undefined {
@@ -58,13 +58,10 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = this.state.loading ?? true;
     const hasDocument = this.state.documents?.length !== 0;
     return (
       <div style={bodyLayout(hasDocument)}>
-        {loading ? (
-          <></>
-        ) : hasDocument ? (
+        {hasDocument ? (
           this.state.documents?.map((item: DocumentModel, i) => {
             return (
               <div
@@ -173,7 +170,7 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (!this.state.loading && this.state.documents?.length !== 0) {
+    if (this.state.documents?.length !== 0) {
       return (
         <Button
           appearance="transparent"
@@ -189,6 +186,14 @@ export class Documents extends Widget<IDocumentState> {
     } else {
       return undefined;
     }
+  }
+
+  protected loadingContent(): JSX.Element | undefined {
+    return (
+      <div style={{ display: "grid", justifyContent: "center", height: "100%" }}>
+        <Spinner label="Loading..." labelPosition="below" />
+      </div>
+    );
   }
 
   widgetStyle(): CSSProperties | undefined {

@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import { CSSProperties } from "react";
 
-import { Button, Image, Text } from "@fluentui/react-components";
+import { Button, Image, Spinner, Text } from "@fluentui/react-components";
 import {
   ArrowRight16Filled,
   CalendarLtr24Regular,
@@ -31,15 +31,15 @@ import { emptyImgStyle, emptyLayout, emptyTextStyle } from "../styles/Common.sty
 
 interface ICalendarState {
   meetings?: CalendarModel[];
-  loading: boolean;
 }
 
 export class Calendar extends Widget<ICalendarState> {
-  async getData(): Promise<ICalendarState> {
-    return { meetings: await getCalendar(), loading: false };
+
+   protected async getData(): Promise<Pick<ICalendarState, keyof ICalendarState>> {
+    return { meetings: await getCalendar() };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle}>
         <CalendarLtr24Regular />
@@ -49,14 +49,11 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
-    const loading: boolean = this.state.loading ?? true;
+  protected bodyContent(): JSX.Element | undefined {
     const hasMeeting = this.state.meetings?.length !== 0;
     return (
       <div style={bodyLayout(hasMeeting)}>
-        {loading ? (
-          <></>
-        ) : hasMeeting ? (
+        {hasMeeting ? (
           <>
             <div style={todayLayout}>
               <Text style={todayText}>{moment().format("ll")}</Text>
@@ -104,7 +101,7 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     return (
       <Button
         appearance="transparent"
@@ -119,7 +116,15 @@ export class Calendar extends Widget<ICalendarState> {
     );
   }
 
-  widgetStyle(): CSSProperties | undefined {
+  protected loadingContent(): JSX.Element | undefined {
+    return (
+      <div style={{ display: "grid", justifyContent: "center", height: "100%" }}>
+        <Spinner label="Loading..." labelPosition="below" />
+      </div>
+    );
+  }
+
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetStyle;
   }
 

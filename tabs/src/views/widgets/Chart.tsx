@@ -85,6 +85,7 @@ export class Chart extends Widget<IChartWidgetState> {
     };
   }
 
+  
   headerContent(): JSX.Element | undefined {
     return (
       <div key="div-chart-header" style={headerStyleWithoutIcon}>

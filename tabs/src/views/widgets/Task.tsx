@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 
-import { Button, Checkbox, Image, Text } from "@fluentui/react-components";
+import { Button, Checkbox, Image, Spinner, Text } from "@fluentui/react-components";
 import {
   Add20Filled,
   ArrowRight16Filled,
@@ -28,7 +28,6 @@ import {
 
 interface ITaskState {
   tasks?: TaskModel[];
-  loading: boolean;
   inputFocused?: boolean;
   addBtnOver?: boolean;
 }
@@ -51,7 +50,6 @@ export class Task extends Widget<ITaskState> {
       tasks: await getTasks(),
       inputFocused: false,
       addBtnOver: false,
-      loading: false,
     };
   }
 
@@ -76,16 +74,13 @@ export class Task extends Widget<ITaskState> {
   }
 
   bodyContent(): JSX.Element | undefined {
-    const loading: boolean = this.state.loading === true;
     const hasTask = this.state.tasks?.length !== 0;
     return (
       <div style={bodyLayout(hasTask)}>
         <TeamsFxContext.Consumer>
           {({ themeString }) => this.inputLayout(themeString)}
         </TeamsFxContext.Consumer>
-        {loading ? (
-          <></>
-        ) : hasTask ? (
+        {hasTask ? (
           this.state.tasks?.map((item: TaskModel) => {
             return (
               <TeamsFxContext.Consumer key={`consumer-task-${item.id}`}>
@@ -115,7 +110,7 @@ export class Task extends Widget<ITaskState> {
   }
 
   footerContent(): JSX.Element | undefined {
-    if (!this.state.loading && this.state.tasks?.length !== 0) {
+    if (this.state.tasks?.length !== 0) {
       return (
         <Button
           appearance="transparent"
@@ -136,6 +131,14 @@ export class Task extends Widget<ITaskState> {
     } else {
       return undefined;
     }
+  }
+
+  protected loadingContent(): JSX.Element | undefined {
+    return (
+      <div style={{ display: "grid", justifyContent: "center", height: "100%" }}>
+        <Spinner label="Loading..." labelPosition="below" />
+      </div>
+    );
   }
 
   private inputLayout(themeString: string): JSX.Element | undefined {

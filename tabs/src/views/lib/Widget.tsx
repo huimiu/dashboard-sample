@@ -2,15 +2,19 @@ import React, { Component, CSSProperties } from "react";
 
 import { headerStyles, widgetStyles } from "./Widget.styles";
 
+interface WidgetState {
+  loading?: boolean;
+}
 /**
  * Defined a widget, it's also a react component.
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
  * T is the model type of the widget.
  */
-export abstract class Widget<T> extends Component<{}, T> {
+export abstract class Widget<T> extends Component<{}, T & WidgetState> {
   constructor(props: any) {
     super(props);
-    this.state = {} as T;
+    type L = T & WidgetState;
+    this.state = {} as L;
   }
 
   /**
@@ -19,7 +23,7 @@ export abstract class Widget<T> extends Component<{}, T> {
    * For more information about react lifecycle, please refer to https://reactjs.org/docs/react-component.html#componentdidmount
    */
   async componentDidMount() {
-    this.setState(await this.getData());
+    this.setState({ ...(await this.getData()), loading: false });
   }
 
   /**
@@ -29,8 +33,10 @@ export abstract class Widget<T> extends Component<{}, T> {
     return (
       <div style={{ ...widgetStyles, ...this.widgetStyle() }}>
         {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
-        {this.bodyContent() !== undefined && this.bodyContent()}
-        {this.bodyContent() !== undefined && this.footerContent()}
+        {this.state.loading !== false && this.loadingContent() !== undefined
+          ? this.loadingContent()
+          : (this.bodyContent() !== undefined && this.bodyContent()) ||
+            (this.footerContent() !== undefined && this.footerContent())}
       </div>
     );
   }
@@ -64,6 +70,13 @@ export abstract class Widget<T> extends Component<{}, T> {
    * @returns react node for the widget footer
    */
   protected footerContent(): JSX.Element | undefined {
+    return undefined;
+  }
+
+  /**
+   * Override this method to customize what the widget will look like when it is loading.
+   */
+  protected loadingContent(): JSX.Element | undefined {
     return undefined;
   }
 
