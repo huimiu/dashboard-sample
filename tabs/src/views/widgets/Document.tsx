@@ -44,11 +44,11 @@ interface IDocumentState {
 }
 
 export class Documents extends Widget<IDocumentState> {
-  async getData(): Promise<IDocumentState> {
+  protected async getData(): Promise<IDocumentState> {
     return { documents: await getDocuments(), activeIndex: -1 };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={{ ...headerStyleWithoutIcon, ...headerStyle }}>
         <Text style={headerTextStyle}>Your documents</Text>
@@ -57,7 +57,7 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     const hasDocument = this.state.documents?.length !== 0;
     return (
       <div style={bodyLayout(hasDocument)}>
@@ -169,7 +169,7 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     if (this.state.documents?.length !== 0) {
       return (
         <Button
@@ -196,7 +196,7 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  widgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetStyle;
   }
 

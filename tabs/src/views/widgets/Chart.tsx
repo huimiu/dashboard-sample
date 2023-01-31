@@ -62,7 +62,7 @@ interface IChartWidgetState {
 }
 
 export class Chart extends Widget<IChartWidgetState> {
-  async getData(): Promise<IChartWidgetState> {
+  protected async getData(): Promise<IChartWidgetState> {
     const chartPoints = [
       {
         legend: "Line 1",
@@ -86,7 +86,7 @@ export class Chart extends Widget<IChartWidgetState> {
   }
 
   
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div key="div-chart-header" style={headerStyleWithoutIcon}>
         <Text key="text-chart-title" style={areaChartStyle}>
@@ -102,7 +102,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     return (
       <div key="div-chart-body" style={bodyLayout}>
         <div key="div-chart-legend" style={legendLayout}>
@@ -282,7 +282,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     return (
       <Button
         key="bt-chart-footer"
@@ -298,7 +298,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  widgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 

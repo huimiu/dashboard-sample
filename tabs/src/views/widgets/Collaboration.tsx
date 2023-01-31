@@ -33,7 +33,7 @@ export class Collaboration extends Widget<ICollaborationState> {
     return { data: getCollaborationData() };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerStyleWithoutIcon}>
         <Text style={headerTextStyle}>Team collaborations</Text>
@@ -42,7 +42,7 @@ export class Collaboration extends Widget<ICollaborationState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     return (
       <div style={bodyLayout}>
         <div style={bodyContent}>
@@ -84,7 +84,7 @@ export class Collaboration extends Widget<ICollaborationState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     return (
       <Button
         appearance="transparent"
@@ -99,7 +99,7 @@ export class Collaboration extends Widget<ICollaborationState> {
     );
   }
 
-  widgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 }

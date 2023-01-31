@@ -53,7 +53,7 @@ export class Task extends Widget<ITaskState> {
     };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerContentStyle}>
         <TeamsFxContext.Consumer>
@@ -73,7 +73,7 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     const hasTask = this.state.tasks?.length !== 0;
     return (
       <div style={bodyLayout(hasTask)}>
@@ -109,7 +109,7 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     if (this.state.tasks?.length !== 0) {
       return (
         <Button
@@ -173,7 +173,7 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  widgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 

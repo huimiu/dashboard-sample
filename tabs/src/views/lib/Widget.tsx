@@ -45,8 +45,8 @@ export abstract class Widget<T> extends Component<{}, T & WidgetState> {
    * Get data required by the widget, you can get data from a api call or static data stored in a file. Override this method according to your needs.
    * @returns data for the widget
    */
-  protected async getData<K extends keyof T>(): Promise<Pick<T, K>> {
-    return {} as Pick<T, K>;
+  protected async getData(): Promise<T> {
+    return {} as T;
   }
 
   /**

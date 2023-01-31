@@ -35,7 +35,7 @@ interface ICalendarState {
 
 export class Calendar extends Widget<ICalendarState> {
 
-   protected async getData(): Promise<Pick<ICalendarState, keyof ICalendarState>> {
+     protected async getData(): Promise<ICalendarState> {
     return { meetings: await getCalendar() };
   }
 
