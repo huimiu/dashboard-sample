@@ -35,7 +35,7 @@ interface ICalendarState {
 
 export class Calendar extends Widget<ICalendarState> {
 
-     protected async getData(): Promise<ICalendarState> {
+  protected async getData(): Promise<ICalendarState> {
     return { meetings: await getCalendar() };
   }
 
@@ -118,7 +118,7 @@ export class Calendar extends Widget<ICalendarState> {
 
   protected loadingContent(): JSX.Element | undefined {
     return (
-      <div style={{ display: "grid", justifyContent: "center", height: "100%" }}>
+      <div style={{ display: "grid" }}>
         <Spinner label="Loading..." labelPosition="below" />
       </div>
     );
