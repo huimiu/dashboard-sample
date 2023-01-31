@@ -33,10 +33,14 @@ export abstract class Widget<T> extends Component<{}, T & WidgetState> {
     return (
       <div style={{ ...widgetStyles, ...this.widgetStyle() }}>
         {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
-        {this.state.loading !== false && this.loadingContent() !== undefined
-          ? this.loadingContent()
-          : (this.bodyContent() !== undefined && this.bodyContent()) ||
-            (this.footerContent() !== undefined && this.footerContent())}
+        {this.state.loading !== false && this.loadingContent() !== undefined ? (
+          this.loadingContent()
+        ) : (
+          <>
+            {this.bodyContent() !== undefined && this.bodyContent()}
+            {this.footerContent() !== undefined && this.footerContent()}
+          </>
+        )}
       </div>
     );
   }

@@ -170,22 +170,18 @@ export class Documents extends Widget<IDocumentState> {
   }
 
   protected footerContent(): JSX.Element | undefined {
-    if (this.state.documents?.length !== 0) {
-      return (
-        <Button
-          appearance="transparent"
-          icon={<ArrowRight16Filled />}
-          iconPosition="after"
-          size="small"
-          style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
-          onClick={() => window.open("https://www.office.com/mycontent")}
-        >
-          View all
-        </Button>
-      );
-    } else {
-      return undefined;
-    }
+    return this.state.documents?.length !== 0 ? (
+      <Button
+        appearance="transparent"
+        icon={<ArrowRight16Filled />}
+        iconPosition="after"
+        size="small"
+        style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
+        onClick={() => window.open("https://www.office.com/mycontent")}
+      >
+        View all
+      </Button>
+    ) : undefined;
   }
 
   protected loadingContent(): JSX.Element | undefined {

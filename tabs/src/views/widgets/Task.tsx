@@ -110,27 +110,23 @@ export class Task extends Widget<ITaskState> {
   }
 
   protected footerContent(): JSX.Element | undefined {
-    if (this.state.tasks?.length !== 0) {
-      return (
-        <Button
-          appearance="transparent"
-          icon={<ArrowRight16Filled />}
-          iconPosition="after"
-          size="small"
-          style={footerBtnStyle}
-          onClick={() =>
-            window.open(
-              "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
-              "_blank"
-            )
-          } // navigate to detailed page
-        >
-          View all
-        </Button>
-      );
-    } else {
-      return undefined;
-    }
+    return this.state.tasks?.length !== 0 ? (
+      <Button
+        appearance="transparent"
+        icon={<ArrowRight16Filled />}
+        iconPosition="after"
+        size="small"
+        style={footerBtnStyle}
+        onClick={() =>
+          window.open(
+            "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
+            "_blank"
+          )
+        } // navigate to detailed page
+      >
+        View all
+      </Button>
+    ) : undefined;
   }
 
   protected loadingContent(): JSX.Element | undefined {
@@ -139,6 +135,19 @@ export class Task extends Widget<ITaskState> {
         <Spinner label="Loading..." labelPosition="below" />
       </div>
     );
+  }
+
+  protected widgetStyle(): CSSProperties | undefined {
+    return widgetPaddingStyle;
+  }
+
+  async componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount(): void {
+    document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   private inputLayout(themeString: string): JSX.Element | undefined {
@@ -171,19 +180,6 @@ export class Task extends Widget<ITaskState> {
         )}
       </div>
     );
-  }
-
-  protected widgetStyle(): CSSProperties | undefined {
-    return widgetPaddingStyle;
-  }
-
-  async componentDidMount() {
-    super.componentDidMount();
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentWillUnmount(): void {
-    document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   private handleClickOutside(event: any) {
