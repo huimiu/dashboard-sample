@@ -3,8 +3,7 @@ import { TeamsUserCredential } from "@microsoft/teamsfx";
 export class TeamsUserCredentialContext {
   private static instance: TeamsUserCredentialContext;
   private credential: TeamsUserCredential | undefined;
-  private isMobile: boolean;
-  private constructor() { this.isMobile=false; }
+  private constructor() {}
 
   public static getInstance(): TeamsUserCredentialContext {
     if (!TeamsUserCredentialContext.instance) {
@@ -26,13 +25,5 @@ export class TeamsUserCredentialContext {
       });
     }
     return this.credential;
-  }
-
-  public setIsMobile(isMobile: boolean) {
-    this.isMobile = isMobile;
-  }
-
-  public getIsMobile() {
-    return this.isMobile;
   }
 }

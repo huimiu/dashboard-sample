@@ -1,5 +1,4 @@
 import React, { Component, CSSProperties } from "react";
-import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 import { dashboardStyles } from "./Dashboard.styles";
 
@@ -63,10 +62,6 @@ export class Dashboard extends Component<any, IDashboardState> {
    * Define thie dashboard default layout, you can edit the code here to customize your dashboard layout.
    */
   render() {
-    if (this.state.isMobile) {
-      TeamsUserCredentialContext.getInstance().setIsMobile(true);
-    }
-
     return (
       <div
         ref={this.ref}

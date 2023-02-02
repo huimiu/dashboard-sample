@@ -66,14 +66,3 @@ export async function addTask(title: string): Promise<TaskModel[]> {
     throw e;
   }
 }
-
-// obseleted
-export function openTaskApp() {
-  if (!TeamsUserCredentialContext.getInstance().getIsMobile()) {
-    console.log("not mobile");
-    window.open(
-      "https://to-do.office.com/tasks",
-      "_blank"
-    );
-  }
-}
