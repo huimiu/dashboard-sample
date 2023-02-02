@@ -1,3 +1,5 @@
+import "../styles/Chart.css";
+
 import * as d3 from "d3-format";
 
 import { AreaChart, IChartProps } from "@fluentui/react-charting";
@@ -16,7 +18,6 @@ import {
 
 import { DayRange, DayRangeModel } from "../../models/dayRangeModel";
 import { TableModel } from "../../models/tableModel";
-import { dayRangeData, tableData } from "../../services/chartService";
 import {
   chart1Points_30D,
   chart1Points_60D,
@@ -24,37 +25,12 @@ import {
   chart2Points_30D,
   chart2Points_60D,
   chart2Points_7D,
+  dayRangeData,
+  tableData,
 } from "../../services/chartService";
 import ProgressBar from "../components/Progress";
 import { Widget } from "../lib/Widget";
-import { footerBtnStyle, headerStyleWithoutIcon } from "../lib/Widget.styles";
-import {
-  actionLayout,
-  areaChartLayout,
-  areaChartStyle,
-  avatarStyle,
-  backlogLayout,
-  backlogStyle,
-  bodyLayout,
-  divider,
-  legendBoldStyle,
-  legendDividerStyle,
-  legendItemLayout,
-  legendLayout,
-  legendNormalStyle,
-  minWidthStyle,
-  stateLayout,
-  stateStyle,
-  tableColumnStyle,
-  tableContentLayout,
-  tableHeaderStyle,
-  tableLayout,
-  timeSpanLayout,
-  timeSpanStyle,
-  titleStyle,
-} from "../styles/Chart.style";
-import { CSSProperties } from "react";
-import { widgetPaddingStyle } from "../styles/Common.styles";
+import { widgetStyle } from "../lib/Widget.styles";
 
 interface IChartWidgetState {
   dayRange: DayRange;
@@ -85,14 +61,13 @@ export class Chart extends Widget<IChartWidgetState> {
     };
   }
 
-  
   protected headerContent(): JSX.Element | undefined {
     return (
-      <div key="div-chart-header" style={headerStyleWithoutIcon}>
-        <Text key="text-chart-title" style={areaChartStyle}>
+      <div key="div-chart-header" className={widgetStyle.headerWithoutIcon}>
+        <Text key="text-chart-title" className="area-chart">
           Area chart
         </Text>
-        <div key="div-chart-actions" style={actionLayout}>
+        <div key="div-chart-actions" className="action-layout">
           <Button key="bt-chart-search" icon={<Search20Regular />} appearance="transparent" />
           <Button key="bt-chart-max" icon={<ArrowMaximize20Regular />} appearance="transparent" />
           <Button key="bt-chart-setting" icon={<Settings20Regular />} appearance="transparent" />
@@ -104,52 +79,52 @@ export class Chart extends Widget<IChartWidgetState> {
 
   protected bodyContent(): JSX.Element | undefined {
     return (
-      <div key="div-chart-body" style={bodyLayout}>
-        <div key="div-chart-legend" style={legendLayout}>
-          <div key="div-legend-time" style={legendItemLayout}>
-            <Text key="text-legend-date" style={legendBoldStyle}>
+      <div key="div-chart-body" className="body-layout">
+        <div key="div-chart-legend" className="legend-layout">
+          <div key="div-legend-time" className="legend-item-layout">
+            <Text key="text-legend-date" className="legend-bold">
               Feb 1, 2020
             </Text>
-            <Text key="text-legend-time" style={legendNormalStyle}>
+            <Text key="text-legend-time" className="legend-normal">
               11:59 am (PT)
             </Text>
           </div>
-          <div key="div-legend-divider1" style={legendDividerStyle} />
-          <div key="div-legend-loc" style={legendItemLayout}>
-            <Text key="text-legend-loc" style={legendNormalStyle}>
+          <div key="div-legend-divider1" className="legend-divider" />
+          <div key="div-legend-loc" className="legend-item-layout">
+            <Text key="text-legend-loc" className="legend-normal">
               Location:
             </Text>
-            <Text key="text-legend-loc-all" style={legendBoldStyle}>
+            <Text key="text-legend-loc-all" className="legend-bold">
               All
             </Text>
           </div>
-          <div key="div-legend-divider2" style={legendDividerStyle} />
-          <div key="div-legend-groups" style={legendItemLayout}>
-            <Text key="text-legend-groups" style={legendNormalStyle}>
+          <div key="div-legend-divider2" className="legend-divider" />
+          <div key="div-legend-groups" className="legend-item-layout">
+            <Text key="text-legend-groups" className="legend-normal">
               Groups:
             </Text>
-            <Text key="text-legend-groups-all" style={legendBoldStyle}>
+            <Text key="text-legend-groups-all" className="legend-bold">
               All
             </Text>
           </div>
-          <div key="div-legend-divider3" style={legendDividerStyle} />
-          <div key="div-legend-range" style={legendItemLayout}>
-            <Text key="text-legend-range" style={legendNormalStyle}>
+          <div key="div-legend-divider3" className="legend-divider" />
+          <div key="div-legend-range" className="legend-item-layout">
+            <Text key="text-legend-range" className="legend-normal">
               Date range:
             </Text>
-            <Text key="text-legend-range-time" style={legendBoldStyle}>
+            <Text key="text-legend-range-time" className="legend-bold">
               Jan 1, 2020 - Jan 30, 2020
             </Text>
           </div>
         </div>
-        <div key="div-time-span" style={timeSpanLayout}>
+        <div key="div-time-span" className="time-span-layout">
           {dayRangeData.map((item: DayRangeModel) => {
             return (
               <ToggleButton
                 key={`tb-day-range-${item.id}`}
                 appearance="transparent"
                 checked={this.state.dayRange === item.dayRange}
-                style={timeSpanStyle}
+                className="time-span"
                 onClick={() =>
                   this.setState({
                     chartProps: this.retriveChartsData(item.dayRange),
@@ -163,7 +138,7 @@ export class Chart extends Widget<IChartWidgetState> {
           })}
         </div>
 
-        <div key="div-area-chart" style={areaChartLayout}>
+        <div key="div-area-chart" className="area-chart-layout">
           {this.state.chartProps && (
             <AreaChart
               key={`area-chart-${this.state.dayRange}`}
@@ -179,9 +154,9 @@ export class Chart extends Widget<IChartWidgetState> {
           )}
         </div>
 
-        <div key="div-table-layout" style={tableLayout}>
-          <div key="div-back-log" style={backlogLayout}>
-            <Text key="text-back-log" style={backlogStyle}>
+        <div key="div-table-layout" className="table-layout">
+          <div key="div-back-log" className="backlog-layout">
+            <Text key="text-back-log" className="backlog">
               Features backlog (57)
             </Text>
             <Button
@@ -191,45 +166,30 @@ export class Chart extends Widget<IChartWidgetState> {
             />
           </div>
 
-          <div key="div-table-content" style={tableContentLayout}>
-            <div key="div-table-column" style={tableColumnStyle}>
-              <Text
-                key="text-table-header-title"
-                style={{ ...minWidthStyle(18), ...tableHeaderStyle }}
-              >
+          <div key="div-table-content" className="table-content-layout">
+            <div key="div-table-column" className="table-column">
+              <Text key="text-table-header-title" className="min-width-18 table-header">
                 Title
               </Text>
-              <Text
-                key="text-table-header-assigned"
-                style={{ ...minWidthStyle(8), ...tableHeaderStyle }}
-              >
+              <Text key="text-table-header-assigned" className="min-width-8 table-header">
                 Assigned To
               </Text>
-              <Text
-                key="text-table-header-owner"
-                style={{ ...minWidthStyle(8), ...tableHeaderStyle }}
-              >
+              <Text key="text-table-header-owner" className="min-width-8 table-header">
                 PM Owner
               </Text>
-              <Text
-                key="text-table-header-priority"
-                style={{ ...minWidthStyle(4), ...tableHeaderStyle }}
-              >
+              <Text key="text-table-header-priority" className="min-width-4 table-header">
                 Priority
               </Text>
-              <Text
-                key="text-table-header-state"
-                style={{ ...minWidthStyle(6), ...tableHeaderStyle }}
-              >
+              <Text key="text-table-header-state" className="min-width-4 table-header">
                 State
               </Text>
             </div>
             {tableData.map((item: TableModel, index) => {
               return (
                 <>
-                  {index !== 0 && <div key={`table-divider-${item.id}`} style={divider} />}
-                  <div key={`div-table-column-${item.id}`} style={tableColumnStyle}>
-                    <div key={`div-table-title-${item.id}`} style={titleStyle}>
+                  {index !== 0 && <div key={`table-divider-${item.id}`} className="divider" />}
+                  <div key={`div-table-column-${item.id}`} className="table-column">
+                    <div key={`div-table-title-${item.id}`} className="title">
                       <ChevronRight20Regular key={`icon-chevron-${item.id}`} />
                       {index !== 3 ? (
                         <Rocket20Regular key={`icon-rocket-${item.id}`} />
@@ -241,7 +201,7 @@ export class Chart extends Widget<IChartWidgetState> {
                       </Text>
                     </div>
 
-                    <div key={`div-table-avatar-${item.id}`} style={avatarStyle}>
+                    <div key={`div-table-avatar-${item.id}`} className="avatar">
                       <Avatar
                         key={`avatar-assigned-${item.id}`}
                         name={item.assignedName}
@@ -250,7 +210,7 @@ export class Chart extends Widget<IChartWidgetState> {
                       />
                       <Text key={`text-assigned-${item.id}`}>{item.assignedName}</Text>
                     </div>
-                    <div key={`div-table-avatar2-${item.id}`} style={avatarStyle}>
+                    <div key={`div-table-avatar2-${item.id}`} className="avatar">
                       <Avatar
                         key={`avatar-owner-${item.id}`}
                         name={item.ownerName}
@@ -262,13 +222,13 @@ export class Chart extends Widget<IChartWidgetState> {
                     <Text key={`text-priority-${item.id}`} style={{ minWidth: "4rem" }}>
                       {item.priority}
                     </Text>
-                    <div key={`div-state-${item.id}`} style={stateLayout}>
+                    <div key={`div-state-${item.id}`} className="state-layout">
                       <ProgressBar
                         key={`pb-state-${item.id}`}
                         bgcolor={item.color}
                         completed={item.state}
                       />
-                      <Text key={`text-state-${item.id}`} style={stateStyle}>
+                      <Text key={`text-state-${item.id}`} className="state">
                         {`${item.state}%`}
                       </Text>
                     </div>
@@ -290,16 +250,12 @@ export class Chart extends Widget<IChartWidgetState> {
         icon={<ArrowRight16Filled />}
         iconPosition="after"
         size="small"
-        style={footerBtnStyle}
+        className={widgetStyle.footerBtn}
         onClick={() => {}} // navigate to detailed page
       >
         View query
       </Button>
     );
-  }
-
-  protected widgetStyle(): CSSProperties | undefined {
-    return widgetPaddingStyle;
   }
 
   private retriveChartsData(r: DayRange): IChartProps {

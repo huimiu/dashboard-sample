@@ -1,5 +1,9 @@
+import "../styles/Common.css";
+import "../styles/Document.css";
+
 import { CSSProperties } from "react";
 
+import { mergeStyles } from "@fluentui/react";
 import {
   Button,
   Image,
@@ -26,17 +30,7 @@ import { DocumentModel } from "../../models/documentModel";
 import { getDocuments, getIconByFileType } from "../../services/documentService";
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
-import { footerBtnStyle, headerStyleWithoutIcon, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout, emptyTextStyle } from "../styles/Common.styles";
-import {
-  bodyLayout,
-  divider,
-  docInfoLayout,
-  headerStyle,
-  itemContent,
-  taskContainer,
-  widgetStyle,
-} from "../styles/Document.styles";
+import { widgetStyle } from "../lib/Widget.styles";
 
 interface IDocumentState {
   activeIndex: number;
@@ -50,8 +44,8 @@ export class Documents extends Widget<IDocumentState> {
 
   protected headerContent(): JSX.Element | undefined {
     return (
-      <div style={{ ...headerStyleWithoutIcon, ...headerStyle }}>
-        <Text style={headerTextStyle}>Your documents</Text>
+      <div className={mergeStyles(widgetStyle.headerWithoutIcon, "header-padding")}>
+        <Text className={widgetStyle.headerText}>Your documents</Text>
         <Button icon={<MoreHorizontal32Regular />} appearance="transparent" />
       </div>
     );
@@ -60,24 +54,27 @@ export class Documents extends Widget<IDocumentState> {
   protected bodyContent(): JSX.Element | undefined {
     const hasDocument = this.state.documents?.length !== 0;
     return (
-      <div style={bodyLayout(hasDocument)}>
+      <div className={hasDocument ? "has-doc-layout" : "no-doc-layout"}>
         {hasDocument ? (
           this.state.documents?.map((item: DocumentModel, i) => {
             return (
               <div
                 key={`div-container-${item.id}`}
-                style={taskContainer}
+                className="doc-container"
                 onMouseOver={() => this.mouseOver(i)}
                 onMouseLeave={() => this.mouseLeave()}
               >
-                {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
+                {i !== 0 && <div key={`divider-${item.id}`} className="doc-divider" />}
                 <div
                   key={`div-content-${item.id}`}
-                  style={itemContent(i === this.state.activeIndex)}
+                  className={mergeStyles(
+                    "doc-item-content",
+                    i === this.state.activeIndex ? "doc-item-active" : "doc-item-non-active"
+                  )}
                 >
                   <div
                     key={`div-doc-info-${item.id}`}
-                    style={docInfoLayout}
+                    className="doc-info-layout"
                     onClick={() => window.open(item.teamsurl)}
                   >
                     <Image
@@ -158,9 +155,9 @@ export class Documents extends Widget<IDocumentState> {
             );
           })
         ) : (
-          <div style={emptyLayout}>
+          <div className="empty-layout">
             <EmptyThemeImg />
-            <Text weight="semibold" style={emptyTextStyle}>
+            <Text weight="semibold" className="empty-text">
               Once you have a document, you'll find it here
             </Text>
           </div>
@@ -176,7 +173,7 @@ export class Documents extends Widget<IDocumentState> {
         icon={<ArrowRight16Filled />}
         iconPosition="after"
         size="small"
-        style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
+        className={mergeStyles(widgetStyle.footerBtn, "footer-padding")}
         onClick={() => window.open("https://www.office.com/mycontent")}
       >
         View all
@@ -192,8 +189,8 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  protected widgetStyle(): CSSProperties | undefined {
-    return widgetStyle;
+  protected stylingWidget(): CSSProperties | string {
+    return "doc-no-padding";
   }
 
   mouseOver = (i: number) => {

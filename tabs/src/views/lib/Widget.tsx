@@ -1,10 +1,12 @@
-import React, { Component, CSSProperties } from "react";
+import { mergeStyles } from "@fluentui/react";
+import { Component, CSSProperties } from "react";
 
-import { headerStyles, widgetStyles } from "./Widget.styles";
+import { widgetStyle } from "./Widget.styles";
 
 interface WidgetState {
   loading?: boolean;
 }
+
 /**
  * Defined a widget, it's also a react component.
  * For more information about react component, please refer to https://reactjs.org/docs/react-component.html
@@ -31,8 +33,8 @@ export abstract class Widget<T> extends Component<{}, T & WidgetState> {
    */
   render() {
     return (
-      <div style={{ ...widgetStyles, ...this.widgetStyle() }}>
-        {this.headerContent() && <div style={headerStyles}>{this.headerContent()}</div>}
+      <div className={mergeStyles(widgetStyle.root, this.genClassName())} style={this.genStyle()}>
+        {this.headerContent() && <div className={widgetStyle.header}>{this.headerContent()}</div>}
         {this.state.loading !== false && this.loadingContent() !== undefined ? (
           this.loadingContent()
         ) : (
@@ -88,7 +90,25 @@ export abstract class Widget<T> extends Component<{}, T & WidgetState> {
    * Override this method to customize the widget style.
    * @returns custom style for the widget
    */
-  protected widgetStyle(): CSSProperties | undefined {
-    return undefined;
+  protected stylingWidget(): CSSProperties | string {
+    return {};
+  }
+
+  /**
+   * Construct CSSProperties object for styling the widget.
+   * @returns CSSProperties object
+   */
+  private genStyle(): CSSProperties {
+    return typeof this.stylingWidget() === "string"
+      ? ({} as CSSProperties)
+      : (this.stylingWidget() as CSSProperties);
+  }
+
+  /**
+   * Construct className string for styling the widget.
+   * @returns className for styling the widget
+   */
+  private genClassName(): string {
+    return typeof this.stylingWidget() === "string" ? (this.stylingWidget() as string) : "";
   }
 }

@@ -1,3 +1,5 @@
+import "../styles/MyDashboard.css";
+
 import { CSSProperties } from "react";
 
 import { Image, Spinner } from "@fluentui/react-components";
@@ -6,7 +8,6 @@ import { loginAction } from "../../internal/login";
 import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 import { Dashboard } from "../lib/Dashboard";
 import { oneColumn } from "../lib/Dashboard.styles";
-import { imgStyle } from "../styles/MyDashboard.styles";
 import { Calendar } from "../widgets/Calendar";
 import { Chart } from "../widgets/Chart";
 import { Collaboration } from "../widgets/Collaboration";
@@ -21,7 +22,7 @@ export default class MyDashboard extends Dashboard {
       <>
         {this.state.showLogin === false ? (
           <>
-            <Image style={imgStyle} src="bg.png" />
+            <Image className="img-style" src="bg.png" />
             <Chart />
             <div style={oneColumn()}>
               <Calendar />
@@ -53,7 +54,7 @@ export default class MyDashboard extends Dashboard {
   async componentDidMount() {
     super.componentDidMount();
     if (await this.checkIsConsentNeeded()) {
-      await loginAction(scope);      
+      await loginAction(scope);
     }
     this.setState({ showLogin: false });
   }

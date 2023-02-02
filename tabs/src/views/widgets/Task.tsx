@@ -1,5 +1,9 @@
-import React, { CSSProperties } from "react";
+import "../styles/Common.css";
+import "../styles/Task.css";
 
+import React from "react";
+
+import { mergeStyles } from "@fluentui/react";
 import { Button, Checkbox, Image, Spinner, Text } from "@fluentui/react-components";
 import {
   Add20Filled,
@@ -15,16 +19,7 @@ import { callFunction } from "../../services/callFunction";
 import { addTask, getTasks } from "../../services/taskService";
 import { EmptyThemeImg } from "../components/EmptyThemeImg";
 import { Widget } from "../lib/Widget";
-import { footerBtnStyle, headerContentStyle, headerTextStyle } from "../lib/Widget.styles";
-import { emptyLayout, emptyTextStyle, widgetPaddingStyle } from "../styles/Common.styles";
-import {
-  addBtnStyle,
-  addTaskBtnStyle,
-  addTaskContainer,
-  bodyLayout,
-  existingTaskLayout,
-  inputStyle,
-} from "../styles/Task.styles";
+import { widgetStyle } from "../lib/Widget.styles";
 
 interface ITaskState {
   tasks?: TaskModel[];
@@ -55,7 +50,7 @@ export class Task extends Widget<ITaskState> {
 
   protected headerContent(): JSX.Element | undefined {
     return (
-      <div style={headerContentStyle}>
+      <div className={widgetStyle.headerContent}>
         <TeamsFxContext.Consumer>
           {({ themeString }) =>
             themeString === "default" ? (
@@ -65,7 +60,7 @@ export class Task extends Widget<ITaskState> {
             )
           }
         </TeamsFxContext.Consumer>
-        <Text key="text-task-title" style={headerTextStyle}>
+        <Text key="text-task-title" className={widgetStyle.headerText}>
           Your tasks
         </Text>
         <Button key="bt-task-more" icon={<MoreHorizontal32Regular />} appearance="transparent" />
@@ -76,7 +71,7 @@ export class Task extends Widget<ITaskState> {
   protected bodyContent(): JSX.Element | undefined {
     const hasTask = this.state.tasks?.length !== 0;
     return (
-      <div style={bodyLayout(hasTask)}>
+      <div className={hasTask ? "has-task-layout" : "no-task-layout"}>
         <TeamsFxContext.Consumer>
           {({ themeString }) => this.inputLayout(themeString)}
         </TeamsFxContext.Consumer>
@@ -85,7 +80,13 @@ export class Task extends Widget<ITaskState> {
             return (
               <TeamsFxContext.Consumer key={`consumer-task-${item.id}`}>
                 {({ themeString }) => (
-                  <div key={`div-task-${item.id}`} style={existingTaskLayout(themeString)}>
+                  <div
+                    key={`div-task-${item.id}`}
+                    className={mergeStyles(
+                      "existing-task-layout",
+                      themeString === "contrast" ? "border-style" : ""
+                    )}
+                  >
                     <Checkbox key={`cb-task-${item.id}`} shape="circular" label={item.name} />
                     <Button
                       key={`bt-task-${item.id}`}
@@ -98,9 +99,9 @@ export class Task extends Widget<ITaskState> {
             );
           })
         ) : (
-          <div style={emptyLayout}>
+          <div>
             <EmptyThemeImg key="img-empty" />
-            <Text key="text-empty" weight="semibold" style={emptyTextStyle}>
+            <Text key="text-empty" weight="semibold" className="empty-text">
               Once you have a task, you'll find it here
             </Text>
           </div>
@@ -116,7 +117,7 @@ export class Task extends Widget<ITaskState> {
         icon={<ArrowRight16Filled />}
         iconPosition="after"
         size="small"
-        style={footerBtnStyle}
+        className={widgetStyle.footerBtn}
         onClick={() =>
           window.open(
             "https://teams.microsoft.com/l/app/0d5c91ee-5be2-4b79-81ed-23e6c4580427?source=app-details-dialog",
@@ -137,10 +138,6 @@ export class Task extends Widget<ITaskState> {
     );
   }
 
-  protected widgetStyle(): CSSProperties | undefined {
-    return widgetPaddingStyle;
-  }
-
   async componentDidMount() {
     super.componentDidMount();
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -152,23 +149,33 @@ export class Task extends Widget<ITaskState> {
 
   private inputLayout(themeString: string): JSX.Element | undefined {
     return (
-      <div ref={this.inputDivRef} style={addTaskContainer(themeString, this.state.inputFocused)}>
+      <div
+        ref={this.inputDivRef}
+        className={mergeStyles(
+          "add-task-container",
+          this.state.inputFocused ? "focused-color" : "non-focused-color",
+          themeString === "contrast" ? "border-style" : ""
+        )}
+      >
         {this.state.inputFocused ? (
-          <Circle20Regular style={addBtnStyle} />
+          <Circle20Regular className="add-btn" />
         ) : (
-          <Add20Filled style={addBtnStyle} />
+          <Add20Filled className="add-btn" />
         )}
 
         <input
           ref={this.inputRef}
           type="text"
-          style={inputStyle(this.state.inputFocused)}
+          className={mergeStyles(
+            "input",
+            this.state.inputFocused ? "focused-color" : "non-focused-color"
+          )}
           onFocus={() => this.inputFocusedState()}
           placeholder="Add a task"
         />
         {this.state.inputFocused && (
           <button
-            style={addTaskBtnStyle(this.state.addBtnOver)}
+            className={this.state.addBtnOver ? "add-btn-enter" : "add-btn-leave"}
             onClick={() => {
               this.onAddButtonClick();
             }}
