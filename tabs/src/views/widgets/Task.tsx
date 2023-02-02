@@ -25,7 +25,6 @@ import {
   existingTaskLayout,
   inputStyle,
 } from "../styles/Task.styles";
-import { TeamsUserCredentialContext } from "../../internal/singletonContext";
 
 interface ITaskState {
   tasks?: TaskModel[];
