@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
+  Spinner,
   Text,
 } from "@fluentui/react-components";
 import {
@@ -40,15 +41,14 @@ import {
 interface IDocumentState {
   activeIndex: number;
   documents?: DocumentModel[];
-  loading: boolean;
 }
 
 export class Documents extends Widget<IDocumentState> {
-  async getData(): Promise<IDocumentState> {
-    return { documents: await getDocuments(), activeIndex: -1, loading: false };
+  protected async getData(): Promise<IDocumentState> {
+    return { documents: await getDocuments(), activeIndex: -1 };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={{ ...headerStyleWithoutIcon, ...headerStyle }}>
         <Text style={headerTextStyle}>Your documents</Text>
@@ -57,15 +57,12 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
-    const loading: boolean = !this.state.data || (this.state.data.loading ?? true);
-    const hasDocument = this.state.data?.documents?.length !== 0;
+  protected bodyContent(): JSX.Element | undefined {
+    const hasDocument = this.state.documents?.length !== 0;
     return (
       <div style={bodyLayout(hasDocument)}>
-        {loading ? (
-          <></>
-        ) : hasDocument ? (
-          this.state.data?.documents?.map((item: DocumentModel, i) => {
+        {hasDocument ? (
+          this.state.documents?.map((item: DocumentModel, i) => {
             return (
               <div
                 key={`div-container-${item.id}`}
@@ -76,7 +73,7 @@ export class Documents extends Widget<IDocumentState> {
                 {i !== 0 && <div key={`divider-${item.id}`} style={divider} />}
                 <div
                   key={`div-content-${item.id}`}
-                  style={itemContent(i === this.state.data?.activeIndex)}
+                  style={itemContent(i === this.state.activeIndex)}
                 >
                   <div
                     key={`div-doc-info-${item.id}`}
@@ -172,46 +169,46 @@ export class Documents extends Widget<IDocumentState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
-    if (!this.state.data?.loading && this.state.data?.documents?.length !== 0) {
-      return (
-        <Button
-          appearance="transparent"
-          icon={<ArrowRight16Filled />}
-          iconPosition="after"
-          size="small"
-          style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
-          onClick={() => window.open("https://www.office.com/mycontent")}
-        >
-          View all
-        </Button>
-      );
-    } else {
-      return undefined;
-    }
+  protected footerContent(): JSX.Element | undefined {
+    return this.state.documents?.length !== 0 ? (
+      <Button
+        appearance="transparent"
+        icon={<ArrowRight16Filled />}
+        iconPosition="after"
+        size="small"
+        style={{ ...footerBtnStyle, padding: "0px 1.25rem 1.25rem 1.25rem" }}
+        onClick={() => window.open("https://www.office.com/mycontent")}
+      >
+        View all
+      </Button>
+    ) : undefined;
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  protected loadingContent(): JSX.Element | undefined {
+    return (
+      <div style={{ display: "grid" }}>
+        <Spinner label="Loading..." labelPosition="below" />
+      </div>
+    );
+  }
+
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetStyle;
   }
 
   mouseOver = (i: number) => {
     this.setState({
-      data: {
-        activeIndex: i,
-        documents: this.state.data?.documents,
-        loading: false,
-      },
+      activeIndex: i,
+      documents: this.state.documents,
+      loading: false,
     });
   };
 
   mouseLeave = () => {
     this.setState({
-      data: {
-        activeIndex: -1,
-        documents: this.state.data?.documents,
-        loading: false,
-      },
+      activeIndex: -1,
+      documents: this.state.documents,
+      loading: false,
     });
   };
 }
