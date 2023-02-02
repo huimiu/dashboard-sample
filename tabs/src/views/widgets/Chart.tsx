@@ -62,7 +62,7 @@ interface IChartWidgetState {
 }
 
 export class Chart extends Widget<IChartWidgetState> {
-  async getData(): Promise<IChartWidgetState> {
+  protected async getData(): Promise<IChartWidgetState> {
     const chartPoints = [
       {
         legend: "Line 1",
@@ -85,7 +85,8 @@ export class Chart extends Widget<IChartWidgetState> {
     };
   }
 
-  headerContent(): JSX.Element | undefined {
+  
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div key="div-chart-header" style={headerStyleWithoutIcon}>
         <Text key="text-chart-title" style={areaChartStyle}>
@@ -101,7 +102,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     return (
       <div key="div-chart-body" style={bodyLayout}>
         <div key="div-chart-legend" style={legendLayout}>
@@ -147,14 +148,12 @@ export class Chart extends Widget<IChartWidgetState> {
               <ToggleButton
                 key={`tb-day-range-${item.id}`}
                 appearance="transparent"
-                checked={this.state.data?.dayRange === item.dayRange}
+                checked={this.state.dayRange === item.dayRange}
                 style={timeSpanStyle}
                 onClick={() =>
                   this.setState({
-                    data: {
-                      chartProps: this.retriveChartsData(item.dayRange),
-                      dayRange: item.dayRange,
-                    },
+                    chartProps: this.retriveChartsData(item.dayRange),
+                    dayRange: item.dayRange,
                   })
                 }
               >
@@ -165,10 +164,10 @@ export class Chart extends Widget<IChartWidgetState> {
         </div>
 
         <div key="div-area-chart" style={areaChartLayout}>
-          {this.state.data?.chartProps && (
+          {this.state.chartProps && (
             <AreaChart
-              key={`area-chart-${this.state.data.dayRange}`}
-              data={this.state.data.chartProps}
+              key={`area-chart-${this.state.dayRange}`}
+              data={this.state.chartProps}
               legendsOverflowText={"Overflow Items"}
               yAxisTickFormat={d3.format(".1s")}
               wrapXAxisLables={false}
@@ -283,7 +282,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     return (
       <Button
         key="bt-chart-footer"
@@ -299,7 +298,7 @@ export class Chart extends Widget<IChartWidgetState> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 

@@ -24,12 +24,16 @@ import {
 } from "../styles/Collaboration.styles";
 import { widgetPaddingStyle } from "../styles/Common.styles";
 
-export class Collaboration extends Widget<CollaborationModel[]> {
-  async getData(): Promise<CollaborationModel[]> {
-    return getCollaborationData();
+interface ICollaborationState {
+  data: CollaborationModel[];
+}
+
+export class Collaboration extends Widget<ICollaborationState> {
+  async getData(): Promise<ICollaborationState> {
+    return { data: getCollaborationData() };
   }
 
-  headerContent(): JSX.Element | undefined {
+  protected headerContent(): JSX.Element | undefined {
     return (
       <div style={headerStyleWithoutIcon}>
         <Text style={headerTextStyle}>Team collaborations</Text>
@@ -38,7 +42,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
     );
   }
 
-  bodyContent(): JSX.Element | undefined {
+  protected bodyContent(): JSX.Element | undefined {
     return (
       <div style={bodyLayout}>
         <div style={bodyContent}>
@@ -80,7 +84,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
     );
   }
 
-  footerContent(): JSX.Element | undefined {
+  protected footerContent(): JSX.Element | undefined {
     return (
       <Button
         appearance="transparent"
@@ -95,7 +99,7 @@ export class Collaboration extends Widget<CollaborationModel[]> {
     );
   }
 
-  customiseWidgetStyle(): CSSProperties | undefined {
+  protected widgetStyle(): CSSProperties | undefined {
     return widgetPaddingStyle;
   }
 }
