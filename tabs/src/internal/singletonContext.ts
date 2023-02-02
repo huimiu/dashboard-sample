@@ -4,7 +4,7 @@ export class TeamsUserCredentialContext {
   private static instance: TeamsUserCredentialContext;
   private credential: TeamsUserCredential | undefined;
   private isMobile: boolean;
-  private constructor() {}
+  private constructor() { this.isMobile=false; }
 
   public static getInstance(): TeamsUserCredentialContext {
     if (!TeamsUserCredentialContext.instance) {
