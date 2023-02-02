@@ -78,7 +78,7 @@ export class Documents extends Widget<IDocumentState> {
                   <div
                     key={`div-doc-info-${item.id}`}
                     style={docInfoLayout}
-                    onClick={() => window.open(item.teamsurl)}
+                    onClick={() => window.open(item.weburl)}
                   >
                     <Image
                       key={`img-${item.id}`}
