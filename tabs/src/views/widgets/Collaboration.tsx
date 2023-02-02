@@ -36,31 +36,26 @@ export class Collaboration extends Widget<ICollaborationState> {
       <div className="colla-body-layout">
         {this.state.data?.map((item: CollaborationModel) => {
           return (
-            <div key={`collaboration-container-${item.id}`} className="collo-display">
-              <Image
-                key={`collaboration-img-${item.id}`}
-                src={item.img}
-                width="100%"
-                shape="rounded"
-              />
-              <Text key={`collaboration-title-${item.id}`} className="title">
+            <div key={`colla-container-${item.id}`} className="collo-display">
+              <Image key={`colla-img-${item.id}`} src={item.img} width="100%" shape="rounded" />
+              <Text key={`colla-title-${item.id}`} className="colla-title">
                 {item.title}
               </Text>
-              <Text key={`collaboration-description-${item.id}`} className="description">
+              <Text key={`colla-description-${item.id}`} className="colla-description">
                 {item.description}
               </Text>
-              <div key={`collaboration-footer-${item.id}`} className="footer-layout">
+              <div key={`colla-footer-${item.id}`} className="footer-layout">
                 <Button
-                  key={`collaboration-share-${item.id}`}
+                  key={`colla-share-${item.id}`}
                   icon={<Share20Regular />}
                   appearance="transparent"
                   className="share-btn"
                 />
                 <CircleSmall20Filled
-                  key={`collaboration-circle-${item.id}`}
+                  key={`colla-circle-${item.id}`}
                   className="colorNeutralForeground3"
                 />
-                <Text key={`collaboration-time-${item.id}`} className="colorNeutralForeground3">
+                <Text key={`colla-time-${item.id}`} className="colorNeutralForeground3">
                   {item.updateTime}
                 </Text>
               </div>

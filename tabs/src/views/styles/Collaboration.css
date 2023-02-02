@@ -5,25 +5,19 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.body-content {
-  display: grid;
-  gap: 0.75rem;
-  overflow-x: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
 .collo-display {
   display: grid;
+  min-width: 12.5rem;
 }
 
-.title {
+.colla-title {
   font-weight: 600 !important;
   font-size: 0.75rem !important;
   line-height: 1rem !important;
   margin-top: 0.5rem;
 }
 
-.description {
+.colla-description {
   font-weight: 400 !important;
   font-size: 0.75rem !important;
   line-height: 1rem !important;
@@ -34,12 +28,13 @@
 
 .footer-layout {
   display: grid;
+  align-items: center;
   grid-template-columns: 8fr min-content max-content 2fr;
 }
 
 .share-btn {
-  padding: 0;
   justify-content: start;
+  padding: 0 !important;
 }
 
 .colorNeutralForeground3 {
