@@ -15,9 +15,9 @@ import TabConfig from "./views/TabConfig";
 import TermsOfUse from "./views/TermsOfUse";
 
 export default function App() {
-  const { themeString, teamsfx } = useTeamsFx();
+  const { themeString } = useTeamsFx();
   return (
-    <TeamsFxContext.Provider value={{ themeString, teamsfx }}>
+    <TeamsFxContext.Provider value={{ themeString }}>
       <FluentProvider
         theme={
           themeString === "dark"
@@ -38,7 +38,7 @@ export default function App() {
           <>
             <Route exact path="/privacy" component={Privacy} />
             <Route exact path="/termsofuse" component={TermsOfUse} />
-            <Route exact path="/dashboard" component={MyDashboard} />
+            <Route exact path="/tab" component={MyDashboard} />
             <Route exact path="/config" component={TabConfig} />
           </>
         </Router>
