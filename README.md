@@ -9,7 +9,7 @@ Microsoft Teams supports the ability to run web-based UI inside "custom tabs" th
 
 Team Central Dashboard shows you how to build a tab with data chats and content from Microsoft Graph to accelerate team collaboration and personal productivity.
 
-<img src="tabs\public\dashboard.png">
+![team-central-dashboard](images/team-central-dashboard.gif)
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Team Central Dashboard shows you how to build a tab with data chats and content 
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 
 ## What you will learn in this sample:
-
+- How to use TeamsFx to embed a canvas containing multiple cards that provide an overview of data or content in your tab app.
 - How to use TeamsFx to build frontend hosting on Azure for your tab app.
 - How to use TeamsFx to build backend hosting on Azure for your tab app.
 - How to use MS graph client in TeamsFx to get access to M365 data.
